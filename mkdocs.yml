@@ -1,0 +1,44 @@
+site_name: Kubescape
+site_url: https://kubescape.io/
+repo_url: https://github.com/kubescape/kubescape
+theme:
+  name: material
+  logo: assets/kubescape-icon-white.svg
+  font:
+    text: Fira Sans
+    code: Fira Mono
+  features:
+    - navigation.tabs    
+    - navigation.footer  
+  icon:
+    repo: fontawesome/brands/github
+  custom_dir: overrides
+extra:
+  social:
+    - icon: fontawesome/brands/twitter 
+      link: https://twitter.com/@kubescape
+extra_css:
+  - stylesheets/extra.css
+copyright:
+  Copyright &copy; 2021 - 2023 The Kubescape Authors
+
+nav:
+    - Home: 'index.md'
+    - Docs:
+        - 'Documentation overview': 'docs/index.md'
+        - 'Getting Started': 'docs/getting-started.md'
+    - Project: 
+        - 'About the Kubescape project': 'project/about.md'
+        - 'License': 'project/license.md'
+        - 'Community': 'project/community.md'
+        - 'Contributing': 'https://github.com/kubescape/kubescape/blob/master/CONTRIBUTING.md'
+    - GitHub: 'https://github.com/kubescape/kubescape'
+
+markdown_extensions:
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.superfences    

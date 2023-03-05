@@ -1,0 +1,1 @@
+Click the links on the left to learn more about the Kubescape project.
