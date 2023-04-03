@@ -19,9 +19,7 @@ We recommend all Kubescape users join -announce to stay up to date with new rele
 
 # Monthly meeting
 
-We hold monthly community meetings on Zoom, on the first Tuesday of every month, at 14:00 GMT.
-
-* [https://us02web.zoom.us/j/84020231442]
+We hold [community meetings](https://zoom.us/j/95174063585) on Zoom, on the first Tuesday of every month, at 14:00 GMT. ([See that in your local time zone](https://time.is/compare/1400_in_GMT)).
 
 # Code of Conduct
 
