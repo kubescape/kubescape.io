@@ -3,7 +3,7 @@ site_url: https://kubescape.io/
 repo_url: https://github.com/kubescape/kubescape
 theme:
   name: material
-  logo: assets/kubescape-icon-white.svg
+  logo: assets/kubescape-lockup.svg
   font:
     text: Fira Sans
     code: Fira Mono
