@@ -1,13 +1,13 @@
 However you want to use, or contribute to, Kubescape, we are very happy to welcome you.
 
-# Slack
+## Slack
 
 Kubescape users and developers meet on the CNCF Slack.
 
 * [Join the CNCF Slack instance](https://slack.cncf.io/)
 * Look for Kubescape in the following channels: [#kubescape](https://cloud-native.slack.com/archives/C04EY3ZF9GE), [#kubescape-dev](https://cloud-native.slack.com/archives/C04GY6H082K)
 
-# Mailing lists
+## Mailing lists
 
 We have three mailing lists:
 
@@ -17,11 +17,11 @@ We have three mailing lists:
 
 We recommend all Kubescape users join -announce to stay up to date with new releases.
 
-# Monthly meeting
+## Monthly meeting
 
 We hold [community meetings](https://zoom.us/j/95174063585) on Zoom, on the first Tuesday of every month, at 14:00 GMT. ([See that in your local time zone](https://time.is/compare/1400_in_GMT)).
 
-# Code of Conduct
+## Code of Conduct
 
 Participating in open source is often a highly collaborative experience. We’re encouraged to create in public view, and we’re incentivized to welcome contributions of all kinds from people around the world. This makes the practice of open source as much social as it is technical.
 
