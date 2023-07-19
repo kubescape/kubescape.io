@@ -1,9 +1,17 @@
+# Project information
 site_name: Kubescape
+site_description: The official documentation for Kubescape
 site_url: https://kubescape.io/
-repo_url: https://github.com/kubescape/kubescape
+
+# Repository
+repo_name: 'kubescape/kubescape'
+repo_url: 'https://github.com/kubescape/kubescape'
+
+# Config
 theme:
   name: material
   logo: assets/kubescape-lockup.svg
+  favicon: assets/favicon.svg
   font:
     text: Fira Sans
     code: Fira Mono
@@ -24,6 +32,8 @@ extra:
     property: G-BS68QKB4RT
 extra_css:
   - stylesheets/extra.css
+
+# Copyright
 copyright:
   Copyright &copy; 2021 - 2023 <a href="https://kubescape.devstats.cncf.io/d/66/developer-activity-counts-by-companies?orgId=1">The Kubescape Authors</a>
 
@@ -32,6 +42,7 @@ nav:
     - Docs:
         - 'Documentation overview': 'docs/index.md'
         - 'Getting Started': 'docs/getting-started.md'
+        - 'Installation': 'docs/installation.md'
     - Project: 
         - 'About the Kubescape project': 'project/about.md'
         - 'License': 'project/license.md'
