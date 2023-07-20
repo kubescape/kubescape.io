@@ -1,4 +1,4 @@
-# kubescape.io website
+# Kubescape website
 
 This repository contains the source files for the kubescape.io website.
 
@@ -11,11 +11,14 @@ We use [mkdocs](https://www.mkdocs.org/) with the [mkdocs-material](https://squi
 To build and test locally: 
 
 * [install mkdocs-material](https://squidfunk.github.io/mkdocs-material/getting-started/) with `pip` or Docker 
-* run `mkdocs serve`
+* Run the development server
+```bash
+  $ make site
+```
 
 ## Local build
 
-Run `mkdocs build`, and the site will be built in the `site/` directory.
+Run `make build`, and the site will be built in the `site/` directory.
 
 ### Production
 
