@@ -14,3 +14,7 @@ h1, h2, h3 {
 .md-header__title .md-ellipsis {
   display: none;
 }
+
+.md-post__header {
+  margin-top: 20px;
+}
