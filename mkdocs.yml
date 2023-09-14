@@ -59,6 +59,9 @@ nav:
     - GitHub: 'https://github.com/kubescape/kubescape'
 
 markdown_extensions:
+  - admonition
+  - attr_list
+  - md_in_html
   - pymdownx.highlight:
       anchor_linenums: true
       line_spans: __span
@@ -66,3 +69,6 @@ markdown_extensions:
   - pymdownx.inlinehilite
   - pymdownx.snippets
   - pymdownx.superfences    
+  
+plugins:
+  - glightbox
