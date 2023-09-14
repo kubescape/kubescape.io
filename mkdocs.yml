@@ -31,6 +31,7 @@ plugins:
         - tags 
       abstract_chars_count: -1
       abstract_delimiter: ""
+  - glightbox
 extra:
   social:
     - icon: fontawesome/brands/twitter 
@@ -68,7 +69,4 @@ markdown_extensions:
       pygments_lang_class: true
   - pymdownx.inlinehilite
   - pymdownx.snippets
-  - pymdownx.superfences    
-  
-plugins:
-  - glightbox
+  - pymdownx.superfences
