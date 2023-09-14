@@ -8,6 +8,7 @@ theme:
     text: Fira Sans
     code: Fira Mono
   features:
+    - content.code.copy
     - navigation.tabs    
     - navigation.footer  
   icon:
@@ -32,6 +33,16 @@ nav:
     - Docs:
         - 'Documentation overview': 'docs/index.md'
         - 'Getting Started': 'docs/getting-started.md'
+        - 'Installing the client': 'docs/install-cli.md'
+        - 'Installing in your cluster': 'docs/install-in-cluster.md'
+        - 'Scanning your environment': 'docs/scanning.md'
+        - 'Customizing your scans': 'docs/customizing-your-scans.md'
+        - 'Accepting risk': 'docs/accepting-risk.md'
+        - 'Connecting to providers': 'docs/providers.md'
+        - Integrations:
+            - 'GitHub': 'docs/integrations/github.md'
+            - 'Lens': 'docs/integrations/lens.md'
+        - 'Building Kubescape': 'docs/building.md'
     - Project: 
         - 'About the Kubescape project': 'project/about.md'
         - 'License': 'project/license.md'
@@ -40,10 +51,11 @@ nav:
     - GitHub: 'https://github.com/kubescape/kubescape'
 
 markdown_extensions:
+  - admonition
   - pymdownx.highlight:
       anchor_linenums: true
       line_spans: __span
       pygments_lang_class: true
   - pymdownx.inlinehilite
   - pymdownx.snippets
-  - pymdownx.superfences    
+  - pymdownx.superfences

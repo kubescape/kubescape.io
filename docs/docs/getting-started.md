@@ -1,8 +1,8 @@
 # Getting started with Kubescape
 
-Kubescape can run as a command line tool on a client, as an operator inside a cluster, as part of your CI/CD process, or more.  
+Kubescape can be used as a command line tool, as an operator inside a cluster, as part of a CI/CD process, or in many more places.  
 
-The best way to get started with Kubescape is to download it to the machine you use to manage your Kubernetes cluster.
+The easiest way to get started with Kubescape is to download it to the machine you use to manage your Kubernetes cluster.
 
 ## Install Kubescape
 
@@ -12,17 +12,22 @@ curl -s https://raw.githubusercontent.com/kubescape/kubescape/master/install.sh 
 
 (Kubescape is a security product; please read the file before you run it!)
 
-You can also 
-
-* [Install on windows](#install-on-windows)
-* [Install on macOS](#install-on-macos)
-* [Install on NixOS or Linux/macOS via nix](#install-on-nixos-or-with-nix-community)
-
 ## Run your first scan
 
 ```sh
 kubescape scan --enable-host-scan --verbose
 ```
+
+You will see output like this:
+
+<img src="https://raw.githubusercontent.com/kubescape/kubescape/master/docs/img/summary.png">
+
+
+
+* [Install on windows](#install-on-windows)
+* [Install on macOS](#install-on-macos)
+* [Install on NixOS or Linux/macOS via nix](#install-on-nixos-or-with-nix-community)
+
 
 You will see output like this:
 
