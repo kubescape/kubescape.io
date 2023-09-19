@@ -51,7 +51,7 @@ In Kubescape 3.0 we have added in-cluster storage for scan results.  With the Ku
 In previous versions, Kubescape supported vulnerability scanning inside a cluster. We’ve brought this feature to the Kubescape command line in 3.0.
 
 <figure markdown>
-  ![Scanning a single image in Kubescape 3.0](/blog/introducing-kubescape-3.0/scan-image.png){ width="600" }
+  ![Scanning a single image in Kubescape 3.0](/blog/introducing-kubescape-3/scan-image.png){ width="600" }
   <figcaption>The UX for scanning a single image in Kubescape.  Output can be in tabular or `VulnerabilityManifest` JSON format</figcaption>
 </figure>
 
@@ -142,7 +142,7 @@ If you would like to preview the new security scan mode, update Kubescape to the
 This scan will become the default behavior of `kubescape scan` in the coming weeks. You can access the previous default by running `kubescape scan framework allcontrols,nsa,mitre`.
 
 <figure markdown>
-  ![The new overview security scan](/blog/introducing-kubescape-3.0/security-scan.png){ width="600" }
+  ![The new overview security scan](/blog/introducing-kubescape-3/security-scan.png){ width="600" }
   <figcaption>The new overview security scan. Use Kubescape's risk acceptance feature to get all the scores down to 0, and then anything above this represents an issue worth investigating.</figcaption>
 </figure>
 
@@ -183,7 +183,7 @@ capabilities:
 We’re certainly not done here! For the rest of the year we will be finishing off our compliance and vulnerability scanning roadmap, including an in-cluster UI for better visualization of the saved results.
 
 <figure markdown>
-  ![Kubescape 3.1 UI preview](/blog/introducing-kubescape-3.0/ui-preview.png){ width="600" }
+  ![Kubescape 3.1 UI preview](/blog/introducing-kubescape-3/ui-preview.png){ width="600" }
   <figcaption>A work-in-progress look at what we’re building for the in-cluster UI. The final UI will probably be much different (and much better!)</figcaption>
 </figure>
 
