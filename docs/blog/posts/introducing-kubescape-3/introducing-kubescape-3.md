@@ -5,8 +5,7 @@ categories:
   - Project
 authors:
   - craigbox
-#hide:
-  #- toc  
+slug: "introducing-kubescape-3"
 ---
 
 # Introducing Kubescape 3.0
