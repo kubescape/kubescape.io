@@ -1,0 +1,21 @@
+authors:
+  craigbox:
+    name: Craig Box
+    description: Kubescape maintainer
+    avatar: https://github.com/craigbox.png
+  slashben:
+    name: Ben Hirschberg
+    description: Kubescape maintainer
+    avatar: https://github.com/slashben.png
+  dwertent:
+    name: David Wertenteil
+    description: Kubescape maintainer
+    avatar: https://github.com/dwertent.png
+  rotem:
+    name: Rotem Refael
+    description: Kubescape maintainer
+    avatar: https://github.com/rotemamsa.png
+  oshratn:
+    name: Oshrat Nir
+    description: Kubescape contributor
+    avatar: https://github.com/oshratn.png

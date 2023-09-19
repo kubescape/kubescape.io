@@ -14,3 +14,11 @@ h1, h2, h3 {
 .md-header__title .md-ellipsis {
   display: none;
 }
+
+.md-post__header {
+  margin-top: 20px;
+}
+
+.md-typeset ol li, .md-typeset ul li {
+  margin-bottom: 0.125em;
+}

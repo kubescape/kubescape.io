@@ -9,11 +9,30 @@ theme:
     code: Fira Mono
   features:
     - content.code.copy
+    - navigation.sections
     - navigation.tabs    
     - navigation.footer  
+    - navigation.tracking  
+    - navigation.expand
+    - navigation.indexes    
   icon:
     repo: fontawesome/brands/github
   custom_dir: overrides
+plugins:
+  - blog:
+      archive_url_format: "archive/{date}"
+      archive_url_date_format: yyyy/MM
+      categories_url_format: "category/{slug}"
+  - rss:
+      match_path: blog/posts/.* 
+      date_from_meta:
+        as_creation: date
+      categories:
+        - categories
+        - tags 
+      abstract_chars_count: -1
+      abstract_delimiter: ""
+  - glightbox
 extra:
   social:
     - icon: fontawesome/brands/twitter 
@@ -27,7 +46,6 @@ extra_css:
   - stylesheets/extra.css
 copyright:
   Copyright &copy; 2021 - 2023 <a href="https://kubescape.devstats.cncf.io/d/66/developer-activity-counts-by-companies?orgId=1">The Kubescape Authors</a>
-
 nav:
     - Home: 'index.md'
     - Docs:
@@ -48,10 +66,14 @@ nav:
         - 'License': 'project/license.md'
         - 'Community': 'project/community.md'
         - 'Contributing': 'https://github.com/kubescape/kubescape/blob/master/CONTRIBUTING.md'
+    - Blog: 
+      - 'blog/index.md'
     - GitHub: 'https://github.com/kubescape/kubescape'
 
 markdown_extensions:
   - admonition
+  - attr_list
+  - md_in_html
   - pymdownx.highlight:
       anchor_linenums: true
       line_spans: __span

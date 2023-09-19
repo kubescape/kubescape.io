@@ -45,6 +45,15 @@ Set-ExecutionPolicy RemoteSigned -scope CurrentUser
 !!! note "Note"
     The installation script requires PowerShell v5.0 or higher.
 
+## Chocolatey
+> **Note**: Chocolatey [community-supported](https://community.chocolatey.org/packages/kubescape).
+```powershell
+choco install kubescape
+```
+
+!!! note "Note"
+    Packaging for Chocolatey is community-supported and may not be up to date with the [latest Kubescape release](https://github.com/kubescape/kubescape/tags).
+
 ## Manual installation
 
 ### X86_64 or ARM64 (M1/M2) Linux / macOS
@@ -66,7 +75,12 @@ sudo apt update
 sudo apt install kubescape
 ```
 
-### Red Hat, Fedora, other RPM-based distributions, and Debian
+Kubescape can also be installed from [the Snap Store]
+[![Get it from the Snap Store](https://snapcraft.io/static/images/badges/en/snap-store-white.svg)](https://snapcraft.io/kubescape)
+
+
+
+### Red Hat, CentOS, Fedora and other RPM-based distributions, and Debian
 
 The Kubescape maintainers build each release and upload the packages to the openSUSE Build Service (OBS), which builds packages in `RPM` and `deb` format for many
 
@@ -102,7 +116,6 @@ yay -S kubescape-bin
     Packaging for kubescape-bin is supported by the AUR community.
 
 
-
 ## Homebrew
 > **Note**: The kubescape delivered by [official Homebrew](https://formulae.brew.sh/formula/kubescape#default) comes with git disabled.
 
@@ -116,11 +129,6 @@ brew tap kubescape/tap
 brew install kubescape-cli
 ```
 
-## Chocolatey
-> **Note**: Chocolatey [community-supported](https://community.chocolatey.org/packages/kubescape).
-```powershell
-choco install kubescape
-```
 
 ## Scoop
 > **Note**: Scoop [community-supported](https://scoop.sh/#/apps?q=kubescape&s=0&d=1&o=true&id=1f5ae05eaafe3e7a26505f0889101e0da91ffe91).
@@ -129,8 +137,6 @@ scoop install kubescape
 ```
 
 
-## Snap
-[![Get it from the Snap Store](https://snapcraft.io/static/images/badges/en/snap-store-white.svg)](https://snapcraft.io/kubescape)
 
 ## NixOS or with nix
 > **Note**: This method is community-supported. If you are having trouble, please reach out to [NixOS support](https://nixos.wiki/wiki/Support).
