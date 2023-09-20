@@ -4,33 +4,44 @@ The Kubescape command-line client is a single binary. Because the software is up
 
 When Kubescape runs, it will check for a more recent version.
 
-* [All platforms](#all-platforms)
-* [Windows](#install-on-windows)
-* [macOS](#install-on-macos)
-* [Linux](#install-on-linux)
-* [nix](#install-on-nixos-or-with-nix-community)
-* [Manual installation](#manual-installation)
+## Cross-platform
 
+### Script install
 
-## All platforms
+!!! info "Supported platforms"
+    This script is supported on Linux (x86_64 and arm64), macOS (Intel or Apple Silicon) and `bash` on Windows (x86_64).
+
+You can automatically download and install Kubescape using our installer script.  We encourage you to read it before executing it.
+
+If run as root, the script will install the `kubescape` binary in `/usr/local/bin`.  If run as a user, it will put the binary in `/.kubescape/bin`.
+
+```bash
+curl -s https://raw.githubusercontent.com/kubescape/kubescape/master/install.sh | /bin/bash
+```
 
 ### krew
 
 [Krew](https://krew.sigs.k8s.io/) is the plugin manager for the `kubectl` command-line tool.  Kubescape can be installed as a `kubectl` plugin.
 
-First, [install Krew](https://krew.sigs.k8s.io/docs/user-guide/setup/install/) using the appropriate method for your platform. Then, to install Kubescape:
+First, [install Krew](https://krew.sigs.k8s.io/docs/user-guide/setup/install/) using the appropriate method for your platform. Then, install Kubescape:
 
 ```bash
 kubectl krew update
 kubectl krew install kubescape
-kubectl kubescape
 ```
+
+To invoke Kubescape when installed with krew, use `kubectl kubescape` instead of `kubescape`.
+
 
 ## Windows
 
+!!! info "Supported platforms"
+    Kubescape is supported on Windows x64.
+
+
 ### PowerShell 
 
-Kubescape is packaged for Windows v86_64. 
+Similar to the [bash installation script](#manual-install), you can install Kubescape using PowerShell on Windows: 
 
 ```powershell
 iwr -useb https://raw.githubusercontent.com/kubescape/kubescape/master/install.ps1 | iex
@@ -45,20 +56,45 @@ Set-ExecutionPolicy RemoteSigned -scope CurrentUser
 !!! note "Note"
     The installation script requires PowerShell v5.0 or higher.
 
-## Chocolatey
-> **Note**: Chocolatey [community-supported](https://community.chocolatey.org/packages/kubescape).
+### Chocolatey
+
+[Chocolatey](https://chocolatey.org/) is a package manager for Windows.  To install Kubescape using Chocolatey, open a PowerShell terminal and run:
+
 ```powershell
 choco install kubescape
 ```
 
 !!! note "Note"
-    Packaging for Chocolatey is community-supported and may not be up to date with the [latest Kubescape release](https://github.com/kubescape/kubescape/tags).
+    Packaging for Chocolatey is [community supported](https://community.chocolatey.org/packages/kubescape) and may not always be up to date with the [latest Kubescape release](https://github.com/kubescape/kubescape/tags).
 
-## Manual installation
+### Scoop
 
-### X86_64 or ARM64 (M1/M2) Linux / macOS
+[Scoop](https://scoop.sh/) is a command-line installer for Windows.  To install Kubescape using Scoop, open a PowerShell terminal and run:
+
+```powershell
+scoop install kubescape
+```
+
+!!! note "Note"
+    Packaging for Scoop is [community supported](https://scoop.sh/#/apps?q=kubescape&s=0&d=1&o=true&id=1f5ae05eaafe3e7a26505f0889101e0da91ffe91) and may not always be up to date with the [latest Kubescape release](https://github.com/kubescape/kubescape/tags).
+
+## macOS
+
+## Homebrew
+
+Kubescape is available in the [official Homebrew repository](https://formulae.brew.sh/formula/kubescape#default) or through a [Kubescape tap](https://github.com/kubescape/homebrew-tap). The version from the official repository does not include support for scanning Git repositories, due to [an upstream packaging issue](https://github.com/kubescape/kubescape/issues/1014).
+
+To install Kubescape from the official repository:
+
 ```bash
-curl -s https://raw.githubusercontent.com/kubescape/kubescape/master/install.sh | /bin/bash
+brew install kubescape
+```
+
+To get Git support, install the Kubescape tap and the `kubescape-cli` package:
+
+```bash
+brew tap kubescape/tap
+brew install kubescape-cli
 ```
 
 ## Linux
@@ -75,16 +111,13 @@ sudo apt update
 sudo apt install kubescape
 ```
 
-Kubescape can also be installed from [the Snap Store]
-[![Get it from the Snap Store](https://snapcraft.io/static/images/badges/en/snap-store-white.svg)](https://snapcraft.io/kubescape)
-
-
+Kubescape can also be installed from [the Snap Store](https://snapcraft.io/kubescape).
 
 ### Red Hat, CentOS, Fedora and other RPM-based distributions, and Debian
 
-The Kubescape maintainers build each release and upload the packages to the openSUSE Build Service (OBS), which builds packages in `RPM` and `deb` format for many
+The Kubescape maintainers build each release and upload the packages to the openSUSE Build Service (OBS), which builds packages in `RPM` and `deb` format for many different distributions and platforms.
 
-[Installation instructions for each platform are available on the OBS page](https://software.opensuse.org/download.html?project=home%3Akubescape&package=kubescape).
+[Installation instructions for each distribution are available on the OBS page](https://software.opensuse.org/download.html?project=home%3Akubescape&package=kubescape).
 
 ### openSUSE
 
@@ -96,7 +129,7 @@ sudo zypper install kubescape
 ```
 
 !!! note "Note"
-    Packaging for openSUSE is supported by the openSUSE community.
+    Packaging for openSUSE is supported by the openSUSE community and may not always be up to date with the [latest Kubescape release](https://github.com/kubescape/kubescape/tags).
 
 ### Arch
 
@@ -113,39 +146,16 @@ yay -S kubescape-bin
 ```
 
 !!! note "Note"
-    Packaging for kubescape-bin is supported by the AUR community.
+    Packaging for kubescape-bin is supported by the [AUR community](https://aur.archlinux.org/packages?O=0&K=kubescape) and may not always be up to date with the [latest Kubescape release](https://github.com/kubescape/kubescape/tags).
 
 
-## Homebrew
-> **Note**: The kubescape delivered by [official Homebrew](https://formulae.brew.sh/formula/kubescape#default) comes with git disabled.
-
-```bash
-brew install kubescape
-```
-
-If you want to have the git enabled one, you can install via the [homebrew-tap](https://github.com/kubescape/homebrew-tap):
-```bash
-brew tap kubescape/tap
-brew install kubescape-cli
-```
-
-
-## Scoop
-> **Note**: Scoop [community-supported](https://scoop.sh/#/apps?q=kubescape&s=0&d=1&o=true&id=1f5ae05eaafe3e7a26505f0889101e0da91ffe91).
-```powershell
-scoop install kubescape
-```
-
-
-
-## NixOS or with nix
-> **Note**: This method is community-supported. If you are having trouble, please reach out to [NixOS support](https://nixos.wiki/wiki/Support).
+### NixOS, or using nix on Windows or Linux
 
 You can use `nix` on Linux or macOS.
 
-Try it out in an ephemeral shell: `nix-shell -p kubescape`.
+To try it out in an ephemeral shell, run `nix-shell -p kubescape`.
 
-NixOS:
+To install Kubescape on NixOS, add the following configuration to your [`/etc/nixos/configuration.nix`](https://nixos.org/manual/nixos/stable/#ch-configuration) file:
 
 ```
   # your other config ...
@@ -155,7 +165,7 @@ NixOS:
   ];
 ```
 
-home-manager:
+Alternatively, if using [Home Manager](https://nixos.wiki/wiki/Home_Manager):
 
 ```
   # your other config ...
@@ -165,6 +175,56 @@ home-manager:
   ];
 ```
 
-Or, to your profile (not preferred): `nix-env --install -A nixpkgs.kubescape`.
+Or, to install your profile (not recommended): 
 
-## In-cluster installation
+```bash
+nix-env --install -A nixpkgs.kubescape
+```
+
+!!! note "Note"
+    Packaging for Nix is [community supported](https://github.com/NixOS/nixpkgs/blob/master/pkgs/tools/security/kubescape/default.nix) and may not always be up to date with the [latest Kubescape release](https://github.com/kubescape/kubescape/tags). If you are having trouble, please reach out to [NixOS support](https://nixos.wiki/wiki/Support).
+
+## Offline/air-gapped environment support
+
+When it runs, Kubescape downloads *artifacts* (frameworks, controls and configurations) from the [control library](frameworks-and-controls/index.md) or from a configured [provider](providers.md).
+
+You can download these files manually, so that Kubescape can run offline, or in an "air-gapped" environment.
+
+### Download all artifacts
+
+1. Download the controls and save them in the local directory.  If no path is specified, they will be saved in `~/.kubescape`.
+
+    ```sh
+    kubescape download artifacts --output path/to/local/dir
+    ```
+
+2. Copy the downloaded artifacts to the offline system.
+  
+3. Scan using the downloaded artifacts:
+
+    ```sh
+    kubescape scan --use-artifacts-from path/to/local/dir
+    ```
+
+### Download a single artifact
+
+You can also download a single artifact, and scan with the `--use-from` flag:
+
+1. Download and save in a file. If no file name is specified, the artifact will be saved as `~/.kubescape/<framework name>.json`.
+
+    ```sh
+    kubescape download framework nsa --output /path/nsa.json
+    ```
+
+2. Copy the downloaded artifacts to the offline system.
+
+3. Scan using the downloaded framework:
+
+    ```sh
+    kubescape scan framework nsa --use-from /path/nsa.json
+    ```
+
+## Next steps
+
+* [Learn how to install the Kubescape Operator in your Kubernetes cluster](install-operator.md)
+* [Check out the GitHub repository for Kubescape packaging](https://github.com/kubescape/packaging)
