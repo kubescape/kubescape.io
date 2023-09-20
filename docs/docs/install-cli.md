@@ -80,7 +80,7 @@ scoop install kubescape
 
 ## macOS
 
-## Homebrew
+### Homebrew
 
 Kubescape is available in the [official Homebrew repository](https://formulae.brew.sh/formula/kubescape#default) or through a [Kubescape tap](https://github.com/kubescape/homebrew-tap). The version from the official repository does not include support for scanning Git repositories, due to [an upstream packaging issue](https://github.com/kubescape/kubescape/issues/1014).
 
