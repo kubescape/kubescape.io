@@ -58,8 +58,8 @@ nav:
         - 'Accepting risk': 'docs/accepting-risk.md'
         - 'Connecting to providers': 'docs/providers.md'
         - Kubescape Operator:
-            - 'Overview': 'operator/index.md'
-            - 'Vulnerability scanning': 'operator/vulnerabilities.md'
+            - 'Overview': 'docs/operator/index.md'
+            - 'Vulnerability scanning': 'docs/operator/vulnerabilities.md'
         - Integrations:
             - 'Overview': 'docs/integrations/index.md'
             - 'GitHub': 'docs/integrations/github.md'
