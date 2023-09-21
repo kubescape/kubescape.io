@@ -35,11 +35,10 @@ curl -s https://raw.githubusercontent.com/kubescape/kubescape/master/install.sh 
 
 Learn more about:
 
-* [Installing Kubescape](https://github.com/kubescape/kubescape/blob/master/docs/getting-started.md#install-kubescape)
-* [Running your first scan](https://github.com/kubescape/kubescape/blob/master/docs/getting-started.md#run-your-first-scan)
-* [Usage](https://github.com/kubescape/kubescape/blob/master/docs/getting-started.md#examples)
-* [Architecture](https://github.com/kubescape/kubescape/blob/master/docs/architecture.md)
-* [Building Kubescape from source](https://github.com/kubescape/kubescape/blob/master/docs/building.md)
+* [Installing Kubescape](docs/getting-started.md/#install-kubescape)
+* [Running your first scan](docs/getting-started.md/#run-your-first-scan)
+* [Usage](docs/scanning.md)
+* [Building Kubescape from source](https://github.com/kubescape/kubescape/wiki/Building)
 
 _Did you know you can use Kubescape in all these places?_
 
@@ -49,27 +48,25 @@ _Did you know you can use Kubescape in all these places?_
 
 ## Under the hood
 
-Kubescape uses [Open Policy Agent](https://github.com/open-policy-agent/opa) to verify Kubernetes objects against [a library of posture controls](https://github.com/kubescape/regolibrary).
+Kubescape uses [Open Policy Agent](https://github.com/open-policy-agent/opa) to verify Kubernetes objects against [a library of posture controls](docs/frameworks-and-controls/index.md).
 
 By default, the results are printed in a console-friendly manner, but they can be:
 
 * exported to JSON or junit XML
 * rendered to HTML or PDF
-* submitted to a [cloud service](https://github.com/kubescape/kubescape/blob/master/docs/providers.md)
-
-It retrieves Kubernetes objects from the API server and runs a set of [Rego snippets](https://www.openpolicyagent.org/docs/latest/policy-language/) developed by [ARMO](https://www.armosec.io/?utm_source=kubescape.io&utm_medium=website).
+* submitted to a [Kubescape-compatible provider](docs/providers.md)
 
 ## Community
 
 Kubescape is an open source project, we welcome your feedback and ideas for improvement. We are part of the Kubernetes community and are building more tests and controls as the ecosystem develops.
 
-We hold [community meetings](https://us02web.zoom.us/j/84020231442) on Zoom, on the first Tuesday of every month, at 14:00 GMT.
+We hold [community meetings](project/community.md#monthly-meeting) every month.
 
 The Kubescape project follows the [CNCF Code of Conduct](https://github.com/cncf/foundation/blob/master/code-of-conduct.md).
 
 ## Contributions 
 
-Thanks to all our contributors!  Check out our [CONTRIBUTING](https://github.com/kubescape/kubescape/blob/master/CONTRIBUTING.md) file to learn how to join them.
+Thanks to all our contributors!  Check out our [contributing guide](https://github.com/kubescape/kubescape/blob/master/CONTRIBUTING.md) file to learn how to join them.
 
 * Feel free to pick a task from the [issues](https://github.com/kubescape/kubescape/issues?q=is%3Aissue+is%3Aopen+label%3A%22open+for+contribution%22), [roadmap](https://github.com/kubescape/kubescape/blob/master/docs/roadmap.md) or suggest a feature of your own.
 * [Open an issue](https://github.com/kubescape/kubescape/issues/new/choose): we aim to respond to all issues within 48 hours.
@@ -85,7 +82,7 @@ Thanks to all our contributors!  Check out our [CONTRIBUTING](https://github.com
 
 ## License
 
-Copyright 2021-2023, the Kubescape Authors. All rights reserved. Kubescape is released under the Apache 2.0 license. See the [LICENSE](LICENSE) file for details.
+Copyright 2021-2023, the Kubescape Authors. All rights reserved. [Kubescape is released under the Apache 2.0 license.](project/license.md).
 
 Kubescape is a [Cloud Native Computing Foundation (CNCF) sandbox project](https://www.cncf.io/sandbox-projects/) and was contributed by [ARMO](https://www.armosec.io/?utm_source=kubescape.io&utm_medium=website).
 
