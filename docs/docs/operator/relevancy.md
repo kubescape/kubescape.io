@@ -2,7 +2,7 @@
 
 The relevancy feature of the Kubescape operator enables users to understand which vulnerabilities detected by [the vulnerability scanner](vulnerabilities.md) are likely to be relevant, based on evaluation at runtime.
 
-ARMO's relevancy is implemented by an eBPF program on each node, deployed using the [node agent](index.md#node-agent). It scans the running environment and maps out artifacts and libraries that are loaded into memory and therefore are in use in the environment.
+Kubescape's relevancy filtering is implemented by an [eBPF](https://ebpf.io/) program on each node, deployed using the [node agent](index.md#node-agent). It scans the running environment and maps out artifacts and libraries that are loaded into memory and therefore are in use in the environment.
 
 Using eBPF probes, it looks at the file activity of a running container. When a pod starts on a node, the node agent will watch its containers for a configurable learning period and store an activity log.
 
@@ -62,12 +62,11 @@ NAME                                                               CREATED AT   
 
 ### Linux kernel
 
-The relevancy functionality is based on eBPF technology, which is implemented only on Linux kernels. This feature will not work on Windows. The kernel version on the node must be >= 4.14.
+The relevancy functionality is based on eBPF, which is currently only implemented on Linux. This feature will not work on Windows. The kernel version on the node must be >= 4.14.
 
-### Relevancy engine
-
-The relevancy functionality is based on the Falco library. Falco downloads the kernel object per the kernel version in the node. Not all kernel versions have a matching object.
+!!! info Info
+    The node agent uses the [Inspektor Gadget](https://www.inspektor-gadget.io/) library.
 
 ### Symlinks
 
-The Falco library does not report on the actual file when a symlink is opened, meaning relevant files opened by symlink may cause CVEs to appear as not relevant.  This may result in false positives.
+The eBPF probes used by Kubescape do not report on the actual file when a symlink is opened, meaning relevant files opened by symlink may cause CVEs to appear as not relevant.  This may result in false positives.

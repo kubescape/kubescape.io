@@ -86,7 +86,7 @@ Kubescape can examine the use of containers at runtime to suggest which vulnerab
 
 ## Uploading scan results to a provider
 
-If you have Kubescape configured to use a [provider](../providers.md), then Kubevuln will send 
+If you have Kubescape configured to use a [provider](../providers.md), then upon the completion of a scan, Kubevuln will send the results to that provider.
 
 ## Configuration
 
