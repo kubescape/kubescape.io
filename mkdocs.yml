@@ -14,7 +14,7 @@ theme:
     - navigation.footer  
     - navigation.tracking  
     - navigation.expand
-    - navigation.indexes    
+    # - navigation.indexes    
   icon:
     repo: fontawesome/brands/github
   custom_dir: overrides
@@ -58,8 +58,10 @@ nav:
         - 'Accepting risk': 'docs/accepting-risk.md'
         - 'Connecting to providers': 'docs/providers.md'
         - Kubescape Operator:
-            - 'Overview': 'operator/index.md'
-            - 'Vulnerability scanning': 'operator/vulnerabilities.md'
+            - 'Overview': 'docs/operator/index.md'
+            - 'Vulnerability scanning': 'docs/operator/vulnerabilities.md'
+            - 'Relevancy': 'docs/operator/relevancy.md'
+            - 'Scheduled scans': 'docs/operator/scheduled-scans.md'
         - Integrations:
             - 'Overview': 'docs/integrations/index.md'
             - 'GitHub': 'docs/integrations/github.md'
@@ -83,6 +85,7 @@ markdown_extensions:
   - admonition
   - attr_list
   - md_in_html
+  - pymdownx.details
   - pymdownx.highlight:
       anchor_linenums: true
       line_spans: __span
