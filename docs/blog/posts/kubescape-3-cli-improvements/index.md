@@ -5,6 +5,7 @@ categories:
   - Project
 authors:
   - oshratn
+slug: 'kubescape-3-cli-improvements'
 ---
 
 # Kubescape 3.0: CLI improvements
