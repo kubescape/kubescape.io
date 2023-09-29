@@ -1,10 +1,10 @@
 ---
-date: 2023-09-28
+date: 2023-09-29
 categories:
   - Announcements
   - Project
 authors:
-  - oshratn
+  - vladklokun
 slug: 'kubescape-3-cli-improvements'
 ---
 
@@ -15,10 +15,8 @@ In the latest release of Kubescape, we completely overhauled the CLI experience 
 Watch a short video for a demonstration of the new CLI and its benefits, or read on.
 
 <div class="video-wrapper">
-  <iframe width="640" height="360" src="https://www.youtube.com/embed/dQw4w9WgXcQ?si=8IrRiUOQG0JCqd1N" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+  <iframe width="640" height="360" src="https://www.youtube.com/embed/ul5Wry6sS8w?si=V8CStezYDZa_4Dtd" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 </div>
-
-(Upload [the video](https://drive.google.com/file/d/1WeS5zQ_k6L_seYtHKW6hQaHlekUZA3u6/view?usp=sharing) to YouTube)
 
 <!-- more -->
 
