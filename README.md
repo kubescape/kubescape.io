@@ -22,14 +22,7 @@ These instructions will get you a copy of the project up and running on your loc
 ### Setting Up
 
 1. Clone the repository to your local machine.
-```bash
-git clone https://github.com/kubescape/website.git
-```
-2. Navigate to the project directory.
-```bash
-cd website
-```
-3. Install the required dependencies using the `requirements.txt` file.
+2. Install the required dependencies using the `requirements.txt` file.
 ```bash
 pip install -r requirements.txt
 ```
@@ -38,7 +31,7 @@ pip install -r requirements.txt
 
 To build and test the website locally, follow these steps:
 
-1. Naviagte to project directory and run the command `mkdocs build`. The site will be built in the `site/` directory.
+1. Run the command `mkdocs build`. The site will be built in the `site/` directory.
 2. After building the website locally, you can run the website locally using the command `mkdocs serve`.
 
 ## Production
@@ -48,7 +41,3 @@ The site is currently hosted with thanks to Netlify. On each successful push to 
 ## Contributing
 
 We welcome contributions from the community. Please read our [contributing guide](https://github.com/kubescape/kubescape.io/blob/main/docs/project/contributing.md) for more information.
-
-## License
-
-This project is licensed under the Creative Commons Attribution 4.0 International License - see the [LICENSE.md](https://github.com/kubescape/kubescape.io/blob/main/LICENSE) file for details.
