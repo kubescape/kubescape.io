@@ -88,6 +88,6 @@ Kubescape will then scan the image for vulnerabilities and provide you with a re
 
 The new functionality in the Kubescape 3.0 CLI will make it easier and faster for you to improve the security of your Kubernetes clusters. Try it out today and let us know what you think!
 
-Please feel free to [raise any issues against the Kubescape GitHub project](https://github.com/kubescape/kubescape/issues) or ask questions [in our Slack channel](https://kubescape.io/project/community/#slack).
+Please feel free to [raise any issues in the Kubescape GitHub project](https://github.com/kubescape/kubescape/issues) or ask questions [in our Slack channel](https://kubescape.io/project/community/#slack).
 
 Are you enjoying Kubescape? [Please fill in our user survey!](https://kubescape.io/project/survey/)
