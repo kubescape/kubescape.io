@@ -28,25 +28,25 @@ Kubescape's `scan` command supports a `--controls-config` flag, which allows you
 
 Used for controls that test that [CPU resource `limit` values](https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/#requests-and-limits) are set and under a defined maximum value.
 
-* Default values: none
+* Default value: none
 
 ### cpu_limit_min
 
 Used for controls that test that [CPU resource `limit` values](https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/#requests-and-limits) are set and above a defined minimum value.
 
-* Default values: 0
+* Default value: 0
 
 ### cpu_request_max
 
 Used for controls that test that [CPU resource `request` values](https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/#requests-and-limits) are set and under a defined maximum value.
 
-* Default values: none
+* Default value: none
 
 ### cpu_request_min
 
 Used for controls that test that [CPU resource `request` values](https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/#requests-and-limits) are set and above a defined minimum value.
 
-* Default values: 0
+* Default value: 0
 
 ### imageRepositoryAllowList
 
@@ -122,19 +122,19 @@ The maximum number of `High` severity vulnerabilities to allow.
 
 Used for controls that test that [memory resource `limit` values](https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/#requests-and-limits) are set and under a defined maximum value.
 
-* Default values: none
+* Default value: none
 
 ### memory_limit_min
 
 Used for controls that test that [memory resource `limit` values](https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/#requests-and-limits) are set and above a defined minimum value.
 
-* Default values: 0
+* Default value: 0
 
 ### memory_request_max
 
 Used for controls that test that [memory resource `request` values](https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/#requests-and-limits) are set and under a defined maximum value.
 
-* Default values: none
+* Default value: none
 
 ### memory_request_min
 
