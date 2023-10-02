@@ -28,7 +28,7 @@ Kubescape's `scan` command supports a `--controls-config` flag, which allows you
 
 Used for controls that test that [CPU resource `limit` values](https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/#requests-and-limits) are set and under a defined maximum value.
 
-* Default values: None
+* Default values: none
 
 ### cpu_limit_min
 
@@ -40,7 +40,7 @@ Used for controls that test that [CPU resource `limit` values](https://kubernete
 
 Used for controls that test that [CPU resource `request` values](https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/#requests-and-limits) are set and under a defined maximum value.
 
-* Default values: None
+* Default values: none
 
 ### cpu_request_min
 
@@ -144,9 +144,9 @@ Used for controls that test that [memory resource `request` values](https://kube
 
 ### publicRegistries
 
-Kubescape checks none of these public container registries are in use.
+Kubescape checks that none of these public container registries are in use.
 
-* Default values: None
+* Default values: none
 
 ### recommendedLabels
 
