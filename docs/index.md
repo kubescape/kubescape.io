@@ -67,7 +67,7 @@ We hold [community meetings](https://us02web.zoom.us/j/84020231442) on Zoom, on 
 
 The Kubescape project follows the [CNCF Code of Conduct](https://github.com/cncf/foundation/blob/master/code-of-conduct.md).
 
-## Contributions 
+## Contributions
 
 Thanks to all our contributors!  Check out our [CONTRIBUTING](https://github.com/kubescape/kubescape/blob/master/CONTRIBUTING.md) file to learn how to join them.
 
@@ -88,6 +88,8 @@ Thanks to all our contributors!  Check out our [CONTRIBUTING](https://github.com
 Copyright 2021-2023, the Kubescape Authors. All rights reserved. Kubescape is released under the Apache 2.0 license. See the [LICENSE](LICENSE) file for details.
 
 Kubescape is a [Cloud Native Computing Foundation (CNCF) sandbox project](https://www.cncf.io/sandbox-projects/) and was contributed by [ARMO](https://www.armosec.io/?utm_source=kubescape.io&utm_medium=website).
+
+Kubescape is a [trademark](https://www.linuxfoundation.org/legal/trademarks) owned by the [Linux Foundation](https://www.linuxfoundation.org/)
 
 <div align="center">
     <img src="https://raw.githubusercontent.com/cncf/artwork/master/other/cncf-sandbox/horizontal/color/cncf-sandbox-horizontal-color.svg" width="300" alt="CNCF Sandbox Project">
