@@ -32,6 +32,7 @@ plugins:
         - tags 
       abstract_chars_count: -1
       abstract_delimiter: ""
+  - search
   - glightbox
 extra:
   social:
