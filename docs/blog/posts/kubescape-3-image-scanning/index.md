@@ -15,22 +15,21 @@ In the latest release of Kubescape, we completely overhauled the CLI experience 
 Watch a short video for a demonstration of image scanning from the Kubescape CLI and its benefits, or read on.
 
 <div class="video-wrapper">
-  <iframe width="640" height="360" src="https://youtu.be/rjLL_5F41Oc" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+  <iframe width="640" height="360" src="https://www.youtube.com/embed/rjLL_5F41Oc?si=X5XLkMLBpzTQl5FK"  title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 </div>
 
 <!-- more -->
 
-## What’s new and howto?
+## What’s new and how to?
 
 ### Scanning an image in the Kubescape CLI
 
 To scan an image, simply run the following command:
 
-"
-
+```
 kubescape scan image 
+```
 
-"
 
 Kubescape will then scan the image for vulnerabilities and show you the results. 
 
@@ -49,11 +48,10 @@ The results include the following information:
 
 If you would like to see all of the vulnerabilities, regardless of severity, you can run the command in verbose mode with the -v flag.
 
-"
-
+```
 kubescape scan image  --verbose
+```
 
-"
 
 The initial scan can take a while, as it is a comprehensive scan of everything. Subsequent scans are much quicker, so you can easily scan your images as part of your CI/CD pipeline.
 
@@ -61,11 +59,9 @@ The initial scan can take a while, as it is a comprehensive scan of everything. 
 
 Having said that, the use case for security in CI/CD pipelines is not only about speed. To support this we extended our severity threshold flag to support image scanning. Just indicate the severity you would like to fail on, and Kubescape will fail your runs on them.
 
-"
-
+```
 kubescape scan image my-image:latest --severity-threshold high
-
-"
+```
 
 We believe that image scanning is an essential part of any Kubernetes security strategy. We encourage you to try it out and see for yourself how it can help you keep your images safe.
 

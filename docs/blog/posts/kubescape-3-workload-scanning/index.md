@@ -15,7 +15,7 @@ Kubescape 3.0 introduces workload scanning, which allows you to comprehensively 
 Watch a short video for a demonstration of workload scanning from the Kubescape CLI and its benefits, or read on.
 
 <div class="video-wrapper">
-  <iframe width="640" height="360" src="https://youtu.be/N13jDFBAy7w" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+  <iframe width="640" height="360" src="https://www.youtube.com/embed/N13jDFBAy7w?si=6KC2njGeCbSfzZRJ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 </div>
 
 <!-- more -->
@@ -25,17 +25,13 @@ Watch a short video for a demonstration of workload scanning from the Kubescape 
 To scan a workload, simply run the following command:
 
 ```
-
 kubescape scan workload -n  /
-
 ```
 
 For example, to scan a Deployment named "my-deployment", you would run the following command:
 
 ```
-
 kubescape scan workload Deployment/my-deployment
-
 ```
 
 ## Workload configuration scanning
