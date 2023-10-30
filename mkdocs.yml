@@ -64,6 +64,7 @@ nav:
             - 'Vulnerability scanning': 'docs/operator/vulnerabilities.md'
             - 'Relevancy': 'docs/operator/relevancy.md'
             - 'Scheduled scans': 'docs/operator/scheduled-scans.md'
+            - 'Continuous scanning': 'docs/operator/continuous-scanning.md'
         - Integrations:
             - 'Overview': 'docs/integrations/index.md'
             - 'GitHub': 'docs/integrations/github.md'
@@ -96,3 +97,8 @@ markdown_extensions:
   - pymdownx.inlinehilite
   - pymdownx.snippets
   - pymdownx.superfences
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
