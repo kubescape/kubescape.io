@@ -13,7 +13,7 @@ jobs:
       - name: Automatically Merge PR
         uses: plm9606/automerge_actions@1.2.2
         with:
-          label-name: automerge, file-sync, sync
+          label-name: automerge
           reviewers-number: 0
           merge-method: merge
           auto-delete: false
