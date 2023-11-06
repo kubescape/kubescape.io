@@ -7,7 +7,7 @@ on:
       - main/* 
 
 jobs:
-  Run_Actions:
+  Run-Actions:
     runs-on: ubuntu-latest
     steps:
       - name: Automatically Merge PR
