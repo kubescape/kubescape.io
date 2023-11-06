@@ -20,6 +20,7 @@ theme:
   custom_dir: overrides
 plugins:
   - blog:
+      archive_date_format: MMMM yyyy
       archive_url_format: "archive/{date}"
       archive_url_date_format: yyyy/MM
       categories_url_format: "category/{slug}"
@@ -32,6 +33,7 @@ plugins:
         - tags 
       abstract_chars_count: -1
       abstract_delimiter: ""
+  - search
   - glightbox
 extra:
   social:
