@@ -8,7 +8,7 @@ authors:
 slug: 'kubescape-3-workload-scanning'
 ---
 
-# Kubescape 3.0: Intorducing Workload Scanning
+# Kubescape 3.0: Introducing Workload Scanning
 
 Kubescape 3.0 introduces workload scanning, which allows you to comprehensively report on the security posture of individual workloads running in a Kubernetes cluster. This includes both misconfiguration and vulnerability scanning. This scan results in information that gives a 360° assessment of your workload’s security posture.
 
