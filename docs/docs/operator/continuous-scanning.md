@@ -4,14 +4,20 @@ To let cluster operators see the current security posture of their cluster, Kube
 
 ## Installation
 
-Continuous Scanning is built into the Kubescape Operator Helm chart. To use this capibility, you only need to enable it. Start by navigating to the `values.yaml` file and make sure that the corresponding `capabilities.continuousScan` key is set to `enabled`, like so:
+Continuous Scanning is built into the Kubescape Operator Helm chart. To use this capability, you only need to enable it. You can enable it when installing Kubescape with a single command:
+
+```
+helm repo add kubescape https://kubescape.github.io/helm-charts/ ; helm repo update ; helm upgrade --install kubescape kubescape/kubescape-operator -n kubescape --create-namespace --set clusterName=`kubectl config current-context` --set capabilities.continuousScan=enable
+```
+
+Or, if you prefer managing your Helm releases with the `values.yaml` file, make sure that the corresponding `capabilities.continuousScan` key is set to `enabled`, like so:
 
 ```yaml
 capabilities:
   continuousScan: enable  # Make sure this is set to "enable"
 ```
 
-Once you apply the chart with the capability enabled, Kubescape will continuously secure your cluster and provide the scan results as Custom Resources.
+Once you roll out the release with the capability enabled, Kubescape will continuously secure your cluster and provide the scan results as Custom Resources.
 
 ## Accessing Results
 
@@ -23,15 +29,15 @@ Kubescape provides scan results as Custom Resources so you can access them in th
 kubectl get workloadconfigurationscansummaries -o yaml
 ```
 
-Running this command will return you a YAML-formatted list of configuration scan summaries for your cluster by namespaces.
+Running this command will return a YAML-formatted list of configuration scan summaries for your cluster by namespaces.
 
-On clusters with many namespaces, the results might be overwhelming and might even exceed your terminal history. Since Kubescape serves results as Kubernetes objects, which are YAML files at its core, you can do your usual tricks: pipe them to files, text editors etc. A trick we commonly use is:
+On clusters with many namespaces, the results might be overwhelming and might even exceed your terminal history. Since Kubescape serves results as Kubernetes objects, which are YAML files at the end of the day, you can apply your usual processes to aggregate them in a readable way. For exampple - pipe them to files, text editors etc. We commonly use the following command:
 
 ```
 kubectl get workloadconfigurationscansummaries -o yaml | less
 ```
 
-This way you get the entire results and browse the file as you see fit.
+This way you get the complete result in a file and can browse it as you see fit.
 
 ### By Namespace
 
@@ -45,7 +51,7 @@ You should see a summary for the insecure namespace only.
 
 ### By Workload
 
-You could also be interested in checking how secure a specific workload is. To see the results, use:
+You could also be interested in checking how secure a specific workload is. To see those results, use:
 
 ```
 kubectl get -n k8s-bad-practices workloadconfigurationscansummaries trusty-reverse-proxy -o yaml | less
