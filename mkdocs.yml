@@ -74,6 +74,17 @@ nav:
             - 'Frameworks': 'docs/frameworks-and-controls/frameworks.md'
             - 'Control library': 'docs/controls/index.md'
             - 'Configuring controls': 'docs/frameworks-and-controls/configuring-controls.md'
+    - Use cases:
+        - CI/CD:
+            - 'Argo CD gates using Kubescape': 'use_cases/argocd-gates-using-kubescape.md'
+            - 'CI security gates': 'use_cases/ci-security-gates.md'
+        - Cluster:
+            - 'Secured dev using Kubescape': 'use_cases/kubescape-3.0-secure-development-cluster.md'
+            - 'Misconfiguration remediation best practive': 'use_cases/misconfiguration-remediation-best-practice.md'
+            - 'Addressing and prioritizing vulneravilities': 'use_cases/prioritizing-and-addressing-vulnerabilities.md'
+        - Integrations:
+            - 'Prometheus alerts with Kubescape': 'use_cases/prometheus-alerts-with-kubescape.md'
+            - 'Kubescape integrations': 'use_cases/kubescape-Integrations.md'
     - Project: 
         - 'About the Kubescape project': 'project/about.md'
         - 'License': 'project/license.md'
