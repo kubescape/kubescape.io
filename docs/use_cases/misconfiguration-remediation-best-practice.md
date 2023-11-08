@@ -69,4 +69,4 @@ Post-remediation, embed Kubescape scans into ongoing development and deployment 
 
 Educate your development team on the significance of security best practices and consistent scanning with Kubescape to cultivate a security-aware culture.
 
-Stay abreast of Kubescape’s latest updates to capitalize on new functionalities and security checks that reflect the evolving threat landscape and compliance requirements.
+Stay informed of Kubescape’s latest updates to capitalize on new functionalities and security checks that reflect the evolving threat landscape and compliance requirements.
