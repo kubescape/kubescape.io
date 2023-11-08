@@ -99,6 +99,6 @@ By implementing Kubescape in their CI/CD pipeline, Acme Corporation is able to:
 * Continuously monitor and enforce security compliance in their Kubernetes infrastructure.
 * Quickly identify and remediate security issues before they affect production systems.
 * Maintain an agile DevOps process that does not sacrifice security for speed.
-* Ensure that developers are educated on security best practices through automated feedback.
+* Ensure that developers are educated on security best practices through an automated feedback loop.
 
 Acme's proactive approach to security with Kubescape helps to protect their critical financial services from potential threats and vulnerabilities while maintaining the pace of innovation and deployment required in their competitive industry.
