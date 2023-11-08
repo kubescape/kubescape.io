@@ -10,7 +10,7 @@ To reinforce security within their software delivery workflow, a team is leverag
 
 Kubescape is woven into the ArgoCD deployment process, with its scans initiated through additional steps in the Application resource definition.
 
-Kubescape extends its functionality to examine Kubernetes manifests and Docker images, identifying both misconfigurations and vulnerabilities.
+Kubescape examines Kubernetes manifests and Docker images, identifying both misconfigurations and vulnerabilities.
 
 
 ### Implementing Pre-Sync and Sync Hooks:
