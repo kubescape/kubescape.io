@@ -56,7 +56,7 @@ Mitigation of the likelihood of deploying insecure code, which enhances the orga
 
 ## **Additional Benefits**
 
-Ingrains a preemptive security approach by embedding checks early in the CI/CD process.
+instills a preemptive security approach by embedding checks early in the CI/CD process.
 
 Nurtures a culture of security awareness with immediate developer feedback on security lapses.
 
