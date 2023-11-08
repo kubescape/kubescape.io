@@ -19,7 +19,7 @@ The DevOps team at an innovative fintech company is gearing up to deploy a new b
 2. Security Standards Enforcement:
     * The team selects a suite of security standards for Kubescape to enforce. This includes the CIS Benchmarks and the NSA/CISA guidance, alongside custom organizational policies specifically designed for the financial sector.
 3. Vulnerability and Misconfiguration Reporting:
-    * Once the assessment is completed, Kubescape generates a comprehensive report listing vulnerabilities, misconfigurations, and suggestions for fixed versions.
+    * Once the assessment is complete, Kubescape generates a comprehensive report listing vulnerabilities, misconfigurations, and suggestions for fixed versions.
     * The developers review these findings directly in their development environment, prioritizing issues based on severity.
 4. Remediation and Iteration:
     * The team addresses the identified security gaps by modifying their Kubernetes configuration files.
