@@ -43,7 +43,7 @@ The DevOps team at an innovative fintech company is gearing up to deploy a new b
 
 
 
-* The preemptive scanning of configurations prior to deployment slashes the risk of introducing insecure workloads into the cluster.
+* The preemptive scanning of configurations prior to deployment reduces the risk of introducing insecure workloads into the cluster.
 * The prompt identification and correction of security issues ensure the development cycle remains swift yet secure.
 * A proactive security ethos is cultivated, with security considerations embedded within daily workflows, eliminating the last-minute rush to patch up security holes.
 
