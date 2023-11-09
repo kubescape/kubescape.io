@@ -50,7 +50,7 @@ Deploy compensating controls such as network segmentation, seccomp profiles or s
 
 ### Architectural Redesign:
 
-Evaluate and plan for long-term architectural or design adjustments to eradicate or reduce the vulnerability’s footprint.
+Evaluate and plan for long-term architectural or design adjustments to remove or reduce the vulnerability’s footprint.
 
 
 ### Exception Policy:
