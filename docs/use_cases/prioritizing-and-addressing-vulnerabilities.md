@@ -68,7 +68,7 @@ Engage with Kubescape 3.0 for consistent scanning and maintain a well-prioritize
 
 Act swiftly to remediate the most critical and contextually significant vulnerabilities, and strategize for those without immediate solutions.
 
-Develop a comprehensive vulnerability management and mitigation program, factoring in the enhanced capabilities of Kubescape 3.0.
+Develop a comprehensive vulnerability management and mitigation program, leveraging the enhanced capabilities of Kubescape 3.0.
 
 
 ## **What’s Next?**
