@@ -49,7 +49,7 @@ Automatic and comprehensive security assessments during deployments.
 
 Assurance that only vetted, secure, and compliant applications are deployed.
 
-Early detection of potential security risks, facilitating prompt resolution.
+Build-time detection of potential security risks, facilitating prompt resolution.
 
 Mitigation of the likelihood of deploying insecure code, which enhances the organization's defense against security infractions and regulatory non-compliance.
 
