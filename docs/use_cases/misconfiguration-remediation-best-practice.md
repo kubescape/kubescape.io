@@ -65,7 +65,7 @@ Embed Kubescape scans into your routine operations to maintain and enhance secur
 
 ## **What’s Next?**
 
-Post-remediation, embed Kubescape scans into ongoing development and deployment processes for perpetual security monitoring.
+Post-remediation, embed Kubescape scans into ongoing development and deployment processes for continuous security monitoring.
 
 Educate your development team on the significance of security best practices and consistent scanning with Kubescape to cultivate a security-aware culture.
 
