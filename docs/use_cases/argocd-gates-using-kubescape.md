@@ -8,7 +8,7 @@ To reinforce security within their software delivery workflow, a team is leverag
 
 ### Kubescape Integration in ArgoCD Workflows:
 
-Kubescape is woven into the ArgoCD deployment process, with its scans initiated through additional steps in the Application resource definition.
+Kubescape is woven into the ArgoCD deployment process, with its scans initiated through adding additional steps in the Application resource definition.
 
 Kubescape examines Kubernetes manifests and Docker images, identifying both misconfigurations and vulnerabilities.
 
