@@ -58,5 +58,5 @@ Development teams are looking to incorporate security practices early in the sof
 
 
 * Regularly update your local Kubescape tooling to benefit from the latest vulnerability databases and scanning capabilities.
-* Collaborate with your security team to tailor Kubescape's scanning policies to match organizational security requirements.
+* Collaborate with your security team to tailor Kubescape's scanning policies to match organizational security and compliance requirements.
 * Share knowledge and best practices with your team to cultivate a shared responsibility model for security within your development process.
