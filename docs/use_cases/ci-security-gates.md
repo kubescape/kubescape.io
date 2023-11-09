@@ -1,6 +1,6 @@
 #### **Scenario**
 
-Acme Corporation is a SaaS company providing financial services to clients worldwide. With the rise of cybersecurity threats, they must ensure that their Kubernetes clusters, including manifests, Helm charts, and container images, comply with industry security standards and best practices. The development team employs a DevOps approach and uses both direct commits and pull requests to manage changes in their infrastructure-as-code (IaC) repositories.
+Acme Corporation is a SaaS company providing financial services to clients worldwide. With the rise of cybersecurity threats, they must ensure that their Kubernetes clusters, including manifests, Helm charts, and container images, comply with industry security standards and best practices. The development team employs a DevOps approach and uses both direct commits and pull requests to manage changes in their Kubernetes manifest repositories.
 
 
 ## **Objectives**
