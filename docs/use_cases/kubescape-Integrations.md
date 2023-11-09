@@ -1,6 +1,6 @@
 #### **Scenario**
 
-Development teams are looking to incorporate security practices early in the application lifecycle. By integrating Kubescape into their local development environments, they can scan Kubernetes manifests, Helm charts, and container images for security misconfigurations and vulnerabilities before these elements are committed to version control or reach the CI/CD pipeline.
+Development teams are looking to incorporate security practices early in the software devlopment lifecycle. By integrating Kubescape into their local development environments, they can scan Kubernetes manifests, Helm charts, and container images for security misconfigurations and vulnerabilities before these elements are committed to version control or reach the CI/CD pipeline.
 
 
 ## **Why Integrate Kubescape?**
