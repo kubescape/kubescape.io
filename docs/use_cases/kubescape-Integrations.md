@@ -14,7 +14,7 @@ Development teams are looking to incorporate security practices early in the sof
 * **Automation and Consistency:** Automated scanning with integrated tools reduces the likelihood of human error and maintains consistency in security practices across the development team.
 
 
-## **What Integrations are Available?**
+## **Available Integrations**
 
 
 
