@@ -6,7 +6,7 @@ In the evolving landscape of DevSecOps, the integration of security into the dev
 
 #### **Scenario**
 
-The DevOps team at an innovative fintech company is gearing up to deploy a new blockchain-based payment application to their Kubernetes development cluster. Understanding the sensitivity of their application, they need to ensure the highest security standards are met to protect against potential breaches and compliance slip-ups.
+The DevOps team at an innovative fintech company is gearing up to deploy a new blockchain-based payment application to their Kubernetes development cluster. Understanding the sensitivity of their application, they need to ensure the highest security standards are met to protect against potential breaches and compliance lapses.
 
 
 ## Actions
