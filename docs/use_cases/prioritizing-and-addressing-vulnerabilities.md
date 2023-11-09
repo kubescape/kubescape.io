@@ -8,7 +8,7 @@ A development team, using Kubescape 3.0, discovers various vulnerabilities acros
 
 ### Severity Assessment:
 
-Use Kubescape 3.0 to scan and review the list of identified vulnerabilities, taking note of the severity ratings (Critical, High, Medium, Low) alongside the CVSS scores to gauge potential impacts.
+Use Kubescape 3.0 to scan and review the list of identified vulnerabilities, taking note of the severity ratings (Critical, High, Medium, Low) to gauge potential impacts.
 
 
 ### Availability of Fixes and Image Scanning:

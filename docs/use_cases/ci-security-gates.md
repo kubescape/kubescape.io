@@ -60,7 +60,6 @@ Acme uses Kubescape to scan container images for vulnerabilities and misconfigur
 
 
 
-* Integrate Kubescape with the container registry to scan new images upon push.
 * Prevent non-compliant images from being deployed to production environments.
 
 
@@ -77,19 +76,6 @@ To optimize scanning and avoid unnecessary checks, Acme configures Kubescape to 
 * Maintain a structured and well-documented repository layout to facilitate targeted scanning.
 
 
-### Scan Against Specific Frameworks
-
-Acme has customized security frameworks that align with their organizational policies. They configure Kubescape to scan against these specific frameworks in addition to standard frameworks, ensuring both external and internal compliance requirements are met.
-
-
-#### Action Points
-
-
-
-* Customize Kubescape scan frameworks according to Acme's security policies.
-* Regularly update the custom frameworks to reflect any changes in Acme's internal security policies or the regulatory landscape.
-
-
 ## **Expected Outcome**
 
 By implementing Kubescape in their CI/CD pipeline, Acme Corporation is able to:
@@ -98,7 +84,7 @@ By implementing Kubescape in their CI/CD pipeline, Acme Corporation is able to:
 
 * Continuously monitor and enforce security compliance in their Kubernetes infrastructure.
 * Quickly identify and remediate security issues before they affect production systems.
-* Maintain an agile DevOps process that does not sacrifice security for speed.
+* Manitain an agile DevOps workflow that balances speed and security, ensuring neither is compromised at the expense of the other.
 * Ensure that developers are educated on security best practices through an automated feedback loop.
 
 Acme's proactive approach to security with Kubescape helps to protect their critical financial services from potential threats and vulnerabilities while maintaining the pace of innovation and deployment required in their competitive industry.

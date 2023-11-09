@@ -23,12 +23,12 @@ Development teams are looking to incorporate security practices early in the sof
     * The extension provides immediate feedback on potential security risks, offering suggestions and fixes as code is being written.
 2. Docker Desktop Extension:
     * With the Docker Desktop extension, developers can scan container images for vulnerabilities during the build process.
-    * It enables them to update Dockerfiles with secure base images and avoid using versions of images that contain known vulnerabilities.
+    * It enables them to update Dockerfiles with secure base images and reduce the usage versions of images that contain known vulnerabilities.
 3. Lens Extension:
     * The Lens extension for Kubescape allows developers to scan Kubernetes clusters directly from the Lens IDE.
     * This is particularly useful for ensuring that the Kubernetes configurations and runtime environment adhere to best practices and are free from misconfigurations.
 4. Command-Line Interface (CLI):
-    * The CLI allows developers to run Kubescape against local manifest files as part of their pre-commit or pre-push git hooks, ensuring scans are performed automatically before code is contributed to the repository.
+    * The CLI allows developers to run Kubescape against local manifest files as part of their pre-commit or pre-push git hooks, ensuring scans are performed automatically before code is pushed to the repository.
     * It can also be incorporated into scripts or manual processes that are part of the developer's workflow.
 
 

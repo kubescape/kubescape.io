@@ -8,7 +8,7 @@ A development team has utilized Kubescape to uncover a series of misconfiguratio
 
 ### Interpreting Kubescape’s Findings:
 
-Post-scan, the team carefully reviews Kubescape’s report, which sheds light on vulnerabilities and misconfigurations, complete with severity levels and the context behind each issue, grounded in recognized security standards.
+Post-scan, the team carefully reviews Kubescape’s report, which sheds light on vulnerabilities and misconfigurations, complete with severity levels and the context behind each issue and incorporating Kubescape 3.0's Highest-stakes workloads for prioritization, grounded in recognized security standards.
 
 
 ### Remediation Guidance from Kubescape:

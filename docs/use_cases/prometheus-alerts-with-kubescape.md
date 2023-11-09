@@ -18,7 +18,6 @@ An operations team at a leading cloud services provider is focused on bolstering
     * They ensure Prometheus has the necessary RBAC permissions for metrics scraping from cluster nodes and pods.
 2. Kubescape Metrics Integration:
     * Prometheus is then configured to scrape security metrics exposed by Kubescape.
-    * In the absence of native Prometheus-compatible metrics from Kubescape, an intermediary service or exporter is deployed to format Kubescape's output for Prometheus.
 3. Alert Rules Configuration:
     * The team defines Prometheus alert rules based on security events reported by Kubescape, such as when critical vulnerabilities or specific misconfiguration counts exceed certain thresholds.
     * Alertmanager is configured to handle these alerts, with capabilities to manage, mute, and inhibit them as needed.

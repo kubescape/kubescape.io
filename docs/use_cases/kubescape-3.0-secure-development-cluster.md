@@ -26,8 +26,8 @@ The DevOps team at an innovative fintech company is gearing up to deploy a new b
     * They re-run Kubescape to ensure their remediation measures align with the security standards, and no new issues have surfaced.
 5. CI Integration:
     * Kubescape scans are integrated into the continuous integration workflow, ensuring that each pull request or merge is scrutinized for security before being applied to the development cluster.
-6. Security Baseline Establishment:
-    * With the cluster configuration secured, this state is documented as a security baseline, providing a reference point for all future development activities.
+6. Secure Baseline Establishment:
+    * With the cluster configuration secured, this state is documented as a secure baseline, providing a reference point for all future development activities.
 
 
 ## **Expected Outcome**
