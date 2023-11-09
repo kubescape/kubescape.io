@@ -50,7 +50,7 @@ Development teams are looking to incorporate security practices early in the sof
 
 * Integrate Kubescape into your IDE and local development environments to proactively address security concerns.
 * Utilize Kubescape's extensions and plugins to ensure that your Kubernetes resources are secure by design.
-* Embrace a proactive security posture by incorporating Kubescape scans into your daily development practices.
+* Embrace proactive hardening by incorporating Kubescape scans into your daily development practices.
 
 
 ## **What’s Next?**
