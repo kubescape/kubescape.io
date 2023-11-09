@@ -23,7 +23,7 @@ Strategize fixes starting with the most critical vulnerabilities, considering bo
 
 ### Contextual Relevance with eBPF:
 
-Utilize Kubescape’s helm chart solution, which leverages eBPF technology, to ascertain the actual relevance of vulnerabilities by identifying which packages are loaded into memory, providing a more accurate risk assessment.
+Utilize Kubescape’s helm chart, which leverages eBPF technology, to ascertain the actual relevance of vulnerabilities by identifying which packages are loaded into memory, providing a more accurate risk assessment.
 
 
 ### Testing and Deployment:
