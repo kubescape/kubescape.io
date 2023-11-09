@@ -60,7 +60,7 @@ Absorb the findings from Kubescape reports to fully comprehend the security rami
 
 Implement Kubescape’s recommended corrective actions to resolve identified issues proactively.
 
-Embed Kubescape scans into your routine operations to uphold and enhance security standards.
+Embed Kubescape scans into your routine operations to maintain and enhance security standards.
 
 
 ## **What’s Next?**
