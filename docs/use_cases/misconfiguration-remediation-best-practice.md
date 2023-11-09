@@ -25,7 +25,7 @@ The development team prioritizes remediation tasks by the severity and potential
 
 Remediation is carried out through specific modifications in Kubernetes manifests, Dockerfiles, or directly in the application code, following Kubescape’s recommendations.
 
-If Kubescape specifies a more secure package version, the team ensures these updates are made.
+If Kubescape specifies a more secure package version, the team must ensure these updates are made, or other mitigations are put in place.
 
 
 ### Validation through Re-scanning:
