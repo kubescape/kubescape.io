@@ -35,7 +35,7 @@ The DevOps team at an innovative fintech company is gearing up to deploy a new b
 
 
 * Developers receive immedite security feedback as they code. Thus, drastically reducing the chances of vulnerabilities progressing through the development pipeline.
-* Kubernetes manifests are under continuous assessment against rigorous security standards, thwarting the progression of insecure configurations.
+* Kubernetes manifests are under continuous assessment against rigorous security standards, preventing the progression of insecure configurations.
 * The development cluster remains shielded against security risks, with automated scanning serving as a checkpoint against configuration drift.
 
 
