@@ -23,7 +23,7 @@ The development team prioritizes remediation tasks by the severity and potential
 
 ### Executing Remediations:
 
-Remediation is carried out through precise modifications in Kubernetes manifests, Dockerfiles, or directly in the application code, following Kubescape’s recommendations.
+Remediation is carried out through specific modifications in Kubernetes manifests, Dockerfiles, or directly in the application code, following Kubescape’s recommendations.
 
 If Kubescape specifies a more secure package version, the team ensures these updates are made.
 
