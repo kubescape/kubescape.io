@@ -32,7 +32,7 @@ Deployments are configured to be halted upon discovery of any critical issues by
 
 ### Security Issue Review and Resolution:
 
-If Kubescape's scans block a deployment, the team examines the scan reports to pinpoint and resolve security concerns, guided by Kubescape’s remediation advice.
+If Kubescape's scans blocks a deployment, the team examines the scan reports to pinpoint and resolve security concerns, guided by Kubescape’s remediation advice.
 
 
 ### Policy and Threshold Optimization:
