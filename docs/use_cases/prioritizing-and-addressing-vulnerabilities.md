@@ -1,6 +1,6 @@
 #### **Scenario**
 
-A development team, equipped with the Kubescape 3.0, discovers various vulnerabilities across their Kubernetes resources, including those within container images. To effectively prioritize and remediate these issues, they seek a systematic approach that factors in the immediate risk and strategic impact of each finding.
+A development team, using Kubescape 3.0, discovers various vulnerabilities across their Kubernetes resources, including those within container images. To effectively prioritize and remediate these issues, they seek a systematic approach that factors in the immediate risk and strategic impact of each finding.
 
 
 ## **Steps to Prioritize and Fix Vulnerabilities**
