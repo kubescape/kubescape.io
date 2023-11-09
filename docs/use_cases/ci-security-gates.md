@@ -40,7 +40,7 @@ For changes submitted through pull requests, Kubescape checks the proposed infra
 
 ### Automatically Suggest Fixes for Direct Commits
 
-When developers make direct commits to the repository, Kubescape scans the changes and, if issues are detected, it triggers an automated workflow that creates a new issue in the issue-tracking system detailing the security findings and recommended fixes.
+When developers make direct commits to the repository, Kubescape scans the changes. If issues are detected, it triggers an automated workflow that creates a new issue in the issue-tracking system, detailing the security findings and recommended fixes.
 
 
 #### Action Points
