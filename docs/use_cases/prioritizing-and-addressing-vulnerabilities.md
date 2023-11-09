@@ -18,7 +18,7 @@ Consider the "fixed in version" information for prompt updates to affected compo
 
 ### Fix Planning:
 
-Strategize fixes starting with the most critical vulnerabilities, considering both severity and real-world applicability as determined by the eBPF analysis. Integrate these fixes into your development workflow, prioritizing according to risk.
+Prioritize fixes starting with the most critical vulnerabilities, considering both severity and real-world applicability as determined by the eBPF analysis (i.e. Images with CVEs that are loaded into memory). Integrate these fixes into your development workflow, working according to contextualized risk.
 
 
 ### Contextual Relevance with eBPF:
