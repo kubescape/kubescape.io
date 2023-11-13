@@ -2,16 +2,21 @@ name: Automerge
 
 on:
   # Try enabling auto-merge for all open pull requests. (Only recommended for testing.)
-  pull_request:
-    types:
-      - labeled
+  push: 
   pull_request_review:
     types:
       - submitted
+
   pull_request_target:
     types:
+      - opened
+      - synchronize
+      - reopened
+      - edited
       - labeled
 
+  # Try enabling auto-merge for the specified pull request, review or all open pull requests if
+  # none is specified.
   workflow_dispatch:
     inputs:
       pull-request:
