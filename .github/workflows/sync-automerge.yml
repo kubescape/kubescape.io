@@ -21,10 +21,10 @@ on:
     inputs:
       pull-request:
         description: Pull Request Number
-        required: false
+        required: true
       review:
         description: Review ID
-        required: false
+        required: true
 
 jobs:
   automerge:
