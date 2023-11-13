@@ -36,6 +36,7 @@ jobs:
           merge-method: merge
           do-not-merge-labels: never-merge
           required-labels: automerge
+          pull-request-author-associations: OWNER
           pull-request: ${{ github.event.inputs.pull-request }}
           review: ${{ github.event.inputs.review }}
           dry-run: false
