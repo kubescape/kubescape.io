@@ -1,42 +1,17 @@
 name: Automerge
 
 on:
-  # Try enabling auto-merge for all open pull requests. (Only recommended for testing.)
-  push: 
-  pull_request_review:
-    types:
-      - submitted
-
+  # See note below about using pull_request_target
   pull_request_target:
-    types:
-      - opened
-      - synchronize
-      - reopened
-      - edited
-      - labeled
-
-  # Try enabling auto-merge for the specified pull request, review or all open pull requests if
-  # none is specified.
-  workflow_dispatch:
-    inputs:
-      pull-request:
-        description: Pull Request Number
-        required: true
-      review:
-        description: Review ID
-        required: true
 
 jobs:
   automerge:
+    name: Enable automerge on dependabot PRs
     runs-on: ubuntu-latest
     steps:
-      - uses: reitermarkus/automerge@v2
+      - name: Enable automerge on dependabot PRs
+        uses: daneden/enable-automerge-action@v1
         with:
-          token: ${{ secrets.PAT }}
-          merge-method: merge
-          do-not-merge-labels: never-merge
-          required-labels: automerge
-          pull-request-author-associations: OWNER
-          pull-request: ${{ github.event.inputs.pull-request }}
-          review: ${{ github.event.inputs.review }}
-          dry-run: false
+          github-token: ${{ secrets.PAT }}
+          allowed-author: "TRohit20"
+          merge-method: MERGE
