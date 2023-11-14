@@ -2,6 +2,9 @@
 
 A development team, using Kubescape 3.0, discovers various vulnerabilities across their Kubernetes resources, including those within container images. To effectively prioritize and remediate these issues, they seek a systematic approach that factors in the immediate risk and strategic impact of each finding.
 
+#### Example
+Scanning nginx:1.24 image using Kubescape
+![alt text](assets/image_scan.gif)
 
 ## **Steps to Prioritize and Fix Vulnerabilities**
 

@@ -1,6 +1,6 @@
 #### **Scenario**
 
-A DevOps/Platform team is using ArgoCD for Kubernetes orchestration. They seek to embed security into the workflow to ensure every deployment is secure and compliant with industry benchmarks. To achieve this, Kubescape is chosen to implement security gates within their ArgoCD pipelines. Thus, automatically preventing delivery of any non-compliant deployments.
+When users using ArgoCD for Kubernetes orchestration. They seek to embed security into the workflow to ensure every deployment is secure and compliant with industry benchmarks. To achieve this, Kubescape is chosen to implement security gates within their ArgoCD pipelines. Thus, automatically preventing delivery of any non-compliant deployments.
 
 
 ## **Actions**
