@@ -10,11 +10,11 @@ theme:
   features:
     - content.code.copy
     - navigation.sections
-    - navigation.tabs    
-    - navigation.footer  
-    - navigation.tracking  
+    - navigation.tabs
+    - navigation.footer
+    - navigation.tracking
     - navigation.expand
-    # - navigation.indexes    
+    # - navigation.indexes
   icon:
     repo: fontawesome/brands/github
   custom_dir: overrides
@@ -25,21 +25,21 @@ plugins:
       archive_url_date_format: yyyy/MM
       categories_url_format: "category/{slug}"
   - rss:
-      match_path: blog/posts/.* 
+      match_path: blog/posts/.*
       date_from_meta:
         as_creation: date
       categories:
         - categories
-        - tags 
+        - tags
       abstract_chars_count: -1
       abstract_delimiter: ""
   - search
   - glightbox
 extra:
   social:
-    - icon: fontawesome/brands/twitter 
+    - icon: fontawesome/brands/twitter
       link: https://twitter.com/@kubescape
-    - icon: fontawesome/brands/github 
+    - icon: fontawesome/brands/github
       link: https://github.com/kubescape/kubescape
   analytics:
     provider: google
@@ -66,6 +66,7 @@ nav:
             - 'Scheduled scans': 'docs/operator/scheduled-scans.md'
             - 'Continuous scanning': 'docs/operator/continuous-scanning.md'
             - 'Automatic upgrades': 'docs/operator/automatic-release-upgrades.md'
+            - 'VEX document generation (experimental)': 'docs/operator/generating-vex.md'
         - Integrations:
             - 'Overview': 'docs/integrations/index.md'
             - 'GitHub': 'docs/integrations/github.md'
@@ -76,12 +77,12 @@ nav:
             - 'Frameworks': 'docs/frameworks-and-controls/frameworks.md'
             - 'Control library': 'docs/controls/index.md'
             - 'Configuring controls': 'docs/frameworks-and-controls/configuring-controls.md'
-    - Project: 
+    - Project:
         - 'About the Kubescape project': 'project/about.md'
         - 'License': 'project/license.md'
         - 'Community': 'project/community.md'
         - 'Contributing': 'https://github.com/kubescape/kubescape/blob/master/CONTRIBUTING.md'
-    - Blog: 
+    - Blog:
       - 'blog/index.md'
     - GitHub: 'https://github.com/kubescape/kubescape'
 
