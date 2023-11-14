@@ -1,4 +1,4 @@
-name: Auto-approve Controls Documentation changes
+name: Auto-approve Controls Documentation PR
 
 on: pull_request_target
 
