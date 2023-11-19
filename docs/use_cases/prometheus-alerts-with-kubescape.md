@@ -29,6 +29,11 @@ An operations team at a leading cloud services provider is focused on bolstering
 6. Documentation:
     * The complete setup, including Prometheus and Kubescape integration, alert rules, notification workflows, and response protocols, is thoroughly documented for clarity and training purposes.
 
+![alt text](assets/graphana-arch.png)
+
+## **Repository**
+
+[Kubescape Prometheus Exporter](https://github.com/kubescape/prometheus-exporter)
 
 ## **Expected Outcome**
 
