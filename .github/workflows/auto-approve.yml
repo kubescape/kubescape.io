@@ -7,6 +7,6 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       pull-requests: write
-    if: github.actor == 'TRohit20'
+    if: github.actor == 'kubescape'
     steps:
       - uses: hmarr/auto-approve-action@v3
