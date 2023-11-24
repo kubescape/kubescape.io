@@ -1,19 +1,22 @@
+# The action is triggered and auto-merges a pull request
+# ONLY when it is from a specific user defined below & all checks have passed
+
 name: automerge
 
 on:
+  # Events which trigger the action on the pull request
   pull_request:
     types:
-      - labeled
-      - synchronize
-      - opened
-      - edited
-      - reopened
+      - labeled  # when a label is added to the pull request
+      - synchronize  # when the pull request is synchronized
+      - opened  # when a pull request is opened
+      - edited  # when a pull request is edited
   pull_request_review:
     types:
-      - submitted
+      - submitted  # when a review/approval is submitted on the pull request
   check_suite:
     types:
-      - completed
+      - completed  # when all checks for a pull request are completed
       
 jobs:
   automerge:
@@ -24,4 +27,4 @@ jobs:
         uses: "pascalgn/automerge-action@v0.15.6"
         env:
           GITHUB_TOKEN: "${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}"
-          MERGE_FILTER_AUTHOR: "kubescape"
+          MERGE_FILTER_AUTHOR: "kubescape"  # Specifies the user whose pull request can be auto-merged

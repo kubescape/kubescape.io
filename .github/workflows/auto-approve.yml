@@ -1,3 +1,6 @@
+# The action is triggered and auto-approves a pull request
+# ONLY when the pull request is from the user specified below
+
 name: Auto-approve Controls Documentation PR
 
 on: pull_request_target
@@ -6,7 +9,8 @@ jobs:
   auto-approve:
     runs-on: ubuntu-latest
     permissions:
-      pull-requests: write
-    if: github.actor == 'kubescape'
+      pull-requests: write  # Permissions required for the job
+    # Condition for auto-approving the pull request from a specific user
+    if: github.actor == 'kubescape'  
     steps:
       - uses: hmarr/auto-approve-action@v3
