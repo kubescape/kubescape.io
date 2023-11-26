@@ -1,9 +1,9 @@
 #### **Scenario**
 
-With the rise of cybersecurity threats, users that are using ArgoCD for Kubernetes orchestration seek to ensure that their Kubernetes clusters, including manifests, Helm charts, and container images, comply with industry security standards and best practices. The development team employs a DevOps approach and uses both direct commits and pull requests to manage changes in their Kubernetes manifest repositories.
+How can users of ArgoCD for Kubernetes orchestration employ Kubescape to ensure their Kubernetes clusters, manifests, Helm charts, and container images comply with industry security standards and best practices, while maintaining a high-security posture throughout their DevOps processes?
 
 
-## **Objectives**
+## **Goals**
 
 
 

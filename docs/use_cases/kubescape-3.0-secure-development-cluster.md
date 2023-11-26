@@ -6,7 +6,7 @@ In the evolving landscape of DevSecOps, the integration of security into the dev
 
 #### **Scenario**
 
-The DevOps team at an innovative fintech company is gearing up to deploy a new blockchain-based payment application to their Kubernetes development cluster. Understanding the sensitivity of their application, they need to ensure the highest security standards are met to protect against potential breaches and compliance lapses.
+How to integrate Kubescape 3.0 into a development process to secure Kubernetes clusters, ensuring adherence to the highest security standards for your application, while fostering a proactive security culture within the DevOps team?
 
 
 ## Actions

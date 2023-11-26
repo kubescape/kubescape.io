@@ -6,7 +6,7 @@ In the complex environment of a cloud-native enterprise, ensuring the security a
 
 #### **Scenario**
 
-An operations team at a leading cloud services provider is focused on bolstering the observability of their Kubernetes clusters. With a variety of services running across different environments, the team sets up Prometheus for metrics collection and alerts for security incidents as identified by Kubescape, allowing for quick and effective incident response.
+How can an operations team leverage Kubescape and Prometheus to establish a comprehensive monitoring and alerting framework for Kubernetes clusters, enabling real-time security insights and effective incident response across various services and environments?
 
 
 ## **Actions**

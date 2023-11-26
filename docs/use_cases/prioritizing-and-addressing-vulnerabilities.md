@@ -1,6 +1,6 @@
 #### **Scenario**
 
-A development team, using Kubescape 3.0, discovers various vulnerabilities across their Kubernetes resources, including those within container images. To effectively prioritize and remediate these issues, they seek a systematic approach that factors in the immediate risk and strategic impact of each finding.
+How can a development team use Kubescape 3.0 to prioritize and remediate vulnerabilities in their Kubernetes resources and container images, incorporating severity assessment, fix planning, contextual relevance, and risk analysis for effective security management?
 
 #### Example
 Scanning nginx:1.24 image using Kubescape

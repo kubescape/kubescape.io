@@ -1,6 +1,6 @@
 #### **Scenario**
 
-When users using ArgoCD for Kubernetes orchestration. They seek to embed security into the workflow to ensure every deployment is secure and compliant with industry benchmarks. To achieve this, Kubescape is chosen to implement security gates within their ArgoCD pipelines. Thus, automatically preventing delivery of any non-compliant deployments.
+How can Kubescape be integrated into ArgoCD workflows to ensure that every Kubernetes deployment is secure, compliant with industry benchmarks, and automatically prevents the delivery of non-compliant deployments?
 
 
 ## **Actions**
