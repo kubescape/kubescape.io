@@ -41,9 +41,6 @@ workloadconfigurationscans                        spdx.softwarecomposition.kubes
 workloadconfigurationscansummaries                spdx.softwarecomposition.kubescape.io/v1beta1   true         WorkloadConfigurationScanSummary
 ```
 
-!!! note annotate "Why didn't we use CRDs?"
-    When you create a CRD (1), the data that backs it is stored in the cluster's `etcd` instance. Our SBOMs (2) can be several megabytes each, and there's one for every image you run in your cluster. This much extra data can be a strain on etcd, which was designed as a lock server that stores only a small amount of data.  An aggregated API server is designed for exactly this use case.
-
 1. [Custom Resource Definitions](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/#customresourcedefinitions), a common approach for adding new types to the Kubernetes API.
 2. Software Bill of Materials    
     
