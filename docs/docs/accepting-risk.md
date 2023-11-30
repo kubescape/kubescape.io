@@ -1,5 +1,9 @@
 # Accepting risk with exceptions
 
+!!! info "Risk acceptance support"
+    Risk acceptance is available for Kubescape CLI only at this point.
+
+
 Control failures cannot account for all situations.  What is acceptable in one environment may not be in another, and vice versa. Kubescape offers sensible defaults but should be configured to reflect each environment in which it runs.
 
 **Exceptions** are the method for excluding failed resources from affecting the risk score. For example, a control may count the number of resources that have `cluster-admin` role assigned. Any number above 0 will be considered a failure. Using exceptions, you note that you have considered each resource and deemed it OK. Then, you know that if you ever see this control failure, it it something that warrants investigation.
