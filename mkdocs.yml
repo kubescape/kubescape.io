@@ -56,7 +56,6 @@ nav:
         - 'Installing the client': 'docs/install-cli.md'
         - 'Installing in your cluster': 'docs/install-operator.md'
         - 'Scanning your environment': 'docs/scanning.md'
-        - 'Customizing your scans': 'docs/customizing-your-scans.md'
         - 'Accepting risk': 'docs/accepting-risk.md'
         - 'Connecting to providers': 'docs/providers.md'
         - Kubescape Operator:
@@ -68,7 +67,6 @@ nav:
             - 'Automatic upgrades': 'docs/operator/automatic-release-upgrades.md'
             - 'VEX document generation (experimental)': 'docs/operator/generating-vex.md'
         - Integrations:
-            - 'Overview': 'docs/integrations/index.md'
             - 'GitHub': 'docs/integrations/github.md'
             - 'Lens': 'docs/integrations/lens.md'
             - 'VS Code': 'docs/integrations/vscode.md'
