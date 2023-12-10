@@ -4,7 +4,7 @@ categories:
   - Announcements
   - Project
 authors:
-  - oshratnir
+  - oshratn
 slug: "kubescape-support-for-vex-generation"
 ---
 
