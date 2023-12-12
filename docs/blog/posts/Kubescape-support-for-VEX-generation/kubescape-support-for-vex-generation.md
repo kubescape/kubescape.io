@@ -113,22 +113,10 @@ Here is how to run it:
 
 This produces the following output (note the 338 ignored vulnerabilities!):
 
-| $ grype nginx:1.14.2 --vex nginx.json
-
-✔ Vulnerability DB                [no update available]
-
-✔ Loaded image                                                                                                      nginx:1.14.2
-
-✔ Parsed image                                           sha256:295c7be079025306c4f1d65997fcf7adb411c88f139ad1d34b537164aa060369
-
-✔ Cataloged packages              [111 packages]
-
-✔ Scanned for vulnerabilities     [58 vulnerability matches]
-
-  ├── by severity: 55 critical, 102 high, 85 medium, 52 low, 102 negligible
-
-  └── by status:   126 fixed, 270 not-fixed, 338 ignored |
-| -- |
+<figure markdown>
+  ![VEX Output](output.png){ width="600" }
+  <figcaption>VEX output via Grype</figcaption>
+</figure>
 
 ## VEX formats
 
