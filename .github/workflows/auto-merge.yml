@@ -8,12 +8,6 @@ on:
   pull_request:
     types:
       - labeled  # when a label is added to the pull request
-      - synchronize  # when the pull request is synchronized
-      - opened  # when a pull request is opened
-      - edited  # when a pull request is edited
-  pull_request_review:
-    types:
-      - submitted  # when a review/approval is submitted on the pull request
   check_suite:
     types:
       - completed  # when all checks for a pull request are completed
