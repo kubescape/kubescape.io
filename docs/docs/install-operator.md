@@ -15,7 +15,7 @@ To install the Kubescape Operator:
 ```bash
 helm repo add kubescape https://kubescape.github.io/helm-charts/
 helm repo update
-helm upgrade --install kubescape kubescape/kubescape-operator -n kubescape --create-namespace --set clusterName=`kubectl config current-context` 
+helm upgrade --install kubescape kubescape/kubescape-operator -n kubescape --create-namespace --set clusterName=`kubectl config current-context`
 ```
 
 ## Upgrading to a new release
@@ -27,7 +27,7 @@ helm repo update
 helm upgrade kubescape kubescape/kubescape-operator -n kubescape
 ```
 
-You can find the current version of the Helm chart installed in your cluster by running `helm list -n kubescape`. 
+You can find the current version of the Helm chart installed in your cluster by running `helm list -n kubescape`.
 
 To manually check if a newer version is available, visit the GitHub page for the Helm chart, or run
 
@@ -63,7 +63,7 @@ See [the GitHub repository for the Kubescape operator](https://github.com/kubesc
 
 By default, Kubescape supports small- to medium-sized clusters. If you have a larger cluster and you experience slowdowns, or see Kubernetes evicting components, revise the number of resources allocated for the troubled component.
 
-The defaults of 500 MiB of memory and 500m CPU work well for clusters up to 1250 total resources when running Kubescape.  
+The defaults of 500 MiB of memory and 500m CPU work well for clusters up to 1250 total resources when running Kubescape.
 
 If you have more total resources or experience resource pressure, verify how many resources are in your cluster by running the following command:
 
@@ -71,8 +71,8 @@ If you have more total resources or experience resource pressure, verify how man
 kubectl get all -A --no-headers | wc -l
 ```
 
-The command prints an approximate count of resources in your cluster.  
-Then based on the number you see, allocate 100 MiB of memory for every 200 resources in your cluster over the count of 1250, but no less than 128 MiB total.  
+The command prints an approximate count of resources in your cluster.
+Then based on the number you see, allocate 100 MiB of memory for every 200 resources in your cluster over the count of 1250, but no less than 128 MiB total.
 
 The formula for memory is as follows:
 
@@ -91,8 +91,34 @@ kubescape:
 
 If your cluster has 50 resources, we recommend allocating at least 128 MiB of memory.
 
-For the CPU, the more you allocate, the faster your clusters are scanned. This is especially true for clusters that have a large number of resources.  
+For the CPU, the more you allocate, the faster your clusters are scanned. This is especially true for clusters that have a large number of resources.
 
 However, we recommend that you give Kubescape no less than 500m CPU no matter the size of your cluster so it can scan a relatively large amount of resources fast.
 
-## 
+## Verifying images
+
+Kubescape container images are signed with [Cosign](https://docs.sigstore.dev/signing/quickstart/).
+
+### Keyless verification
+
+For keyless verification use GitHub as the trust anchor, see this example:
+```bash
+cosign verify quay.io/kubescape/kubescape:v2.9.2-prerelease --certificate-identity-regexp "github.com" --certificate-oidc-issuer-regexp "githubusercontent.com" && echo Signature OK
+```
+
+### Validation with Public key
+
+Put the following key to a file called `cosign.pub`.
+
+Kubescape Cosign public key (version 1):
+```
+-----BEGIN PUBLIC KEY-----
+MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEbgIMZrMTTlEFDLEeZXz+4R/908BG
+EeO70x6oMN7E4JQgzgbCB5rinqhK5t7dB61saVKQTb4P2NGtjPjXVbSTwQ==
+-----END PUBLIC KEY-----
+```
+
+Use the following command to verify the image integrity with it:
+```bash
+cosign verify --key cosign.pub quay.io/kubescape/kubescape:v2.9.2-prerelease  && echo Signature OK
+```
