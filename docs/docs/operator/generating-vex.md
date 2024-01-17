@@ -18,13 +18,13 @@ There are multiple formats and implementations of the VEX as an idea. Kubescape 
 
 ## Installing Kubescape Operator
 
-Kubescape operator is installed as usual (see full install guide [here](/docs/install-operator/)) expect that VEX document generation needs to be explicitly enabled using `capabilities.vexGeneration=enable` HELM flag (in older HELM chart version 1.16.2 the flag was `kubevuln.config.vexGeneration=true`).
+Kubescape operator is installed as usual (see full install guide [here](/docs/install-operator/)) expect that VEX document generation needs to be explicitly enabled using `capabilities.vexGeneration=enable` HELM flag.
 
 Run the following to install Kubescape Operator with VEX generation.
 ```bash
 helm repo add kubescape https://kubescape.github.io/helm-charts/
 helm repo update
-helm upgrade --install kubescape kubescape/kubescape-operator -n kubescape --create-namespace --set clusterName=`kubectl config current-context` --set capabilities.vexGeneration=enable --set kubevuln.config.vexGeneration=true
+helm upgrade --install kubescape kubescape/kubescape-operator -n kubescape --create-namespace --set clusterName=`kubectl config current-context` --set capabilities.vexGeneration=enable
 ```
 
 Make sure that all the components are running:
