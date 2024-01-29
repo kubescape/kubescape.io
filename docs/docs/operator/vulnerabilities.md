@@ -92,7 +92,20 @@ If you have Kubescape configured to use a [provider](../providers.md), then upon
 
 ### Scanning images pulled from private registries
 
-To scan images that are pulled from private registries, you can define a Secret with credentials.
+There are two ways Kubescape vulnerability scanner can access private registries.
+
+* Using `imagePullSecrets` bound to the workload that uses the images
+* Granting credentials directly to Kubescape vulnerability scanner to access private registries
+
+#### Using imagePullSecrets
+
+The advantage of this method that it works "out of the box" without any need for the user to add any extra configuration *in case this field is in use* 🎉
+
+The disadvantage is that it doesn't work when the private registry is not accessed using `imagePullSecrets` but via direct grant to the Kubelet (example, granting IAM role to access ECR to the EC2 nodes and similar) or when using the registry scan feature, which obviously lacks `imagePullSecrets` field. In these cases, the following method is advised.
+
+#### Granting credentials directly
+
+To scan images that are pulled from private registries without `imagePullSecret`, you can define a Secret with credentials.
 
 !!! note Note
     The secret must start with the name `kubescape-registry-scan`.
@@ -117,6 +130,10 @@ stringData:
       }
     ]
 ```
+
+For example, in case of a cloud vendor container registry (ECR, ACR or else) the `username` is the "client ID" and the `password` is the "secret".
+
+Kubescape automatically detects these secrets and uses them to access the registries defined under the `registry` field.
 
 ### Air-gapped installation support
 
