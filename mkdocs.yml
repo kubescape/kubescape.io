@@ -46,7 +46,7 @@ extra:
 extra_css:
   - stylesheets/extra.css
 copyright:
-  Copyright &copy; 2021 - 2023 <a href="https://kubescape.devstats.cncf.io/d/66/developer-activity-counts-by-companies?orgId=1">The Kubescape Authors</a>
+  Copyright &copy; 2021 - 2024 <a href="https://kubescape.devstats.cncf.io/d/66/developer-activity-counts-by-companies?orgId=1">The Kubescape Authors</a>
 nav:
     - Home: 'index.md'
     - Docs:
@@ -76,6 +76,7 @@ nav:
     - Project: 
         - 'About the Kubescape project': 'project/about.md'
         - 'License': 'project/license.md'
+        - 'Releases': 'https://github.com/kubescape/helm-charts/releases'
         - 'Community': 'project/community.md'
         - 'Contributing': 'https://github.com/kubescape/kubescape/blob/master/CONTRIBUTING.md'
     - Blog: 
