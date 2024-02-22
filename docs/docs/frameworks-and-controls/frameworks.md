@@ -16,13 +16,15 @@ The CIS family of frameworks are derived from the [CIS Kubernetes Benchmarks](ht
 
 The frameworks are:
 
-* `cis`, for default Kubernetes clusters
-* `cis-aks`, for Azure Kubernetes Service
-* `cis-eks`, for Amazon Elastic Kubernetes Service
+* `cis-v1.23-t1.0.1`, for default Kubernetes clusters
+* `cis-aks-t1.2.0`, for Azure Kubernetes Service
+* `cis-eks-t1.2.0`, for Amazon Elastic Kubernetes Service
 
 ## Scanning using a framework
 
 To scan a cluster using a particular framework, use the command `kubescape scan framework <framework>`.  You can specify more than one framework by providing a comma-separated list, such as `kubescape scan framework nsa,mitre`.
+
+To get a full list of frameworks that kubescape supports run the command `kubescape list frameworks`.
 
 !!! note "Note"
     Before Kubescape 3.0, the default behaviour of `kubescape scan` was to scan the NSA and MITRE frameworks.
