@@ -41,9 +41,6 @@ extra:
       link: https://twitter.com/@kubescape
     - icon: fontawesome/brands/github
       link: https://github.com/kubescape/kubescape
-  analytics:
-    provider: google
-    property: G-BS68QKB4RT
 extra_css:
   - stylesheets/extra.css
 copyright:
