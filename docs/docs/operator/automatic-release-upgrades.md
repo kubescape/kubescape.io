@@ -4,6 +4,10 @@ Starting with the Helm version 1.16.1, Kubescape operator provides the Helm Rele
 
 ## How to Use
 
+> [!WARNING]
+> The Auto Upgrading capability works the same way as a regular Helm upgrade.
+> Therefore, it [won't update Kubernetes resources after manual changes](https://github.com/helm/helm/issues/11040#issuecomment-1154700942).
+
 To enable this capability, simply set the `capabilities.autoUpgrading` to `enable` and configure how often you would like to check for updates by adjusting the cron schedule:
 
 ```yaml

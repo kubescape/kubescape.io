@@ -10,6 +10,11 @@ The Kubescape operator includes:
 * exporting data to a configured [provider](../providers.md) 
 * allowing secure control by a configured provider
 
+## Install
+
+The Kubescape operator is installed using [Helm](https://helm.sh/).
+[Here](../install-operator.md) you can find the installation instructions for the Kubescape operator.
+
 ## Misconfiguration scanning
 
 The `kubescape` service uses the same engine as the Kubescape CLI to scan the cluster for misconfigurations.
@@ -30,15 +35,24 @@ To see a list of the types that are added to your cluster, use `kubectl api-reso
 
 ```
 $ kubectl api-resources | grep kubescape
-configurationscansummaries                        spdx.softwarecomposition.kubescape.io/v1beta1   false        ConfigurationScanSummary
-sbomspdxv2p3filtereds                             spdx.softwarecomposition.kubescape.io/v1beta1   true         SBOMSPDXv2p3Filtered
-sbomspdxv2p3s                                     spdx.softwarecomposition.kubescape.io/v1beta1   true         SBOMSPDXv2p3
-sbomsummaries                                     spdx.softwarecomposition.kubescape.io/v1beta1   true         SBOMSummary
-vulnerabilitymanifests                            spdx.softwarecomposition.kubescape.io/v1beta1   true         VulnerabilityManifest
-vulnerabilitymanifestsummaries                    spdx.softwarecomposition.kubescape.io/v1beta1   true         VulnerabilityManifestSummary
-vulnerabilitysummaries                            spdx.softwarecomposition.kubescape.io/v1beta1   false        VulnerabilitySummary
-workloadconfigurationscans                        spdx.softwarecomposition.kubescape.io/v1beta1   true         WorkloadConfigurationScan
-workloadconfigurationscansummaries                spdx.softwarecomposition.kubescape.io/v1beta1   true         WorkloadConfigurationScanSummary
+applicationactivities                                     spdx.softwarecomposition.kubescape.io/v1beta1   true         ApplicationActivity
+applicationprofiles                                       spdx.softwarecomposition.kubescape.io/v1beta1   true         ApplicationProfile
+applicationprofilesummaries                               spdx.softwarecomposition.kubescape.io/v1beta1   true         ApplicationProfileSummary
+configurationscansummaries                                spdx.softwarecomposition.kubescape.io/v1beta1   false        ConfigurationScanSummary
+generatednetworkpolicies                                  spdx.softwarecomposition.kubescape.io/v1beta1   true         GeneratedNetworkPolicy
+knownservers                                              spdx.softwarecomposition.kubescape.io/v1beta1   false        KnownServer
+networkneighborses                                        spdx.softwarecomposition.kubescape.io/v1beta1   true         NetworkNeighbors
+openvulnerabilityexchangecontainers                       spdx.softwarecomposition.kubescape.io/v1beta1   true         OpenVulnerabilityExchangeContainer
+sbomspdxv2p3filtereds                                     spdx.softwarecomposition.kubescape.io/v1beta1   true         SBOMSPDXv2p3Filtered
+sbomspdxv2p3s                                             spdx.softwarecomposition.kubescape.io/v1beta1   true         SBOMSPDXv2p3
+sbomsummaries                                             spdx.softwarecomposition.kubescape.io/v1beta1   true         SBOMSummary
+sbomsyftfiltereds                                         spdx.softwarecomposition.kubescape.io/v1beta1   true         SBOMSyftFiltered
+sbomsyfts                                                 spdx.softwarecomposition.kubescape.io/v1beta1   true         SBOMSyft
+vulnerabilitymanifests                                    spdx.softwarecomposition.kubescape.io/v1beta1   true         VulnerabilityManifest
+vulnerabilitymanifestsummaries                            spdx.softwarecomposition.kubescape.io/v1beta1   true         VulnerabilityManifestSummary
+vulnerabilitysummaries                                    spdx.softwarecomposition.kubescape.io/v1beta1   false        VulnerabilitySummary
+workloadconfigurationscans                                spdx.softwarecomposition.kubescape.io/v1beta1   true         WorkloadConfigurationScan
+workloadconfigurationscansummaries                        spdx.softwarecomposition.kubescape.io/v1beta1   true         WorkloadConfigurationScanSummary
 ```
 
 1. [Custom Resource Definitions](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/#customresourcedefinitions), a common approach for adding new types to the Kubernetes API.
