@@ -63,10 +63,10 @@ nav:
             - 'Generate Network Policies': '/docs/operator/network-policy-generation.md'
             - 'Scheduled scans': 'docs/operator/scheduled-scans.md'
             - 'Continuous scanning': 'docs/operator/continuous-scanning.md'
-            - 'Prometheus Integrations': 'docs/docs/operator/prometheus-integration.md'
+            - 'Prometheus Integrations': 'docs/operator/prometheus-integration.md'
             - 'Automatic upgrades': 'docs/operator/automatic-release-upgrades.md'
             - 'VEX document generation (experimental)': 'docs/operator/generating-vex.md'
-            - 'Telemetry': 'docs/docs/operator/telemetry.md'
+            - 'Telemetry': 'docs/operator/telemetry.md'
         - Integrations:
             - 'Overview': 'docs/integrations/index.md'
             - 'GitHub': 'docs/integrations/github.md'
