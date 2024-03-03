@@ -22,10 +22,8 @@ Verify the cluster is up:
 
 ![image](01-cluster-up.png)
 
-Forward the port to 4000 since the Flask server will use 5000. Feel free to modify this if you wish. 
-
 ## Deploy a Pod
-For this deployment, we will use a very simple Flask container. 
+For this deployment, we will use a very simple NGINX container. 
 
 ### Create the Manifest
 
