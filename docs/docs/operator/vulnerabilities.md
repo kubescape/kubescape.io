@@ -135,14 +135,16 @@ For example, in case of a cloud vendor container registry (ECR, ACR or else) the
 
 Kubescape automatically detects these secrets and uses them to access the registries defined under the `registry` field.
 
-??? "Insecure registry access"
-    Additional options can be specified in the secret to customize registry access, such as skipping TLS certificate verification or insecure registry access.
+#### Insecure registries access
 
-    - `skipTLSVerify`: Set to `true` to skip TLS certificate verification.
+Additional options can be specified in the secret mentioned above for insecure registries access, such as skipping TLS certificate verification or using HTTP instead of HTTPS.
 
-    - `http`: Set to `true` for registry access via HTTP instead of HTTPS.
+- `skipTLSVerify`: Set to `true` to skip TLS certificate verification.
 
-    For example:
+- `http`: Set to `true` for registry access via HTTP instead of HTTPS.
+
+??? Example
+
     ```yaml
     kind: Secret
     apiVersion: v1
