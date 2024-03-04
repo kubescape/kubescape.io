@@ -138,7 +138,7 @@ Kubescape automatically detects these secrets and uses them to access the regist
 ??? "Insecure registry access"
     Additional options can be specified in the secret to customize registry access, such as skipping TLS certificate verification or insecure registry access.
 
-    - `skipTLSverify`: Set to `true` to skip TLS certificate verification.
+    - `skipTLSVerify`: Set to `true` to skip TLS certificate verification.
 
     - `http`: Set to `true` for registry access via HTTP instead of HTTPS.
 
@@ -158,7 +158,7 @@ Kubescape automatically detects these secrets and uses them to access the regist
             "username": "<username/clientID>",
             "password": "<password/secret>",
             "auth_method": "credentials",
-            "skipTLSverify": true,
+            "skipTLSVerify": true,
             "http": true
           }
         ]
