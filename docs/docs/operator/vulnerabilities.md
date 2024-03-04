@@ -138,9 +138,9 @@ Kubescape automatically detects these secrets and uses them to access the regist
 ??? "Insecure registry access"
     Additional options can be specified in the secret to customize registry access, such as skipping TLS certificate verification or insecure registry access.
 
-    - `skipTLSverify`: Set to `true` if you want to skip TLS certificate verification.
+    - `skipTLSverify`: Set to `true` to skip TLS certificate verification.
 
-    - `http`: Set to `true` if your registry should be accessed by using HTTP instead of HTTPS.
+    - `http`: Set to `true` for registry access via HTTP instead of HTTPS.
 
     For example:
     ```yaml
