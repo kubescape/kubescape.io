@@ -168,4 +168,4 @@ The default output format for a Kubescape scan is a "pretty-printed" table view.
 
 ## Scanning with the Kubescape Operator
 
-
+Besides the CLI, the Kubescape operator can also be installed via a Helm chart. Installing the Helm chart is an excellent way to begin using Kubescape, as it provides extensive features such as continuous scanning, image vulnerability scanning, runtime analysis, network policy generation, and more. You can find the Helm chart in the [Kubescape-operator documentation](../docs/install-operator.md).
