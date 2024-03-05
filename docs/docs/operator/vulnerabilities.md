@@ -137,7 +137,7 @@ Kubescape automatically detects these secrets and uses them to access the regist
 
 #### Insecure registries access
 
-Additional options can be specified in the secret mentioned above for insecure registries access, such as skipping TLS certificate verification or using HTTP instead of HTTPS.
+Additional options can be specified in the credentials secret mentioned above for insecure registries access, such as skipping TLS certificate verification or using HTTP instead of HTTPS.
 
 - `skipTLSVerify`: Set to `true` to skip TLS certificate verification.
 
