@@ -78,8 +78,8 @@ nav:
             - 'Control library': 'docs/controls/index.md'
             - 'Configuring controls': 'docs/frameworks-and-controls/configuring-controls.md'
         - Guides:
-            - 'Repo Scanning with the Kubescape GitHub Action': 'docs/use-cases/Kubescape-gha/kubescape-gha.md'
-            - 'Cluster Hardening with Kubescape': 'docs/use-cases/Kubescape-cli/kubescape-cli.md'
+            - 'Configure checks on a GitHub repository': 'docs/use-cases/kubescape-gha/kubescape-gha.md'
+            - 'Harden a cluster': 'docs/use-cases/kubescape-cli/kubescape-cli.md'
     - Project:
         - 'About the Kubescape project': 'project/about.md'
         - 'License': 'project/license.md'
