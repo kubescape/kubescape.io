@@ -135,6 +135,38 @@ For example, in case of a cloud vendor container registry (ECR, ACR or else) the
 
 Kubescape automatically detects these secrets and uses them to access the registries defined under the `registry` field.
 
+#### Insecure registries access
+
+Additional options can be specified in the credentials secret mentioned above for insecure registries access, such as skipping TLS certificate verification or using HTTP instead of HTTPS.
+
+- `skipTLSVerify`: Set to `true` to skip TLS certificate verification.
+
+- `http`: Set to `true` for registry access via HTTP instead of HTTPS.
+
+??? Example
+
+    ```yaml
+    kind: Secret
+    apiVersion: v1
+    metadata:
+      name: kubescape-registry-scan-insecure-registry-secret
+      namespace: kubescape
+    type: Opaque
+    stringData:
+      registriesAuth: |
+        [     
+          {
+            "registry": "registry.example.io",
+            "username": "<username/clientID>",
+            "password": "<password/secret>",
+            "auth_method": "credentials",
+            "skipTLSVerify": true,
+            "http": true
+          }
+        ]
+    ```
+
+
 ### Air-gapped installation support
 
 It is possible to get image vulnerability results in an air-gapped mode, where you don't have access to download the Grype database. 
