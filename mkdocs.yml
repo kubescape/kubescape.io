@@ -76,8 +76,9 @@ nav:
             - 'Frameworks': 'docs/frameworks-and-controls/frameworks.md'
             - 'Control library': 'docs/controls/index.md'
             - 'Configuring controls': 'docs/frameworks-and-controls/configuring-controls.md'
-        - Use Cases:
-            - 'Repo Scanning with GHA': 'docs/use-cases/Kubescape-gha/kubescape-gha.md'
+        - Guides:
+            - 'Configure checks on a GitHub repository': 'docs/use-cases/kubescape-gha/index.md'
+            - 'Harden a cluster': 'docs/use-cases/kubescape-cli/index.md'
     - Project:
         - 'About the Kubescape project': 'project/about.md'
         - 'License': 'project/license.md'
