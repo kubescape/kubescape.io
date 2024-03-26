@@ -37,15 +37,11 @@ To see a list of the types that are added to your cluster, use `kubectl api-reso
 $ kubectl api-resources | grep kubescape
 applicationactivities                                     spdx.softwarecomposition.kubescape.io/v1beta1   true         ApplicationActivity
 applicationprofiles                                       spdx.softwarecomposition.kubescape.io/v1beta1   true         ApplicationProfile
-applicationprofilesummaries                               spdx.softwarecomposition.kubescape.io/v1beta1   true         ApplicationProfileSummary
 configurationscansummaries                                spdx.softwarecomposition.kubescape.io/v1beta1   false        ConfigurationScanSummary
 generatednetworkpolicies                                  spdx.softwarecomposition.kubescape.io/v1beta1   true         GeneratedNetworkPolicy
 knownservers                                              spdx.softwarecomposition.kubescape.io/v1beta1   false        KnownServer
 networkneighborses                                        spdx.softwarecomposition.kubescape.io/v1beta1   true         NetworkNeighbors
 openvulnerabilityexchangecontainers                       spdx.softwarecomposition.kubescape.io/v1beta1   true         OpenVulnerabilityExchangeContainer
-sbomspdxv2p3filtereds                                     spdx.softwarecomposition.kubescape.io/v1beta1   true         SBOMSPDXv2p3Filtered
-sbomspdxv2p3s                                             spdx.softwarecomposition.kubescape.io/v1beta1   true         SBOMSPDXv2p3
-sbomsummaries                                             spdx.softwarecomposition.kubescape.io/v1beta1   true         SBOMSummary
 sbomsyftfiltereds                                         spdx.softwarecomposition.kubescape.io/v1beta1   true         SBOMSyftFiltered
 sbomsyfts                                                 spdx.softwarecomposition.kubescape.io/v1beta1   true         SBOMSyft
 vulnerabilitymanifests                                    spdx.softwarecomposition.kubescape.io/v1beta1   true         VulnerabilityManifest
