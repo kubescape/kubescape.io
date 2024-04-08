@@ -35,6 +35,7 @@ plugins:
       abstract_delimiter: ""
   - search
   - glightbox
+  - mermaid2
 extra:
   social:
     - icon: fontawesome/brands/twitter
