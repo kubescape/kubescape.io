@@ -34,13 +34,14 @@ kubectl create namespace prometheus
 helm install -n prometheus prometheus prometheus-community/prometheus
 ```
 
-2. Install the `kubescape-operator` Helm Chart with `capabilities.prometheusExporter` and `configuration.prometheusAnnotations` enabled
+2. Install the `kubescape-operator` Helm Chart with `capabilities.prometheusExporter` and `configurations.prometheusAnnotations` enabled
 
 ```
 helm repo add kubescape https://kubescape.github.io/helm-charts/
 helm repo update
-helm upgrade --install <...> --set capabilities.prometheusExporter=enable --set configuration.prometheusAnnotations=enable
-``` 
+helm upgrade --install <...> --set capabilities.prometheusExporter=enable --set configurations.prometheusAnnotations=enable
+```
+
 ---
 
 ## Component Diagram
