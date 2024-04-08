@@ -1,10 +1,10 @@
 # Kubescape-Prometheus Integration
 
-Most of the end-users either use [`kube-prometheus-stack`](https://github.com/prometheus-community/helm-charts/tree/main/charts/kube-prometheus-stack) Prometheus operator else [`prometheus helm chart`](https://github.com/prometheus-community/helm-charts/tree/main/charts/prometheus) to install Prometheus for monitoring. Based on your choice of Prometheus, you can follow either of the below methods to enable kubescape monitoring with Prometheus.
+Most of the end-users either use [`prometheus-community/kube-prometheus-stack`](https://github.com/prometheus-community/helm-charts/tree/main/charts/kube-prometheus-stack) or [`prometheus-community/prometheus`](https://github.com/prometheus-community/helm-charts/tree/main/charts/prometheus) to install Prometheus for monitoring. Based on your choice of Prometheus, you can follow either of the below methods to enable kubescape monitoring with Prometheus.
 
 ---
 
-## Kubescape integration with Kube-Prometheus-stack (Prometheus operator):
+## Prometheus operator (kube-prometheus-stack) helm chart
 
 1. Install the `kube-prometheus-stack` Helm Chart
 ```
@@ -24,7 +24,7 @@ helm upgrade --install <...> --set capabilities.prometheusExporter=enable
 
 ---
 
-## Kubescape integration with Prometheus community helm chart:
+## Prometheus community helm chart
 
 1. Install the `prometheus-community` Helm Chart
 ```
