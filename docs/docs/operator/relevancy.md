@@ -73,7 +73,3 @@ The relevancy functionality is based on eBPF, which is currently only implemente
 
 !!! info Info
     The node agent uses the [Inspektor Gadget](https://www.inspektor-gadget.io/) library.
-
-### Symlinks
-
-The eBPF probes used by Kubescape do not report on the actual file when a symlink is opened, meaning relevant files opened by symlink may cause CVEs to appear as not relevant.  This may result in false positives.
