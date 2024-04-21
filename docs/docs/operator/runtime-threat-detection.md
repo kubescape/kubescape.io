@@ -3,8 +3,8 @@ The runtime threat detection & response feature of the Kubescape operator enable
 Using eBPF probes toghether with Kubernetes context, the node agent effectively monitors the runtime environment for any suspicious activity.
 
 ## How it works
-The runtime threat detection & response feature is divided into two main components:
-- The anomaly detection engine 🔎
+The runtime threat detection & response feature is divided into two main components: <br>
+- The anomaly detection engine 🔎 <br>
 - The behavior analysis engine 🧠
 
 ### Anomaly detection engine
@@ -39,22 +39,22 @@ To `enable`/`disable` this capability, you need to `enable`/`disable` it when in
 
 ## Viewing alerts
 The alerts raised by the sensor can be viewed in the stdout of the node agent pod.
-If you want to view the alerts in a more structured way, we support several exporters:
-- Prometheus (Alertmanager)
+If you want to view the alerts in a more structured way, we support several exporters:<br>
+### Prometheus (Alertmanager)
 ```bash
 --set nodeAgent.config.alertManagerExporterUrls=localhost:9093 or localhost:9093,localhost:9094
 ```
-- Syslog
+### Syslog
 ```bash
 --set nodeAgent.config.syslogExporterURL=localhost:514
 ```
-- HTTP
+### HTTP
 ```bash
 --set nodeAgent.config.httpExporterConfig.url=http://localhost:8080
 # Optional
 --set nodeAgent.config.httpExporterConfig.maxAlertsPerMinute=1000
 ```
-- STDOUT
+### STDOUT
 ```bash
 --set nodeAgent.config.stdoutExporter=true
 ```
