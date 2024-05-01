@@ -66,7 +66,7 @@ You can customize the bindings of the rules to the workloads by editing the CRD.
 The CRD supports Kubernetes selectors to bind the rules to specific workloads.
 
 ## BETA features
-Some features are still in beta and are not enabled by default. To enable them, you need to set the helm values accordingly.
+Some features are still in beta and are not enabled by default. To enable them, you need to set the Helm values accordingly.
 
 ### Malware detection
 We are working on integrating a malware detection engine into the runtime threat detection & response feature. This engine will be able to detect known malware in real-time by scanning the files and processes accessed by the application.
