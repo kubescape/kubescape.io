@@ -25,7 +25,7 @@ nodeAgent:
 The behavior analysis engine is responsible for analyzing the behavior of the application and determining if it is malicious. It does this by analyzing the behavior of the application and comparing it to known malicious behavior. If any malicious behavior is detected, the engine will raise an alert.
 
 The behavior analysis engine uses a set of predefined rules to determine if the behavior of the application is malicious. These rules are defined as a Custom Resource Definition (CRD) and can be customized by the user.
-By default, all the rules are being enforced.
+By default, all the rules are enforced.
 The rules are defined in the `runtimerulealertbindings.kubescape.io` CRD.
 Kubescape covers a wide range of threats, including but not limited to code execution, network attacks, crypto-mining, fileless malware, and more.
 
