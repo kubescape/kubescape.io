@@ -12,7 +12,7 @@ The anomaly detection engine is responsible for detecting any abnormal behavior 
 
 Kubescape observes containers during a customizable learning phase to understand the application's typical behavior. It then stores this information persistently in a cache, capturing details such as file access, network connections, system calls, and other relevant data.
 
-The durations for how long the node agent will observe a running container are configured with the nodeAgent.config values in the Helm installation:
+The durations for which the node agent will monitor a running container are set using the `nodeAgent.config` values in the Helm installation configuration:
 ```
 nodeAgent:
   config:
