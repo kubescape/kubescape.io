@@ -5,7 +5,7 @@ Using eBPF probes toghether with Kubernetes context, kubescape effectively monit
 ## How it works
 The runtime threat detection & response feature is divided into two main components: <br>
 - [Anomaly detection engine](#Anomaly-detection-engine) 🔎 <br>
-- The behavior analysis engine 🧠
+- [Behavior analysis engine](#Behavior-analysis-engine) 🧠
 
 ### Anomaly detection engine
 The anomaly detection engine is responsible for detecting any abnormal behavior in the runtime environment. It does this by recording the normal behavior of the application and comparing it to the current state. If any deviation is detected, the engine will raise an alert.
