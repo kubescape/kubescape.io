@@ -1,6 +1,6 @@
 # Runtime Threat Detection & Response
 The runtime threat detection & response feature of the Kubescape operator enables users to have visibility into the runtime environment and respond to threats in real-time.
-Using eBPF probes toghether with Kubernetes context, kubescape effectively monitors the runtime environment for any suspicious activity.
+Using eBPF probes toghether with Kubernetes context, Kubescape effectively monitors the runtime environment for any suspicious activity.
 
 ## How it works
 The runtime threat detection & response feature is divided into two main detection components: <br>
