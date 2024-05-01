@@ -4,7 +4,7 @@ Using eBPF probes toghether with Kubernetes context, kubescape effectively monit
 
 ## How it works
 The runtime threat detection & response feature is divided into two main components: <br>
-- The anomaly detection engine 🔎 <br>
+- [Anomaly detection engine](#Anomaly-detection-engine) 🔎 <br>
 - The behavior analysis engine 🧠
 
 ### Anomaly detection engine
