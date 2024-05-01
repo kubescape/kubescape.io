@@ -3,7 +3,7 @@ The runtime threat detection & response feature of the Kubescape operator enable
 Using eBPF probes toghether with Kubernetes context, kubescape effectively monitors the runtime environment for any suspicious activity.
 
 ## How it works
-The runtime threat detection & response feature is divided into two main components: <br>
+The runtime threat detection & response feature is divided into two main detection components: <br>
 - [Anomaly detection engine](#Anomaly-detection-engine) 🔎 <br>
 - [Behavior analysis engine](#Behavior-analysis-engine) 🧠
 
@@ -74,6 +74,10 @@ In addition to the anomaly detection and behavior analysis engines, the malware 
 ```bash
 --set capabilities.malwareDetection=enable
 ```
+
+## Response actions
+The runtime threat detection & response feature supports response actions to mitigate the threats detected by the anomaly detection and behavior analysis engines.
+This section is still in development and will be available in future releases, therefore it is not enabled by default.
 
 ## Limitations
 
