@@ -10,7 +10,7 @@ The runtime threat detection & response feature is divided into two main compone
 ### Anomaly detection engine
 The anomaly detection engine is responsible for detecting any abnormal behavior in the runtime environment. It does this by recording the normal behavior of the application and comparing it to the current state. If any deviation is detected, the engine will raise an alert.
 
-To learn the normal behavior of the application, the node agent will watch the containers for a configurable learning period and store the "Application Profile" in the in-cluster storage. The Application Profile contains the base line behavior of the application, including the files accessed, network connections, system calls and more.
+Kubescape observes containers during a customizable learning phase to understand the application's typical behavior. It then stores this information persistently in a cache, capturing details such as file access, network connections, system calls, and other relevant data.
 
 The durations for how long the node agent will observe a running container are configured with the nodeAgent.config values in the Helm installation:
 ```
