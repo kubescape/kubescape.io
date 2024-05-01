@@ -61,7 +61,7 @@ If you want to view the alerts in a more structured way, we support several expo
 
 ## Rule bindings
 The CRD `runtimerulealertbindings.kubescape.io` is used to define the rules that should be enforced by the runtime threat detection & response engine.
-By default, all the rules are being enforced on all workloads.
+By default, all the rules are enforced on all workloads.
 You can customize the bindings of the rules to the workloads by editing the CRD.
 The CRD supports Kubernetes selectors to bind the rules to specific workloads.
 
