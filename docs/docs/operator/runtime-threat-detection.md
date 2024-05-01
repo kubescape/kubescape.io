@@ -27,7 +27,7 @@ The behavior analysis engine is responsible for analyzing the behavior of the ap
 The behavior analysis engine uses a set of predefined rules to determine if the behavior of the application is malicious. These rules are defined as a Custom Resource Definition (CRD) and can be customized by the user.
 By default, all the rules are enforced.
 The rules are defined in the `runtimerulealertbindings.kubescape.io` CRD.
-Kubescape covers a wide range of threats, including but not limited to code execution, network attacks, crypto-mining, fileless malware, and more.
+Kubescape covers a wide range of threats, including but not limited to code execution, network attacks, crypto-mining, fileless malware.
 
 ## Enabling runtime threat detection & response
 Runtime threat detection & response isn't installed by default when installing the Kubescape operator through Helm. 
