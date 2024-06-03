@@ -15,7 +15,6 @@ Kubescape observes containers during a customizable learning phase to understand
 The durations for which the node agent will monitor a running container are set using the `nodeAgent.config` values in the Helm installation configuration.
 Here are the default values:
 ```yaml
-```
 nodeAgent:
   config:
     maxLearningPeriod: 12h 
