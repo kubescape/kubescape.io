@@ -61,8 +61,8 @@ _Did you know you can use Kubescape in all these places?_
 
 ## Under the hood
 
-Kubescape uses [Open Policy Agent](https://github.com/open-policy-agent/opa) to verify Kubernetes objects against [a library of posture controls](https://github.com/kubescape/regolibrary).
-For image scanning, it uses [Grype](https://github.com/anchore/grype).
+Kubescape uses [Open Policy Agent](https://github.com/open-policy-agent/opa) to verify Kubernetes objects against [a library of posture controls](https://github.com/kubescape/regolibrary).  
+For image scanning, it uses [Grype](https://github.com/anchore/grype).  
 For image patching, it uses [Copacetic](https://github.com/project-copacetic/copacetic).
 
 By default, the results are printed in a console-friendly manner, but they can be:
