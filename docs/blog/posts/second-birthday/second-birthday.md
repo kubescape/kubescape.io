@@ -10,7 +10,7 @@ authors:
 
 # Happy second birthday, Kubescape!
 
-What do you get a piece of software for its second birthday?  A brand new blog, of course! And cake.  More on the cake later.
+What do you get a piece of software for its second birthday?  A brand-new blog, of course! And cake.  More on the cake later.
 
 Kubescape is an open-source Kubernetes security platform that helps you identify and fix security risks, misconfigurations and vulnerabilities in your Kubernetes clusters. It is a powerful tool that can save you time and effort, and help you keep your Kubernetes deployments secure.
 

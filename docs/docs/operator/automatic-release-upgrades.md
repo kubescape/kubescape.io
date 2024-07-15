@@ -23,7 +23,7 @@ helmReleaseUpgrader:
 ```
 
 Helm will then install the Helm Release Upgrader CronJob and its supporting resources with the Kubescape operator.
-They will keep your Kubescape release up to date.
+They will keep your Kubescape release up-to-date.
 
 !!! warning
     Due to the way Helm works, the Helm Release Upgrader requires highly elevated RBAC permissions and leaves orphaned resources even after you uninstall the Kubescape release.
