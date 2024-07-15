@@ -15,7 +15,7 @@ In the latest release of Kubescape, we completely overhauled the CLI experience 
 Watch a short video for a demonstration of the new CLI and its benefits, or read on.
 
 <div class="video-wrapper">
-  <iframe width="640" height="360" src="https://www.youtube.com/embed/ul5Wry6sS8w?si=V8CStezYDZa_4Dtd" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+  <iframe width="640" height="360" src="https://www.youtube.com/embed/ul5Wry6sS8w?si=V8CStezYDZa_4Dtd" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 </div>
 
 <!-- more -->
@@ -62,7 +62,7 @@ If you’re concerned about one of your results and would like to investigate it
 
 ### Image scanning
 
-To make Kubescape a complete one stop shop for Kubernetes security, we introduced image scanning to the command line tool. 
+To make Kubescape a complete one-stop shop for Kubernetes security, we introduced image scanning to the command line tool. 
 
 Image scanning allows you to scan your container images for vulnerabilities, even if they are not running in a cluster. This is a valuable feature for ensuring that your images are secure before you deploy them to your clusters.
 

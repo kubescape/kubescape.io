@@ -23,7 +23,7 @@ Kubescape 3.0 will add:
 * A new capability-based Helm chart
 * Per workload, per namespace and per cluster Prometheus metrics
 * Alerting through Prometheus Alertmanager
-* Sending data outside of the cluster to hosted services
+* Sending data outside the cluster to hosted services
 
 Most of these features have landed already, with some being finished over the next few weeks.
 
@@ -198,7 +198,3 @@ Thanks to all our contributors! Check out our [CONTRIBUTING](https://github.com/
 * Don’t forget to leave a star on our [repository](https://github.com/kubescape/kubescape): it means the world to us!
 
 The Kubescape project follows the [CNCF Code of Conduct](https://github.com/cncf/foundation/blob/master/code-of-conduct.md).
-
-## Watch this space
-
-We will be publishing more detailed posts about the new features in Kubescape 3.0 in the coming weeks. Stay tuned!

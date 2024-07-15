@@ -18,7 +18,7 @@ There are multiple formats and implementations of the VEX as an idea. Kubescape 
 
 ## Installing Kubescape Operator
 
-Kubescape operator is installed as usual (see full install guide [here](/docs/install-operator/)) expect that VEX document generation needs to be explicitly enabled using `capabilities.vexGeneration=enable` HELM flag.
+Kubescape operator is installed as usual (see full installation guide [here](/docs/install-operator/)) expect that VEX document generation needs to be explicitly enabled using `capabilities.vexGeneration=enable` HELM flag.
 
 Run the following to install Kubescape Operator with VEX generation.
 ```bash
@@ -42,7 +42,7 @@ storage-5898d46fd-rmv4x      1/1     Running   0          99s
 
 To produce a VEX document, Kubescape needs to see a workload that runs the given image from its start. In other words, it needs to see containers from start.
 
-Let's run a simple Nginx deployment:
+Let's run a simple NGINX deployment:
 ```bash
 kubectl apply -f https://k8s.io/examples/application/deployment.yaml
 ```
@@ -94,4 +94,3 @@ $ grype nginx:1.14.2 --vex nginx.json
 ```
 
 Voila! 😎
-

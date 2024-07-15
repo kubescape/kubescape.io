@@ -15,11 +15,11 @@ We have three mailing lists:
 * [-dev](https://lists.cncf.io/g/cncf-kubescape-dev): for discussion amongst contributors
 * [-users](https://lists.cncf.io/g/cncf-kubescape-dev): for user-to-user discussion and help
 
-We recommend all Kubescape users join -announce to stay up to date with new releases.
+We recommend all Kubescape users join -announce to stay up-to-date with new releases.
 
-## Monthly meeting
+## Community meetings
 
-We hold [community meetings](https://zoom.us/j/95174063585) on Zoom, on the first Tuesday of every month, at 14:00 GMT. ([See that in your local time zone](https://time.is/compare/1400_in_GMT)).
+We hold [community meetings](https://zoom.us/j/95174063585) on Zoom, every other week, at 15:00 CET. ([See that in your local time zone](https://time.is/compare/1500_in_CET))
 
 ## Code of Conduct
 

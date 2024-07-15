@@ -50,7 +50,7 @@ Used for controls that test that [CPU resource `request` values](https://kuberne
 
 ### imageRepositoryAllowList
 
-Kubescape checks that containers are using images from the allowed contrainer registries configured in this list.
+Kubescape checks that containers are using images from the allowed container registries configured in this list.
 
 * Default values: none
 

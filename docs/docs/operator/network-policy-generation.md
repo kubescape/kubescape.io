@@ -123,12 +123,12 @@ spec:
 ```
 
 `spec` - contains the Kubernetes native Network Policy to be applied on the cluster.  
-`policyRef` - contains enrichment information about the generated Network Policy. Each entry refers to an single `cidr` on the Network Policy.  
+`policyRef` - contains enrichment information about the generated Network Policy. Each entry refers to a single `cidr` on the Network Policy.  
 `policyRef.originalIP` - the original IP that was captured on the traffic.  
 `policyRef.ipBlock` - the IP Block that was generated based on the original IP.  
 `policyRef.dns` - the DNS resolution of the original IP. This enrichment is done by the node-agent component.  
 `policyRef.server` - the server to which the IP belongs to. This enrichment is done by the storage component, based on the `KnownServer` CRDs (see "Advanced Usage").  
-`policyRef.name` - this is a user identifer for the IP. This is used to identify the IP in a user-friendly manner. This enrichment is done by the storage component, based on the `KnownServer` CRDs (see "Advanced Usage").  
+`policyRef.name` - this is a user identifier for the IP. This is used to identify the IP in a user-friendly manner. This enrichment is done by the storage component, based on the `KnownServer` CRDs (see "Advanced Usage").  
 
 Since the Network Policy generation is based on the traffic that is captured, it is recommended to generate the Network Policy after the workload has been running for a while. This will ensure that the Network Policy will contain all the required rules.
 We also recommend going over the generated Network Policy and making sure that it contains all the required rules. You can then apply the Network Policy to your cluster.
@@ -184,7 +184,7 @@ sequenceDiagram
   
 ### Known Servers
 
-When generating Network Policies based on captured traffic, we will often encounter IPs which, by themselves, don't have any meaning. They may be part of an bigger network on which every IP actually belongs to the same service, and thus, the entire network should be represented on the policy. Or it may be unclear for someone looking at the policy what this IP actually means, and what service it represents.    
+When generating Network Policies based on captured traffic, we will often encounter IPs which, by themselves, don't have any meaning. They may be part of a bigger network on which every IP actually belongs to the same service, and thus, the entire network should be represented on the policy. Or it may be unclear for someone looking at the policy what this IP actually means, and what service it represents.    
 The `KnownServer` CRD comes to take care of both situations. You can define for an IP the network which is equivalent to it, and also the server to which it belongs to. You can also name it in a user-friendly manner, so it will be easier to understand what this IP actually means.
 
 Example of a `KnownServer` CRD:
@@ -339,7 +339,7 @@ spec:
 `egress.ports.port` - the port number for the entry's traffic.  
 `egress.ports.protocol` - the protocol for the entry's traffic.
 `egress.ports.name` - the identifier for the port entry.  
-`egress.type` - the type of the entry's traffic. Can be `internal` or `external`, where internal means that the traffic is going to a Pod in the cluster, and external means that the traffic is going outside of the cluster.  
+`egress.type` - the type of the entry's traffic. Can be `internal` or `external`, where internal means that the traffic is going to a Pod in the cluster, and external means that the traffic is going outside the cluster.  
 `ingress` - same as `egress`, but for ingress traffic.    
 To retrieve the `NetworkNeighbors` CRD for a workload, you can run the following command:
 ```bash
