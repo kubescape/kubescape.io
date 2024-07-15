@@ -12,7 +12,7 @@ Runtime threat detection is part of the Kubescape Operator, and most of the func
 
 ![Node agent design](/assets/node-agent-design.svg)
 
-Node-agent uses [Inspektor Gadget](https://www.inspektor-gadget.io/) for eBPF event aquistion. It uses the [Kubescape Storage](https://github.com/kubescape/storage) to store and monitor detection related objects.
+Node-agent uses [Inspektor Gadget](https://www.inspektor-gadget.io/) for eBPF event acquisition for most events and implements some of its own eBPF gadgets. It uses the [Kubescape Storage](https://github.com/kubescape/storage) to store and monitor detection related objects.
 
 Alerts can be sent to multiple sink components, from logs to Prometheus AlertManager.
 
@@ -25,7 +25,7 @@ Kubescape Node-agent leverages advanced eBPF (extended Berkeley Packet Filter) t
 The runtime threat detection feature is divided into three main detection strategies:
 
 * [Anomaly detection engine](#anomaly-detection-engine) 🔎
-* [Behavior analysis engine](#behavior-analysis-engine) 🧠
+* [Behavioral analysis engine](#behavior-analysis-engine) 🧠
 * [Malware scanner](#malware-scanning) 🐛
 
 
@@ -34,7 +34,7 @@ The anomaly detection engine is responsible for detecting any abnormal behavior 
 
 Kubescape observes containers during a customizable learning phase to understand the application's typical behavior. It then stores this information persistently in objects called `ApplicationProfiles` (see [here](https://github.com/kubescape/storage/blob/968527e99defc5be451813e1008453869cf82c0a/pkg/apis/softwarecomposition/v1beta1/types.go#L238)) , capturing details such as file access, network connections, system calls, and other relevant data. This profile, stored as a Kubernetes Custom Resource (CR), serves as a benchmark for normal behavior. Once the learning phase concludes and the profile is established, Kubescape validates application events coming from eBPF for deviations from this norm, triggering alerts upon detecting anomalies.
 
-### Behavior analysis engine
+### Behavioral analysis engine
 Additionally, Kubescape is equipped with rules designed to identify well-known attack signatures. These rules are adept at uncovering various threats, such as unauthorized software executions that deviate from the original container image, detection of unpackers in memory, reverse shell activities, and more. Users have the flexibility to create 'Rule Bindings'—specific instructions that direct Kubescape on which rules should be applied to which Pods. This level of customization ensures that security measures are tailored to the unique needs of each Kubernetes deployment, enhancing the overall security posture and responsiveness of the system.
 
 ### Malware scanning
