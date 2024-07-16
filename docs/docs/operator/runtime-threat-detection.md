@@ -4,7 +4,7 @@ Kubescape's  runtime threat detection feature enables users to gain visibility i
 
 It is designed to be a simple, low-footprint, easy-to-use, and effective tool for detecting threats in your Kubernetes cluster at runtime.
 
-It is based on eBPF-based event monitoring on Kubernetes nodes and an advanced rule engine that allows you to write rules that can detect and respond to threats in your cluster and more specifically in your workload itself🛡️.
+It is uses eBPF-based event monitoring on Kubernetes nodes and an advanced rule engine that allows you to write rules that can detect and respond to threats in your cluster and more specifically in your workload itself🛡️.
 
 ## Architecture
 
