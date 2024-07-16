@@ -40,7 +40,7 @@ Additionally, Kubescape is equipped with rules designed to identify well-known a
 ### Malware scanning
 Kubescape can scan the nodes for malware using ClamAV as an engine, a popular open-source antivirus engine. ClamAV supports scanning of files, directories, and volumes, and can be configured to scan the entire node or only specific directories. You can read more about ClamAV here.
 
-Kubescape uses its own virus database which is a subset of the latest ClamAV virus database release but adopted to Kubernetes environment to save resources.
+Kubescape uses its own virus database which is a subset of the latest ClamAV virus database release but adapted to Kubernetes environment to save resources.
 
 ### Rule bindings
 The CRD `runtimerulealertbindings.kubescape.io` is used to define the rules that should be enforced by the runtime threat detection engine.
