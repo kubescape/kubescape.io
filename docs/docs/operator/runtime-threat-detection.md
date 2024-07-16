@@ -1,6 +1,6 @@
 # Runtime Threat Detection
 
-The runtime threat detection feature of Kubescape enables users to have visibility into the runtime environment and detects security threats in real time within the Kubernetes Pods and API server.
+Kubescape's  runtime threat detection feature enables users to gain visibility into the runtime environment and detects security threats in real time within Kubernetes Pods and API server.
 
 It is designed to be a simple, low-footprint, easy-to-use, and effective tool for detecting threats in your Kubernetes cluster at runtime.
 
