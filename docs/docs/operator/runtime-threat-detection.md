@@ -65,7 +65,7 @@ Note, that we have not defined an exporter, therefore the alerts are sent to the
 
 Wait for the learning period to end (the default is 24h!) and you can try out the detection capabilities.
 
-For example, in this case we run the system on a Kind cluster and here is what you see in logs if you open a process on a container:
+For example, in this case we ran the system on a Kind cluster and here is what you see in logs if you open a process on a container:
 ```bash
 $ kubectl apply -f https://k8s.io/examples/application/deployment.yaml
 $ sleep $LEARNING_PERIOD
