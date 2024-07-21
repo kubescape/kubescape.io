@@ -15,8 +15,17 @@ Kubescape's controls are written in the [Rego](https://www.openpolicyagent.org/d
 
 The controls, and their grouping into frameworks, are maintained in the Kubescape [regolibrary](https://github.com/kubescape/regolibrary) repository.
 
+## Validating Admission Policy
+
+Since Kubernetes 1.30, you can validate the admission policy of your cluster with the [Validating Admission Policy](https://kubernetes.io/docs/reference/access-authn-authz/validating-admission-policy/),
+which is a declarative, in-process alternative to validating admission webhooks.
+Validating admission policies use the Common Expression Language (CEL) to declare the validation rules of a policy.
+
+Kubescape controls have been converted to [CEL expressions](https://github.com/kubescape/cel-admission-library) and can be used as a validating admission policy (see next steps below).
+
 ## Next steps
 
 * [Read about the supported frameworks](frameworks.md)
 * [Create your own framework](frameworks.md#custom-frameworks)
 * [Learn about downloading artifacts for offline usage](../install-cli.md#offlineair-gapped-environment-support)
+* [Use Kubescape to configure a validating admission policy](validating-admission-policy.md)
