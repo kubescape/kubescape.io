@@ -8,7 +8,7 @@ you need to edit the property below at [values.yaml](https://github.com/kubescap
 
 ```
 configurations:
-  otelUrl: # default is empty ,add yours otel URL here 
+  otelUrl: # Default is empty. Add your Open Telemetry URL here.
 ```
 
 If you don't have an otel distribution, we suggest you try either [Uptrace](https://github.com/uptrace/uptrace/tree/master/example/docker) or [SigNoz](https://signoz.io/docs/install/docker/)
