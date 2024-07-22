@@ -15,7 +15,7 @@ Kubescape 3.0 introduces workload scanning, which allows you to comprehensively 
 Watch a short video for a demonstration of workload scanning and its benefits, or read on.
 
 <div class="video-wrapper">
-  <iframe width="640" height="360" src="https://www.youtube.com/embed/N13jDFBAy7w?si=6KC2njGeCbSfzZRJ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+  <iframe width="640" height="360" src="https://www.youtube.com/embed/N13jDFBAy7w?si=6KC2njGeCbSfzZRJ" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 </div>
 
 <!-- more -->

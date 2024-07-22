@@ -6,7 +6,7 @@
 Using tools such as Kubescape to help remediate security issues in your cluster is crucial to any security plan. With Kubescape, you can scan your manifests, Helm charts, or active clusters for compliance with security frameworks such as NSA, MITRE, SOC2, and more. While Kubescape significantly increases your security compliance with active clusters, it works even better when your scans are automatically run against any manifest files as soon as they are pushed to your repository and, ideally, before merging to the main branch. Let’s look at how to configure the GitHub Action to automatically run scans based on your chosen frameworks, ignore acceptable risks, and improve your security posture whenever a pull request is created against your repository. We use GitHub in this example, but you can apply the same principles to other Git vendors. 
 
 ## The Deployment
-The Kubernetes manifest we’ll be scanning is a simple one. This way, we can focus on the task at hand, improving the security posture. If you’d like to follow along, go ahead and create a new repository and add a README.md file to the main branch. Pull the repo to your local IDE of choice. I’ll be using Codespaces through this tutorial to keep it simple. Once you’ve done that, let’s get Github Actions configured.
+The Kubernetes manifest we’ll be scanning is a simple one. This way, we can focus on the task at hand, improving the security posture. If you’d like to follow along, go ahead and create a new repository and add a README.md file to the main branch. Pull the repo to your local IDE of choice. I’ll be using Codespaces through this tutorial to keep it simple. Once you’ve done that, let’s get GitHub Actions configured.
 
 ### Enable GitHub Actions
 
@@ -45,7 +45,7 @@ jobs:
     severityThreshold: low
 ```
 
-This is going to run the action any time there is a pull request in the repository. It will run the Kubescan CLI with the NSA Framework (PDF Link) and the MITRE Framework. To read more about the frameworks available, you can find that information here: https://kubescape.io/docs/frameworks-and-controls/frameworks/
+This is going to run the action any time there is a pull request in the repository. It will run the Kubescape CLI with the NSA Framework (PDF Link) and the MITRE Framework. To read more about the frameworks available, you can find that information here: https://kubescape.io/docs/frameworks-and-controls/frameworks/
 
 I have also added a few other customizations to provide for verbose output and set the severityThreshold to ensure any controls will cause the action to fail. . 
 
@@ -63,7 +63,7 @@ First, create a new branch called dev:
 
 `git checkout -b dev`
 
-We’re going to do a very simple manifest that will deploy an Nginx pod to start. Although simple, it still contains several security vulnerabilities, as you can see. Create a file called nginx.yml in the root directory of your repository and add the following:
+We’re going to do a very simple manifest that will deploy a NGINX pod to start. Although simple, it still contains several security vulnerabilities, as you can see. Create a file called nginx.yml in the root directory of your repository and add the following:
 
 ```
 apiVersion: v1
@@ -100,7 +100,7 @@ Open the pull request, and you should see “All checks have failed.” since we
 ![image](pr-checks-failed.png)
 
 
-Open the details and take a look and you’ll see a full report with, at the time of this writing, seven failed controls and the links and assisted remediation for each:
+Open the details, take a look, and you’ll see a full report with, at the time of this writing, seven failed controls and the links and assisted remediation for each:
 ![image](kubescape-first-scan.png)
 
 

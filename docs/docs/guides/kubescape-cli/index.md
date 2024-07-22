@@ -3,7 +3,7 @@
 ## Intro
 
 Using tools such as Kubescape to help remediate security issues in your cluster is crucial to any security plan. With Kubescape, you can scan your manifests, Helm charts, or active clusters for compliance with [security frameworks](../frameworks-and-controls/) such as NSA, MITRE, SOC 2, and more. 
-There are several ways to run Kubescape, including a command-line tool, an in-cluster Operator, a Visual Studio Code integration, and a GitHub action. In this guide, you will use the Kubescape command-line tool (CLI) to illustrate hardening a running Kubernetes cluster with a simple deployment. Since the Kubescape CLI is agentless, it doesn’t have as much insight into the cluster as the operator does. However, it’s still a potent tool.
+There are several ways to run Kubescape, including a command-line tool, an in-cluster Operator, a Visual Studio Code integration, and a GitHub action. In this guide, you will use the Kubescape command-line tool (CLI) to illustrate hardening a running Kubernetes cluster with a simple deployment. Since the Kubescape CLI is agentless, it doesn't have as much insight into the cluster as the operator does. However, it’s still a potent tool.
 
 ## Deploy a Cluster
 In this example, you will use a Kubernetes cluster deployed with K3s. Any cluster will do as long as it supports a local container image registry and basic Kubectl commands. If you don’t have a cluster meeting those criteria, you can set one up using the following instructions.
@@ -226,7 +226,7 @@ kubescape scan workload Pod/nginx-app --namespace app
 
 
 ### Image Scanning
-For the final piece of the puzzle, scan the image and see if you can improve its security posture. At the bottom of the previous output, you should see "Receive a full report for nginx by running: `$ kubescape scan image nginx:1.21`. Run that command:
+For the final piece of the puzzle, scan the image and see if you can improve its security posture. At the bottom of the previous output, you should see "Receive a full report for nginx by running: `$ kubescape scan image nginx:1.21`". Run that command:
 ```shell
 kubescape scan image nginx:1.21
 ```

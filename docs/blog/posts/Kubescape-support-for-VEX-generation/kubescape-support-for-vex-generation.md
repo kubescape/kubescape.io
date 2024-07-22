@@ -26,7 +26,7 @@ For example:
 
 The extreme transparency brought by SBOMs into how software is composed will most likely increase the number of these kinds of false positives, requiring an automated solution to avoid an explosion in the false positive rate of security scans. Hence VEX.
 
-Using VEX is a way to turn down the noise, and give security practitioners a good strong signal, a scanner may consume VEX data from the software supplier. However, it is time consuming to write a VEX document and since it is imperative these documents stay current, it is a never ending task.
+Using VEX is a way to turn down the noise, and give security practitioners a good strong signal, a scanner may consume VEX data from the software supplier. However, it is time-consuming to write a VEX document and since it is imperative these documents stay current, it is a never ending task.
 **The solution to this must come via automation.**
 
 !!! note "_[Are you running Kubescape? Want to help us get to incubation in the CNCF? Please help us by filling in our three-question survey!](https://kubescape.io/project/survey/)_"
@@ -37,7 +37,7 @@ Using VEX is a way to turn down the noise, and give security practitioners a goo
 
 The adoption and support of VEX documents represent a major shift in how security practitioners address software vulnerabilities. Primarily, VEX is designed to assist these professionals in determining which vulnerabilities require immediate attention and remediation. This targeted approach is crucial in a landscape where prioritizing security efforts is overwhelming due to the sheer volume of reported vulnerabilities.
 
-Grype and Trivy are two popular open source vulnerability scanners. Their newest versions allow them to ingest VEX documents. Thus, giving clearer results of vulnerability scans, with a better signal to noise ratio. Leading to more actionable results, since users of VEX based scans have a good understanding of the vulnerabilities that can hurt them now.
+Grype and Trivy are two popular open source vulnerability scanners. Their newest versions allow them to ingest VEX documents. Thus, giving clearer results of vulnerability scans, with a better signal-to-noise ratio. Leading to more actionable results, since users of VEX based scans have a good understanding of the vulnerabilities that can hurt them now.
 
 However, one big stumbling block remained - **the sourcing of reliable and accurate VEX documents**.
 
@@ -62,13 +62,13 @@ These Kubernetes API objects containing VEX information can be easily downloaded
 
 ### Generating VEX Documents with Kubescape
 
-A prerequisite to using Kubescape to generate a VEX document is that you install the Kubescape operator. For details you can check out [Kubescape documentation](https://kubescape.io/docs/install-operator/) or the [Kubescape Github repo](https://github.com/kubescape/operator).
+A prerequisite to using Kubescape to generate a VEX document is that you install the Kubescape operator. For details, you can check out [Kubescape documentation](https://kubescape.io/docs/install-operator/) or the [Kubescape GitHub repo](https://github.com/kubescape/operator).
 
 To produce a VEX document, Kubescape needs to see a workload running the given image from its start. In other words, it needs to see containers from start.
 
 Now that all the prerequisites have been fulfilled, the following steps will lead to the auto-generation of a VEX document.
 
-The following example uses an NGINX deployment to demonstrate the generation of a VEX document.
+The following example uses a NGINX deployment to demonstrate the generation of a VEX document.
 
 | kubectl apply -f https://k8s.io/examples/application/deployment.yaml |
 | -- |
@@ -91,11 +91,12 @@ Here is an example to see how many vulnerabilities are affected:
 
 | $ jq "." nginx.json | grep -c "\"affected\""
 
-58
+| 58 |
+| -- |
 
 $ jq "." nginx.json | grep -c "\"not_affected\""
 
-338 |
+| 338 |
 | -- |
 
 Now that we have a VEX document in hand, how do we feed it to a scanner?
@@ -152,9 +153,9 @@ Follows the Common Security Advisory Framework (CSAF) format.
 
 ### OpenVEX
 
-That being said, the open source community, namely the Linux Foundation, are working on a standard called OpenVEX. OpenVEX is an implementation of VEX that is designed to be minimal, compliant, interoperable, and embeddable. The specification is available in the [OPENVEX-SPEC.md](https://github.com/openvex/spec/blob/main/OPENVEX-SPEC.md) file of the [OpenVEX Github repository](https://github.com/openvex). OpenVEX documents are minimal JSON-LD files that capture the minimal requirements for VEX as defined by the VEX working group organized by CISA. The OpenVEX Specification is owned and steered by the community.
+That being said, the open source community, namely the Linux Foundation, are working on a standard called OpenVEX. OpenVEX is an implementation of VEX that is designed to be minimal, compliant, interoperable, and embeddable. The specification is available in the [OPENVEX-SPEC.md](https://github.com/openvex/spec/blob/main/OPENVEX-SPEC.md) file of the [OpenVEX GitHub repository](https://github.com/openvex). OpenVEX documents are minimal JSON-LD files that capture the minimal requirements for VEX as defined by the VEX working group organized by CISA. The OpenVEX Specification is owned and steered by the community.
 
-## Staying up to date
+## Staying up-to-date
 
 If you’ve reached this point then you probably understand that VEX documents play a critical role in communicating the true risk posed by vulnerabilities within software products. However, the effectiveness of VEX hinges on one crucial factor: regular updates and refreshes.
 
@@ -186,7 +187,7 @@ Kubescape is the first open source project that supports auto-generation of VEX 
 
 So, next time your vulnerability scanner spews an endless list of vulnerabilities whose dependencies you now need to investigate, try Kubescape to lighten the load. 
 
-To follow additional developments in open source Kubernetes security, check out the Kubescape Github repo, follow us on X (formerly known as Twitter), or join the community channels (#kubescape, #kubescape-dev) on the CNCF Slack.
+To follow additional developments in open source Kubernetes security, check out the Kubescape GitHub repo, follow us on X (formerly known as Twitter), or join the community channels (#kubescape, #kubescape-dev) on the CNCF Slack.
 
 
 ## Join the Kubescape community

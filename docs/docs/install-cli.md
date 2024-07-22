@@ -65,7 +65,7 @@ choco install kubescape
 ```
 
 !!! note "Note"
-    Packaging for Chocolatey is [community supported](https://community.chocolatey.org/packages/kubescape) and may not always be up to date with the [latest Kubescape release](https://github.com/kubescape/kubescape/tags).
+    Packaging for Chocolatey is [community supported](https://community.chocolatey.org/packages/kubescape) and may not always be up-to-date with the [latest Kubescape release](https://github.com/kubescape/kubescape/tags).
 
 ### Scoop
 
@@ -76,7 +76,7 @@ scoop install kubescape
 ```
 
 !!! note "Note"
-    Packaging for Scoop is [community supported](https://scoop.sh/#/apps?q=kubescape&s=0&d=1&o=true&id=1f5ae05eaafe3e7a26505f0889101e0da91ffe91) and may not always be up to date with the [latest Kubescape release](https://github.com/kubescape/kubescape/tags).
+    Packaging for Scoop is [community supported](https://scoop.sh/#/apps?q=kubescape&s=0&d=1&o=true&id=1f5ae05eaafe3e7a26505f0889101e0da91ffe91) and may not always be up-to-date with the [latest Kubescape release](https://github.com/kubescape/kubescape/tags).
 
 ## macOS
 
@@ -129,7 +129,7 @@ sudo zypper install kubescape
 ```
 
 !!! note "Note"
-    Packaging for openSUSE is supported by the openSUSE community and may not always be up to date with the [latest Kubescape release](https://github.com/kubescape/kubescape/tags).
+    Packaging for openSUSE is supported by the openSUSE community and may not always be up-to-date with the [latest Kubescape release](https://github.com/kubescape/kubescape/tags).
 
 ### Arch
 
@@ -146,7 +146,7 @@ yay -S kubescape-bin
 ```
 
 !!! note "Note"
-    Packaging for kubescape-bin is supported by the [AUR community](https://aur.archlinux.org/packages?O=0&K=kubescape) and may not always be up to date with the [latest Kubescape release](https://github.com/kubescape/kubescape/tags).
+    Packaging for kubescape-bin is supported by the [AUR community](https://aur.archlinux.org/packages?O=0&K=kubescape) and may not always be up-to-date with the [latest Kubescape release](https://github.com/kubescape/kubescape/tags).
 
 
 ### NixOS, or using nix on Windows or Linux
@@ -182,7 +182,7 @@ nix-env --install -A nixpkgs.kubescape
 ```
 
 !!! note "Note"
-    Packaging for Nix is [community supported](https://github.com/NixOS/nixpkgs/blob/master/pkgs/tools/security/kubescape/default.nix) and may not always be up to date with the [latest Kubescape release](https://github.com/kubescape/kubescape/tags). If you are having trouble, please reach out to [NixOS support](https://nixos.wiki/wiki/Support).
+    Packaging for Nix is [community supported](https://github.com/NixOS/nixpkgs/blob/master/pkgs/tools/security/kubescape/default.nix) and may not always be up-to-date with the [latest Kubescape release](https://github.com/kubescape/kubescape/tags). If you are having trouble, please reach out to [NixOS support](https://nixos.wiki/wiki/Support).
 
 ## Offline/air-gapped environment support
 

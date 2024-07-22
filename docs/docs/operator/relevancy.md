@@ -32,7 +32,7 @@ After installation, the node agent will start listening for every **new** or **r
 
 ### View relevancy information
 
-Counts of relevant vulnerabilties are available in the [vulnerability summary objects](vulnerabilities.md#vulnerabilty-summaries). The [vulnerability manifest](vulnerabilities.md#vulnerabilty-manifests) will show whether a given CVE was found relevant or not.
+Counts of relevant vulnerabilities are available in the [vulnerability summary objects](vulnerabilities.md#vulnerabilty-summaries). The [vulnerability manifest](vulnerabilities.md#vulnerabilty-manifests) will show whether a given CVE was found relevant or not.
 
 The full and filtered SBOM objects are stored in the `kubescape` namespace. View the labels to get the information as to which image and parent object the SBOM relates to.
 

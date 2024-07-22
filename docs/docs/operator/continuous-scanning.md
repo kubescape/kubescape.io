@@ -31,7 +31,7 @@ kubectl get workloadconfigurationscansummaries -o yaml
 
 Running this command will return a YAML-formatted list of configuration scan summaries for your cluster by namespaces.
 
-On clusters with many namespaces, the results might be overwhelming and might even exceed your terminal history. Since Kubescape serves results as Kubernetes objects, which are YAML files at the end of the day, you can apply your usual processes to aggregate them in a readable way. For exampple - pipe them to files, text editors etc. We commonly use the following command:
+On clusters with many namespaces, the results might be overwhelming and might even exceed your terminal history. Since Kubescape serves results as Kubernetes objects, which are YAML files at the end of the day, you can apply your usual processes to aggregate them in a readable way. For example - pipe them to files, text editors etc. We commonly use the following command:
 
 ```
 kubectl get workloadconfigurationscansummaries -o yaml | less

@@ -16,7 +16,7 @@ If you have not already, you should [install Helm](https://helm.sh/docs/intro/in
 Using alternative installation methods, such as Kustomize, Helmfile or using custom scripts, may lead to unexpected behavior and issues.
 We cannot guarantee compatibility or provide support for deployments that are installed using methods other than Helm or ArgoCD.
 
-Run the install command:
+Run the installation command:
 ```
 helm repo add kubescape https://kubescape.github.io/helm-charts/ ; helm repo update ; helm upgrade --install kubescape kubescape/kubescape-operator -n kubescape --create-namespace --set clusterName=`kubectl config current-context` --set capabilities.continuousScan=enable
 ```
@@ -104,7 +104,7 @@ kubectl delete ns kubescape
 
 ## Configuring your installation
 
-The Helm charts for the Kubescape Operator support coarse and fine grained control of  configuration of many
+The Helm charts for the Kubescape Operator offer both broad and detailed configuration options.
 
 ### Enabling capabilities
 

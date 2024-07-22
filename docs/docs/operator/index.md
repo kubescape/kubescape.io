@@ -5,7 +5,7 @@ When installed in your cluster, Kubescape runs as a set of microservices.  These
 The Kubescape operator includes:
 
 * scanning for misconfigurations
-* scanning all deployed images for vulnerabilties (CVEs)
+* scanning all deployed images for vulnerabilities (CVEs)
 * exposing in-cluster data as Kubernetes API objects
 * exporting data to a configured [provider](../providers.md) 
 * allowing secure control by a configured provider

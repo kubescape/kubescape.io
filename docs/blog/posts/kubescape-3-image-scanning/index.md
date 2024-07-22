@@ -15,7 +15,7 @@ In previous versions, Kubescape supported vulnerability scanning inside a cluste
 Watch a short video for a demonstration of image scanning from the Kubescape CLI and its benefits, or read on.
 
 <div class="video-wrapper">
-  <iframe width="640" height="360" src="https://www.youtube.com/embed/rjLL_5F41Oc?si=X5XLkMLBpzTQl5FK"  title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+  <iframe width="640" height="360" src="https://www.youtube.com/embed/rjLL_5F41Oc?si=X5XLkMLBpzTQl5FK"  title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 </div>
 
 <!-- more -->
@@ -46,7 +46,7 @@ The results include the following information:
 
 * A link to the documentation for each vulnerability
 
-If you would like to see all of the vulnerabilities, regardless of severity, you can run the command in verbose mode with the -v flag.
+If you would like to see all the vulnerabilities, regardless of severity, you can run the command in verbose mode with the -v flag.
 
 ```
 kubescape scan image  --verbose

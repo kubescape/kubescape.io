@@ -9,7 +9,7 @@ hide:
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/cncf/artwork/master/projects/kubescape/stacked/white/kubescape-stacked-white.svg" width="300">
   <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/cncf/artwork/master/projects/kubescape/stacked/color/kubescape-stacked-color.svg" width="300">
-  <img alt="Kubescape logo" align="right" src="https://raw.githubusercontent.com/cncf/artwork/master/projects/kubescape/stacked/color/kubescape-stacked-color.svg" width="300">
+  <img alt="Kubescape logo" src="https://raw.githubusercontent.com/cncf/artwork/master/projects/kubescape/stacked/color/kubescape-stacked-color.svg" width="300">
 </picture>
 
 _Comprehensive Kubernetes Security from Development to Runtime_
@@ -33,7 +33,7 @@ By providing this comprehensive security coverage from development to production
 Kubescape was created by [ARMO](https://www.armosec.io/?utm_source=github&utm_medium=repository) and is a [Cloud Native Computing Foundation (CNCF) sandbox project](https://www.cncf.io/sandbox-projects/).
 
 ## Demo
-<img src="https://github.com/kubescape/kubescape/raw/master/docs/img/demo.gif">
+<img src="https://github.com/kubescape/kubescape/raw/master/docs/img/demo.gif" alt="demo">
 
 _Please [star ⭐](https://github.com/kubescape/kubescape/stargazers) the repo if you want us to continue developing and improving Kubescape! 😀_
 
@@ -55,7 +55,7 @@ Learn more about:
 
 _Did you know you can use Kubescape in all these places?_
 
-<div align="center">
+<div>
     <img src="https://github.com/kubescape/kubescape/raw/master/docs/img/ksfromcodetodeploy.png" alt="Places you can use Kubescape: in your IDE, CI, CD, or against a running cluster.">
 </div>
 
@@ -93,7 +93,7 @@ Thanks to all our contributors!  Check out our [CONTRIBUTING](https://github.com
 
 <div style="text-align: center">
 <a href = "https://github.com/kubescape/kubescape/graphs/contributors">
-  <img src = "https://contrib.rocks/image?repo=kubescape/kubescape"/>
+  <img src="https://contrib.rocks/image?repo=kubescape/kubescape" alt="kubescape contributors"/>
 </a>
 </div>
 
@@ -105,6 +105,6 @@ Kubescape is a [Cloud Native Computing Foundation (CNCF) sandbox project](https:
 
 Kubescape is a [trademark](https://www.linuxfoundation.org/legal/trademark-usage) owned by the [Linux Foundation](https://www.linuxfoundation.org/)
 
-<div align="center">
+<div>
     <img src="https://raw.githubusercontent.com/cncf/artwork/master/other/cncf-sandbox/horizontal/color/cncf-sandbox-horizontal-color.svg" width="300" alt="CNCF Sandbox Project">
 </div>
