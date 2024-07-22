@@ -9,6 +9,17 @@ you need to edit the property below at [values.yaml](https://github.com/kubescap
 ```
 configurations:
   otelUrl: # Default is empty. Add your Open Telemetry URL here.
+
+..
+..
+..
+
+otelCollector:
+  name: otel-collector
+  endpoint: 
+    insecure: true # configurable
+    headers:
+      uptrace-dsn: "" # configurable
 ```
 
 If you don't have an otel distribution, we suggest you try either [Uptrace](https://github.com/uptrace/uptrace/tree/master/example/docker) or [SigNoz](https://signoz.io/docs/install/docker/)
