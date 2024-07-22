@@ -1,18 +1,25 @@
 # Setting up Telemetry
 
-Several of Kubescape's in-cluster components implement telemetry data using [OpenTelemetry](https://opentelemetry.io/) (otel).
-You can optionally install an otel [collector](https://opentelemetry.io/docs/collector/) to your cluster to aggregate all metrics and send them to your own tracing tool.
+Several of Kubescape's in-cluster components implement telemetry data using [OpenTelemetry](https://opentelemetry.io/) (otel).\
+You can optionally install an Otel [collector](https://opentelemetry.io/docs/collector/) to your cluster to aggregate all metrics and send them to your own tracing tool.
 
-You simply have to fill in this information before [installing kubescape operator](#installing-kubescape-operator-in-a-kubernetes-cluster-using-helm):
+You simply have to fill in this information before [installing kubescape operator](/../install-operator.md):\
+you need to edit the property below at [values.yaml](https://github.com/kubescape/helm-charts/blob/main/charts/kubescape-operator/values.yaml) OR using --set while installing the helm chart\
 
 ```
+configurations:
+  otelUrl: # Default is empty. Add your Open Telemetry URL here.
+
+..
+..
+..
+
 otelCollector:
-  enabled: true
-  endpoint:
-    host: <ip or dns for your gRPC otel endpoint>
-    port: 4317
-    insecure: <whether your otel endpoint requires ssl>
-    headers: <optional - map of headers required by tracing tool>
+  name: otel-collector
+  endpoint: 
+    insecure: true # configurable
+    headers:
+      uptrace-dsn: "" # configurable
 ```
 
 If you don't have an otel distribution, we suggest you try either [Uptrace](https://github.com/uptrace/uptrace/tree/master/example/docker) or [SigNoz](https://signoz.io/docs/install/docker/)

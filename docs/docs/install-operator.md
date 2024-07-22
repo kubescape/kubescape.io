@@ -129,16 +129,25 @@ capabilities:
 
   # ====== Runtime related capabilities ======
   #
-  runtimeObservability: disable
+  runtimeObservability: enable
   networkPolicyService: enable
-
-  # ====== Integrations ======
-  #
-  prometheusExporter: disable
+  runtimeDetection: disable
+  malwareDetection: disable
+  nodeProfileService: disable
+  seccompProfileService: enable
 
   # ====== Other capabilities ======
   #
+  # This is an experimental capability with an elevated security risk. Read the
+  # matching docs before enabling.
   autoUpgrading: disable
+  prometheusExporter: disable
+  # seccompGenerator: disable
+
+#extra capability - service discovery option
+serviceScanConfig:
+  enabled : false
+  interval: 1h
 ```
 
 You can configure these by using `--set` when installing the chart, or by specifying your own values file with the `-f` flag. [Read the Helm documentation to learn more](https://helm.sh/docs/chart_template_guide/values_files/).
