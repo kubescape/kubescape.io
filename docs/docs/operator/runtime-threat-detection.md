@@ -101,6 +101,7 @@ spec:
 
 The rules are defined in the [node-agent repository](https://github.com/kubescape/node-agent/tree/main/pkg/ruleengine/v1).
 Currently, the following rules are supported:
+
 | **Rule**                                      | **Description**                                                                                       |
 |-----------------------------------------------|-------------------------------------------------------------------------------------------------------|
 | **Unexpected process launched**               | Detects the launch of an unexpected or unauthorized process.                                           |
