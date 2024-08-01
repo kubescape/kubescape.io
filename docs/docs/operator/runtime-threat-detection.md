@@ -8,11 +8,11 @@ It is uses eBPF-based event monitoring on Kubernetes nodes and an advanced rule 
 
 ## Architecture
 
-Runtime threat detection is part of the Kubescape Operator, and most of the functionality is implemented as part of the Node-agent.
+Runtime threat detection is part of the Kubescape Operator, and most of the functionality is implemented as part of the node-agent.
 
 ![Node agent design](/assets/node-agent-design.svg)
 
-Node-agent uses [Inspektor Gadget](https://www.inspektor-gadget.io/) for eBPF event acquisition for most events and implements some of its own eBPF gadgets. It uses the [Kubescape Storage](https://github.com/kubescape/storage) to store and monitor detection related objects.
+node-agent uses [Inspektor Gadget](https://www.inspektor-gadget.io/) for eBPF event acquisition for most events and implements some of its own eBPF gadgets. It uses the [Kubescape Storage](https://github.com/kubescape/storage) to store and monitor detection related objects.
 
 Alerts can be sent to multiple sink components, from logs to Prometheus AlertManager.
 
@@ -20,7 +20,7 @@ Detection capabilities are organized into "Rules" and each of them is designed t
 
 ## How it works
 
-Kubescape Node-agent leverages advanced eBPF (extended Berkeley Packet Filter) technology for comprehensive runtime security detection in Kubernetes environments. Its detection capabilities encompass a wide array of events including new process initiations, file activities, network operations, system call activities, and usage of Linux capabilities.
+Kubescape node-agent leverages advanced eBPF (extended Berkeley Packet Filter) technology for comprehensive runtime security detection in Kubernetes environments. Its detection capabilities encompass a wide array of events including new process initiations, file activities, network operations, system call activities, and usage of Linux capabilities.
 
 The runtime threat detection feature is divided into three main detection strategies:
 
@@ -47,6 +47,369 @@ The CRD `runtimerulealertbindings.kubescape.io` is used to define the rules that
 By default, all the rules are enforced on all workloads.
 You can customize the bindings of the rules to the workloads by editing the CRD.
 The CRD supports Kubernetes selectors to bind the rules to specific workloads.
+You can find the CRD definition [here](https://github.com/kubescape/helm-charts/blob/main/charts/dependency_chart/clustered-crds/crds/runtime-rule-binding.crd.yaml).
+
+Example of a `RuntimeRuleAlertBinding` CRD:
+<details>
+<summary>Click to expand</summary>
+
+```yaml
+apiVersion: kubescape.io/v1
+kind: RuntimeRuleAlertBinding
+metadata:
+  name: all-rules-all-pods
+spec:
+  namespaceSelector:
+    matchExpressions:
+      - key: "kubernetes.io/metadata.name"
+        operator: "NotIn"
+        values:
+        - "kube-system"
+        - "kube-public"
+        - "kube-node-lease"
+        - "kubeconfig"
+        - "gmp-system"
+        - "gmp-public"
+  rules:
+    - ruleName: "Unexpected process launched"
+    - ruleName: "Unexpected file access"
+      parameters:
+        ignoreMounts: true
+        ignorePrefixes: ["/proc", "/run/secrets/kubernetes.io/serviceaccount", "/var/run/secrets/kubernetes.io/serviceaccount", "/tmp"]
+    - ruleName: "Unexpected system call"
+    - ruleName: "Unexpected capability used"
+    - ruleName: "Unexpected domain request"
+    - ruleName: "Unexpected Service Account Token Access"
+    - ruleName: "Kubernetes Client Executed"
+    - ruleName: "Exec from malicious source"
+    - ruleName: "Kernel Module Load"
+    - ruleName: "Exec Binary Not In Base Image"
+    - ruleName: "Malicious SSH Connection"
+    - ruleName: "Fileless Execution"
+    - ruleName: "XMR Crypto Mining Detection"
+    - ruleName: "Exec from mount"
+    - ruleName: "Crypto Mining Related Port Communication"
+    - ruleName: "Crypto Mining Domain Communication"
+    - ruleName: "Read Environment Variables from procfs"
+    - ruleName: "eBPF Program Load"
+    - ruleName: "Symlink Created Over Sensitive File"
+    - ruleName: "Unexpected Sensitive File Access"
+    - ruleName: "LD_PRELOAD Hook"
+    - ruleName: "Hardlink Created Over Sensitive File"
+```
+</details>
+
+The rules are defined in the [node-agent repository](https://github.com/kubescape/node-agent/tree/main/pkg/ruleengine/v1).
+Currently, the following rules are supported:
+* Unexpected process launched
+* Unexpected file access (ignoreMounts parameter can be used to ignore mounts, ignorePrefixes parameter can be used to ignore specific prefixes).
+* Unexpected system call
+* Unexpected capability used
+* Unexpected domain request
+* Unexpected Service Account Token Access
+* Kubernetes Client Executed
+* Exec from malicious source
+* Kernel Module Load
+* Exec Binary Not In Base Image
+* Malicious SSH Connection
+* Fileless Execution
+* XMR Crypto Mining Detection
+* Exec from mount
+* Crypto Mining Related Port Communication
+* Crypto Mining Domain Communication
+* Read Environment Variables from procfs
+* eBPF Program Load
+* Symlink Created Over Sensitive File (additionalPaths parameter can be used to specify additional paths to be checked).
+* Unexpected Sensitive File Access (additionalPaths parameter can be used to specify additional paths to be checked).
+* LD_PRELOAD Hook
+* Hardlink Created Over Sensitive File (additionalPaths parameter can be used to specify additional paths to be checked).
+
+The rules are written in golang and are compiled into the node-agent binary.
+In the future we plan to add additional rules, as well as support custom rules.
+Some of the rules support parameters that can be set in the Rule Binding CRD.
+
+## Application profiles
+Application profiles are used to store the normal behavior of the application, as recorded during the learning phase.
+The profiles are stored in the `ApplicationProfile` CRD.
+
+An example of an `ApplicationProfile` CRD:
+<details>
+<summary>Click to expand</summary>
+
+```json
+{
+  "kind": "ApplicationProfile",
+  "apiVersion": "spdx.softwarecomposition.kubescape.io/v1beta1",
+  "metadata": {
+    "name": "replicaset-nginx-77b4fdf86c",
+    "creationTimestamp": "2024-03-19T09:27:05Z",
+    "labels": {
+      "kubescape.io/instance-template-hash": "77b4fdf86c",
+      "kubescape.io/workload-api-group": "apps",
+      "kubescape.io/workload-api-version": "v1",
+      "kubescape.io/workload-kind": "Deployment",
+      "kubescape.io/workload-name": "nginx"
+    },
+    "annotations": {
+      "kubescape.io/completion": "complete",
+      "kubescape.io/resource-size": "85",
+      "kubescape.io/status": "completed"
+    }
+  },
+  "spec": {
+    "architectures": [
+      "amd64",
+      "arm64"
+    ],
+    "containers": [
+      {
+        "capabilities": [
+          "NET_BIND_SERVICE",
+          "DAC_OVERRIDE",
+          "CHOWN",
+          "SETGID",
+          "SETUID"
+        ],
+        "execs": [
+          {
+            "path": "/usr/bin/dpkg-query",
+            "args": [
+              "--show",
+              "--showformat=${Conffiles}\\n",
+              "/usr/bin/dpkg-query",
+              "nginx"
+            ]
+          },
+          {
+            "path": "/docker-entrypoint.sh",
+            "args": [
+              "-g",
+              "/docker-entrypoint.sh",
+              "daemon off;",
+              "nginx"
+            ]
+          },
+          {
+            "path": "/usr/bin/cut",
+            "args": [
+              "-d ",
+              "-f",
+              "/usr/bin/cut",
+              "3"
+            ]
+          },
+          {
+            "path": "/docker-entrypoint.d/30-tune-worker-processes.sh",
+            "args": [
+              "/docker-entrypoint.d/30-tune-worker-processes.sh"
+            ]
+          },
+          {
+            "path": "/docker-entrypoint.d/10-listen-on-ipv6-by-default.sh",
+            "args": [
+              "/docker-entrypoint.d/10-listen-on-ipv6-by-default.sh"
+            ]
+          },
+          {
+            "path": "/usr/bin/touch",
+            "args": [
+              "/etc/nginx/conf.d/default.conf",
+              "/usr/bin/touch"
+            ]
+          },
+          {
+            "path": "/usr/sbin/nginx",
+            "args": [
+              "-g",
+              "/usr/sbin/nginx",
+              "daemon off;"
+            ]
+          },
+          {
+            "path": "/usr/bin/md5sum",
+            "args": [
+              "-",
+              "-c",
+              "/usr/bin/md5sum"
+            ]
+          },
+          {
+            "path": "/usr/bin/sed",
+            "args": [
+              "-E",
+              "-i",
+              "/etc/nginx/conf.d/default.conf",
+              "/usr/bin/sed",
+              "s,listen       80;,listen       80;\\n    listen  [::]:80;,"
+            ]
+          },
+          {
+            "path": "/usr/bin/grep",
+            "args": [
+              "-q",
+              "/etc/nginx/conf.d/default.conf",
+              "/usr/bin/grep",
+              "etc/nginx/conf.d/default.conf",
+              "listen  \\[::]\\:80;"
+            ]
+          },
+          {
+            "path": "/etc/nginx/conf.d/sedzJNyeW"
+          }
+        ],
+        "opens": null,
+        "syscalls": null,
+        "seccompProfile": {
+          "path": "default/replicaset-nginx-bf5d5cf98-nginx.json",
+          "spec": {
+            "defaultAction": "SCMP_ACT_ERRNO",
+            "architectures": [
+              "SCMP_ARCH_X86_64",
+              "SCMP_ARCH_X86",
+              "SCMP_ARCH_X32"
+            ],
+            "syscalls": [
+              {
+                "names": [
+                  "accept4",
+                  "epoll_wait",
+                  "pselect6",
+                  "futex",
+                  "madvise",
+                  "epoll_ctl",
+                  "getsockname",
+                  "setsockopt",
+                  "vfork",
+                  "mmap",
+                  "arch_prctl",
+                  "sysinfo",
+                  "symlinkat",
+                  "connect",
+                  "dup3",
+                  "getcwd",
+                  "getpid",
+                  "brk",
+                  "fchdir",
+                  "pread64",
+                  "wait4",
+                  "clone3",
+                  "setuid",
+                  "write",
+                  "prctl",
+                  "munmap",
+                  "rt_sigprocmask",
+                  "rt_sigreturn",
+                  "fsetxattr",
+                  "getrandom",
+                  "ioctl",
+                  "mount",
+                  "getpeername",
+                  "gettid",
+                  "fcntl",
+                  "mkdirat",
+                  "prlimit64",
+                  "setgid",
+                  "fgetxattr",
+                  "pwrite64",
+                  "sched_yield",
+                  "uname",
+                  "openat2",
+                  "vfork",
+                  "openat",
+                  "umask",
+                  "nanosleep",
+                  "eventfd2",
+                  "getgid",
+                  "listen",
+                  "mprotect",
+                  "epoll_ctl",
+                  "fchmodat",
+                  "getegid",
+                  "epoll_pwait",
+                  "keyctl",
+                  "mkdir",
+                  "set_robust_list",
+                  "tgkill",
+                  "read",
+                  "rseq",
+                  "statfs",
+                  "unlinkat",
+                  "capset",
+                  "epoll_create",
+                  "fstatfs",
+                  "sched_getaffinity",
+                  "fchownat",
+                  "newfstatat",
+                  "sendmsg",
+                  "chown",
+                  "clone",
+                  "execve",
+                  "faccessat2",
+                  "rename",
+                  "umount2",
+                  "access",
+                  "futex",
+                  "getsockopt",
+                  "readlinkat",
+                  "dup2",
+                  "geteuid",
+                  "bind",
+                  "pipe2",
+                  "rt_sigsuspend",
+                  "fstat",
+                  "socketpair",
+                  "mmap",
+                  "set_tid_address",
+                  "setgroups",
+                  "setsid",
+                  "exit",
+                  "getuid",
+                  "io_setup",
+                  "mknodat",
+                  "unshare",
+                  "getppid",
+                  "madvise",
+                  "setsockopt",
+                  "getdents64",
+                  "lseek",
+                  "mount_setattr",
+                  "rt_sigaction",
+                  "sigaltstack",
+                  "capget",
+                  "chdir",
+                  "epoll_wait",
+                  "linkat",
+                  "exit_group",
+                  "getrlimit",
+                  "recvmsg",
+                  "socket",
+                  "fadvise64",
+                  "pivot_root",
+                  "sethostname",
+                  "utimensat",
+                  "close",
+                  "epoll_create1",
+                  "fchown",
+                  "getsockname"
+                ],
+                "action": "SCMP_ACT_ALLOW"
+              }
+            ]
+          }
+        }
+      }
+    ]
+  },
+  "status": {}
+}
+```
+</details>
+
+You can modify the `ApplicationProfile` CRD to add or remove execs, syscalls, capabilities, and opens.
+Once the learning phase is over, the profile is used to detect anomalies in the runtime environment.
+If you want to know when a profile is completed, you can check the `kubescape.io/status` annotation, `completed` means that the profile is ready to be used for detection.
+`kubescape.io/completion` annotation can be used to track the completion of the profile. This is useful in cases where we started the recording of the profile on an already running workload. It is initially marked as`partial` until the workload is restarted. Note: we do enforce the rules on the workload even if the profile is incomplete (i.e. lacks the completion annotation).
+We recommend that you restart the workloads after installing the Kubescape Operator to ensure that the profiles are completed.
 
 ## Getting started
 
@@ -60,8 +423,8 @@ helm repo update
 helm upgrade --install kubescape kubescape/kubescape-operator -n kubescape --create-namespace --set capabilities.runtimeDetection=enable --set alertCRD.installDefault=true
 ```
 
-This installs the Node-agent with detection enabled and with default alert rule bindings.
-Note, that we have not defined an exporter, therefore the alerts are sent to the Node-agent logs.
+This installs the node-agent with detection enabled and with default alert rule bindings.
+Note, that we have not defined an exporter, therefore the alerts are sent to the node-agent logs.
 
 Wait for the learning period to end (the default is 24h!) and you can try out the detection capabilities.
 
@@ -109,9 +472,8 @@ If you want to view the alerts in a more structured way, we support several expo
 --set nodeAgent.config.stdoutExporter=true
 ```
 
-
-
-
+## Alert aggregation
+When running anomaly detection, the system relies on the fact that normal application behavior was recorded and can be compared to the current state. This means that if something was missed (e.g syscall/file access) during the learning phase, the system will generate many alerts during runtime. To avoid this, we recommend using a learning phase that is long enough to capture all the possible behavior of the application. The default is 24h. In addition, we recommend you to consider disabling the "Unexpected file access" rule or any other anomaly rule (i.e. those that start eith the word 'Unexpected') as long you are not doing any alert aggregation.
 
 ## Limitations
 
