@@ -8,11 +8,11 @@ It is uses eBPF-based event monitoring on Kubernetes nodes and an advanced rule 
 
 ## Architecture
 
-Runtime threat detection is part of the Kubescape Operator, and most of the functionality is implemented as part of the Node-agent.
+Runtime threat detection is part of the Kubescape Operator, and most of the functionality is implemented as part of the node-agent.
 
 ![Node agent design](/assets/node-agent-design.svg)
 
-Node-agent uses [Inspektor Gadget](https://www.inspektor-gadget.io/) for eBPF event acquisition for most events and implements some of its own eBPF gadgets. It uses the [Kubescape Storage](https://github.com/kubescape/storage) to store and monitor detection related objects.
+node-agent uses [Inspektor Gadget](https://www.inspektor-gadget.io/) for eBPF event acquisition for most events and implements some of its own eBPF gadgets. It uses the [Kubescape Storage](https://github.com/kubescape/storage) to store and monitor detection related objects.
 
 Alerts can be sent to multiple sink components, from logs to Prometheus AlertManager.
 
@@ -20,7 +20,7 @@ Detection capabilities are organized into "Rules" and each of them is designed t
 
 ## How it works
 
-Kubescape Node-agent leverages advanced eBPF (extended Berkeley Packet Filter) technology for comprehensive runtime security detection in Kubernetes environments. Its detection capabilities encompass a wide array of events including new process initiations, file activities, network operations, system call activities, and usage of Linux capabilities.
+Kubescape node-agent leverages advanced eBPF (extended Berkeley Packet Filter) technology for comprehensive runtime security detection in Kubernetes environments. Its detection capabilities encompass a wide array of events including new process initiations, file activities, network operations, system call activities, and usage of Linux capabilities.
 
 The runtime threat detection feature is divided into three main detection strategies:
 
@@ -99,7 +99,7 @@ spec:
 ```
 </details>
 
-The rules are defined in the [Node-agent repository](https://github.com/kubescape/node-agent/tree/main/pkg/ruleengine/v1).
+The rules are defined in the [node-agent repository](https://github.com/kubescape/node-agent/tree/main/pkg/ruleengine/v1).
 Currently, the following rules are supported:
 * Unexpected process launched
 * Unexpected file access (ignoreMounts parameter can be used to ignore mounts, ignorePrefixes parameter can be used to ignore specific prefixes).
@@ -124,7 +124,7 @@ Currently, the following rules are supported:
 * LD_PRELOAD Hook
 * Hardlink Created Over Sensitive File (additionalPaths parameter can be used to specify additional paths to be checked).
 
-The rules are written in golang and are compiled into the Node-agent binary.
+The rules are written in golang and are compiled into the node-agent binary.
 In the future we plan to add additional rules, as well as support custom rules.
 Some of the rules support parameters that can be set in the Rule Binding CRD.
 
@@ -425,8 +425,8 @@ helm repo update
 helm upgrade --install kubescape kubescape/kubescape-operator -n kubescape --create-namespace --set capabilities.runtimeDetection=enable --set alertCRD.installDefault=true
 ```
 
-This installs the Node-agent with detection enabled and with default alert rule bindings.
-Note, that we have not defined an exporter, therefore the alerts are sent to the Node-agent logs.
+This installs the node-agent with detection enabled and with default alert rule bindings.
+Note, that we have not defined an exporter, therefore the alerts are sent to the node-agent logs.
 
 Wait for the learning period to end (the default is 24h!) and you can try out the detection capabilities.
 
