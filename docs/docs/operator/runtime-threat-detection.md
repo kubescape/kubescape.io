@@ -124,7 +124,8 @@ Currently, the following rules are supported:
 * LD_PRELOAD Hook
 * Hardlink Created Over Sensitive File (additionalPaths parameter can be used to specify additional paths to be checked).
 
-The rules are written in golang and are compiled into the Node-agent binary, in the future we plan to support custom rules.
+The rules are written in golang and are compiled into the Node-agent binary.
+In the future we plan to add additional rules, as well as support custom rules.
 Some of the rules support parameters that can be set in the Rule Binding CRD.
 
 More rules are planned to be added in the future and will be better documented in a separate document.
