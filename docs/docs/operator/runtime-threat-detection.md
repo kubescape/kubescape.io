@@ -101,28 +101,31 @@ spec:
 
 The rules are defined in the [node-agent repository](https://github.com/kubescape/node-agent/tree/main/pkg/ruleengine/v1).
 Currently, the following rules are supported:
-* Unexpected process launched
-* Unexpected file access (ignoreMounts parameter can be used to ignore mounts, ignorePrefixes parameter can be used to ignore specific prefixes).
-* Unexpected system call
-* Unexpected capability used
-* Unexpected domain request
-* Unexpected Service Account Token Access
-* Kubernetes Client Executed
-* Exec from malicious source
-* Kernel Module Load
-* Exec Binary Not In Base Image
-* Malicious SSH Connection
-* Fileless Execution
-* XMR Crypto Mining Detection
-* Exec from mount
-* Crypto Mining Related Port Communication
-* Crypto Mining Domain Communication
-* Read Environment Variables from procfs
-* eBPF Program Load
-* Symlink Created Over Sensitive File (additionalPaths parameter can be used to specify additional paths to be checked).
-* Unexpected Sensitive File Access (additionalPaths parameter can be used to specify additional paths to be checked).
-* LD_PRELOAD Hook
-* Hardlink Created Over Sensitive File (additionalPaths parameter can be used to specify additional paths to be checked).
+| **Rule**                                      | **Description**                                                                                       |
+|-----------------------------------------------|-------------------------------------------------------------------------------------------------------|
+| **Unexpected process launched**               | Detects the launch of an unexpected or unauthorized process.                                           |
+| **Unexpected file access**                    | Identifies unexpected access to files. `ignoreMounts` parameter can be used to ignore mounts, `ignorePrefixes` parameter can be used to ignore specific prefixes. |
+| **Unexpected system call**                    | Detects unexpected or unauthorized system calls.                                                      |
+| **Unexpected capability used**                | Flags the use of unexpected capabilities.                                                             |
+| **Unexpected domain request**                 | Identifies requests to unexpected or unauthorized domains.                                            |
+| **Unexpected Service Account Token Access**   | Detects unauthorized access to service account tokens.                                                |
+| **Kubernetes Client Executed**                | Detects the execution of a Kubernetes client.                                                         |
+| **Exec from malicious source**                | Identifies execution of commands from a known malicious source.                                       |
+| **Kernel Module Load**                        | Detects the loading of unauthorized or unexpected kernel modules.                                     |
+| **Exec Binary Not In Base Image**             | Flags execution of binaries not included in the base image.                                           |
+| **Malicious SSH Connection**                  | Detects malicious or unauthorized SSH connections.                                                    |
+| **Fileless Execution**                        | Identifies execution of commands or scripts without a file.                                           |
+| **XMR Crypto Mining Detection**               | Detects cryptocurrency mining activity related to Monero (XMR).                                       |
+| **Exec from mount**                           | Flags execution of commands from a mounted directory.                                                 |
+| **Crypto Mining Related Port Communication**  | Identifies port communication related to cryptocurrency mining.                                       |
+| **Crypto Mining Domain Communication**        | Detects communication with domains associated with cryptocurrency mining.                             |
+| **Read Environment Variables from procfs**    | Flags unauthorized reading of environment variables from procfs.                                       |
+| **eBPF Program Load**                         | Detects loading of eBPF programs.                                                                     |
+| **Symlink Created Over Sensitive File**       | Flags the creation of symlinks over sensitive files. `additionalPaths` parameter can be used to specify additional paths to be checked. |
+| **Unexpected Sensitive File Access**          | Identifies access to sensitive files. `additionalPaths` parameter can be used to specify additional paths to be checked. |
+| **LD_PRELOAD Hook**                           | Detects the use of LD_PRELOAD to hook shared libraries.                                               |
+| **Hardlink Created Over Sensitive File**      | Flags the creation of hardlinks over sensitive files. `additionalPaths` parameter can be used to specify additional paths to be checked. |
+
 
 The rules are written in golang and are compiled into the node-agent binary.
 In the future we plan to add additional rules, as well as support custom rules.
