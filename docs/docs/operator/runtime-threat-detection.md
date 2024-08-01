@@ -410,7 +410,7 @@ An example of an `ApplicationProfile` CRD:
 You can modify the `ApplicationProfile` CRD to add or remove execs, syscalls, capabilities, and opens.
 Once the learning phase is over, the profile is used to detect anomalies in the runtime environment.
 If you want to know when a profile is completed, you can check the `kubescape.io/status` annotation, `completed` means that the profile is ready to be used for detection.
-`kubescape.io/completion` annotation can be used to track the completion of the profile, means that if we started the recording of the profile on an already running workload, we mark it as `partial` until the workload is restarted, note that we do enforce the rules on the workload even if the profile is not completed.
+`kubescape.io/completion` annotation can be used to track the completion of the profile. This is useful in cases where we started the recording of the profile on an already running workload. It is initially marked as`partial` until the workload is restarted. Note: we do enforce the rules on the workload even if the profile is incomplete (i.e. lacks the completion annotation).
 We recommend that you restart the workloads after installing the Kubescape Operator to ensure that the profiles are completed.
 
 ## Getting started
