@@ -47,7 +47,7 @@ The CRD `runtimerulealertbindings.kubescape.io` is used to define the rules that
 By default, all the rules are enforced on all workloads.
 You can customize the bindings of the rules to the workloads by editing the CRD.
 The CRD supports Kubernetes selectors to bind the rules to specific workloads.
-You can find the CRD definition [here](https://github.com/kubescape/helm-charts/blob/main/charts/kubescape-operator/templates/node-agent/default-rule-binding.yaml).
+You can find the CRD definition [here](https://github.com/kubescape/helm-charts/blob/main/charts/dependency_chart/clustered-crds/crds/runtime-rule-binding.crd.yaml).
 
 Example of a `RuntimeRuleAlertBinding` CRD:
 <details>
