@@ -131,7 +131,7 @@ Some of the rules support parameters that can be set in the Rule Binding CRD.
 More rules are planned to be added in the future and will be better documented in a separate document.
 
 ## Application profiles
-Application profiles are used to store the normal behavior of the application during the learning phase.
+Application profiles are used to store the normal behavior of the application, as recorded during the learning phase.
 The profiles are stored in the `ApplicationProfile` CRD.
 
 An example of an `ApplicationProfile` CRD:
