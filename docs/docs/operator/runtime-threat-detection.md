@@ -475,7 +475,7 @@ If you want to view the alerts in a more structured way, we support several expo
 ```
 
 ## Alert aggregation
-When doing anomaly detection, you are relying on the fact that you will record the normal behavior of the application and then compare it to the current state. This means that if we missed something (e.g syscall/file access) during the learning phase, we will generate a lot of alerts during the runtime phase. To avoid this, we recommend using a learning phase that is long enough to capture all the relevant behavior of the application the default is 24h. In addition, we recommend you to consider disabling the "Unexpected file access" rule or any other anomaly rule (Unexpected...) as long you are not doing any alert aggregation.
+When running anomaly detection, the system relies on the fact that normal application behavior was recorded and can be compared to the current state. This means that if something was missed (e.g syscall/file access) during the learning phase, the system will generate many alerts during runtime. To avoid this, we recommend using a learning phase that is long enough to capture all the possible behavior of the application. The default is 24h. In addition, we recommend you to consider disabling the "Unexpected file access" rule or any other anomaly rule (i.e. those that start eith the word 'Unexpected') as long you are not doing any alert aggregation.
 
 ## Limitations
 
