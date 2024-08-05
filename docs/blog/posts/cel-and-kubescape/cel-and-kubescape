@@ -42,7 +42,7 @@ Having said that, Polyfill Implementation and Core Functionality as a Library (p
 The Validating Admission Policies functionality offers several advantages over webhooks, making it a more attractive choice for policy enforcement:
 1. **No Infrastructure Requirement**: Validating Admission Policies doesn't require you to build infrastructure to host the admission webhook, simplifying the process.
 2. **Reduced Latency**: By eliminating the need for an additional network hop, Validating Admission Policies helps reduce latency, ensuring smoother and faster operations.
-3. **Increased Reliability**: In-process webhooks used by Validating Admission Policies are less prone to failure than webhooks with extra infrastructure dependencies, enhancing the overall reliability.
+3. **Increased Reliability and Scalability**: In-process webhooks used by Validating Admission Policies are less prone to failure than webhooks with extra infrastructure dependencies, enhancing the overall reliability. Beyond this, the in-process admission decision makes the Kubernetes control plane more scaleable since it doesn't depend on an external component.
 4. **Lower Operational Burden**: Cluster administrators responsible for the observability, security, and release/rollout/rollback plans for webhooks will experience a lower operational burden with Validating Admission Policies.
 
 ## Kubescape's Cel-Admission-Library
