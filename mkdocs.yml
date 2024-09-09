@@ -81,6 +81,7 @@ nav:
         - Guides:
             - 'Configure checks on a GitHub repository': 'docs/guides/kubescape-gha/index.md'
             - 'Harden a cluster': 'docs/guides/kubescape-cli/index.md'
+            - 'Kubescape for teenagers': 'docs/guides/kubescape-for-teenagers/kubescape-for-teenagers.md'
     - Project:
         - 'About the Kubescape project': 'project/about.md'
         - 'License': 'project/license.md'
