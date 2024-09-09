@@ -17,9 +17,11 @@ In this blog post, we'll explore the benefits of Validating Admission Policies, 
 ## Validating Admission Policies Short Primer
 The first part of this blog post explains what ValidatingAdmissionPolicies are and explain why they were added and their benefits. If you have been following the development of KEP-3488, through alpha in Kubernetes 1.26, beta in Kubernetes 1.28 and GA in the aforementioned Kubernetes 1.30 and you just want to get started with them, feel free to skip to [Using the Kubescape CEL library in your cluster](#using-the-kubescape-cel-library-in-your-cluster).
 If you are reading this and thinking: “I already have OPA Gatekeeper or Kyverno up and running to solve this”.
+
 <figure markdown>
-  ![Admission control meme](/blog/cel-and-kubescape/admission-control-meme.jpg){ width="600" }
- </figure>
+  ![Admission control meme](admission-control-meme.jpg){ width="600" }
+</figure>
+
 Please join us to get a better understanding of this Kubernetes native feature, what it seeks to achieve and what the benefits of using it are. Also, take into account that this functionality will become the de-facto standard, similar to what happened with OpenTelemetry and GatewayAPI.
 
 ### Introduction to ValidatingAdmissionPolicies
@@ -85,7 +87,7 @@ Policies are provided as Kubernetes objects, which are then bound to certain res
 ```bash minikube start --kubernetes-version=1.30.2 --extra-config=apiserver.runtime-config=admissionregistration.k8s.io/v1alpha1  --feature-gates='ValidatingAdmissionPolicy=true'```
 
 To install the policies in your cluster:
-```bash 
+```bash
 # Install configuration CRD
 
 kubectl apply -f https://github.com/kubescape/cel-admission-library/releases/latest/download/policy-configuration-definition.yaml
@@ -101,58 +103,31 @@ kubectl apply -f https://github.com/kubescape/cel-admission-library/releases/lat
 ```
 
 To apply policies to objects, create a ValidatingAdmissionPolicyBinding resource. Let’s apply the above Kubescape C-0017 control to any namespace with the label policy=enforced:
-```bash 
+```bash
 # Create a binding
 
 
 kubectl apply -f - <<EOT
-
-
 apiVersion: admissionregistration.k8s.io/v1alpha1
-
-
 kind: ValidatingAdmissionPolicyBinding
-
-
 metadata:
-
-
  name: c0017-binding
-
-
 spec:
-
-
  policyName: kubescape-c-0017-deny-mutable-container-filesystem
-
-
  matchResources:
-
-
    namespaceSelector:
-
-
      matchLabels:
-
-
        policy: enforced
-
-
 EOT
+
 # Create a namespace for running the example
-
-
 kubectl create namespace policy-example
-
-
 kubectl label namespace policy-example 'policy=enforced'
 ```
 
 Now, if you attempt to create an object without specifying a readOnlyRootFilesystem, it will not be created.
 ```bash
 # The next line should fail
-
-
 kubectl -n policy-example run nginx --image=nginx --restart=Never
 ```
 
