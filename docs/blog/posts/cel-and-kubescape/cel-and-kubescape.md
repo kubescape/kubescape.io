@@ -19,7 +19,7 @@ The first part of this blog post explains what ValidatingAdmissionPolicies are a
 If you are reading this and thinking: “I already have OPA Gatekeeper or Kyverno up and running to solve this”.
 
 <figure markdown>
-  ![Admission control meme](admission-control-meme.jpg){ width="600" }
+  ![Admission control meme](/assets/admission-meme.jpg){ width="600" }
 </figure>
 
 Please join us to get a better understanding of this Kubernetes native feature, what it seeks to achieve and what the benefits of using it are. Also, take into account that this functionality will become the de-facto standard, similar to what happened with OpenTelemetry and GatewayAPI.
@@ -28,11 +28,13 @@ Please join us to get a better understanding of this Kubernetes native feature, 
 ValidatingAdmissionPolicies are: A declarative, in-process alternative to validating admission webhooks. They use the Common Expression Language (CEL) to define the policies.
 
 They consist of two main resources:
+
 * ValidatingAdmissionPolicy describes the policy logic
 * ValidatingAdmissionPolicyBinding links the above policy to the resources it applies to
 
 ### The Goals of Validating Admission Policies
 The Kubernetes team has established specific goals for Validating Admission Policies to guarantee that it aligns with the community's requirements.:
+
 1. **Alternative to Webhooks**: Validating Admission Policies aims to provide an alternative to webhooks for the majority of validating admission use cases.
 2. **In-Tree Extensions**: The feature intends to offer the in-tree extensions required to build policy frameworks for Kubernetes without relying on webhooks.
 3. **Efficient Type Checking**: Validating Admission Policies aims to make good use of CEL type checking, even when considering that CRD schemas can be changed at any time, and not all fields of built-in types exist in older Kubernetes versions.
@@ -42,6 +44,7 @@ Having said that, Polyfill Implementation and Core Functionality as a Library (p
 
 ### The Benefits of Validating Admission Policies
 The Validating Admission Policies functionality offers several advantages over webhooks, making it a more attractive choice for policy enforcement:
+
 1. **No Infrastructure Requirement**: Validating Admission Policies doesn't require you to build infrastructure to host the admission webhook, simplifying the process.
 2. **Reduced Latency**: By eliminating the need for an additional network hop, Validating Admission Policies helps reduce latency, ensuring smoother and faster operations.
 3. **Increased Reliability and Scalability**: In-process webhooks used by Validating Admission Policies are less prone to failure than webhooks with extra infrastructure dependencies, enhancing the overall reliability. Beyond this, the in-process admission decision makes the Kubernetes control plane more scaleable since it doesn't depend on an external component.
@@ -49,6 +52,7 @@ The Validating Admission Policies functionality offers several advantages over w
 
 ## Kubescape's Cel-Admission-Library
 When Validating Admission Policies was first introduced in beta in version 1.26, the maintainers of Kubescape were eager to utilize it. They created the [cel-admission-library](https://github.com/kubescape/cel-admission-library) based on Kubescape controls originally written in Rego. The library includes the following 27 admission controls:
+
 | Control ID | Name | Policy name | Configuration parameter |
 | --- | --- | --- | --- |
 | [C-0001](https://hub.armosec.io/docs/c-0001) | Forbidden Container Registries | [kubescape-c-0001-deny-forbidden-container-registries](/docs/policies-based-on-kubescape-controls/kubescape-c-0001-deny-forbidden-container-registries.md) | [untrustedRegistries](https://hub.armosec.io/docs/configuration_parameter_untrustedregistries) |
@@ -89,24 +93,18 @@ Policies are provided as Kubernetes objects, which are then bound to certain res
 To install the policies in your cluster:
 ```bash
 # Install configuration CRD
-
 kubectl apply -f https://github.com/kubescape/cel-admission-library/releases/latest/download/policy-configuration-definition.yaml
 
 # Install basic configuration
-
 kubectl apply -f https://github.com/kubescape/cel-admission-library/releases/latest/download/basic-control-configuration.yaml
 
 # Install policies
-
-
 kubectl apply -f https://github.com/kubescape/cel-admission-library/releases/latest/download/kubescape-validating-admission-policies.yaml
 ```
 
 To apply policies to objects, create a ValidatingAdmissionPolicyBinding resource. Let’s apply the above Kubescape C-0017 control to any namespace with the label policy=enforced:
 ```bash
 # Create a binding
-
-
 kubectl apply -f - <<EOT
 apiVersion: admissionregistration.k8s.io/v1alpha1
 kind: ValidatingAdmissionPolicyBinding
@@ -139,38 +137,16 @@ Policy objects can include configuration, which is provided in a different objec
 To use this configuration object, or your own object in the same format, add a paramRef.name value to your binding object:
 ```bash
 apiVersion: admissionregistration.k8s.io/v1alpha1
-
-
 kind: ValidatingAdmissionPolicyBinding
-
-
 metadata:
-
-
  name: c0001-binding
-
-
 spec:
-
-
  policyName: kubescape-c-0001-deny-forbidden-container-registries
-
-
  paramRef:
-
-
    name: basic-control-configuration
-
-
  matchResources:
-
-
    namespaceSelector:
-
-
      matchLabels:
-
-
        policy: enforced
 ```
 
