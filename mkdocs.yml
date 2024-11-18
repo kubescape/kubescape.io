@@ -65,6 +65,7 @@ nav:
             - 'Scheduled scans': 'docs/operator/scheduled-scans.md'
             - 'Continuous scanning': 'docs/operator/continuous-scanning.md'
             - 'Prometheus Integrations': 'docs/operator/prometheus-integration.md'
+            - 'UI with Headlamp': 'docs/operator/ui-with-headlamp.md'
             - 'Automatic upgrades': 'docs/operator/automatic-release-upgrades.md'
             - 'VEX document generation (experimental)': 'docs/operator/generating-vex.md'
             - 'Telemetry': 'docs/operator/telemetry.md'
