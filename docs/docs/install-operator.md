@@ -34,6 +34,11 @@ kubescape     storage-59567854fd-hg8n8                            1/1     Runnin
 
 The scanning results will be available gradually as the scans are completed.
 
+There are multiple options to visualize the results (GUI):
+* [Headlamp integration](operator/ui-with-headlamp.md)
+* [Lens integration](integrations/lens.md)
+* [ARMO Platform](https://armosec.io) (commertial)
+
 ### Compliance scanning
 
 View Compliance summary report per namespace:
@@ -83,7 +88,7 @@ To upgrade to the most recent version of the Kubescape Operator:
 helm repo update; helm upgrade kubescape kubescape/kubescape-operator -n kubescape
 ```
 
-You can find the current version of the Helm chart installed in your cluster by running `helm list -n kubescape`. 
+You can find the current version of the Helm chart installed in your cluster by running `helm list -n kubescape`.
 
 To manually check if a newer version is available, visit the GitHub page for the Helm chart, or run
 
@@ -98,7 +103,7 @@ You can uninstall this helm chart by running the following command:
 helm uninstall kubescape -n kubescape
 ```
 Then, delete the kubescape namespace:
-```shell  
+```shell
 kubectl delete ns kubescape
 ```
 
@@ -160,7 +165,7 @@ See [the GitHub repository for the Kubescape operator](https://github.com/kubesc
 
 By default, Kubescape supports small- to medium-sized clusters. If you have a larger cluster and you experience slowdowns, or see Kubernetes evicting components, revise the number of resources allocated for the troubled component.
 
-The defaults of 500 MiB of memory and 500m CPU work well for clusters up to 1250 total resources when running Kubescape.  
+The defaults of 500 MiB of memory and 500m CPU work well for clusters up to 1250 total resources when running Kubescape.
 
 If you have more total resources or experience resource pressure, verify how many resources are in your cluster by running the following command:
 
@@ -168,8 +173,8 @@ If you have more total resources or experience resource pressure, verify how man
 kubectl get all -A --no-headers | wc -l
 ```
 
-The command prints an approximate count of resources in your cluster.  
-Then based on the number you see, allocate 100 MiB of memory for every 200 resources in your cluster over the count of 1250, but no less than 128 MiB total.  
+The command prints an approximate count of resources in your cluster.
+Then based on the number you see, allocate 100 MiB of memory for every 200 resources in your cluster over the count of 1250, but no less than 128 MiB total.
 
 The formula for memory is as follows:
 
@@ -188,7 +193,7 @@ kubescape:
 
 If your cluster has 50 resources, we recommend allocating at least 128 MiB of memory.
 
-For the CPU, the more you allocate, the faster your clusters are scanned. This is especially true for clusters that have a large number of resources.  
+For the CPU, the more you allocate, the faster your clusters are scanned. This is especially true for clusters that have a large number of resources.
 
 However, we recommend that you give Kubescape no less than 500m CPU no matter the size of your cluster so it can scan a relatively large amount of resources fast.
 
