@@ -17,11 +17,13 @@ Using alternative installation methods, such as Kustomize, Helmfile or using cus
 We cannot guarantee compatibility or provide support for deployments that are installed using methods other than Helm or ArgoCD.
 
 Run the installation command:
-```
+
+```shell
 helm repo add kubescape https://kubescape.github.io/helm-charts/ ; helm repo update ; helm upgrade --install kubescape kubescape/kubescape-operator -n kubescape --create-namespace --set clusterName=`kubectl config current-context` --set capabilities.continuousScan=enable
 ```
 
 Verify that the installation was successful:
+
 ```shell
 $ kubectl get pods -n kubescape
 kubescape     kubescape-548d6b4577-qshb5                          1/1     Running   0               60m
@@ -35,48 +37,56 @@ kubescape     storage-59567854fd-hg8n8                            1/1     Runnin
 The scanning results will be available gradually as the scans are completed.
 
 There are multiple options to visualize the results (GUI):
+
 * [Headlamp integration](operator/ui-with-headlamp.md)
 * [Lens integration](integrations/lens.md)
-* [ARMO Platform](https://armosec.io) (commertial)
+* [ARMO Platform](https://armosec.io) (commercial)
 
 ### Compliance scanning
 
 View Compliance summary report per namespace:
-```
+
+```shell
 kubectl get workloadconfigurationscansummaries
 ```
 
 View Compliance **summary** report for each workload:
-```
+
+```shell
 kubectl get workloadconfigurationscansummaries -A
 ```
 
 View Compliance **detailed** report for each workload:
-```
+
+```shell
 kubectl get workloadconfigurationscans -A
 ```
 
 ### Image Vulnerabilities scanning
 
 View Vulnerabilities summary report per namespace:
-```
+
+```shell
 kubectl get vulnerabilitysummaries
 ```
 
 View vulnerabilities **summary** report for each workload/image:
-```
+
+```shell
 kubectl get vulnerabilitymanifestsummaries -A
 ```
 
 View vulnerabilities **detailed** report for each workload/image:
-```
+
+```shell
 kubectl get vulnerabilitymanifests -A
 ```
 
 ### Network Policy Generation
 
 View generated network policies:
-```
+
+```shell
 kubectl get generatednetworkpolicies -A
 ```
 
@@ -99,10 +109,13 @@ helm repo update; helm search repo kubescape/kubescape-operator
 ## Uninstall
 
 You can uninstall this helm chart by running the following command:
+
 ```shell
 helm uninstall kubescape -n kubescape
 ```
+
 Then, delete the kubescape namespace:
+
 ```shell
 kubectl delete ns kubescape
 ```
@@ -169,7 +182,7 @@ The defaults of 500 MiB of memory and 500m CPU work well for clusters up to 1250
 
 If you have more total resources or experience resource pressure, verify how many resources are in your cluster by running the following command:
 
-```
+```shell
 kubectl get all -A --no-headers | wc -l
 ```
 
@@ -184,7 +197,7 @@ MemoryLimit := max(128, 0.4 * YOUR_AMOUNT_OF_RESOURCES)
 
 For example, if your cluster has 500 resources, a sensible memory limit would be:
 
-```
+```yaml
 kubescape:
   resources:
     limits:
@@ -204,6 +217,7 @@ Kubescape container images are signed with [Cosign](https://docs.sigstore.dev/si
 ### Keyless verification
 
 For keyless verification use GitHub as the trust anchor, see this example:
+
 ```bash
 cosign verify quay.io/kubescape/kubescape:v2.9.2-prerelease --certificate-identity-regexp "github.com" --certificate-oidc-issuer-regexp "githubusercontent.com" && echo Signature OK
 ```
@@ -213,6 +227,7 @@ cosign verify quay.io/kubescape/kubescape:v2.9.2-prerelease --certificate-identi
 Put the following key to a file called `cosign.pub`.
 
 Kubescape Cosign public key (version 1):
+
 ```
 -----BEGIN PUBLIC KEY-----
 MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEbgIMZrMTTlEFDLEeZXz+4R/908BG
@@ -221,6 +236,7 @@ EeO70x6oMN7E4JQgzgbCB5rinqhK5t7dB61saVKQTb4P2NGtjPjXVbSTwQ==
 ```
 
 Use the following command to verify the image integrity with it:
+
 ```bash
 cosign verify --key cosign.pub quay.io/kubescape/kubescape:v2.9.2-prerelease  && echo Signature OK
 ```
