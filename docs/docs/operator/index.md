@@ -62,10 +62,14 @@ Several of our in-cluster components implement telemetry data using OpenTelemetr
 
 ## Automation and control
 
-* The `operator` and `gateway` microservices interact to start or [schedule](scheduled-scans.md) scans. 
-* The `kollector` service sends information about the state of the cluster to a configured [provider](../providers.md). 
+* The `operator` microservice handles the [scheduling](scheduled-scans.md) and execution of scans.
+* The `synchronizer` microservice sends information about the state of the cluster to a configured [provider](../providers.md). A connected provider can leverage the `synchronizer` to create OperatorCommand (CRDs), to instruct the `operator` to perform tasks such as executing scans or other supported actions of the operator.
 
 For information on how these services interact, [check out their documentation on GitHub.](https://github.com/kubescape/helm-charts/blob/main/charts/kubescape-operator/README.md)
+
+!!! info "Deprecated microservices"
+
+    The `kollector`<sup>[1](https://github.com/kubescape/helm-charts/pull/559)</sup> and `gateway`<sup>[2](https://github.com/kubescape/helm-charts/pull/565)</sup> microservices have been deprecated in Helm chart versions 1.24.0 and 1.25.0, respectively, and replaced by the `synchronizer` microservice.
 
 ## Node agent
 
