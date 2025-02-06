@@ -1,6 +1,6 @@
 # Kubescape Operator vs CLI: Comparison and Functionality
 
-The Kubescape Operator and Kubescape CLI are two different tools provided by Kubescape for securing Kubernetes environments. Here's a comparison of their functionalities and differences based on the provided documentation.
+The Kubescape Operator and Kubescape CLI are two different tools provided by Kubescape for securing Kubernetes environments. Here's a comparison of their functionalities and differences:
 
 ---
 
