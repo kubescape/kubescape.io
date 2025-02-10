@@ -4,13 +4,19 @@ Creating Network Policies for workloads running in a cluster is a very important
 Kubescape provides a way to automatically generate Network Policies for your cluster. Once the Network Policy generation feature is enabled, Kubescape will listen to the network communication on your workloads, and you can then use `kubectl` to generate Network Policies automatically based on the captured traffic. Please note that the policies won't be applied to the cluster automatically. You will have to apply them manually.
 
 ## Installation 
-Kubescape Network Policy generation is built into the Kubescape Operator Helm chart and is enabled by default. 
+Kubescape's ability to capture network traffic is built into the Kubescape Operator Helm chart and is enabled by default.
 To `enable`/`disable` this capability, you need to `enable`/`disable` it when installing the chart:
 ```bash
 --set capabilities.networkPolicyService=enable
 ```
 
-Once you apply the chart with the capability enabled, Kubescape will continuously listen to the workloads traffic and you could then generate network policies for them.
+Kubescape's Network Policy generation capability based on the captured network traffic, is disabled by default.
+To enable this capability, you need to enable it when installing the chart:
+```bash
+--set storage.forceVirtualCrds=true
+```
+
+Once you apply the chart with the above capabilities enabled, Kubescape will continuously listen to the workloads traffic and you could then generate network policies for them.
 
 ## Network Policy generation
 
@@ -134,7 +140,7 @@ Since the Network Policy generation is based on the traffic that is captured, it
 We also recommend going over the generated Network Policy and making sure that it contains all the required rules. You can then apply the Network Policy to your cluster.
 
 ## How it works
-With Network Policy feature enabled, Kubescape will use the `node-agent` component to listen for the network traffic in all your Pods. This traffic will then be aggregate by workload, and saved into a CRD of Kind `NetworkNeighbors`. This CRD represents all the incoming and outgoing communication for all Pods which belong to the same workload. When the client asks for a `GeneratedNetworkPolicy` CRD, Kubescape will use the `NetworkNeighbors` CRD to as well as `KnownServers` CRDs (see "Advanced Usage") to generate the Network Policy, converting all traffic into Network Policy rules.  
+With Network Policy feature enabled, Kubescape will use the `node-agent` component to listen for the network traffic in all your Pods. This traffic will then be aggregate by workload, and saved into a CRD of Kind `NetworkNeighborhood`. This CRD represents all the incoming and outgoing communication for all Pods which belong to the same workload. When the client asks for a `GeneratedNetworkPolicy` CRD, Kubescape will use the `NetworkNeighborhood` CRD to as well as `KnownServers` CRDs (see "Advanced Usage") to generate the Network Policy, converting all traffic into Network Policy rules.  
 
 ```mermaid
 sequenceDiagram
@@ -153,16 +159,16 @@ sequenceDiagram
     end
     k8a ->> u: Installation Complete
 
-    %% Initial creation of NetworkNeighbors resource by Node-Agent
+    %% Initial creation of NetworkNeighborhood resource by Node-Agent
     ksn ->> ksn: Listen for Initial Network Traffic
-    ksn ->> k8a: Create NetworkNeighbors Resource
-    k8a ->> kss: Store NetworkNeighbors Resource
+    ksn ->> k8a: Create NetworkNeighborhood Resource
+    k8a ->> kss: Store NetworkNeighborhood Resource
 
-    %% Node-Agent continuously monitors network traffic and updates NetworkNeighbors
+    %% Node-Agent continuously monitors network traffic and updates NetworkNeighborhood
     loop Continuously Monitor Network Traffic
         ksn ->> ksn: Listen for Network Traffic
-        ksn ->> k8a: Update NetworkNeighbors Resource
-        k8a ->> kss: Store Updated NetworkNeighbors
+        ksn ->> k8a: Update NetworkNeighborhood Resource
+        k8a ->> kss: Store Updated NetworkNeighborhood
     end
 
     %% Optional scenario: User creates a 'KnownServer' CRD
@@ -174,7 +180,7 @@ sequenceDiagram
     %% User requests GeneratedNetworkPolicy CRD
     u ->> k8a: GET GeneratedNetworkPolicy
     k8a ->> kss: Request GeneratedNetworkPolicy
-    kss ->> kss: Generate Policy from NetworkNeighbors and KnownServers
+    kss ->> kss: Generate Policy from NetworkNeighborhood and KnownServers
     kss -->> k8a: Return GeneratedNetworkPolicy
     k8a -->> u: Provide GeneratedNetworkPolicy
 
@@ -212,20 +218,21 @@ policyRef:
   originalIP: 142.250.1.104
   dns: ""
 ```
-The `dns` field will be populated depending on the data retrieved from the node-agent and stored in the `NetworkNeighbors`.
+The `dns` field will be populated depending on the data retrieved from the node-agent and stored in the `NetworkNeighborhood`.
   
 You can generate as many `KnownServer` CRDs as you want. Kubescape will use all of them when generating the Network Policy.
 
-### Network Neighbors
-The captured traffic is stored by the node-agent in a CRD called `NetworkNeighbors`. This CRD represents the ingress and egress traffic aggregated by the parent workload (for example, if we create a Deployment with 2 Pods, we will only see NetworkNeighbors for the Deployment and not for it Pods nor for it Replicas).  
+### Network Neighborhood
+The captured traffic is stored by the node-agent in a CRD called `NetworkNeighborhood`. This CRD represents the ingress and egress traffic aggregated by the parent workload (for example, if we create a Deployment with 2 Pods, we will only see NetworkNeighborhood for the Deployment and not for it Pods nor for it Replicas).  
 This CRD is used by the storage to generate the NetworkPolicy on-the-fly upon a request from the user.   
 
-Example of a `NetworkNeighbors` CRD:
+Example of a `NetworkNeighborhood` CRD:
 ```yaml
 apiVersion: spdx.softwarecomposition.kubescape.io/v1beta1
-kind: NetworkNeighbors
+kind: NetworkNeighborhood
 metadata:
   annotations:
+    kubescape.io/completion: complete
     kubescape.io/status: complete
   creationTimestamp: "2023-12-11T17:16:58Z"
   labels:
@@ -240,96 +247,102 @@ metadata:
   resourceVersion: "1"
   uid: e8fb66d7-aad6-40f7-ab14-6267d3c1636d
 spec:
-  egress:
-  - dns: ""
-    identifier: ad98a9e00a1e4a5efbbd827f432595a31085d0e8dcec365dbdfd8141bf3cbe3e
-    ipAddress: ""
-    namespaceSelector: null
-    podSelector:
-      matchLabels:
-        app: otel-collector
-    ports:
-    - name: TCP-4317
-      port: 4317
-      protocol: TCP
-    type: internal
-  - dns: ""
-    identifier: e6d07dcea08c02c35494f7aed68e7cff6d51843c5fbb36032a905f11ba833c13
-    ipAddress: ""
-    namespaceSelector: null
-    podSelector:
-      matchLabels:
-        app: gateway
-    ports:
-    - name: TCP-8001
-      port: 8001
-      protocol: TCP
-    type: internal
-  - dns: ""
-    identifier: ed8a3fa8750dd7045e9abb755f5dbd1a2025f5ed49c1ed67b7d8e1c534899bbb
-    ipAddress: ""
-    namespaceSelector: null
-    podSelector:
-      matchLabels:
-        app: kubescape
-    ports:
-    - name: TCP-8080
-      port: 8080
-      protocol: TCP
-    type: internal
-  - dns: report.armo.cloud.
-    identifier: 83260a3ba8236e69f12ebb706196a2d9541b6c2771cb481dde4f3f5816a1cd94
-    ipAddress: 16.171.184.118
-    namespaceSelector: null
-    podSelector: null
-    ports:
-    - name: TCP-443
-      port: 443
-      protocol: TCP
-    type: external
-  - dns: ""
-    identifier: e5e8ca3d76f701a19b7478fdc1c8c24ccc6cef9902b52c8c7e015439e2a1ddf3
-    ipAddress: ""
-    namespaceSelector:
-      matchLabels:
-        kubernetes.io/metadata.name: kube-system
-    podSelector:
-      matchLabels:
-        k8s-app: kube-dns
-    ports:
-    - name: UDP-53
-      port: 53
-      protocol: UDP
-    type: internal
-  - dns: ""
-    identifier: ba56b560f0008cb2227752015bf87c5fc365fb8dfd5599162cbe71f105dfce00
-    ipAddress: ""
-    namespaceSelector: null
-    podSelector:
-      matchLabels:
-        app: kubevuln
-    ports:
-    - name: TCP-8080
-      port: 8080
-      protocol: TCP
-    type: internal
-  - dns: ""
-    identifier: d3e4abc95832bb489fadd3cf2448ad9954e09ef1c6e4aaaf8790097369a873e5
-    ipAddress: 10.128.0.90
-    namespaceSelector: null
-    podSelector: null
-    ports:
-    - name: TCP-443
-      port: 443
-      protocol: TCP
-    type: internal
-  ingress: []
+  containers:
+  - name: "operator"
+    ingress: []
+    egress:
+    - dns: ""
+      identifier: ad98a9e00a1e4a5efbbd827f432595a31085d0e8dcec365dbdfd8141bf3cbe3e
+      ipAddress: ""
+      namespaceSelector: null
+      podSelector:
+        matchLabels:
+          app: otel-collector
+      ports:
+      - name: TCP-4317
+        port: 4317
+        protocol: TCP
+      type: internal
+    - dns: ""
+      identifier: e6d07dcea08c02c35494f7aed68e7cff6d51843c5fbb36032a905f11ba833c13
+      ipAddress: ""
+      namespaceSelector: null
+      podSelector:
+        matchLabels:
+          app: gateway
+      ports:
+      - name: TCP-8001
+        port: 8001
+        protocol: TCP
+      type: internal
+    - dns: ""
+      identifier: ed8a3fa8750dd7045e9abb755f5dbd1a2025f5ed49c1ed67b7d8e1c534899bbb
+      ipAddress: ""
+      namespaceSelector: null
+      podSelector:
+        matchLabels:
+          app: kubescape
+      ports:
+      - name: TCP-8080
+        port: 8080
+        protocol: TCP
+      type: internal
+    - dns: report.armo.cloud.
+      identifier: 83260a3ba8236e69f12ebb706196a2d9541b6c2771cb481dde4f3f5816a1cd94
+      ipAddress: 16.171.184.118
+      namespaceSelector: null
+      podSelector: null
+      ports:
+      - name: TCP-443
+        port: 443
+        protocol: TCP
+      type: external
+    - dns: ""
+      identifier: e5e8ca3d76f701a19b7478fdc1c8c24ccc6cef9902b52c8c7e015439e2a1ddf3
+      ipAddress: ""
+      namespaceSelector:
+        matchLabels:
+          kubernetes.io/metadata.name: kube-system
+      podSelector:
+        matchLabels:
+          k8s-app: kube-dns
+      ports:
+      - name: UDP-53
+        port: 53
+        protocol: UDP
+      type: internal
+    - dns: ""
+      identifier: ba56b560f0008cb2227752015bf87c5fc365fb8dfd5599162cbe71f105dfce00
+      ipAddress: ""
+      namespaceSelector: null
+      podSelector:
+        matchLabels:
+          app: kubevuln
+      ports:
+      - name: TCP-8080
+        port: 8080
+        protocol: TCP
+      type: internal
+    - dns: ""
+      identifier: d3e4abc95832bb489fadd3cf2448ad9954e09ef1c6e4aaaf8790097369a873e5
+      ipAddress: 10.128.0.90
+      namespaceSelector: null
+      podSelector: null
+      ports:
+      - name: TCP-443
+        port: 443
+        protocol: TCP
+      type: internal
+  ephemeralContainers: null
+  initContainers: null
   matchLabels:
     app.kubernetes.io/instance: kubescape
     app.kubernetes.io/name: operator
     tier: ks-control-plane
 ```  
-`spec` - contains the ingress and egress traffic for the workload.  
+`spec.containers` - contains the ingress and egress traffic for each container of the workload.
+`spec.ephemeralContainers` - contains the ingress and egress traffic for each ephemeral container of the workload.
+`spec.initContainers` - contains the ingress and egress traffic for each init container of the workload.
 `egress.identifier` - a unique identifier for an egress traffic entry.  
 `egress.ipAddress` - the IP address of the entry's traffic.  
 `egress.dns` - the DNS resolution of the entry's traffic, in case its IP address was resolved to a DNS name.  
@@ -340,8 +353,12 @@ spec:
 `egress.ports.protocol` - the protocol for the entry's traffic.
 `egress.ports.name` - the identifier for the port entry.  
 `egress.type` - the type of the entry's traffic. Can be `internal` or `external`, where internal means that the traffic is going to a Pod in the cluster, and external means that the traffic is going outside the cluster.  
-`ingress` - same as `egress`, but for ingress traffic.    
-To retrieve the `NetworkNeighbors` CRD for a workload, you can run the following command:
+`ingress` - same as `egress`, but for ingress traffic.
+To retrieve the `NetworkNeighborhood` CRD for a workload, you can run the following command:
 ```bash
-kubectl -n <namespace> get networkneighbors <workload-kind>-<workload-name> -o yaml
+kubectl -n <namespace> get networkneighborhoods <workload-kind>-<workload-name> -o yaml
 ```
+
+!!! info "Deprecated NetworkNeighbors CRD"
+
+    The `NetworkNeighbors` CRD has been deprecated<sup>[1](https://github.com/kubescape/storage/pull/107)</sup> and replaced by the `NetworkNeighborhood` CRD.

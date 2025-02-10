@@ -35,20 +35,21 @@ To see a list of the types that are added to your cluster, use `kubectl api-reso
 
 ```
 $ kubectl api-resources | grep kubescape
-applicationactivities                                     spdx.softwarecomposition.kubescape.io/v1beta1   true         ApplicationActivity
-applicationprofiles                                       spdx.softwarecomposition.kubescape.io/v1beta1   true         ApplicationProfile
-configurationscansummaries                                spdx.softwarecomposition.kubescape.io/v1beta1   false        ConfigurationScanSummary
-generatednetworkpolicies                                  spdx.softwarecomposition.kubescape.io/v1beta1   true         GeneratedNetworkPolicy
-knownservers                                              spdx.softwarecomposition.kubescape.io/v1beta1   false        KnownServer
-networkneighborses                                        spdx.softwarecomposition.kubescape.io/v1beta1   true         NetworkNeighbors
-openvulnerabilityexchangecontainers                       spdx.softwarecomposition.kubescape.io/v1beta1   true         OpenVulnerabilityExchangeContainer
-sbomsyftfiltereds                                         spdx.softwarecomposition.kubescape.io/v1beta1   true         SBOMSyftFiltered
-sbomsyfts                                                 spdx.softwarecomposition.kubescape.io/v1beta1   true         SBOMSyft
-vulnerabilitymanifests                                    spdx.softwarecomposition.kubescape.io/v1beta1   true         VulnerabilityManifest
-vulnerabilitymanifestsummaries                            spdx.softwarecomposition.kubescape.io/v1beta1   true         VulnerabilityManifestSummary
-vulnerabilitysummaries                                    spdx.softwarecomposition.kubescape.io/v1beta1   false        VulnerabilitySummary
-workloadconfigurationscans                                spdx.softwarecomposition.kubescape.io/v1beta1   true         WorkloadConfigurationScan
-workloadconfigurationscansummaries                        spdx.softwarecomposition.kubescape.io/v1beta1   true         WorkloadConfigurationScanSummary
+operatorcommands                      opcmd                    kubescape.io/v1alpha1                           true         OperatorCommand
+runtimerulealertbindings              rab                      kubescape.io/v1                                 false        RuntimeRuleAlertBinding
+applicationactivities                                          spdx.softwarecomposition.kubescape.io/v1beta1   true         ApplicationActivity
+applicationprofiles                                            spdx.softwarecomposition.kubescape.io/v1beta1   true         ApplicationProfile
+knownservers                                                   spdx.softwarecomposition.kubescape.io/v1beta1   false        KnownServer
+networkneighborhoods                                           spdx.softwarecomposition.kubescape.io/v1beta1   true         NetworkNeighborhood
+networkneighborses                                             spdx.softwarecomposition.kubescape.io/v1beta1   true         NetworkNeighbors
+openvulnerabilityexchangecontainers                            spdx.softwarecomposition.kubescape.io/v1beta1   true         OpenVulnerabilityExchangeContainer
+sbomsyftfiltereds                                              spdx.softwarecomposition.kubescape.io/v1beta1   true         SBOMSyftFiltered
+sbomsyfts                                                      spdx.softwarecomposition.kubescape.io/v1beta1   true         SBOMSyft
+seccompprofiles                                                spdx.softwarecomposition.kubescape.io/v1beta1   true         SeccompProfile
+vulnerabilitymanifests                                         spdx.softwarecomposition.kubescape.io/v1beta1   true         VulnerabilityManifest
+vulnerabilitymanifestsummaries                                 spdx.softwarecomposition.kubescape.io/v1beta1   true         VulnerabilityManifestSummary
+workloadconfigurationscans                                     spdx.softwarecomposition.kubescape.io/v1beta1   true         WorkloadConfigurationScan
+workloadconfigurationscansummaries                             spdx.softwarecomposition.kubescape.io/v1beta1   true         WorkloadConfigurationScanSummary
 ```
 
 1. [Custom Resource Definitions](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/#customresourcedefinitions), a common approach for adding new types to the Kubernetes API.
