@@ -4,19 +4,19 @@ Creating Network Policies for workloads running in a cluster is a very important
 Kubescape provides a way to automatically generate Network Policies for your cluster. Once the Network Policy generation feature is enabled, Kubescape will listen to the network communication on your workloads, and you can then use `kubectl` to generate Network Policies automatically based on the captured traffic. Please note that the policies won't be applied to the cluster automatically. You will have to apply them manually.
 
 ## Installation 
-Kubescape's ability to capture network traffic is built into the Kubescape Operator Helm chart and is enabled by default.
+Kubescape Network Policy generation is built into the Kubescape Operator Helm chart and is enabled by default. 
 To `enable`/`disable` this capability, you need to `enable`/`disable` it when installing the chart:
 ```bash
 --set capabilities.networkPolicyService=enable
 ```
 
-Kubescape's Network Policy generation capability based on the captured network traffic, is disabled by default.
+Once you apply the chart with the capability enabled, Kubescape will continuously listen to the workloads traffic and you could then generate network policies for them.
+
+In case a [provider](https://kubescape.io/docs/providers) is configured, Network Policy generation capability will be disabled by default.
 To enable this capability, you need to enable it when installing the chart:
 ```bash
 --set storage.forceVirtualCrds=true
 ```
-
-Once you apply the chart with the above capabilities enabled, Kubescape will continuously listen to the workloads traffic and you could then generate network policies for them.
 
 ## Network Policy generation
 
