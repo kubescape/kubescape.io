@@ -31,7 +31,6 @@ kubescape scan --exceptions /path/to/exceptions.json
     - resource labels as key value (case-sensitive, regex NOT supported)
 - `posturePolicies`- An attribute-based declaration {key: value}
     - `frameworkName` - [Framework name](https://github.com/kubescape/regolibrary/tree/master/frameworks) (regex supported)
-    - `controlName` - [Control name](https://github.com/kubescape/regolibrary/tree/master/controls) (regex supported)
     - `controlID` - [Control ID](https://github.com/kubescape/regolibrary/tree/master/controls) (regex supported)
     - `ruleName` - [Rule name](https://github.com/kubescape/regolibrary/tree/master/rules) (regex supported)
 
@@ -76,18 +75,18 @@ Policies are combined with a logical *OR*. To exclude all namespaces *OR* any re
 ]
 ```
 
-The `posturePolicies` list works in a similar fashion.  For example, if you wish to exclude the resources declared in the `resources` list that failed when scanning the `NSA` framework *AND* failed the `Allowed hostPath` control, both can be defined in the `posturePolicies` list:
+The `posturePolicies` list works in a similar fashion.  For example, if you wish to exclude the resources declared in the `resources` list that failed when scanning the `NSA` framework *AND* failed the `C-0030` control, both can be defined in the `posturePolicies` list:
 
 ```
 "posturePolicies": [
     {
         "frameworkName": "NSA",
-        "controlName": "Allowed hostPath" 
+        "controlID": "C-0030" 
     }
 ]
 ```
 
-But, if you wish to exclude the resources declared in the `resources` list that failed when scanning the `NSA` framework *OR* failed the `Allowed hostPath` control, the `posturePolicies` list should look as follows:
+But, if you wish to exclude the resources declared in the `resources` list that failed when scanning the `NSA` framework *OR* failed the `C-0030` control, the `posturePolicies` list should look as follows:
 
 ```
 "posturePolicies": [
@@ -95,7 +94,7 @@ But, if you wish to exclude the resources declared in the `resources` list that 
         "frameworkName": "NSA" 
     },
     {
-        "controlName": "Allowed hostPath" 
+        "controlID": "C-0030" 
     }
 ]
 ```
@@ -135,7 +134,7 @@ The resources
 ]
 ```
 
-### Exclude deployments in the default namespace that failed the "Allowed hostPath" control
+### Exclude deployments in the default namespace that failed the "C-0030" control
 
 ```
 [
@@ -156,7 +155,7 @@ The resources
         ],
         "posturePolicies": [
             {
-                "controlName": "Allowed hostPath" 
+                "controlID": "C-0030" 
             }
         ]
     }
@@ -193,3 +192,7 @@ The resources
     }
 ]
 ```
+
+!!! info "Deprecated exceptions by control name"
+
+    Creating exceptions by control name (`controlName` field) has been deprecated in Kubescape version `v3.0.29`<sup>[1](https://github.com/kubescape/kubescape/releases/tag/v3.0.29)</sup>
