@@ -4,9 +4,9 @@ The relevancy feature of the Kubescape operator enables users to understand whic
 
 Kubescape's relevancy filtering is implemented by an [eBPF](https://ebpf.io/) program on each node, deployed using the [node agent](index.md#node-agent). It scans the running environment and maps out artifacts and libraries that are loaded into memory and therefore are in use in the environment.
 
-Using eBPF probes, it looks at the file activity of a running container. When a pod starts on a node, the node agent will watch its containers for a configurable learning period and store an activity log.
+Using eBPF probes, it looks at the file activity of a running container. When a pod starts on a node, the node agent will watch its containers for a configurable learning period and store an application profile.
 
-During the process of scanning a container, an SBOM is generated. This contains the vulnerability scanner’s understanding of which components are installed in the container. When vulnerabilities are checked, the engine is provided with a filtered SBOM, including the packages that relate to files that were accessed during the learning period.
+During the process of scanning a container, an SBOM is generated. This contains the vulnerability scanner’s understanding of which components are installed in the container. When vulnerabilities are checked, the engine is using the application profile to filter the SBOM, including only the packages that relate to files that were accessed during the learning period.
 
 
 ## Enabling relevancy
@@ -14,14 +14,14 @@ During the process of scanning a container, an SBOM is generated. This contains 
 Relevancy is installed by default when installing the Kubescape operator through Helm.  You must have a node that supports eBPF.
 
 !!! note Note
-    Relevancy does not work on Minikube or Docker Desktop.
+    Relevancy might not work on Minikube or Docker Desktop.
 
 The durations for how long the node agent will observe a running container are configured with the `nodeAgent.config` values in the Helm installation:
 
 ```
 nodeAgent:
   config:
-    maxLearningPeriod: 3h 
+    maxLearningPeriod: 24h 
     learningPeriod: 2m
     updatePeriod: 10m
 ```
@@ -52,7 +52,13 @@ gke.gcr.io-event-exporter-sha256-2607d2e19305547b3fe63b10752ae725d98c6e80940a483
 gke.gcr.io-fluent-bit-gke-exporter-v0.26.0-gke.5-sha256-1de68ae89a169af1013424adc95a29fd1ed8b35694c1323f245c39d647fe0876-fe0876                   2024-02-13T09:12:01Z
 ```
 
-To view the filtered information:
+Filtered information are not stored by default, but if enabled, you can view them in the `kubescape` namespace:
+
+```
+kubevuln:
+  config:
+    storeFilteredSbom: false
+```
 
 ```
 % kubectl get -n kubescape sbomsyftfiltereds
@@ -69,7 +75,7 @@ replicaset-storage-745bb58996-apiserver-a381-b389                2024-02-13T09:1
 
 ### Linux kernel
 
-The relevancy functionality is based on eBPF, which is currently only implemented on Linux. This feature will not work on Windows. The kernel version on the node must be >= 4.14.
+The relevancy functionality is based on eBPF, which is currently only implemented on Linux. This feature will not work on Windows. The kernel version on the node must be >= 5.4 and have BTF enabled.
 
 !!! info Info
     The node agent uses the [Inspektor Gadget](https://www.inspektor-gadget.io/) library.
