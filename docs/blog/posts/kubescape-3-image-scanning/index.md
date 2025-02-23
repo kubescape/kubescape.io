@@ -10,12 +10,12 @@ slug: 'kubescape-3-image-scanning'
 
 # Kubescape 3.0: Introducing Image Scanning
 
-In the latest release of Kubescape, we completely overhauled the CLI experience to make it easier and faster for you to improve the security of your clusters.
+In previous versions, Kubescape supported vulnerability scanning inside a cluster. We’ve brought this feature to the Kubescape command line in 3.0.
 
 Watch a short video for a demonstration of image scanning from the Kubescape CLI and its benefits, or read on.
 
 <div class="video-wrapper">
-  <iframe width="640" height="360" src="https://www.youtube.com/embed/rjLL_5F41Oc?si=X5XLkMLBpzTQl5FK"  title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+  <iframe width="640" height="360" src="https://www.youtube.com/embed/rjLL_5F41Oc?si=X5XLkMLBpzTQl5FK"  title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 </div>
 
 <!-- more -->
@@ -46,7 +46,7 @@ The results include the following information:
 
 * A link to the documentation for each vulnerability
 
-If you would like to see all of the vulnerabilities, regardless of severity, you can run the command in verbose mode with the -v flag.
+If you would like to see all the vulnerabilities, regardless of severity, you can run the command in verbose mode with the -v flag.
 
 ```
 kubescape scan image  --verbose
@@ -68,7 +68,7 @@ We believe that image scanning is an essential part of any Kubernetes security s
 
 ## Conclusion
 
-Image scanning is key to maintaining a tight security posture. It is now available on Kubescape and can be run via the CLI or embedded into your CI/CD pipelines. To learn more, please visit the [Kubescape documentation](https://kubescape.io/operator/vulnerabilities.md).
+Image scanning is key to maintaining a tight security posture. It is now available on Kubescape and can be run via the CLI or embedded into your CI/CD pipelines. To learn more, please visit the [Kubescape documentation](https://kubescape.io/docs).
 
 Feel free to [raise any issues in the Kubescape GitHub project](https://github.com/kubescape/kubescape/issues) or ask questions [in our Slack channel](https://kubescape.io/project/community/#slack).
 

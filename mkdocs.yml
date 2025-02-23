@@ -10,39 +10,38 @@ theme:
   features:
     - content.code.copy
     - navigation.sections
-    - navigation.tabs    
-    - navigation.footer  
-    - navigation.tracking  
+    - navigation.tabs
+    - navigation.footer
+    - navigation.tracking
     - navigation.expand
-    # - navigation.indexes    
+    # - navigation.indexes
   icon:
     repo: fontawesome/brands/github
   custom_dir: overrides
 plugins:
   - blog:
+      archive_date_format: MMMM yyyy
       archive_url_format: "archive/{date}"
       archive_url_date_format: yyyy/MM
       categories_url_format: "category/{slug}"
   - rss:
-      match_path: blog/posts/.* 
+      match_path: blog/posts/.*
       date_from_meta:
         as_creation: date
       categories:
         - categories
-        - tags 
+        - tags
       abstract_chars_count: -1
       abstract_delimiter: ""
   - search
   - glightbox
+  - mermaid2
 extra:
   social:
-    - icon: fontawesome/brands/twitter 
+    - icon: fontawesome/brands/twitter
       link: https://twitter.com/@kubescape
-    - icon: fontawesome/brands/github 
+    - icon: fontawesome/brands/github
       link: https://github.com/kubescape/kubescape
-  analytics:
-    provider: google
-    property: G-BS68QKB4RT
 extra_css:
   - stylesheets/extra.css
 copyright:
@@ -55,14 +54,21 @@ nav:
         - 'Installing the client': 'docs/install-cli.md'
         - 'Installing in your cluster': 'docs/install-operator.md'
         - 'Scanning your environment': 'docs/scanning.md'
-        - 'Customizing your scans': 'docs/customizing-your-scans.md'
         - 'Accepting risk': 'docs/accepting-risk.md'
         - 'Connecting to providers': 'docs/providers.md'
         - Kubescape Operator:
             - 'Overview': 'docs/operator/index.md'
             - 'Vulnerability scanning': 'docs/operator/vulnerabilities.md'
             - 'Relevancy': 'docs/operator/relevancy.md'
+            - 'Runtime Threat Detection': 'docs/operator/runtime-threat-detection.md'
+            - 'Generate Network Policies': 'docs/operator/network-policy-generation.md'
             - 'Scheduled scans': 'docs/operator/scheduled-scans.md'
+            - 'Continuous scanning': 'docs/operator/continuous-scanning.md'
+            - 'Prometheus Integrations': 'docs/operator/prometheus-integration.md'
+            - 'UI with Headlamp': 'docs/operator/ui-with-headlamp.md'
+            - 'Automatic upgrades': 'docs/operator/automatic-release-upgrades.md'
+            - 'VEX document generation (experimental)': 'docs/operator/generating-vex.md'
+            - 'Telemetry': 'docs/operator/telemetry.md'
         - Integrations:
             - 'Overview': 'docs/integrations/index.md'
             - 'GitHub': 'docs/integrations/github.md'
@@ -73,13 +79,17 @@ nav:
             - 'Frameworks': 'docs/frameworks-and-controls/frameworks.md'
             - 'Control library': 'docs/controls/index.md'
             - 'Configuring controls': 'docs/frameworks-and-controls/configuring-controls.md'
-    - Project: 
+        - Guides:
+            - 'Configure checks on a GitHub repository': 'docs/guides/kubescape-gha/index.md'
+            - 'Harden a cluster': 'docs/guides/kubescape-cli/index.md'
+            - 'Kubescape for teenagers': 'docs/guides/kubescape-for-teenagers/kubescape-for-teenagers.md'
+    - Project:
         - 'About the Kubescape project': 'project/about.md'
         - 'License': 'project/license.md'
         - 'Releases': 'https://github.com/kubescape/helm-charts/releases'
         - 'Community': 'project/community.md'
         - 'Contributing': 'https://github.com/kubescape/kubescape/blob/master/CONTRIBUTING.md'
-    - Blog: 
+    - Blog:
       - 'blog/index.md'
     - GitHub: 'https://github.com/kubescape/kubescape'
 
@@ -95,3 +105,9 @@ markdown_extensions:
   - pymdownx.inlinehilite
   - pymdownx.snippets
   - pymdownx.superfences
+  - pymdownx.extra:
+      pymdownx.superfences:
+        custom_fences:
+          - name: mermaid
+            class: mermaid
+            format: !!python/name:pymdownx.superfences.fence_code_format

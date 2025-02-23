@@ -21,7 +21,7 @@ kubescape config set server <server URL>
 kubescape config set accountID <accountID>
 ```
 
-You can override this configuration wtih `--account <accountID>` and `--server <server>` on the command line.
+You can override this configuration with `--account <accountID>` and `--server <server>` on the command line.
 
 ### In the Kubescape Operator
 

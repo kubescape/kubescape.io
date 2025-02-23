@@ -15,12 +15,16 @@ We have three mailing lists:
 * [-dev](https://lists.cncf.io/g/cncf-kubescape-dev): for discussion amongst contributors
 * [-users](https://lists.cncf.io/g/cncf-kubescape-dev): for user-to-user discussion and help
 
-We recommend all Kubescape users join -announce to stay up to date with new releases.
+We recommend all Kubescape users join -announce to stay up-to-date with new releases.
 
-## Monthly meeting
+## Community meetings
 
-We hold [community meetings](https://zoom.us/j/95174063585) on Zoom, on the first Tuesday of every month, at 14:00 GMT. ([See that in your local time zone](https://time.is/compare/1400_in_GMT)).
+We hold [community meetings](https://zoom.us/j/95174063585) on Zoom, every second Tuesday, at 15:00 CET. ([See that in your local time zone](https://time.is/compare/1500_in_CET). 
 
+* Meetings are announced in [#kubescape-dev](https://cloud-native.slack.com/archives/C04GY6H082K) on Slack (including any cancellations).
+* [The agenda and notes are in a public Google doc](https://docs.google.com/document/d/1X_eyhPzJvb4ascVQ2e0jN87LAvq7lTuXT5d4gQxi8us/edit?tab=t.0).
+* [Recordings are posted to YouTube](https://www.youtube.com/@kubescape).
+  
 ## Code of Conduct
 
 Participating in open source is often a highly collaborative experience. We’re encouraged to create in public view, and we’re incentivized to welcome contributions of all kinds from people around the world. This makes the practice of open source as much social as it is technical.

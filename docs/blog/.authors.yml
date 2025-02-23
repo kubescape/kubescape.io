@@ -23,3 +23,11 @@ authors:
     name: Vlad Klokun
     description: Kubescape contributor
     avatar: https://github.com/vladklokun.png
+  anubhav06:
+    name: Anubhav Gupta
+    description: Kubescape contributor
+    avatar: https://github.com/anubhav06.png
+  agarcia-oss:
+    name: Alfredo García
+    description: Bitnami maintainer
+    avatar: https://github.com/agarcia-oss.png

@@ -32,30 +32,37 @@ After installation, the node agent will start listening for every **new** or **r
 
 ### View relevancy information
 
-Counts of relevant vulnerabilties are available in the [vulnerability summary objects](vulnerabilities.md#vulnerabilty-summaries). The [vulnerability manifest](vulnerabilities.md#vulnerabilty-manifests) will show whether a given CVE was found relevant or not.
+Counts of relevant vulnerabilities are available in the [vulnerability summary objects](vulnerabilities.md#vulnerabilty-summaries). The [vulnerability manifest](vulnerabilities.md#vulnerabilty-manifests) will show whether a given CVE was found relevant or not.
 
 The full and filtered SBOM objects are stored in the `kubescape` namespace. View the labels to get the information as to which image and parent object the SBOM relates to.
 
 ```
-% kubectl get -n kubescape --show-labels SBOMSPDXv2p3
-NAME                                                               CREATED AT             LABELS
-0349106521d476e8a833088c33f6db5ac4c898f00d1b6b6f15d9902ff5fdd0f4   2023-04-23T09:07:47Z   kubescape.io/image-name=gcr-io-vmwarecloudadvocacy-acmeshop-order
-0f232ba18b63363e33f205d0242ef98324fb388434f8598c2fc8e967dca146bc   2023-04-23T09:04:23Z   kubescape.io/image-name=gke-gcr-io-cluster-proportional-autoscaler
-1198b3b3f1e324799012d0634e96ef99e43831cdb240749f7ceaaab551b09622   2023-04-23T09:15:28Z   kubescape.io/image-name=quay-io-kubescape-kubevuln
-13964b29d63efcd1490d1a500c4332c642655fe4ca613683fa4dde9a205dd0f7   2023-04-23T09:14:05Z   kubescape.io/image-name=ghcr-io-dexidp-dex
-1d20492ca374191e5b6ff4b7712b62b41ab75ce226424974356dc266e6e99e83   2023-04-23T09:04:06Z   kubescape.io/image-name=gke-gcr-io-metrics-server
-20b172e673454b675cade099b95125fb1ce01b53fbf99c5b6260e048174060b1   2023-04-23T09:08:29Z   kubescape.io/image-name=gcr-io-google-samples-microservices-demo-frontend
+% kubectl get -n kubescape sbomsyfts
+NAME                                                                                                                                              CREATED AT
+docker.io-library-alpine-sha256-e1c082e3d3c45cccac829840a25941e679c25d438cc8412c2fa221cf1a824e6a-824e6a                                           2024-02-13T09:14:25Z
+docker.io-library-busybox-sha256-e8e5cca392e3cf056fcdb3093e7ac2bf83fcf28b3bcf5818fe8ae71cf360c231-60c231                                          2024-02-13T09:15:02Z
+docker.io-library-redis-sha256-92f3e116c1e719acf78004dd62992c3ad56f68f810c93a8db3fe2351bb9722c2-9722c2                                            2024-02-13T09:14:30Z
+docker.io-library-wordpress-sha256-5f1873a461105cb1dc1a75731671125f1fb406b18e3fcf63210e8f7f84ce560b-ce560b                                        2024-02-13T09:14:55Z
+docker.io-otel-opentelemetry-collector-0.92.0-aaa6c0                                                                                              2024-02-13T09:11:47Z
+gke.gcr.io-addon-resizer-1.8.19-gke.0-sha256-a462e2d1edde8ef5bc42f09ab08b15b6fa70fc61941a45da01babdc71d07abcf-07abcf                              2024-02-13T09:11:03Z
+gke.gcr.io-cluster-proportional-autoscaler-1.8.4-gke.1-a146bc                                                                                     2024-02-13T09:13:02Z
+gke.gcr.io-cluster-proportional-autoscaler-1.8.4-gke.1-sha256-0f232ba18b63363e33f205d0242ef98324fb388434f8598c2fc8e967dca146bc-a146bc             2024-02-13T09:12:40Z
+gke.gcr.io-csi-node-driver-registrar-v2.9.2-gke.0-sha256-c3fffb646042a56c2f2e0da9017922f47c520bd25ffe52dd470125868899c8be-99c8be                  2024-02-13T09:11:11Z
+gke.gcr.io-event-exporter-sha256-2607d2e19305547b3fe63b10752ae725d98c6e80940a48385974ba84007d8cc5-7d8cc5                                          2024-02-13T09:12:35Z
+gke.gcr.io-fluent-bit-gke-exporter-v0.26.0-gke.5-sha256-1de68ae89a169af1013424adc95a29fd1ed8b35694c1323f245c39d647fe0876-fe0876                   2024-02-13T09:12:01Z
 ```
 
 To view the filtered information:
 
 ```
-% kubectl get -n kubescape --show-labels SBOMSPDXv2p3Filtered
-NAME                                                               CREATED AT             LABELS
-0207f7055a0a13a655efe073c320de83219ca19e396e37e1bdcc83de976ca99a   2023-04-23T10:05:48Z   kubescape.io/workload-api-group=apps,kubescape.io/workload-api-version=v1,kubescape.io/workload-container-name=redis,kubescape.io/workload-kind=Deployment,kubescape.io/workload-name=argocd-redis,kubescape.io/workload-namespace=argocd
-0d69953f27f65b0546fbd29b12849368cbc5a0cf358b828ee31fbe2865279dea   2023-04-23T10:06:07Z   kubescape.io/workload-api-group=apps,kubescape.io/workload-api-version=v1,kubescape.io/workload-container-name=main,kubescape.io/workload-kind=Deployment,kubescape.io/workload-name=loadgenerator,kubescape.io/workload-namespace=onlineboutique
-28372aa3a8dfdebb9cd2561f85beabbe58fbeb67060c3bde74a061c62923183f   2023-04-23T10:05:49Z   kubescape.io/workload-api-group=apps,kubescape.io/workload-api-version=v1,kubescape.io/workload-container-name=argocd-notifications-controller,kubescape.io/workload-kind=Deployment,kubescape.io/workload-name=argocd-notifications-controller,kubescape.io/workload-namespace=argocd
-30c70b40821cd009b417167b2280cd9d2df4e4eef8dff79f3c7f9a8ee7d75672   2023-04-23T10:05:42Z   kubescape.io/workload-api-group=apps,kubescape.io/workload-api-version=v1,kubescape.io/workload-container-name=payment,kubescape.io/workload-kind=Deployment,kubescape.io/workload-name=payment,kubescape.io/workload-namespace=acme-fitness
+% kubectl get -n kubescape sbomsyftfiltereds
+NAME                                                             CREATED AT
+job-kubescape-scheduler-28465179-kubescape-scheduler-ebc9-3511   2024-02-14T11:39:13Z
+job-kubevuln-scheduler-28464136-kubevuln-scheduler-c7f6-7f3d     2024-02-13T18:16:10Z
+replicaset-collection-94c495554-alpine-container-a3d8-540c       2024-02-13T09:16:22Z
+replicaset-collection-94c495554-redis-6eab-b388                  2024-02-13T09:16:22Z
+replicaset-collection-94c495554-wordpress-94fd-4e76              2024-02-13T09:16:23Z
+replicaset-storage-745bb58996-apiserver-a381-b389                2024-02-13T09:12:37Z
 ```
 
 ## Limitations
@@ -66,7 +73,3 @@ The relevancy functionality is based on eBPF, which is currently only implemente
 
 !!! info Info
     The node agent uses the [Inspektor Gadget](https://www.inspektor-gadget.io/) library.
-
-### Symlinks
-
-The eBPF probes used by Kubescape do not report on the actual file when a symlink is opened, meaning relevant files opened by symlink may cause CVEs to appear as not relevant.  This may result in false positives.

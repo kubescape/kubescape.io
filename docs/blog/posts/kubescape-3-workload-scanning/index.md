@@ -12,10 +12,10 @@ slug: 'kubescape-3-workload-scanning'
 
 Kubescape 3.0 introduces workload scanning, which allows you to comprehensively report on the security posture of individual workloads running in a Kubernetes cluster. This includes both misconfiguration and vulnerability scanning. This scan results in information that gives a 360° assessment of your workload’s security posture.
 
-Watch a short video for a demonstration of workload scanning from the Kubescape CLI and its benefits, or read on.
+Watch a short video for a demonstration of workload scanning and its benefits, or read on.
 
 <div class="video-wrapper">
-  <iframe width="640" height="360" src="https://www.youtube.com/embed/N13jDFBAy7w?si=6KC2njGeCbSfzZRJ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+  <iframe width="640" height="360" src="https://www.youtube.com/embed/N13jDFBAy7w?si=6KC2njGeCbSfzZRJ" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 </div>
 
 <!-- more -->
@@ -25,7 +25,7 @@ Watch a short video for a demonstration of workload scanning from the Kubescape 
 To scan a workload, simply run the following command:
 
 ```
-kubescape scan workload -n  /
+kubescape scan workload -n <namespace> <kind>/<name>
 ```
 
 For example, to scan a Deployment named "my-deployment", you would run the following command:

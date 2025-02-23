@@ -92,7 +92,20 @@ If you have Kubescape configured to use a [provider](../providers.md), then upon
 
 ### Scanning images pulled from private registries
 
-To scan images that are pulled from private registries, you can define a Secret with credentials.
+There are two ways Kubescape vulnerability scanner can access private registries.
+
+* Using `imagePullSecrets` bound to the workload that uses the images
+* Granting credentials directly to Kubescape vulnerability scanner to access private registries
+
+#### Using imagePullSecrets
+
+The advantage of this method that it works "out of the box" without any need for the user to add any extra configuration *in case this field is in use* 🎉
+
+The disadvantage is that it doesn't work when the private registry is not accessed using `imagePullSecrets` but via direct grant to the Kubelet (example, granting IAM role to access ECR to the EC2 nodes and similar) or when using the registry scan feature, which obviously lacks `imagePullSecrets` field. In these cases, the following method is advised.
+
+#### Granting credentials directly
+
+To scan images that are pulled from private registries without `imagePullSecret`, you can define a Secret with credentials.
 
 !!! note Note
     The secret must start with the name `kubescape-registry-scan`.
@@ -117,6 +130,42 @@ stringData:
       }
     ]
 ```
+
+For example, in case of a cloud vendor container registry (ECR, ACR or else) the `username` is the "client ID" and the `password` is the "secret".
+
+Kubescape automatically detects these secrets and uses them to access the registries defined under the `registry` field.
+
+#### Insecure registries access
+
+Additional options can be specified in the credentials secret mentioned above for insecure registries access, such as skipping TLS certificate verification or using HTTP instead of HTTPS.
+
+- `skipTLSVerify`: Set to `true` to skip TLS certificate verification.
+
+- `http`: Set to `true` for registry access via HTTP instead of HTTPS.
+
+??? Example
+
+    ```yaml
+    kind: Secret
+    apiVersion: v1
+    metadata:
+      name: kubescape-registry-scan-insecure-registry-secret
+      namespace: kubescape
+    type: Opaque
+    stringData:
+      registriesAuth: |
+        [     
+          {
+            "registry": "registry.example.io",
+            "username": "<username/clientID>",
+            "password": "<password/secret>",
+            "auth_method": "credentials",
+            "skipTLSVerify": true,
+            "http": true
+          }
+        ]
+    ```
+
 
 ### Air-gapped installation support
 

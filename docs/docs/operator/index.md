@@ -5,10 +5,15 @@ When installed in your cluster, Kubescape runs as a set of microservices.  These
 The Kubescape operator includes:
 
 * scanning for misconfigurations
-* scanning all deployed images for vulnerabilties (CVEs)
+* scanning all deployed images for vulnerabilities (CVEs)
 * exposing in-cluster data as Kubernetes API objects
 * exporting data to a configured [provider](../providers.md) 
 * allowing secure control by a configured provider
+
+## Install
+
+The Kubescape operator is installed using [Helm](https://helm.sh/).
+[Here](../install-operator.md) you can find the installation instructions for the Kubescape operator.
 
 ## Misconfiguration scanning
 
@@ -30,19 +35,22 @@ To see a list of the types that are added to your cluster, use `kubectl api-reso
 
 ```
 $ kubectl api-resources | grep kubescape
-configurationscansummaries                        spdx.softwarecomposition.kubescape.io/v1beta1   false        ConfigurationScanSummary
-sbomspdxv2p3filtereds                             spdx.softwarecomposition.kubescape.io/v1beta1   true         SBOMSPDXv2p3Filtered
-sbomspdxv2p3s                                     spdx.softwarecomposition.kubescape.io/v1beta1   true         SBOMSPDXv2p3
-sbomsummaries                                     spdx.softwarecomposition.kubescape.io/v1beta1   true         SBOMSummary
-vulnerabilitymanifests                            spdx.softwarecomposition.kubescape.io/v1beta1   true         VulnerabilityManifest
-vulnerabilitymanifestsummaries                    spdx.softwarecomposition.kubescape.io/v1beta1   true         VulnerabilityManifestSummary
-vulnerabilitysummaries                            spdx.softwarecomposition.kubescape.io/v1beta1   false        VulnerabilitySummary
-workloadconfigurationscans                        spdx.softwarecomposition.kubescape.io/v1beta1   true         WorkloadConfigurationScan
-workloadconfigurationscansummaries                spdx.softwarecomposition.kubescape.io/v1beta1   true         WorkloadConfigurationScanSummary
+operatorcommands                      opcmd                    kubescape.io/v1alpha1                           true         OperatorCommand
+runtimerulealertbindings              rab                      kubescape.io/v1                                 false        RuntimeRuleAlertBinding
+applicationactivities                                          spdx.softwarecomposition.kubescape.io/v1beta1   true         ApplicationActivity
+applicationprofiles                                            spdx.softwarecomposition.kubescape.io/v1beta1   true         ApplicationProfile
+knownservers                                                   spdx.softwarecomposition.kubescape.io/v1beta1   false        KnownServer
+networkneighborhoods                                           spdx.softwarecomposition.kubescape.io/v1beta1   true         NetworkNeighborhood
+networkneighborses                                             spdx.softwarecomposition.kubescape.io/v1beta1   true         NetworkNeighbors
+openvulnerabilityexchangecontainers                            spdx.softwarecomposition.kubescape.io/v1beta1   true         OpenVulnerabilityExchangeContainer
+sbomsyftfiltereds                                              spdx.softwarecomposition.kubescape.io/v1beta1   true         SBOMSyftFiltered
+sbomsyfts                                                      spdx.softwarecomposition.kubescape.io/v1beta1   true         SBOMSyft
+seccompprofiles                                                spdx.softwarecomposition.kubescape.io/v1beta1   true         SeccompProfile
+vulnerabilitymanifests                                         spdx.softwarecomposition.kubescape.io/v1beta1   true         VulnerabilityManifest
+vulnerabilitymanifestsummaries                                 spdx.softwarecomposition.kubescape.io/v1beta1   true         VulnerabilityManifestSummary
+workloadconfigurationscans                                     spdx.softwarecomposition.kubescape.io/v1beta1   true         WorkloadConfigurationScan
+workloadconfigurationscansummaries                             spdx.softwarecomposition.kubescape.io/v1beta1   true         WorkloadConfigurationScanSummary
 ```
-
-!!! note annotate "Why didn't we use CRDs?"
-    When you create a CRD (1), the data that backs it is stored in the cluster's `etcd` instance. Our SBOMs (2) can be several megabytes each, and there's one for every image you run in your cluster. This much extra data can be a strain on etcd, which was designed as a lock server that stores only a small amount of data.  An aggregated API server is designed for exactly this use case.
 
 1. [Custom Resource Definitions](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/#customresourcedefinitions), a common approach for adding new types to the Kubernetes API.
 2. Software Bill of Materials    
@@ -55,10 +63,14 @@ Several of our in-cluster components implement telemetry data using OpenTelemetr
 
 ## Automation and control
 
-* The `operator` and `gateway` microservices interact to start or [schedule](scheduled-scans.md) scans. 
-* The `kollector` service sends information about the state of the cluster to a configured [provider](../providers.md). 
+* The `operator` microservice handles the [scheduling](scheduled-scans.md) and execution of scans.
+* The `synchronizer` microservice sends information about the state of the cluster to a configured [provider](../providers.md). A connected provider can leverage the `synchronizer` to create OperatorCommand (CRDs), to instruct the `operator` to perform tasks such as executing scans or other supported actions of the operator.
 
 For information on how these services interact, [check out their documentation on GitHub.](https://github.com/kubescape/helm-charts/blob/main/charts/kubescape-operator/README.md)
+
+!!! info "Deprecated microservices"
+
+    The `kollector`<sup>[1](https://github.com/kubescape/helm-charts/pull/559)</sup> and `gateway`<sup>[2](https://github.com/kubescape/helm-charts/pull/565)</sup> microservices have been deprecated in Helm chart versions 1.24.0 and 1.25.0, respectively, and replaced by the `synchronizer` microservice.
 
 ## Node agent
 

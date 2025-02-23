@@ -1,0 +1,3 @@
+# ks.dev is a convenience redirect to kubescape.io, used in the Kubescape 
+# CLI to reduce the number of characters used.
+https://ks.dev/* https://kubescape.io/:splat 301!

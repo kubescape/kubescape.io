@@ -1,3 +1,3 @@
 # Control library
 
-Each control in the Kubescape control library is documented under this page.
+Kubescape controls are documented in [Documentation](https://hub.armosec.io/docs/controls).

@@ -19,7 +19,7 @@ Kubescape 3.0 is laden with new functionality. In this blog post, we will introd
 Watch a short video for a demonstration of these features in action, or read on.
 
 <div class="video-wrapper">
-  <iframe width="560" height="315" src="https://www.youtube.com/embed/KkJhEzcLw6k?si=7wLenc1TSm7LaCn2" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/KkJhEzcLw6k?si=7wLenc1TSm7LaCn2" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 </div>
 
 <!-- more -->
@@ -57,11 +57,11 @@ capabilities:
 
   relevancy: enable
 
- configurationScan: enable
+  configurationScan: enable
 
- vulnerabilityScan: enable
+  vulnerabilityScan: enable
 
- nodeScan: enable
+  nodeScan: enable
 
 ```
 After installing Kubescape with Continuous Scanning enabled, you can access the scan results as Custom Resources with the Kubernetes API. You can list all the scan results in your cluster by running the following command:
