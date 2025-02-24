@@ -10,7 +10,7 @@ slug: "kubescape-incubation"
 
 # Kubescape's Journey to Incubation: Celebrating our Community and a Secure Kubernetes Future
 
-We are thrilled to share that Kubescape has officially been accepted as a CNCF Incubating project. This milestone is a significant achievement for the project. Kubescape began in 2021 with a mission to provide comprehensive security for Kubernetes environments. The goal was to facilitate shift-left security, the result is so much more.
+We are thrilled to share that Kubescape has officially been accepted as a CNCF Incubating project. This milestone is a significant achievement for the project. Kubescape began in 2021 as a fun project to scan for compliance with NSA-CISA Kubernetes hardening guidelines. What started as a security scanner, helping Devlopers and DevOps teams implement better Kubernetes security practices, evolved into a full security platform. Still helping security Kubernetes environments 😉
 
 From the very beginning, Kubescape was built with the cloud-native community in mind. It started as a simple CLI tool designed to check cluster configurations against NSA-CISA Kubernetes Hardening Guidance. Over time, with the support of a rapidly growing community, Kubescape has evolved into one of the most complete open-source solutions for Kubernetes security. We are proud to have contributed to its development alongside contributors in the Kubescape community, and to see so many adopters leveraging Kubescape in their day-to-day workflows.
 
@@ -18,8 +18,9 @@ The Kubescape community has been a driving force behind this success. It’s not
 
 As we look toward the future, the Kubescape project is poised for even greater growth. Our roadmap is not just about adding more features, but about continuing to improve usability and optimizing the performance of the platform. We are excited to welcome new contributors and users into the fold as we continue on the hamster-wheel of Kubernetes security.
 
-The Kubescape community is our foundation, and we are committed to fostering a collaborative and inclusive environment where all contributions are valued. We are determined to demonstrate sustained growth, strong governance, and broad adoption on our journey toward CNCF graduation. We believe that this is just the beginning, and we are eager to see where the future takes us.
-Together, with the support of the community, Kubescape will continue to evolve and grow, offering better security, deeper insights, and an ever-expanding set of features. We invite everyone—whether you are an adopter, contributor, or newcomer—to join us in shaping the future of Kubernetes security.
+The Kubescape community is our foundation, and we are committed to fostering a collaborative and inclusive environment where all contributions are valued. With the incredible support of the Cloud Native Computing Foundation (CNCF) and the broader Kubernetes community, we are determined to demonstrate sustained growth, strong governance, and broad adoption on our journey toward CNCF graduation. We believe that this is just the beginning, and we are eager to see where the future takes us.
+
+Together, with the support of these vibrant communities, Kubescape will continue to evolve and grow, offering better security, deeper insights, and an ever-expanding set of features. We invite everyone - whether you are an adopter, contributor, or newcomer - to join us in shaping the future of Kubernetes security.
 
 ## Join the Kubescape community
 
