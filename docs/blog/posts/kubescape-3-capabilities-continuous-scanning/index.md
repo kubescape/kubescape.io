@@ -8,7 +8,7 @@ authors:
 slug: 'kubescape-3-capablities-continuous-scanning'
 ---
 
-# Kubescape 3.0: The Capabilties System & Continuous Scanning
+# Kubescape 3.1: The Capabilties System & Continuous Scanning
 
 Kubescape 3.0 is laden with new functionality. In this blog post, we will introduce you to two new and complementary features. 
 
