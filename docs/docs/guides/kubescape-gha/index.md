@@ -42,7 +42,7 @@ jobs:
       with:
         frameworks: NSA,MITRE
         verbose: true
-    severityThreshold: low
+        severityThreshold: low
 ```
 
 This is going to run the action any time there is a pull request in the repository. It will run the Kubescape CLI with the NSA Framework (PDF Link) and the MITRE Framework. To read more about the frameworks available, you can find that information here: https://kubescape.io/docs/frameworks-and-controls/frameworks/
