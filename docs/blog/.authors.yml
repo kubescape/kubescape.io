@@ -31,3 +31,7 @@ authors:
     name: Alfredo García
     description: Bitnami maintainer
     avatar: https://github.com/agarcia-oss.png
+  mgalesloot:
+    name: Matthijs Galesloot
+    description: Kubescape contributor
+    avatar: https://github.com/mgalesloot.png
