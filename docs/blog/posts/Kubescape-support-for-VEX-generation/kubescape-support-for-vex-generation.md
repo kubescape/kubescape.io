@@ -48,7 +48,7 @@ This need poses an even greater challenge for open-source projects, which often 
 
 ## Enter Kubescape
 
-he [Kubescape](http://kubescape.io) project, a Kubernetes security platform, is a CNCF Sandbox project. It has made significant progress in cybersecurity with its latest feature: the generation of reliable Vulnerability Exploitability eXchange (VEX) documents. Kubescape is the first project to provide this functionality. One of Kubescape's functions is to [scan Kubernetes workload images for vulnerabilities](https://kubescape.io/docs/operator/vulnerabilities/), a task crucial for monitoring the security posture of containerized environments.
+he [Kubescape](http://kubescape.io) project, a Kubernetes security platform, is a CNCF incubating project. It has made significant progress in cybersecurity with its latest feature: the generation of reliable Vulnerability Exploitability eXchange (VEX) documents. Kubescape is the first project to provide this functionality. One of Kubescape's functions is to [scan Kubernetes workload images for vulnerabilities](https://kubescape.io/docs/operator/vulnerabilities/), a task crucial for monitoring the security posture of containerized environments.
 
 A standout feature of Kubescape is its "[Reachability](https://kubescape.io/docs/operator/relevancy/#view-relevancy-information)" capability. This functionality uses eBPF technology to detect which software packages are loaded into memory from a container image during runtime. It then automatically categorizes vulnerabilities associated with unloaded packages as unreachable. This distinction is crucial as it distinguishes between theoretical vulnerabilities and those that pose an actual risk in the given container environment.
 
