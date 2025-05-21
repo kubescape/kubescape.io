@@ -182,3 +182,7 @@ kubevulnScheduler.scanSchedule="0 0 * * *"`
 ```
 
 To customize the scan frequency, use `--set kubevulnScheduler.scanSchedule` when installing the Helm chart.
+
+### Scanning embedded SBOMs
+
+If the containers you are scanning already come with an SBOM that is stored in the [filesystem of the image](https://github.com/anchore/syft/blob/v1.23.1/syft/pkg/cataloger/sbom/cataloger.go#L26-L36) (e.g. when you create them as part of your build pipeline), you can additionally enable the scanning of those embedded SBOMs using `--set capabilities.scanEmbeddedSBOMs=enable` when installing the Helm chart. The other scanners will remain enabled and all findings will be merged to obtain a consolidated SBOM that is then used for vulnerability checking.  
