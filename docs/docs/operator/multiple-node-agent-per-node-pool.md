@@ -28,57 +28,57 @@ The Kubescape Operator Helm chart supports this use case via the `nodeAgent.mult
 
 1. **Enable the Feature**
 
-In your `values.yaml` (or via `--set`), enable the feature:
+    In your `values.yaml` (or via `--set`), enable the feature:
 
-```yaml
-nodeAgent:
-  multipleDaemonSets:
-    enabled: true
-```
+    ```yaml
+    nodeAgent:
+    multipleDaemonSets:
+        enabled: true
+    ```
 
 2. **Define Configurations**
 
-Add an entry under `configurations` for each node pool. Each entry can specify:
+    Add an entry under `configurations` for each node pool. Each entry can specify:
 
-- `nodeSelector`: to target the node pool
-- `resources`: requests and limits for CPU/memory
+    - `nodeSelector`: to target the node pool
+    - `resources`: requests and limits for CPU/memory
 
-**Example:**
+    **Example:**
 
-```yaml
-nodeAgent:
-  multipleDaemonSets:
-    enabled: true
-    configurations:
-      - nodeSelector:
-          kubernetes.io/os: linux
-          doks.digitalocean.com/node-pool: pool-1
-        resources:
-          requests:
-            cpu: 300m
-            memory: 128Mi
-          limits:
-            cpu: 400m
-            memory: 512Mi
-      - nodeSelector:
-          kubernetes.io/os: linux
-          doks.digitalocean.com/node-pool: pool-2
-        resources:
-          requests:
-            cpu: 100m
-            memory: 256Mi
-          limits:
-            cpu: 200m
-            memory: 512Mi
-```
+    ```yaml
+    nodeAgent:
+    multipleDaemonSets:
+        enabled: true
+        configurations:
+        - nodeSelector:
+            kubernetes.io/os: linux
+            doks.digitalocean.com/node-pool: pool-1
+            resources:
+            requests:
+                cpu: 300m
+                memory: 128Mi
+            limits:
+                cpu: 400m
+                memory: 512Mi
+        - nodeSelector:
+            kubernetes.io/os: linux
+            doks.digitalocean.com/node-pool: pool-2
+            resources:
+            requests:
+                cpu: 100m
+                memory: 256Mi
+            limits:
+                cpu: 200m
+                memory: 512Mi
+    ```
 
 3. **Apply the Chart**
 
-Install or upgrade your Helm release as usual:
+    Install or upgrade your Helm release as usual:
 
-```sh
-helm upgrade --install kubescape-operator ./charts/kubescape-operator -f values.yaml
-```
+    ```sh
+    helm upgrade --install kubescape-operator ./charts/kubescape-operator -f values.yaml
+    ```
 
 ***
 
