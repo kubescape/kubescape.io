@@ -69,6 +69,7 @@ nav:
             - 'Automatic upgrades': 'docs/operator/automatic-release-upgrades.md'
             - 'VEX document generation (experimental)': 'docs/operator/generating-vex.md'
             - 'Telemetry': 'docs/operator/telemetry.md'
+            - 'Node Agents per Node Pool': 'docs/operator/multiple-node-agent-per-node-pool.md'
         - Integrations:
             - 'Overview': 'docs/integrations/index.md'
             - 'GitHub': 'docs/integrations/github.md'
