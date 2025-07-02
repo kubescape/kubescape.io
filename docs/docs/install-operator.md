@@ -216,7 +216,7 @@ In Kubernetes clusters with heterogeneous node pools (different CPU/memory sizes
 
 The Kubescape Operator Helm chart supports this use case via the `nodeAgent.multipleDaemonSets` feature, allowing you to deploy multiple `node-agent` DaemonSets, each with its own configuration.
 
-More information on this use case can be found [here](./operator/multiple-node-agent-per-node-pool.mdhttps://kubescape.io/docs/frameworks-and-controls/frameworks)
+More information on this use case can be found [here](./operator/multiple-node-agent-per-node-pool.md)
 
 ## Verifying images
 
