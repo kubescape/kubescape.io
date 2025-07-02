@@ -210,6 +210,14 @@ For the CPU, the more you allocate, the faster your clusters are scanned. This i
 
 However, we recommend that you give Kubescape no less than 500m CPU no matter the size of your cluster so it can scan a relatively large amount of resources fast.
 
+#### Multiple Node-Agent DaemonSets per Node Pool DaemonSets
+
+In Kubernetes clusters with heterogeneous node pools (different CPU/memory sizes), it is often necessary to run the `node-agent` with different resource requests/limits and scheduling constraints per node pool. This ensures optimal resource usage and stability, as each node pool can have a `node-agent` DaemonSet tailored to its hardware profile.
+
+The Kubescape Operator Helm chart supports this use case via the `nodeAgent.multipleDaemonSets` feature, allowing you to deploy multiple `node-agent` DaemonSets, each with its own configuration.
+
+More information on this use case can be found [here](./operator/multiple-node-agent-per-node-pool.mdhttps://kubescape.io/docs/frameworks-and-controls/frameworks)
+
 ## Verifying images
 
 Kubescape container images are signed with [Cosign](https://docs.sigstore.dev/signing/quickstart/).
