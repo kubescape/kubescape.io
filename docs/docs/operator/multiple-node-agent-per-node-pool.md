@@ -53,7 +53,7 @@ The Kubescape Operator Helm chart supports this use case via the `nodeAgent.mult
         - nodeSelector:
             kubernetes.io/os: linux
             doks.digitalocean.com/node-pool: pool-1
-            resources:
+          resources:
             requests:
                 cpu: 300m
                 memory: 128Mi
@@ -63,7 +63,7 @@ The Kubescape Operator Helm chart supports this use case via the `nodeAgent.mult
         - nodeSelector:
             kubernetes.io/os: linux
             doks.digitalocean.com/node-pool: pool-2
-            resources:
+          resources:
             requests:
                 cpu: 100m
                 memory: 256Mi
