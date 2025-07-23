@@ -476,6 +476,9 @@ If you want to view the alerts in a more structured way, we support several expo
 --set nodeAgent.config.stdoutExporter=true
 ```
 
+#### Graylog
+See [here](runtime-threat-routing-to-graylog.md) for more details.
+
 ## Alert aggregation
 When running anomaly detection, the system relies on the fact that normal application behavior was recorded and can be compared to the current state. This means that if something was missed (e.g syscall/file access) during the learning phase, the system will generate many alerts during runtime. To avoid this, we recommend using a learning phase that is long enough to capture all the possible behavior of the application. The default is 24h. In addition, we recommend you to consider disabling the "Unexpected file access" rule or any other anomaly rule (i.e. those that start eith the word 'Unexpected') as long you are not doing any alert aggregation.
 
