@@ -101,7 +101,7 @@ Run `kubescape scan control C-0260 -v` as indicated by the error, and you’ll s
 
 ![image](06-netpol-remediation-help.png)
 
-As you can see, if your terminal allows, there is a clickable link to the documentation that provides more information. In this case, it’s located at [https://hub.armosec.io/docs/c-0260](https://hub.armosec.io/docs/c-0260). Based on the information found in the ARMO documentation and the [K3s Hardening Guide](https://ranchermanager.docs.rancher.com/reference-guides/rancher-security/hardening-guides/k3s-hardening-guide#network-policies), create this network policy which will isolate network traffic within the cluster to its respective namespace:
+As you can see, if your terminal allows, there is a clickable link to the documentation that provides more information. In this case, it’s located at [https://kubescape.io/docs/controls/c-0260/](https://kubescape.io/docs/controls/c-0260/). Based on the information found in the ARMO documentation and the [K3s Hardening Guide](https://ranchermanager.docs.rancher.com/reference-guides/rancher-security/hardening-guides/k3s-hardening-guide#network-policies), create this network policy which will isolate network traffic within the cluster to its respective namespace:
 
 #### netpol.yml
 
@@ -184,7 +184,7 @@ kubescape scan workload Pod/nginx-app --namespace app
 ```
 ![image](08-workload-scan-1.png)
 
-You can remediate several issues. Remediate the "Privileged container" first. If you access the [C-0057 docs](https://hub.armosec.io/docs/c-0057), you’ll see a nice remediation example. In the `nginx-app.yml`, you can see that our `privileged` attribute is set to `true`. Sure, this is a relatively contrived and simple example, but it’s a pretty easy fix. In your `nginx-app.yml`, change the `privileged` attribute to `false`:
+You can remediate several issues. Remediate the "Privileged container" first. If you access the [C-0057 docs](https://kubescape.io/docs/controls/c-0057/), you’ll see a nice remediation example. In the `nginx-app.yml`, you can see that our `privileged` attribute is set to `true`. Sure, this is a relatively contrived and simple example, but it’s a pretty easy fix. In your `nginx-app.yml`, change the `privileged` attribute to `false`:
 
 ```yaml
 ---

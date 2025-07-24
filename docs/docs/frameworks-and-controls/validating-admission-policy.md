@@ -47,16 +47,16 @@ kubectl get ValidatingAdmissionPolicy -A
 
 ### Creating a Validating Admission Policy Binding
 
-Let's now create a policy binding for the [C-0073](https://hub.armosec.io/docs/c-0073) control in the default namespace:
+Let's now create a policy binding for the [C-0073](https://kubescape.io/docs/controls/c-0073/) control in the default namespace:
 ```shell
 kubescape vap create-policy-binding --name my-policy-binding --policy kubescape-c-0073-deny-naked-pods --namespace default | kubectl apply -f -
 ```
 
 ### Testing the Validating Admission Policy
 
-This command should be denied since the binding on [C-0073](https://hub.armosec.io/docs/c-0073) forbids creating naked pods in the default namespace.
+This command should be denied since the binding on [C-0073](https://kubescape.io/docs/controls/c-0073/) forbids creating naked pods in the default namespace.
 
 ```shell
 kubectl run nginx --image=nginx --namespace default
-The pods "nginx" is invalid: : ValidatingAdmissionPolicy 'kubescape-c-0073-deny-naked-pods' with binding 'replicalimit-binding-nontest' denied request: Pods doesn't have a parent! (see more at https://hub.armosec.io/docs/c-0073)
+The pods "nginx" is invalid: : ValidatingAdmissionPolicy 'kubescape-c-0073-deny-naked-pods' with binding 'replicalimit-binding-nontest' denied request: Pods doesn't have a parent! (see more at https://kubescape.io/docs/controls/c-0073/)
 ```
