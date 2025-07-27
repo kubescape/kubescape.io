@@ -49,7 +49,7 @@ Ensure that your cluster has workload identity enabled by running this command:
 gcloud container clusters describe <CLUSTER_NAME> | grep workloadPool
 ```
 
-Use [this recipe](https://hub.armosec.io/recipes/setup-gcp-iam-authorization-for-in-cluster-installation-of-kubescape-in-gke-1) to finish setting up the GCP IAM authorization and Kubescape integration.
+Use [this recipe](https://kubescape.io/docs/integrations/kubescape-integration-with-cloud-providers/google-cloud-services-integration/) to finish setting up the GCP IAM authorization and Kubescape integration.
 
 After you’ve installed Kubescape and successfully authorized the components, you can use Kubescape CLI commands to scan clusters hosted in GCP and send the scan results to ARMO Platform to visualize your data.
 
