@@ -76,11 +76,9 @@ Kubescape can be used to scan local YAML/JSON files before they are deployed to 
     ```
 
     !!! note "Note"
-        Kubescape will load the default VALUES file.
-        Discovers charts by looking for `Chart.yaml` files in the directory structure.
-        Renders the chart's templates using default values to generate Kubernetes manifests.
-        Processes the rendered templates as individual Kubernetes resources for security scanning.
-        Validates that the rendered templates contain valid Kubernetes resource definitions (`apiVersion`, `kind`, `metadata`).
+        Kubescape will load the default VALUES file and will use it to render the chart.
+        Charts that require custom values will not be processed by Kubescape.
+
 
 
 
