@@ -76,8 +76,7 @@ Kubescape can be used to scan local YAML/JSON files before they are deployed to 
     ```
 
     !!! note "Note"
-        Kubescape will load the default VALUES file and will use it to render the chart.
-        Charts that require custom values will not be processed by Kubescape.
+        Kubescape will load the default VALUES file.
 
 * Scan a Kustomize directory:
 
