@@ -10,22 +10,20 @@ hide:
   <img alt="Kubescape logo" src="https://raw.githubusercontent.com/cncf/artwork/master/projects/kubescape/stacked/color/kubescape-stacked-color.svg" width="300">
 </picture>
 
-_Comprehensive Kubernetes Security from Development to Runtime_
+_Open-source Kubernetes Security: Practical, End-to-End Coverage_
 
-Kubescape is an open-source Kubernetes security platform that provides comprehensive security coverage, from left to right across the entire development and deployment lifecycle. It offers hardening, posture management, and runtime security capabilities to ensure robust protection for Kubernetes environments.
+Kubescape is an open-source Kubernetes security platform designed to provide practical, end-to-end security for Kubernetes environments. It supports engineers and operators throughout the development and deployment lifecycle, offering tools for configuration scanning, vulnerability assessment, policy enforcement, network policy and seccomp validation, and runtime threat detection.
 
-_Key features of Kubescape include_
+_Key capabilities_
 
-* **Shift-left security**: Kubescape enables developers to scan for misconfigurations as early as the manifest file submission stage, promoting a proactive approach to security.
-* **Runtime security**: Kubescape extends its protection to the runtime environment, providing continuous monitoring and threat detection for deployed applications and runtime context to posture management.
-* **IDE and CI/CD integration**: The tool integrates seamlessly with popular IDEs like VSCode and Lens, as well as CI/CD platforms such as GitHub and GitLab, allowing for security checks throughout the development process.
-* **Cluster scanning**: Kubescape can scan active Kubernetes clusters for vulnerabilities, misconfigurations, and security issues.
-* **Multi-framework compliance support**: Kubescape can test against many security frameworks, including NSA-CISA Kubernetes Hardening Guidance, MITRE ATT&CK , SOC 2, CIS Benchmarks and more. Thus, simplifying compliance efforts and protetcing from configuration drift. 
-* **YAML and Helm chart validation**: The tool checks YAML files and Helm charts for correct configuration according to the frameworks above, without requiring an active cluster.
-* **Kubernetes hardening**: Kubescape ensures proactive identification and rapid remediation of misconfigurations and vulnerabilities through manual, recurring, or event-triggered scans.
-* **Multi-cloud support**: Kubescape offers frictionless security across various cloud providers and Kubernetes distributions.
+- **Configuration and vulnerability scanning:** Kubescape analyzes Kubernetes manifests, Helm charts, and live clusters for misconfigurations and known vulnerabilities, helping teams identify and remediate issues early and continuously.
+- **Policy and compliance enforcement:** The platform supports multiple security frameworks (including CIS Benchmarks, NSA-CISA, MITRE ATT&CK, SOC 2, and more), enabling teams to validate their clusters and workloads against industry standards and custom policies.
+- **Network policy and seccomp validation:** Kubescape checks for the presence and correctness of network policies and seccomp profiles, helping to enforce least-privilege and reduce attack surface.
+- **Runtime detection:** Beyond static analysis, Kubescape provides runtime monitoring and detection for suspicious activity and threats in active clusters.
+- **Developer and CI/CD integration:** Kubescape integrates with popular IDEs (such as VSCode and Lens) and CI/CD systems (like GitHub Actions and GitLab CI), making it easy to include security checks in development workflows.
+- **Multi-cloud and distribution support:** Kubescape works across major cloud providers and Kubernetes distributions, supporting a wide range of deployment scenarios.
 
-By providing this comprehensive security coverage from development to runtime, Kubescape enables organizations to ensure a robust security posture throughout their Kubernetes deployment, addressing potential vulnerabilities and threats at every stage of the application lifecycle.
+By combining these features in a single open-source project, Kubescape aims to make robust Kubernetes security accessible and practical for engineering teams, from configuration to runtime.
 
 Kubescape was created by [ARMO](https://www.armosec.io/?utm_source=github&utm_medium=repository) and is a [Cloud Native Computing Foundation (CNCF) incubating project](https://www.cncf.io/projects/kubescape/).
 
@@ -58,8 +56,8 @@ _Did you know you can use Kubescape in all these places?_
 
 ## Under the hood
 
-Kubescape uses [Open Policy Agent](https://github.com/open-policy-agent/opa) to verify Kubernetes objects against [a library of posture controls](https://github.com/kubescape/regolibrary).  
-For image scanning, it uses [Grype](https://github.com/anchore/grype).  
+Kubescape uses [Open Policy Agent](https://github.com/open-policy-agent/opa) to verify Kubernetes objects against [a library of posture controls](https://github.com/kubescape/regolibrary).
+For image scanning, it uses [Grype](https://github.com/anchore/grype).
 For image patching, it uses [Copacetic](https://github.com/project-copacetic/copacetic).
 For eBPF, it uses [Inspektor Gadet](https://github.com/inspektor-gadget)
 
