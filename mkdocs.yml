@@ -45,7 +45,7 @@ extra:
 extra_css:
   - stylesheets/extra.css
 copyright:
-  Copyright &copy; 2021 - 2024 <a href="https://kubescape.devstats.cncf.io/d/66/developer-activity-counts-by-companies?orgId=1">The Kubescape Authors</a>
+  Copyright &amp;copy; 2021 - 2026 <a href="https://kubescape.devstats.cncf.io/d/66/developer-activity-counts-by-companies?orgId=1">The Kubescape Authors</a>
 nav:
     - Home: 'index.md'
     - Docs:
