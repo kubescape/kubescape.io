@@ -88,6 +88,38 @@ Kubescape can be used to scan local YAML/JSON files before they are deployed to 
     !!! note "Note"
         Kubescape will generate Kubernetes YAML objects using a `kustomize` file and scan them.
 
+### Scanning Images
+
+Kubescape can scan container images for known vulnerabilities before deployment. You can scan images from public registries, private registries, or use an offline vulnerability database.
+
+* Scan a public image:
+    ```sh
+    kubescape scan image <image:tag>
+    ```
+
+* Scan with verbose output:
+    ```sh
+    kubescape scan image <image:tag> -v
+    ```
+
+* Scan a private registry image
+    ```sh
+    kubescape scan image </path/to/image:tag> --username user --password pass
+    ```
+
+#### Using an Offline Grype Database
+
+* Start the offline Grype database server
+   ```sh
+   docker run --rm -p8080:8080 quay.io/kubescape/grype-offline-db:v6-latest
+   ```
+
+* Scan an image using the offline database
+  ```sh 
+  kubescape scan image --grype-db-url http://localhost:8080/databases/ <image:tag>
+  ```
+
+
 ## Examples
 
 * Scan a specific control, using the control name or control ID. [See the control library](controls/index.md).
