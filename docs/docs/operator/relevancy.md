@@ -57,7 +57,7 @@ Filtered information are not stored by default, but if enabled, you can view the
 ```
 kubevuln:
   config:
-    storeFilteredSbom: false
+    storeFilteredSboms: false
 ```
 
 ```
