@@ -44,10 +44,11 @@ Kubescape uses its own virus database which is a subset of the latest ClamAV vir
 
 ### Rule bindings
 The CRD `runtimerulealertbindings.kubescape.io` is used to define the rules that should be enforced by the runtime threat detection engine.
-By default, all the rules are enforced on all workloads.
-You can customize the bindings of the rules to the workloads by editing the CRD.
-The CRD supports Kubernetes selectors to bind the rules to specific workloads.
-You can find the CRD definition [here](https://github.com/kubescape/helm-charts/blob/main/charts/dependency_chart/clustered-crds/crds/runtime-rule-binding.crd.yaml).
+When the operator is installed with `--set alertCRD.installDefault=true`, the Helm chart also creates a `Rules` object named `default-rules`. That object contains the default node-agent rule library, while `RuntimeRuleAlertBinding` objects decide where those rules apply.
+You can customize the bindings of the rules to the workloads by editing the CRD. The CRD supports Kubernetes selectors to bind the rules to specific workloads and can match rules by `ruleID`, `ruleName`, or `ruleTags`.
+You can find [the CRD definition in the helm-charts repository](https://github.com/kubescape/helm-charts/blob/main/charts/dependency_chart/clustered-crds/crds/runtime-rule-binding.crd.yaml).
+
+For the current default rule catalog and a walkthrough for authoring custom CEL rules, see [Node Agent Rule Library](node-agent-rule-library.md).
 
 Example of a `RuntimeRuleAlertBinding` CRD:
 <details>
@@ -57,80 +58,20 @@ Example of a `RuntimeRuleAlertBinding` CRD:
 apiVersion: kubescape.io/v1
 kind: RuntimeRuleAlertBinding
 metadata:
-  name: all-rules-all-pods
+  name: team-a-runtime-rules
 spec:
   namespaceSelector:
-    matchExpressions:
-      - key: "kubernetes.io/metadata.name"
-        operator: "NotIn"
-        values:
-        - "kube-system"
-        - "kube-public"
-        - "kube-node-lease"
-        - "kubeconfig"
-        - "gmp-system"
-        - "gmp-public"
+    matchLabels:
+      kubernetes.io/metadata.name: team-a
   rules:
-    - ruleName: "Unexpected process launched"
-    - ruleName: "Unexpected file access"
-      parameters:
-        ignoreMounts: true
-        ignorePrefixes: ["/proc", "/run/secrets/kubernetes.io/serviceaccount", "/var/run/secrets/kubernetes.io/serviceaccount", "/tmp"]
-    - ruleName: "Unexpected system call"
-    - ruleName: "Unexpected capability used"
-    - ruleName: "Unexpected domain request"
-    - ruleName: "Unexpected Service Account Token Access"
-    - ruleName: "Kubernetes Client Executed"
-    - ruleName: "Exec from malicious source"
-    - ruleName: "Kernel Module Load"
-    - ruleName: "Exec Binary Not In Base Image"
-    - ruleName: "Malicious SSH Connection"
-    - ruleName: "Fileless Execution"
-    - ruleName: "XMR Crypto Mining Detection"
-    - ruleName: "Exec from mount"
-    - ruleName: "Crypto Mining Related Port Communication"
-    - ruleName: "Crypto Mining Domain Communication"
-    - ruleName: "Read Environment Variables from procfs"
-    - ruleName: "eBPF Program Load"
-    - ruleName: "Symlink Created Over Sensitive File"
-    - ruleName: "Unexpected Sensitive File Access"
-    - ruleName: "LD_PRELOAD Hook"
-    - ruleName: "Hardlink Created Over Sensitive File"
+    - ruleID: "R0001"
+    - ruleID: "R0006"
+    - ruleTags:
+        - "crypto"
 ```
 </details>
 
-The rules are defined in the [node-agent repository](https://github.com/kubescape/node-agent/tree/main/pkg/ruleengine/v1).
-Currently, the following rules are supported:
-
-| **Rule**                                      | **Description**                                                                                       |
-|-----------------------------------------------|-------------------------------------------------------------------------------------------------------|
-| **Unexpected process launched**               | Detects the launch of an unexpected or unauthorized process.                                           |
-| **Unexpected file access**                    | Identifies unexpected access to files. `ignoreMounts` parameter can be used to ignore mounts, `ignorePrefixes` parameter can be used to ignore specific prefixes. |
-| **Unexpected system call**                    | Detects unexpected or unauthorized system calls.                                                      |
-| **Unexpected capability used**                | Flags the use of unexpected capabilities.                                                             |
-| **Unexpected domain request**                 | Identifies requests to unexpected or unauthorized domains.                                            |
-| **Unexpected Service Account Token Access**   | Detects unauthorized access to service account tokens.                                                |
-| **Kubernetes Client Executed**                | Detects the execution of a Kubernetes client.                                                         |
-| **Exec from malicious source**                | Identifies execution of commands from a known malicious source.                                       |
-| **Kernel Module Load**                        | Detects the loading of unauthorized or unexpected kernel modules.                                     |
-| **Exec Binary Not In Base Image**             | Flags execution of binaries not included in the base image.                                           |
-| **Malicious SSH Connection**                  | Detects malicious or unauthorized SSH connections.                                                    |
-| **Fileless Execution**                        | Identifies execution of commands or scripts without a file.                                           |
-| **XMR Crypto Mining Detection**               | Detects cryptocurrency mining activity related to Monero (XMR).                                       |
-| **Exec from mount**                           | Flags execution of commands from a mounted directory.                                                 |
-| **Crypto Mining Related Port Communication**  | Identifies port communication related to cryptocurrency mining.                                       |
-| **Crypto Mining Domain Communication**        | Detects communication with domains associated with cryptocurrency mining.                             |
-| **Read Environment Variables from procfs**    | Flags unauthorized reading of environment variables from procfs.                                       |
-| **eBPF Program Load**                         | Detects loading of eBPF programs.                                                                     |
-| **Symlink Created Over Sensitive File**       | Flags the creation of symlinks over sensitive files. `additionalPaths` parameter can be used to specify additional paths to be checked. |
-| **Unexpected Sensitive File Access**          | Identifies access to sensitive files. `additionalPaths` parameter can be used to specify additional paths to be checked. |
-| **LD_PRELOAD Hook**                           | Detects the use of LD_PRELOAD to hook shared libraries.                                               |
-| **Hardlink Created Over Sensitive File**      | Flags the creation of hardlinks over sensitive files. `additionalPaths` parameter can be used to specify additional paths to be checked. |
-
-
-The rules are written in golang and are compiled into the node-agent binary.
-In the future we plan to add additional rules, as well as support custom rules.
-Some of the rules support parameters that can be set in the Rule Binding CRD.
+Some of the rules support per-binding `parameters` values. For example, file-access rules can ignore prefixes and sensitive-file rules can extend the path list. The default rule definitions in the rule library document which parameters are supported.
 
 ## Application profiles
 Application profiles are used to store the normal behavior of the application, as recorded during the learning phase.
@@ -427,7 +368,7 @@ helm repo update
 helm upgrade --install kubescape kubescape/kubescape-operator -n kubescape --create-namespace --set capabilities.runtimeDetection=enable --set alertCRD.installDefault=true
 ```
 
-This installs the node-agent with detection enabled and with default alert rule bindings.
+This installs the node-agent with detection enabled, the default rule library, and the default alert rule bindings.
 Note, that we have not defined an exporter, therefore the alerts are sent to the node-agent logs.
 
 Wait for the learning period to end (the default is 24h!) and you can try out the detection capabilities.
