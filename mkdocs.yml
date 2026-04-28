@@ -62,6 +62,7 @@ nav:
             - 'Vulnerability scanning': 'docs/operator/vulnerabilities.md'
             - 'Relevancy': 'docs/operator/relevancy.md'
             - 'Runtime Threat Detection': 'docs/operator/runtime-threat-detection.md'
+            - 'Node Agent Rule Library': 'docs/operator/node-agent-rule-library.md'
             - 'Generate Network Policies': 'docs/operator/network-policy-generation.md'
             - 'Scheduled scans': 'docs/operator/scheduled-scans.md'
             - 'Continuous scanning': 'docs/operator/continuous-scanning.md'
