@@ -187,10 +187,16 @@ The default output format for a Kubescape scan is a "pretty-printed" table view.
     kubescape scan --format prometheus
     ```
 
-* HTML
+* HTML:
 
     ```sh
     kubescape scan --format html --output results.html
+    ```
+
+* Multiple output formats in a single scan:
+
+    ```sh
+    kubescape scan --format json,html,prometheus --output result
     ```
 
 * Display all scanned resources (including the resources which passed):
