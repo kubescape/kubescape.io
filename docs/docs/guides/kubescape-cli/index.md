@@ -259,6 +259,12 @@ nginx                   latest            fffffc90d343   3 weeks ago     188MB
 nginx                   latest-patched    c9b68957ce42   3 weeks ago     190MB
 ```
 
+By default the patched image is only loaded into your local image store and is **not** pushed back to the source registry. If you want Kubescape to also push the patched image to the registry it was pulled from, pass the `--push` flag (and use `--username` / `--password`, or your Docker credential store, to authenticate):
+
+```shell
+kubescape patch -i myregistry.example.com/team/app:1.2.3 --push
+```
+
 
 ## Conclusion
 

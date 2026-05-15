@@ -124,6 +124,8 @@ We get the following output:
 
 As we can see, we have a new image called **“nginx:1.23-patched”** and the total vulnerabilities has reduced to just 198 from 265!
 
+> **Note on registry pushes:** by default, `kubescape patch` only loads the patched image into your local image store and does **not** push it back to the source registry. If you want it pushed, add the `--push` flag (and authenticate with `--username` / `--password` or your Docker credential store): `kubescape patch -i myregistry/team/app:1.2.3 --push`.
+
 Now, you might wonder — Why weren’t all the vulnerabilities patched and why do we still have 198 vulnerabilities which are not fixed? The answer lies in how image scanning and image patching works.
 
 If you are familiar with any of the popular image scanning software like Grype/Trivy/Docker etc., it lists the following:
