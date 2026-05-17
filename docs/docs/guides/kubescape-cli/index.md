@@ -259,15 +259,17 @@ nginx                   latest            fffffc90d343   3 weeks ago     188MB
 nginx                   latest-patched    c9b68957ce42   3 weeks ago     190MB
 ```
 
-By default, `kubescape patch` loads the patched image into your local Docker image store and does **not** push it back to the source registry. The patched tarball is streamed from BuildKit into `docker load`, so the `docker` CLI must be available on your `PATH` for this default path to work.
+By default, `kubescape patch` loads the patched image into your local Docker image store and does not push it to the source registry. The patched tarball is streamed from BuildKit into `docker load`, so the `docker` CLI must be available on your `PATH`.
 
-To push the patched image to the source registry instead, pass the `--push` flag. Credentials can be supplied via `--username` / `--password`, or are picked up from your Docker credential store:
+To push the patched image to the source registry, pass the `--push` flag:
 
 ```shell
 kubescape patch -i myregistry.example.com/team/app:1.2.3 --push
 ```
 
-When `--push` is used, BuildKit uploads the patched image directly to the registry and does not load it into the local Docker image store.
+For private registries, run `docker login <registry>` before running the command. The BuildKit pull and push path reads registry credentials from your Docker credential store. The `--username` and `--password` flags authenticate the scan and re-scan steps, not the patch export.
+
+With `--push`, BuildKit uploads the patched image to the registry and does not add it to your local Docker image store.
 
 
 ## Conclusion
