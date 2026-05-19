@@ -120,6 +120,24 @@ Kubescape can scan container images for known vulnerabilities before deployment.
   ```
 
 
+### Score-based thresholds
+
+Kubescape exposes two score-based threshold flags:
+
+* `--compliance-threshold <float>` — exit code 1 if the compliance score is below the given percent.
+* `--fail-threshold <float>` *(deprecated)* — exit code 1 if the risk score is above the given percent. This gates a different metric (risk score, not compliance score); it is being phased out in favour of `--compliance-threshold`.
+
+These flags apply to the framework/control subcommands and to the resource/control views:
+
+```sh
+kubescape scan framework nsa --compliance-threshold 80 ./manifests
+kubescape scan control C-0017 --compliance-threshold 80 ./manifests
+kubescape scan --view resource --compliance-threshold 80 ./manifests
+kubescape scan --view control  --compliance-threshold 80 ./manifests
+```
+
+The default `kubescape scan [path]` uses `--view security`, which does not evaluate against a score threshold — pick one of the forms above when you want the exit code to reflect the score. `--severity-threshold` and `--fail-coverage-below` apply in every view.
+
 ## Examples
 
 * Scan a specific control, using the control name or control ID. [See the control library](controls/index.md).
