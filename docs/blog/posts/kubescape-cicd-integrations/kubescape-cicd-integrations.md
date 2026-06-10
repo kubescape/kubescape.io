@@ -76,11 +76,11 @@ kubescape:
     - curl -s https://raw.githubusercontent.com/kubescape/kubescape/master/install.sh | bash
     - export PATH=$PATH:$HOME/.kubescape/bin
   script:
-    - kubescape scan . --format pretty-printer --compliance-threshold 80
+    - kubescape scan framework nsa . --format pretty-printer --compliance-threshold 80
   allow_failure: true
 ```
 
-Set `allow_failure: false` to block merge requests that fall below your compliance threshold. For a full guide including framework-specific scans and troubleshooting, see the [GitLab CI/CD integration guide](https://github.com/kubescape/kubescape/blob/master/docs/gitlab-ci.md).
+Set `allow_failure: false` to block merge requests that fall below your compliance threshold. Note: `--compliance-threshold` only takes effect with `scan framework <name>` or `--view resource|control` — a plain `kubescape scan .` exits 0 regardless of score. For a full guide including framework-specific scans and troubleshooting, see the [GitLab CI/CD integration guide](https://github.com/kubescape/kubescape/blob/master/docs/gitlab-ci.md).
 
 ## Jenkins
 
@@ -102,8 +102,9 @@ pipeline {
                 sh '''
                     curl -s https://raw.githubusercontent.com/kubescape/kubescape/master/install.sh | bash
                     export PATH=$PATH:$HOME/.kubescape/bin
-                    kubescape scan . \
-                        --format pretty-printer \
+                    kubescape scan framework nsa . \
+                        --format sarif \
+                        --output results.sarif \
                         --compliance-threshold 80
                 '''
             }
@@ -112,7 +113,7 @@ pipeline {
 
     post {
         always {
-            archiveArtifacts artifacts: '*.sarif', allowEmptyArchive: true
+            archiveArtifacts artifacts: 'results.sarif', allowEmptyArchive: true
         }
     }
 }
