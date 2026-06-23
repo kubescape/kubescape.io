@@ -75,6 +75,7 @@ nav:
         - Integrations:
             - 'Overview': 'docs/integrations/index.md'
             - 'GitHub': 'docs/integrations/github.md'
+            - 'GitLab CI/CD': 'docs/integrations/gitlab.md'
             - 'Lens': 'docs/integrations/lens.md'
             - 'VS Code': 'docs/integrations/vscode.md'
         - Frameworks and Controls:
