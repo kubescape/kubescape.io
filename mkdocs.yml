@@ -67,6 +67,7 @@ nav:
                 - 'What is a Bill of Behavior': 'docs/operator/bill-of-behavior/index.md'
                 - 'Quickstart': 'docs/operator/bill-of-behavior/quickstart.md'
                 - 'End-to-end example': 'docs/operator/bill-of-behavior/tutorial.md'
+                - 'Signing &amp; tamper detection': 'docs/operator/bill-of-behavior/signing-and-tamper.md'
             - 'Generate Network Policies': 'docs/operator/network-policy-generation.md'
             - 'Scheduled scans': 'docs/operator/scheduled-scans.md'
             - 'Continuous scanning': 'docs/operator/continuous-scanning.md'
