@@ -72,21 +72,23 @@ node-agent detects the mismatch (`Test_30`).
 
 ## 3. The detection — R1016
 
+node-agent re-verifies on the next load, logs *"user-defined ApplicationProfile signature mismatch
+(tamper detected)"*, and raises R1016. The whole flow — signed profile → tamper → alert:
+
+![R1016 tamper detection](r1016-tamper.gif)
+
+Here is the **actual alert**, captured live on a k3s rig running sbob-rc3:
+
 ```json
-{
-  "RuleID": "R1016",
-  "BaseRuntimeMetadata": {
-    "alertName": "Signed profile tampered",
-    "message": "Signed profile tampered: signature present but no longer valid",
-    "severity": 10,
-    "mitreTactic": "TA0005",
-    "mitreTechnique": "T1562"
-  },
-  "RuntimeK8sDetails": { "namespace": "…", "podName": "…", "containerName": "…", "workloadName": "…" }
-}
+{"RuleID":"R1016","alertName":"Signed profile tampered","severity":10,
+ "namespace":"sig-demo","workloadName":"sigapp",
+ "message":"Signed ApplicationProfile 'sigapp' in namespace 'sig-demo' has been tampered with:
+  signature verification failed: invalid signature…"}
 ```
 
-Read it like any other rule violation:
+The full alert also carries a `fixSuggestions` field — *"Investigate who modified the
+ApplicationProfile 'sigapp'… Re-sign the profile after verifying its contents."* Read it like any
+other rule violation:
 
 ```bash
 kubectl -n kubescape logs -l app=node-agent --tail=200 | grep KubescapeRuleViolated \
