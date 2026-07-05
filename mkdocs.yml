@@ -63,6 +63,10 @@ nav:
             - 'Relevancy': 'docs/operator/relevancy.md'
             - 'Runtime Threat Detection': 'docs/operator/runtime-threat-detection.md'
             - 'Node Agent Rule Library': 'docs/operator/node-agent-rule-library.md'
+            - 'Bill of Behavior':
+                - 'What is a Bill of Behavior': 'docs/operator/bill-of-behavior/index.md'
+                - 'Quickstart': 'docs/operator/bill-of-behavior/quickstart.md'
+                - 'End-to-end example': 'docs/operator/bill-of-behavior/tutorial.md'
             - 'Generate Network Policies': 'docs/operator/network-policy-generation.md'
             - 'Scheduled scans': 'docs/operator/scheduled-scans.md'
             - 'Continuous scanning': 'docs/operator/continuous-scanning.md'
