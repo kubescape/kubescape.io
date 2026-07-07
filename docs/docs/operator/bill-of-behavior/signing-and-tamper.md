@@ -1,38 +1,26 @@
-# Signing &amp; tamper detection
-
+# Signing &amp; tamper detection (experimental)
 A user-defined profile is an **allow-list** — whoever can edit it controls what the runtime treats
-as "normal". If an attacker (or a careless CI job) quietly adds `/bin/sh` to a workload's
-`ApplicationProfile`, they have *disabled* the detection for that workload, silently. Signing closes
-that gap: it binds a profile to the key that authored it, and Kubescape re-checks the signature every
-time it loads the profile — so any later modification is caught and raises **R1016 – Signed profile
-tampered**.
+as "normal". Same goes for the CEL rules and the kubescape config. Which is why we decided to make them signable and bundlable.
 
-This is the "signed" in *Signed Bill of Behavior*. It is exercised end to end by the node-agent
+
+![R1016 tamper detection](r1016-tamper.gif)
+
+
+For up-to-date examples, consult the 
 component tests `Test_29` (a signed profile is accepted), `Test_30` (tampering invalidates the
 signature), and `Test_31` (the R1016 alert fires).
 
-## The idea
+## Implemented as annotation
 
-```
- author                          cluster                              node-agent
- ──────                          ───────                              ──────────
- write ApplicationProfile
- sign it (cosign)  ──apply──▶  signed profile (CR)  ──load──▶  verify signature
-                                     │                              ├─ valid   → use it, no alert
- attacker edits the CR ─────────────┘                              └─ changed → R1016 "tampered"
-```
 
 The signature travels **with** the object, as an annotation. Kubescape verifies it on every
 cache-load, so tampering is detected wherever it happens — `kubectl edit`, a compromised operator, a
 malicious admission mutation.
 
-## Run it end-to-end (copy-paste)
+## Try it yourself
 
 Prerequisites: a cluster with Kubescape **sbob-rc3** installed (see the
-[quickstart install](quickstart.md)), plus `kubectl`, `docker`, `jq`, and `yq`. Every block below is
-copy-pasteable as-is. The `sign-object` image is **pinned by digest**, so you get exactly the build
-these steps were verified against; plain `docker run` writes files as you (the entrypoint drops to
-the `/work` owner — no `--user` flag).
+[quickstart install](quickstart.md)), plus `kubectl`, `docker`, `jq`, and `yq`. 
 
 ```bash
 export SIGN_OBJECT="ghcr.io/k8sstormcenter/sign-object:v0.0.3@sha256:f3d4e321fa62e0a4ca421ba59a3fce3f2ff88714aaf87a7d160322cb8ec2f92b"
@@ -196,9 +184,7 @@ The `spec` changed but the signature is still the old one, so it no longer verif
 ## 3. The detection — R1016
 
 node-agent re-verifies on the next load, logs *"user-defined ApplicationProfile signature mismatch
-(tamper detected)"*, and raises R1016. The whole flow — signed profile → tamper → alert:
-
-![R1016 tamper detection](r1016-tamper.gif)
+(tamper detected)"*, and raises R1016.
 
 Here is the **actual alert**, captured live on a k3s rig running sbob-rc3:
 
