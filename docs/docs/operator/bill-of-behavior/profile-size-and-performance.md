@@ -57,6 +57,8 @@ the same files (`/srv/svcN/cache/*`):
 
 
 
-## Next
+## Other links
 
+- **[What is a Software Bill of Behavior](index.md)** — the concept and the custom resources.
+- **[Quickstart](quickstart.md)** — a live Log4Shell detection against a signed profile.
 - **[Signing &amp; tamper detection](signing-and-tamper.md)** — sign the compact profile you ship.

@@ -48,4 +48,4 @@ Thus, we have the `experimental` feature:
 
 ## Next
 
-See **[End-to-end example](quickstart.md)** — deploy a workload, watch its profile being learned, trigger an out-of-profile behavior, see the alert, and learn the day-to-day commands, all in one walkthrough.
+See **[End-to-end Log4J example](quickstart.md)** — deploy a workload, watch its profile being learned, trigger an out-of-profile behavior, see the alert, and learn the day-to-day commands, all in one walkthrough.

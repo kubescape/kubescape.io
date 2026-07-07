@@ -2,7 +2,7 @@
 A user-defined profile is an **allow-list** — whoever can edit it controls what the runtime treats
 as "normal". Same goes for the CEL rules[^cel-rules] and the kubescape config. Which is why we decided to make them signable and bundlable.
 
-[^cel-rules]: Rules are signable (`sign-object --type rules`), but verification is gated on `enableSignatureVerification` (default off, unset by the chart). Off → tampered rules load undetected. On → a tampered rule is rejected (fail-closed skip, logged `skippedByVerification`; not an R1016 alert), and unsigned rules are rejected too — the default library drops to 0 enabled unless every rule is signed.
+[^cel-rules]: Rules are signable (`sign-object --type rules`), but verification is gated on `enableSignatureVerification` (default off, unset by the chart). If set to `ON` a tampered rule is rejected (fail-closed skip, logged `skippedByVerification`; not an R1016 alert), and unsigned rules are rejected too — the default library drops to 0 enabled unless every rule is signed.
 
 
 ![R1016 tamper detection](r1016-tamper.gif)
