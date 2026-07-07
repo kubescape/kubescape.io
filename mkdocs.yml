@@ -66,7 +66,6 @@ nav:
             - 'Bill of Behavior':
                 - 'What is a Bill of Behavior': 'docs/operator/bill-of-behavior/index.md'
                 - 'Quickstart': 'docs/operator/bill-of-behavior/quickstart.md'
-                - 'End-to-end example': 'docs/operator/bill-of-behavior/tutorial.md'
                 - 'Signing &amp; tamper detection': 'docs/operator/bill-of-behavior/signing-and-tamper.md'
                 - 'Profile size &amp; performance': 'docs/operator/bill-of-behavior/profile-size-and-performance.md'
             - 'Generate Network Policies': 'docs/operator/network-policy-generation.md'

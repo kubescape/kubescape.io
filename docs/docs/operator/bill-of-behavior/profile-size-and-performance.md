@@ -101,6 +101,4 @@ per-request-file workload or an imported OneAgent profile produces).
 
 ## Next
 
-- **[End-to-end example](tutorial.md#authoring-a-production-profile-with-wildcards)** — authoring a
-  wildcard profile by hand.
 - **[Signing &amp; tamper detection](signing-and-tamper.md)** — sign the compact profile you ship.
