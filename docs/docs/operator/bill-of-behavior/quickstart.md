@@ -69,7 +69,8 @@ execs:
     A profile that only lists `/usr/bin/psql` still alerts, because `psql` is a
     wrapper that execs `/usr/lib/postgresql/18/bin/psql` and node-agent traces the
     resolved path. Allow the binary the process actually runs. The `⋯⋯` token is the
-    exec-arg wildcard (zero-or-more args).
+    exec-arg wildcard (zero-or-more args); an allowed path run with an argv that matches
+    no recorded pattern trips [R0040](../node-agent-rule-library.md).
 
 Second, the `NetworkNeighborhood` — the only connections it may make:
 

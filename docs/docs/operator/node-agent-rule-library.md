@@ -26,7 +26,7 @@ If you need a refresher on the learning phase and application profiles, see [Run
 
 ## Default rules
 
-In the current Helm chart template, the default rule library contains 26 rules: 22 enabled by default and 4 disabled by default (`R0002`, `R0011`, `R1003`, and `R1011`).
+In the current Helm chart template, the default rule library contains 28 rules: 24 enabled by default and 4 disabled by default (`R0002`, `R0011`, `R1003`, and `R1011`).
 
 ### Profile-driven anomaly rules
 
@@ -43,6 +43,7 @@ In the current Helm chart template, the default rule library contains 26 rules: 
 | `R0009` | On | `bpf` | eBPF Program Load | Detects eBPF program load operations. |
 | `R0010` | On | `open` | Unexpected Sensitive File Access | Detects unexpected access to sensitive files. |
 | `R0011` | Off | `network` | Unexpected Egress Network Traffic | Detects unexpected outbound traffic that is not whitelisted by the learned profile. |
+| `R0040` | On | `exec` | Unexpected process arguments | Detects an exec whose **path is allowed** but whose **argv** matches no recorded pattern for that path. Uses the exec-arg wildcards `⋯` (exactly one arg) and `⋯⋯` (zero-or-more); a literal `*` in a recorded arg is **not** a wildcard. Stays silent when the path itself is unknown — that's `R0001`. |
 
 ### Signature and behavioral rules
 
@@ -63,6 +64,7 @@ In the current Helm chart template, the default rule library contains 26 rules: 
 | `R1012` | On | `hardlink` | Hard link created over sensitive file | Detects hardlink creation over sensitive files. |
 | `R1015` | On | `ptrace` | Malicious Ptrace Usage | Detects potentially malicious `ptrace` usage. |
 | `R1030` | On | `iouring` | Unexpected io_uring Operation Detected | Detects `io_uring` activity that was not observed during the learning period. |
+| `R1016` | On | `—` (metadata) | Signed profile tampered | Detects tampering with a cosign-signed user profile (`ApplicationProfile` / `NetworkNeighborhood`): the signature annotation is present but no longer verifies. Metadata-only — emitted on profile cache-load re-verification, not a live eBPF event. See [Signing &amp; tamper detection](bill-of-behavior/signing-and-tamper.md). |
 
 For the full rule definitions, including severities, MITRE mappings, tags, and trigger settings, see:
 

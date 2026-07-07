@@ -29,8 +29,8 @@ The lifecycle is three steps:
 A learned profile captures what a workload *did* during learning. For production you often want to declare what a workload *should* do — more general, vendor-authored, signed. Kubescape supports this directly:
 
 - **Wildcards** in exec arguments, file paths, and network destinations (CIDRs and DNS-label patterns), so a profile describes a *class* of behavior rather than one observed instance.
-- **Profile compaction** via a `CollapseConfig`, folding many concrete observations into a smaller, maintainable profile.
-- **Signing and tamper detection**, so a user-supplied profile can be cryptographically verified and any later modification is detected at runtime.
+- **Profile compaction** via a `CollapseConfig`, folding many concrete observations into a smaller, maintainable profile — see [Profile size &amp; performance](profile-size-and-performance.md) for what it saves.
+- **Signing and tamper detection** ([R1016](../node-agent-rule-library.md)), so a user-supplied profile can be cryptographically verified and any later modification is detected at runtime — see [Signing &amp; tamper detection](signing-and-tamper.md).
 
 ## Next
 
