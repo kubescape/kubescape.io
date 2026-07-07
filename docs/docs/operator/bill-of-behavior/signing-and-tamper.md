@@ -28,17 +28,28 @@ malicious admission mutation.
 
 ## 1. Sign a profile
 
-Signing is done with the `sign-object` CLI (shipped in the node-agent repo, image
-`ghcr.io/k8sstormcenter/node-agent` under `cmd/sign-object`). Key-based ECDSA needs no Sigstore/OIDC:
+Signing is done with the **`sign-object`** CLI, published as a minimal image
+`ghcr.io/k8sstormcenter/sign-object:v0.0.3`. Key-based ECDSA needs no Sigstore/OIDC — run it against
+your working directory:
 
 ```bash
+alias sign-object='docker run --rm -v "$PWD:/work" ghcr.io/k8sstormcenter/sign-object:v0.0.3'
+
 # one-time: generate a keypair
-sign-object generate-keypair                       # → cosign.key (private) + cosign.pub (public)
+sign-object generate-keypair --output cosign.key   # → cosign.key + cosign.key.pub
 
 # author an ApplicationProfile, then sign it
-sign-object sign --key cosign.key --output my-profile.signed.yaml my-profile.yaml
+sign-object sign --file my-profile.yaml --output my-profile.signed.yaml \
+  --key cosign.key --type applicationprofile
 kubectl apply -f my-profile.signed.yaml
 ```
+
+!!! warning "Author the profile round-trip-safe"
+    Storage normalises empty arrays (`opens: []`, `syscalls: []`, `capabilities: []`, `endpoints: []`)
+    to `null` on apply. Sign a profile that carries them and the stored form no longer matches the
+    signature — R1016 fires at the first bind, a false tamper. **Omit** the fields you aren't
+    constraining; `sign-object` emits `null` for them, which matches what storage stores. (Verified:
+    the signed-vs-stored spec diff drops to zero.)
 
 Attach the signed profile to a workload with the usual label:
 
@@ -67,8 +78,12 @@ kubectl patch applicationprofile my-profile --type=json \
   -p '[{"op":"add","path":"/spec/containers/0/execs/-","value":{"path":"/bin/sh","args":["/bin/sh"]}}]'
 ```
 
-The `spec` changed, so it no longer matches the signature. On the next cache-load re-verification,
-node-agent detects the mismatch (`Test_30`).
+The `spec` changed, so it no longer matches the signature (`Test_30`).
+
+!!! note "When R1016 fires"
+    node-agent verifies a profile's signature on **cache-load** and caches the result, so the tamper
+    is caught on the next re-verification — a profile re-sync or a fresh load — not the instant you
+    edit. To see it immediately, force a reload: `kubectl -n kubescape rollout restart ds/node-agent`.
 
 ## 3. The detection — R1016
 
