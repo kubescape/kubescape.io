@@ -71,14 +71,18 @@ profile. Nothing anomalous → no alert (`Test_29`).
 
 ## 2. Tamper with it
 
-An attacker weakens the allow-list — say, whitelisting a shell so their RCE won't trip R0001:
+An attacker weakens the allow-list — say, whitelisting a shell so their RCE won't trip R0001. A
+*completed* User profile is write-protected in place (an in-place `kubectl patch` is silently a
+no-op), so they **replace** it: edit the signed YAML to append `/bin/sh` to the execs — **keeping the
+original signature annotation** — and re-apply.
 
 ```bash
-kubectl patch applicationprofile my-profile --type=json \
-  -p '[{"op":"add","path":"/spec/containers/0/execs/-","value":{"path":"/bin/sh","args":["/bin/sh"]}}]'
+# add {path: /bin/sh, args: ["/bin/sh"]} to spec.containers[0].execs in my-profile.signed.yaml, then:
+kubectl delete applicationprofile my-profile -n sig-demo
+kubectl apply  -f my-profile.signed.yaml
 ```
 
-The `spec` changed, so it no longer matches the signature (`Test_30`).
+The `spec` changed but the signature is still the old one, so it no longer verifies (`Test_30`).
 
 !!! note "When R1016 fires"
     node-agent verifies a profile's signature on **cache-load** and caches the result, so the tamper
