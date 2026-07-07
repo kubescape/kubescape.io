@@ -1,10 +1,14 @@
 # Bill of Behavior
 
-A **Software Bill of Behavior (SBoB)** is a declarative profile of what a workload is *intended* to do at runtime — the processes it spawns, the files it opens, the network destinations it reaches, and the Linux capabilities it requests.
+A **Software Bill of Behavior (SBOB)** is a declarative and **abstracted** profile of what a workload is *intended* to do at runtime — the processes it spawns, the files it opens, the network destinations it reaches, and the Linux capabilities it requests.
 
-Where a Software Bill of Materials (SBOM) describes what a workload is *made of*, a Bill of Behavior describes what it is *meant to do*. The SBOM is the ingredient list; the SBoB is the package insert. Anything a workload does at runtime that the SBoB does not declare is, by definition, drift — a vendor bug to fix, or a compromise to alert on.
+Where a Software Bill of Materials (SBOM) describes what a workload is *made of*, a Software Bill of Behavior describes what it is *meant to do*. The SBOM is the ingredient list; the SBOB is the package insert. Anything a workload does at runtime that the SBOB does not declare is: `undesired` :
+Either it points to a vendor bug and/or respectively a vendor's lack of testing the SBOB (`False Positive`), or a malicious compromise (`True Positive`).
 
-This matters because most modern compromises leave no SBOM trace: stolen credentials, living-off-the-land, and supply-chain implants are all *behavioral*. They only show up at runtime, measured against a declaration of intent.
+## Validating an SBOB in your environment
+To tell the difference between the *SBOB* being inadequate and there being an actual attack, it is highly recommended to run the workload with a new SBOB in a
+non-productive environment under a standard test-suite.
+We are actively working on providing `validation tests` for common CNCF projects to make this *contrast* between `False` and `True` Positives more achievable.
 
 ## How Kubescape is a reference implementation
 
