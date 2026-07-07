@@ -2,7 +2,7 @@
 
 A **Software Bill of Behavior (SBOB)** is a declarative and **abstracted** profile of what a workload is *intended* to do at runtime — the processes it spawns, the files it opens, the network destinations it reaches, and the Linux capabilities it requests.
 
-Where an SBOM describes what a workload is *made of*, an SBOB describes what it is *meant to do*. The SBOM is the ingredient list; the SBOB is the package insert. 
+Where an [SBOM](https://spdx.dev/specifications/) describes what a workload is *made of*, an [SBOB](https://billofbehavior.com/bob/) describes what it is *meant to do*. The SBOM is the ingredient list; the SBOB is the package insert. 
 
 Anything a workload does at runtime that the SBOB does not declare is `undesired`. Either  
 - it points to a bug: lack of testing the software and/or the SBOB (`False Positive`), or  
@@ -37,15 +37,17 @@ For this, we implemented two major concepts.
 - **Wildcards** in exec arguments, file paths, and network destinations (CIDRs and DNS-label patterns), so a profile describes a *class* of behavior rather than one observed instance.
 - **Plurals** for network destinations (CIDRs and DNS-label patterns): A learnt profile usually contains a specific IP, whereas it might be part of a range. E.g. `pod-cidr` or `services-cidr` for internal and `vendor ip-list` for external endpoints.[^ct]
 
+Refer to the early [specification](https://billofbehavior.com/bob/docs/spec/) for details.
+
 [^ct]: Please see the component test of node-agent for a full set of examples.
 
 ## What can be tampered with, must be signed
 
 Config, CEL rules and SBOBs determine how the detection behaves. Excluding a namespace is as dangerous as allowlisting a new binary in a profile.
-Thus, we have the `experimental` feature:
+Thus, we have the `experimental` feature [Signing &amp; tamper detection](signing-and-tamper.md):
 
-- **Signing and tamper detection** ([R1016](../node-agent-rule-library.md)), so it can be cryptographically verified and any later modification is detected at runtime — see [Signing &amp; tamper detection](signing-and-tamper.md).
+It adds a new rule ([R1016](../node-agent-rule-library.md)), so critical components (config, rules, profiles) can be signed, their integrity be verified and any later modification be detected and alerted on.
 
 ## Next
 
-See **[End-to-end Log4J example](quickstart.md)** — deploy a workload, watch its profile being learned, trigger an out-of-profile behavior, see the alert, and learn the day-to-day commands, all in one walkthrough.
+Try it out in the **[End-to-end Log4J example](quickstart.md)** 

@@ -1,6 +1,6 @@
 # Signing &amp; tamper detection (experimental)
 A user-defined profile is an **allow-list** — whoever can edit it controls what the runtime treats
-as "normal". Same goes for the CEL rules[^cel-rules] and the kubescape config. Which is why we decided to make them signable and bundlable.
+as "normal". Same goes for the CEL rules[^cel-rules] and configuration. Which is why we decided to make them signable and bundlable.
 
 [^cel-rules]: Rules are signable (`sign-object --type rules`), but verification is gated on `enableSignatureVerification` (default off, unset by the chart). If set to `ON` a tampered rule is rejected (fail-closed skip, logged `skippedByVerification`; not an R1016 alert), and unsigned rules are rejected too — the default library drops to 0 enabled unless every rule is signed.
 
@@ -15,9 +15,14 @@ signature), and `Test_31` (the R1016 alert fires).
 ## Implemented as annotation
 
 
-The signature travels **with** the object, as an annotation. Kubescape verifies it on every
-cache-load, so tampering is detected wherever it happens — `kubectl edit`, a compromised operator, a
-malicious admission mutation.
+The signature travels **with** the object, as an annotation.
+```yaml
+      signature.kubescape.io/certificate: LS0tLS1CRUdJTiBDRVJUSUZJ…(base64)   
+      signature.kubescape.io/identity: local-key
+      signature.kubescape.io/issuer: local
+      signature.kubescape.io/signature: MEQCIDEsKzuY5LQM6TO1kNb4…(base64)   
+      signature.kubescape.io/timestamp: "1783454246"
+  ```
 
 ## Try it yourself
 
@@ -33,10 +38,10 @@ mkdir -p sbob-signing && cd sbob-signing
 **1. Generate a keypair.**
 
 ```bash
-sign_object generate-keypair --output cosign.key      # → cosign.key + cosign.key.pub
+sign_object generate-keypair --output cosign.key    
 ```
 
-**2. Author a profile.** List only `execs` — omit empty fields, or storage's `[]→null` normalization breaks the signature.
+**2. Author a profile.** 
 
 ```bash
 cat > my-profile.yaml <<'EOF'
@@ -87,7 +92,7 @@ EOF
 kubectl -n sig-demo rollout status deploy/signed-demo
 ```
 
-node-agent binds and **verifies** the signature — no alert. Confirm it's quiet (expect `0`):
+node-agent binds and **verifies** the signature — no alert. Confirm it's quiet:
 
 ```bash
 kubectl -n kubescape logs ds/node-agent | grep -c '"RuleID":"R1016"'
