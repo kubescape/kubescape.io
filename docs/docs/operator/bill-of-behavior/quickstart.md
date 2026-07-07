@@ -9,7 +9,7 @@ We published a *"harmless"* demo of
 [`log4shell`](https://github.com/k8sstormcenter/bob/tree/main/example/log4j-chain) — a
 `frontend → java-backend → postgres` deployment, while mocking the `external payload` and the `exfiltration domain`.
 
-The attack-chain injects a `JNDI` via http-header, that gets resolved via an `ldap` server, to download a `jar` file is downloaded into the running jvm to spawn a shell. 
+The attack-chain injects a `JNDI` via http-header, that gets resolved via an `ldap` server, to download a `jar` file into the running jvm to spawn a shell. 
 Our chain continues to connect to postgres via `psql` and to exfiltrate the `base32` encoded stolen DB-data via DNS.
 
 
@@ -33,8 +33,8 @@ helm install kubescape "$CHART" \
 
 Node-agent writes alerts to **stdout** by default — read them with `kubectl logs`.
 This walkthrough covers various exceptions,  you should note that the network alerts often depend on actual resolution.
-So **R0005** (DNS exfil) and **R0011** (Unexpected egress) needs an external connection. You can follow along without placing the LDAP and attacker-server
-on a public location and read adapt the CEL rules to understand which rules fire exactly when.
+So **R0005** (DNS exfil) and **R0011** (Unexpected egress) need an external connection. You can follow along without placing the LDAP and attacker-server
+on a public location and read/adapt the CEL rules to understand which rules fire exactly when.
 
 
 The general pattern is to ensure that sbobs of `your-sbob-name` exist and to bind
@@ -91,11 +91,6 @@ execs:
 ```
 To showcase the symlink resolution, we make java use `psql` for its connection to the DB.
 
-<!-- !!! tip "NEW: Symlinks resolve and list the real binary"
-    A profile that only lists `/usr/bin/psql` still alerts, because `psql` is a wrapper that execs `/usr/lib/postgresql/18/bin/psql` 
-    and node-agent traces the resolved path. Allow the binary the process actually runs. The `⋯⋯` token is the
-    exec-arg wildcard (zero-or-more args); an allowed path run with an argv that matches
-    no recorded pattern trips [R0040](../node-agent-rule-library.md). -->
 
 
 ```yaml
@@ -114,6 +109,10 @@ will not be detected as anomaly.
 !!! tip "Allowlisting obvious parts of attack for demo"
     For showcasing various features, we pretend the attacker uses binaries that the app was intended to use. A real java implementation 
     would not use `psql`. 
+
+!!! tip "NEW: Symlinks resolve and list the real binary"
+    Adjacent to our SBOB work, we also decided to resolve symlinked binaries to be able to detect more integrity-issue types in executables.
+
 
 ## 3. Make the attacker's exfil domain resolvable
 
@@ -176,20 +175,6 @@ args: [ curl, -s, -A,
     an env var (`CODEBASE_HOST`), so it can run anywhere. AT YOUR OWN RISK
 
 ## 6. See the detection
-
-<!-- First, recall what the profile **allows** — the two lists from the gif. Nothing here ever alerts:
-
-```bash
-kubectl -n log4j-poc get applicationprofile chain-backend \
-  -o jsonpath='{range .spec.containers[0].execs[*]}{.path}{"\n"}{end}'
-#  /opt/java/openjdk/bin/java   /usr/bin/java   /usr/bin/curl
-#  /usr/bin/psql   /usr/lib/postgresql/18/bin/psql          # the DB client + its resolved binary
-
-kubectl -n log4j-poc get networkneighborhood chain-backend \
-  -o jsonpath='{range .spec.containers[0].egress[*]}{.identifier}{"\n"}{end}'
-#  egress-kube-dns   egress-chain-postgres                  # DNS + the database, nothing else
-```
- -->
 
 Read the raw alerts 
 

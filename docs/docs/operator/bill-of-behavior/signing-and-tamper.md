@@ -1,4 +1,4 @@
-# Signing &amp; tamper detection (experimental)
+# Signing and tamper detection (experimental)
 A user-defined profile is an **allow-list** — whoever can edit it controls what the runtime treats
 as "normal". Same goes for the CEL rules[^cel-rules] and configuration. Which is why we decided to make them signable and bundlable.
 
@@ -9,10 +9,10 @@ as "normal". Same goes for the CEL rules[^cel-rules] and configuration. Which is
 ![R1016 tamper detection](r1016-tamper.gif)
 
 
-Importantly, you currently cannot edit SBOBs in Kubescape - at least, it has no effect at all - you need to restart a pod for an SBOB to take effect[^backlog].
+
 For up-to-date examples, consult the 
 component tests `Test_29` (a signed profile is accepted), `Test_30` (tampering invalidates the
-signature), and `Test_31` (the R1016 alert fires). This implementation will change in the future.
+signature), and `Test_31` (the R1016 alert fires). This implementation will change in the future[^backlog].
 
 ## Implemented as annotation
 
@@ -94,30 +94,32 @@ EOF
 kubectl -n sig-demo rollout status deploy/signed-demo
 ```
 
-node-agent binds and **verifies** the signature — no alert. Confirm it's quiet:
+node-agent binds and **verifies** the signature — no alert. Confirm it's quiet 
 
 ```bash
-kubectl -n kubescape logs ds/node-agent | grep -c '"RuleID":"R1016"'
+kubectl -n kubescape logs -l app=node-agent --tail=-1 | grep -c '"RuleID":"R1016"'
 ```
 
-**5. Tamper.** Add `/bin/sh`, keep the old signature, and replace the profile 
-
-As discussed above, a profile currently can't be patched in place[^backlog]. By extension, it cannot be tampered.
+**5. Tamper.** Add `/bin/sh` to the signed profile, keeping the old signature. Any in-place edit works — `kubectl patch`, `edit`, `apply`, `replace`, or delete + re-apply. The signature no longer matches the spec:
 
 ```bash
-yq -i '.spec.containers[0].execs += [{"path":"/bin/sh","args":["/bin/sh"]}]' my-profile.signed.yaml
-kubectl -n sig-demo delete applicationprofile signed-demo
-kubectl apply -f my-profile.signed.yaml
+kubectl -n sig-demo patch applicationprofile signed-demo --type=json \
+  -p '[{"op":"add","path":"/spec/containers/0/execs/-","value":{"path":"/bin/sh","args":["/bin/sh"]}}]'
 ```
 
 
 
-**6. Bind the new profile and read R1016.** 
-
-Restart the corresponding pod[^backlog]
+**6. Re-bind the pod, then read R1016.** 
+The signature is verified at **bind time**, so a running pod isn't re-checked until it re-binds[^backlog] — restart it:
 
 ```bash
-kubectl -n kubescape logs ds/node-agent | grep '"RuleID":"R1016"' \
+kubectl -n sig-demo rollout restart deploy/signed-demo
+```
+
+Read the alert from the node-agent pods
+
+```bash
+kubectl -n kubescape logs -l app=node-agent --tail=-1 | grep '"RuleID":"R1016"' \
   | jq -c '{RuleID, alert: .BaseRuntimeMetadata.alertName, severity: .BaseRuntimeMetadata.severity, workload: .RuntimeK8sDetails.workloadName}'
 ```
 
