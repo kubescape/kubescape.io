@@ -1,22 +1,25 @@
 # Quickstart
 
-Kubescape catching a live Log4Shell RCE — a shell spawned by a JVM worker thread, then its recon and
-exfiltration children, every one of them outside the workload's declared Bill of Behavior:
+Here, Kubescape uses an SBOB to catch a live Log4Shell RCE — a shell spawned by a JVM worker thread, its pivot and
+exfiltration children, every one of them outside the workload's declared Software Bill of Behavior:
 
 ![Kubescape detecting a Log4Shell RCE against a Bill of Behavior](l4j-detection.gif)
 
-This page reproduces exactly that, end to end, using the public
-[`log4j-chain`](https://github.com/k8sstormcenter/bob/tree/main/example/log4j-chain) demo — a
-`frontend → backend → postgres` app whose backend runs a vulnerable `log4j`. Every manifest is
-applied straight from GitHub; you only need to read the few lines that matter.
+We published a *"harmless"* demo of
+[`log4shell`](https://github.com/k8sstormcenter/bob/tree/main/example/log4j-chain) — a
+`frontend → java-backend → postgres` deployment, while mocking the `external payload` and the `exfiltration domain`.
+The standard chaining injects a `jndi` string via http, that gets resolved to an `ldap` server, from which a `jar` file is downloaded that drops into a shell, 
+our chain continues to connect to postgres via `psql` and to exfiltrate the `base32` encoded stolen data.
+
 
 !!! note "What you need"
-    - A Kubernetes cluster and `kubectl`.
-    - `helm`.
+    - A throwaway Kubernetes cluster (do NOT use in a real environment). 
+    - `helm` and `kubectl`
+    - the dns-mock will configure your core-dns, this is an exfiltration showcase that may leave your cluster misconfigured.
 
 ## 1. Install Kubescape with runtime detection on
 
-The `sbob-rc3` chart ships as a **GitHub release asset** (there is no Helm repo yet):
+The `sbob-rc3` chart currently ships as a **fork release**  and you need the `Kubescape Node-agent` and `Kubescape Storage` component
 
 ```bash
 CHART=https://github.com/k8sstormcenter/helm-charts/releases/download/kubescape-operator-1.40.3-sbob-rc3.1/kubescape-operator-1.40.3-sbob-rc3.1.tgz
@@ -27,20 +30,31 @@ helm install kubescape "$CHART" \
   --set alertCRD.installDefault=true
 ```
 
-Node-agent writes alerts to **stdout** by default — read them with `kubectl logs`. (It can also push
-to Alertmanager, syslog, or HTTP, but that's not needed here.) This walkthrough covers **R0001** (RCE)
-and **R0005** (DNS exfil), which reproduce turnkey; the egress rule **R0011** needs an external
-attacker and is covered in [Also see R0011](#also-see-the-egress-rule-r0011) at the end.
+Node-agent writes alerts to **stdout** by default — read them with `kubectl logs`.
+This walkthrough covers **R0001** (Unknown process executed), you should note that the network alerts often depend on actual resolution.
+So **R0005** (DNS exfil) and **R0011** (Unexpected egress) needs an external connection and is covered in the [last paragraph](#also-see-the-egress-rule-r0011).
+
+
+As long as we havnt migrated to Containerprofiles, the general pattern is to ensure that sbobs of `your-sbob-name` exist and to bind
+them via labels on each pod
+```yaml
+spec:
+  template:
+    metadata:
+      labels:
+        kubescape.io/user-defined-profile: your-sbob-name    
+        kubescape.io/user-defined-network: your-sbob-name    
+```
 
 !!! info "Which build is this"
     `sbob-rc3` is the release candidate that ships the Bill of Behavior features (wildcards, signing,
-    tamper detection) from `ghcr.io/k8sstormcenter/{storage,node-agent}`.
+    tamper detection), watch for announcements when it becomes GA.
 
 ## 2. Apply the Bill of Behavior — *before* the app
 
-The profiles are **supplied, not learned**, so detection is live with no learning period. node-agent
-binds a user profile **when the pod starts**, so the profiles must exist first — create the namespace
-and apply them up front:
+The profiles are **user-defined**, so detection is instantly live with no learning period. 
+
+First, deploy the `user-defined-profile` and `user-defined-network` for the log4j-demo:
 
 ```bash
 kubectl create namespace log4j-poc
@@ -50,44 +64,45 @@ for w in backend frontend observer postgres; do
 done
 ```
 
-Two sections of the backend's Bill of Behavior are what the whole demo turns on. First, the
-`ApplicationProfile` — the executables it may run:
+Two sections of the java-backend's SBOB are worth highlighting as the behavior here is now different from before:
 
 ```yaml
-# ap-chain-backend.yaml — allowed executables
+# ap-chain-backend.yaml 
 execs:
 - { path: /opt/java/openjdk/bin/java, args: ["java", "-jar", "/app/app.jar"] }
 - { path: /usr/bin/curl }
-- { path: /usr/bin/psql,                         args: ["/usr/bin/psql"] }  # the symlink…
-- { path: /usr/lib/postgresql/18/bin/psql,       args: ["/usr/lib/postgresql/18/bin/psql", "⋯⋯"] }
-#   ↑ …and the real binary the wrapper execs. node-agent sees the *resolved*
-#     path, so both must be listed; ⋯⋯ allows any psql arguments.
-# no sh, no getent, no base32 — anything else is drift
+- { path: /usr/bin/psql,                   
+          args: ["/usr/bin/psql"] }  # symlink
+#  New: node-agent sees the *resolved* path from a symlink
+- { path: /usr/lib/postgresql/18/bin/psql, 
+          args: ["/usr/lib/postgresql/18/bin/psql", "⋯⋯"] }
+#  New: wildcard ⋯⋯ allows any psql arguments.
 ```
+To showcase the symlink resolution, we make java use `psql` for its connection to the DB.
 
-!!! tip "Symlinks resolve — list the real binary"
-    A profile that only lists `/usr/bin/psql` still alerts, because `psql` is a
-    wrapper that execs `/usr/lib/postgresql/18/bin/psql` and node-agent traces the
-    resolved path. Allow the binary the process actually runs. The `⋯⋯` token is the
+<!-- !!! tip "NEW: Symlinks resolve and list the real binary"
+    A profile that only lists `/usr/bin/psql` still alerts, because `psql` is a wrapper that execs `/usr/lib/postgresql/18/bin/psql` 
+    and node-agent traces the resolved path. Allow the binary the process actually runs. The `⋯⋯` token is the
     exec-arg wildcard (zero-or-more args); an allowed path run with an argv that matches
-    no recorded pattern trips [R0040](../node-agent-rule-library.md).
+    no recorded pattern trips [R0040](../node-agent-rule-library.md). -->
 
-Second, the `NetworkNeighborhood` — the only connections it may make:
 
 ```yaml
-# nn-chain-backend.yaml — allowed network
+# nn-chain-backend.yaml — allowed network for java
 ingress:
-- from: { app: chain-frontend }   ports: [ TCP/8080 ]   # serves the frontend
-- from: { app: chain-observer }   ports: [ TCP/8080 ]
+- from: { app: chain-frontend }   ports: [ TCP/8080 ]   #incoming from nginx
 egress:
 - to: kube-dns                    ports: [ UDP/53, TCP/53 ]
-- to: { app: chain-postgres }     ports: [ TCP/5432 ]     # reads the database
-# NOT the attacker's LDAP, NOT arbitrary exfil domains
+- to: { app: chain-postgres }     ports: [ TCP/5432 ]   # java-app intended to connect to DB
 ```
 
-`psql` and the postgres egress are *allowed* — this app really does query a database. So the attack
-cannot hide by using them. What it *cannot* do without deviating is spawn a shell, run `getent`,
-resolve an unknown domain, or open an egress to the attacker. That is where it gets caught.
+Egress to postgres is *allowed* — this java really does query a database. This means, the connection via network from java-backend to postgres
+will not be detected as anomaly. 
+
+ 
+!!! tip "Allowlisting obvious parts of attack for demo"
+    For showcasing various features, we pretend the attacker uses binaries that the app was intended to use. A real java implementation 
+    would not use `psql`. 
 
 ## 3. Make the attacker's exfil domain resolvable
 
@@ -99,12 +114,15 @@ CoreDNS so it takes effect:
 kubectl apply -f https://raw.githubusercontent.com/k8sstormcenter/bob/main/example/log4j-chain/exfil-dns.yaml
 kubectl -n kube-system rollout restart deploy/coredns
 ```
+!!! note " SKIP this in any cluster, you will not throw-away - this kaputts dns"  
+
 
 ## 4. Deploy the vulnerable app + the attacker
 
-One manifest brings up the whole chain (`log4j-poc`) plus the in-cluster attacker (`attacker-ns`): a
-marshalsec LDAP server and a class-file HTTP server. Its pods carry the
-`kubescape.io/user-defined-profile` labels that bind the profiles from step 2 **at pod start**:
+Bring up the whole chain (`log4j-poc`)[^scenarios], with the pods labelled `user-defined-profile/network` to bind the profiles from step 2. 
+The manifest also includes the in-cluster attacker: a marshalsec LDAP server and a class-file HTTP server.
+
+[^scenarios]: **B** `backend-b.yaml` — `ghcr.io/k8sstormcenter/log4j-chain-backend-contained@sha256:f71e03993fec4df6ea947eda235d072f5c37569491fd32512a6d793369852e35` · **C** `backend-c.yaml` — `ghcr.io/k8sstormcenter/log4j-chain-backend-patched@sha256:cf34e119b720b0a31b5e5d2a7ede0e61eea0c14105c88558d80e7fa2a062290a`
 
 ```bash
 kubectl apply -f https://raw.githubusercontent.com/k8sstormcenter/bob/main/example/log4j-chain/log4j-chain.yaml
@@ -112,7 +130,7 @@ kubectl -n log4j-poc rollout status deploy/chain-backend --timeout=120s
 kubectl -n attacker-ns rollout status deploy/attacker --timeout=60s
 ```
 
-The one line that makes this exploitable is the backend's log4j (pinned to a verified digest):
+There are two non-vulnerable images in that registry, so you can contrast the detection. Choose the "vulnerable" one right now:
 
 ```yaml
 # backend container, in log4j-chain.yaml
@@ -121,12 +139,11 @@ image: ghcr.io/k8sstormcenter/log4j-chain-backend-vulnerable@sha256:8f3cb3f9… 
 
 ## 5. Fire the exploit
 
-The attack pod sends the classic JNDI payload in a `User-Agent` header. Substitute the pod-name
-placeholder and apply it in one line:
+The attack pod sends the classic JNDI payload in a `User-Agent` header. It lands in `log4j-poc`:
 
 ```bash
 curl -sL https://raw.githubusercontent.com/k8sstormcenter/bob/main/example/log4j-chain/attack-pod.yaml \
-  | sed 's/attack-PLACEHOLDER/attack-a/' | kubectl apply -f -
+  | kubectl -n log4j-poc apply -f -
 ```
 
 The single line that is the attack:
