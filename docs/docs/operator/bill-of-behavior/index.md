@@ -8,7 +8,7 @@ Anything a workload does at runtime that the SBOB does not declare is `undesired
 - it points to a bug: lack of testing the software and/or the SBOB (`False Positive`), or  
 - it points to a malicious compromise (`True Positive`).
 
-In **[the SBOB log4j example](tutorial.md)**, you can try it out yourself.
+In **[the SBOB log4j example](quickstart.md)**, you can try it out yourself.
 
 ## Validating an SBOB in your environment
 To tell the difference between the *SBOB* being inadequate and there being an actual attack, it is highly recommended to run the workload with a new SBOB in a
@@ -48,4 +48,4 @@ Thus, we have the `experimental` feature:
 
 ## Next
 
-See **[End-to-end example](tutorial.md)** — deploy a workload, watch its profile being learned, trigger an out-of-profile behavior, see the alert, and learn the day-to-day commands, all in one walkthrough.
+See **[End-to-end example](quickstart.md)** — deploy a workload, watch its profile being learned, trigger an out-of-profile behavior, see the alert, and learn the day-to-day commands, all in one walkthrough.

