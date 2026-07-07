@@ -163,7 +163,7 @@ kubectl -n log4j-poc get networkneighborhood chain-backend \
 Now fire the payload and read the raw alerts — **one JSON object per rule violation**:
 
 ```bash
-kubectl -n kubescape logs -l app=node-agent --tail=200 | grep KubescapeRuleViolated \
+kubectl -n kubescape logs -l app=node-agent --tail=200 | grep '"RuleID":"R' \
   | jq -c '{RuleID, alertName: .BaseRuntimeMetadata.alertName, args: .BaseRuntimeMetadata.arguments}'
 ```
 

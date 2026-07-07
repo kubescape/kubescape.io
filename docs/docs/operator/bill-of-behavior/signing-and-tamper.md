@@ -26,21 +26,125 @@ The signature travels **with** the object, as an annotation. Kubescape verifies 
 cache-load, so tampering is detected wherever it happens — `kubectl edit`, a compromised operator, a
 malicious admission mutation.
 
-## 1. Sign a profile
+## Run it end-to-end (copy-paste)
 
-Signing is done with the **`sign-object`** CLI, published as a minimal image
-`ghcr.io/k8sstormcenter/sign-object:v0.0.3`. Key-based ECDSA needs no Sigstore/OIDC — run it against
-your working directory:
+Prerequisites: a cluster with Kubescape **sbob-rc3** installed (see the
+[quickstart install](quickstart.md)), plus `kubectl`, `docker`, `jq`, and `yq`. Every block below is
+copy-pasteable as-is. The `sign-object` image is **pinned by digest**, so you get exactly the build
+these steps were verified against; plain `docker run` writes files as you (the entrypoint drops to
+the `/work` owner — no `--user` flag).
 
 ```bash
-alias sign-object='docker run --rm -v "$PWD:/work" ghcr.io/k8sstormcenter/sign-object:v0.0.3'
+export SIGN_OBJECT="ghcr.io/k8sstormcenter/sign-object:v0.0.3@sha256:f3d4e321fa62e0a4ca421ba59a3fce3f2ff88714aaf87a7d160322cb8ec2f92b"
+sign_object() { docker run --rm -v "$PWD:/work" "$SIGN_OBJECT" "$@"; }
+mkdir -p sbob-signing && cd sbob-signing
+```
 
-# one-time: generate a keypair
-sign-object generate-keypair --output cosign.key   # → cosign.key + cosign.key.pub
+**1. Generate a keypair.**
 
-# author an ApplicationProfile, then sign it
-sign-object sign --file my-profile.yaml --output my-profile.signed.yaml \
+```bash
+sign_object generate-keypair --output cosign.key      # → cosign.key + cosign.key.pub
+```
+
+**2. Author a profile.** List only `execs` — omit empty fields, or storage's `[]→null` normalization breaks the signature.
+
+```bash
+cat > my-profile.yaml <<'EOF'
+apiVersion: spdx.softwarecomposition.kubescape.io/v1beta1
+kind: ApplicationProfile
+metadata:
+  name: signed-demo
+  namespace: sig-demo
+  labels:
+    kubescape.io/workload-kind: Deployment
+    kubescape.io/workload-name: signed-demo
+    kubescape.io/workload-namespace: sig-demo
+  annotations:
+    kubescape.io/managed-by: User
+    kubescape.io/status: completed
+spec:
+  architectures: ["amd64"]
+  containers:
+  - name: app
+    execs:
+    - { path: /bin/sleep, args: ["/bin/sleep", "infinity"] }
+EOF
+```
+
+**3. Sign it.**
+
+```bash
+sign_object sign --file my-profile.yaml --output my-profile.signed.yaml \
   --key cosign.key --type applicationprofile
+```
+
+**4. Apply the signed profile first, then a workload that references it** by label.
+
+```bash
+kubectl create namespace sig-demo
+kubectl apply -f my-profile.signed.yaml
+
+kubectl apply -f - <<'EOF'
+apiVersion: apps/v1
+kind: Deployment
+metadata: { name: signed-demo, namespace: sig-demo }
+spec:
+  replicas: 1
+  selector: { matchLabels: { app: signed-demo } }
+  template:
+    metadata:
+      labels:
+        app: signed-demo
+        kubescape.io/user-defined-profile: signed-demo
+        kubescape.io/user-defined-network: signed-demo
+    spec:
+      containers:
+      - { name: app, image: busybox:1.36, command: ["/bin/sleep", "infinity"] }
+EOF
+kubectl -n sig-demo rollout status deploy/signed-demo
+```
+
+node-agent binds and **verifies** the signature — no alert. Confirm it's quiet (expect `0`):
+
+```bash
+kubectl -n kubescape logs ds/node-agent | grep -c '"RuleID":"R1016"'
+```
+
+**5. Tamper.** Add `/bin/sh`, keep the old signature, and replace the profile — a completed profile can't be patched in place.
+
+```bash
+yq -i '.spec.containers[0].execs += [{"path":"/bin/sh","args":["/bin/sh"]}]' my-profile.signed.yaml
+kubectl -n sig-demo delete applicationprofile signed-demo
+kubectl apply -f my-profile.signed.yaml
+```
+
+**6. Force re-verification and read R1016.** node-agent caches the verification, so restart it to re-check on load.
+
+```bash
+kubectl -n kubescape rollout restart ds/node-agent
+sleep 30
+kubectl -n kubescape logs ds/node-agent | grep '"RuleID":"R1016"' \
+  | jq -c '{RuleID, alert: .BaseRuntimeMetadata.alertName, severity: .BaseRuntimeMetadata.severity, workload: .RuntimeK8sDetails.workloadName}'
+```
+
+```json
+{"RuleID":"R1016","alert":"Signed profile tampered","severity":10,"workload":"signed-demo"}
+```
+
+Clean up: `cd .. && kubectl delete namespace sig-demo`.
+
+The sections below explain each piece — the trust model, what is actually signed, and detection vs. enforcement.
+
+## 1. Sign a profile
+
+Signing uses the **`sign-object`** CLI — the digest-pinned image and the `sign_object` helper from
+[Run it end-to-end](#run-it-end-to-end-copy-paste) above. Key-based ECDSA needs no Sigstore/OIDC: you
+sign with *your* key, against your working directory.
+
+```bash
+sign_object generate-keypair --output cosign.key                       # keypair
+sign_object sign --file my-profile.yaml --output my-profile.signed.yaml \
+  --key cosign.key --type applicationprofile                           # sign
 kubectl apply -f my-profile.signed.yaml
 ```
 
@@ -110,8 +214,8 @@ ApplicationProfile 'sigapp'… Re-sign the profile after verifying its contents.
 other rule violation:
 
 ```bash
-kubectl -n kubescape logs -l app=node-agent --tail=200 | grep KubescapeRuleViolated \
-  | jq -c 'select(.RuleID=="R1016") | {RuleID, msg: .BaseRuntimeMetadata.alertName, sev: .BaseRuntimeMetadata.severity}'
+kubectl -n kubescape logs -l app=node-agent --tail=200 | grep '"RuleID":"R1016"' \
+  | jq -c '{RuleID, msg: .BaseRuntimeMetadata.alertName, sev: .BaseRuntimeMetadata.severity}'
 ```
 
 Two properties set R1016 apart from the `R00xx`/`R10xx` families:
