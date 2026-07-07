@@ -2,15 +2,17 @@
 A user-defined profile is an **allow-list** — whoever can edit it controls what the runtime treats
 as "normal". Same goes for the CEL rules[^cel-rules] and configuration. Which is why we decided to make them signable and bundlable.
 
+
 [^cel-rules]: Rules are signable (`sign-object --type rules`), but verification is gated on `enableSignatureVerification` (default off, unset by the chart). If set to `ON` a tampered rule is rejected (fail-closed skip, logged `skippedByVerification`; not an R1016 alert), and unsigned rules are rejected too — the default library drops to 0 enabled unless every rule is signed.
 
 
 ![R1016 tamper detection](r1016-tamper.gif)
 
 
+Importantly, you currently cannot edit SBOBs in Kubescape - at least, it has no effect at all - you need to restart a pod for an SBOB to take effect[^backlog].
 For up-to-date examples, consult the 
 component tests `Test_29` (a signed profile is accepted), `Test_30` (tampering invalidates the
-signature), and `Test_31` (the R1016 alert fires).
+signature), and `Test_31` (the R1016 alert fires). This implementation will change in the future.
 
 ## Implemented as annotation
 
@@ -22,7 +24,7 @@ The signature travels **with** the object, as an annotation.
       signature.kubescape.io/issuer: local
       signature.kubescape.io/signature: MEQCIDEsKzuY5LQM6TO1kNb4…(base64)   
       signature.kubescape.io/timestamp: "1783454246"
-  ```
+```
 
 ## Try it yourself
 
@@ -98,7 +100,9 @@ node-agent binds and **verifies** the signature — no alert. Confirm it's quiet
 kubectl -n kubescape logs ds/node-agent | grep -c '"RuleID":"R1016"'
 ```
 
-**5. Tamper.** Add `/bin/sh`, keep the old signature, and replace the profile — a completed profile can't be patched in place.
+**5. Tamper.** Add `/bin/sh`, keep the old signature, and replace the profile 
+
+As discussed above, a profile currently can't be patched in place[^backlog]. By extension, it cannot be tampered.
 
 ```bash
 yq -i '.spec.containers[0].execs += [{"path":"/bin/sh","args":["/bin/sh"]}]' my-profile.signed.yaml
@@ -106,11 +110,13 @@ kubectl -n sig-demo delete applicationprofile signed-demo
 kubectl apply -f my-profile.signed.yaml
 ```
 
-**6. Bind the new profile and read R1016.** the current implementation [^backlog]
+
+
+**6. Bind the new profile and read R1016.** 
+
+Restart the corresponding pod[^backlog]
 
 ```bash
-kubectl -n kubescape rollout restart ds/node-agent
-sleep 30
 kubectl -n kubescape logs ds/node-agent | grep '"RuleID":"R1016"' \
   | jq -c '{RuleID, alert: .BaseRuntimeMetadata.alertName, severity: .BaseRuntimeMetadata.severity, workload: .RuntimeK8sDetails.workloadName}'
 ```
@@ -123,7 +129,7 @@ Clean up: `cd .. && kubectl delete namespace sig-demo`.
 
 [^backlog]: We currently have a backlog where the late-binding of profiles will be allowed. This requires a lot of testing and process-design, which is
 why currently, you need to restart a pod to bind the whole process to a new profile (irrespective of signature).
-This does not apply to the rules and config. That can be changed in real-time. 
+This does not apply to the rules and config - they can be changed in real-time. 
 Stay tuned for updates 🤓.
 
 
