@@ -26,7 +26,7 @@ Each allowlist is published per **Helm chart minor version**, and its name encod
 armo-kubescape-node-agent-<CHART_MINOR>
 ```
 
-For example, Helm chart `1.40.x` uses the allowlist `armo-kubescape-node-agent-1.40`; chart `1.41.x` uses `armo-kubescape-node-agent-1.41`, and so on. The `AllowlistSynchronizer` path below uses a wildcard, so it installs **all approved versions** for the workload — you then select the one that matches your chart with the Helm flag in Step 4.
+For example, Helm chart `1.40.x` uses the allowlist `armo-kubescape-node-agent-1.40-v2`; chart `1.41.x` uses `armo-kubescape-node-agent-1.41`, and so on. A revision suffix such as `-v2` is appended when an allowlist is superseded — use the exact name reported by `kubectl get WorkloadAllowlist` (Step 3). The `AllowlistSynchronizer` path below uses a wildcard, so it installs **all approved versions** for the workload — you then select the one that matches your chart with the Helm flag in Step 4.
 
 > The allowlist matching your chart minor must already be approved and published by Google. After you install the synchronizer, confirm the expected version appears in `kubectl get WorkloadAllowlist` (Step 3) before deploying.
 
@@ -76,10 +76,14 @@ You should see the installed allowlists, including the version that matches your
 
 ```
 $ kubectl get WorkloadAllowlist
-NAME                             AGE
-armo-kubescape-node-agent-1.40   37s
-armo-private-node-agent-1.40     37s
+NAME                                AGE
+armo-kubescape-node-agent-1.40-v2   37s
+armo-private-node-agent-1.40-v2     37s
 ```
+
+Use the exact name shown here when overriding the allowlist name (Step 4). A revision suffix such as
+`-v2` is appended when an allowlist is superseded, so match whatever `kubectl get WorkloadAllowlist`
+reports.
 
 ### Step 4: Install Kubescape with Helm
 
