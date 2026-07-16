@@ -34,16 +34,16 @@ For example, Helm chart `1.40.x` uses the allowlist `armo-kubescape-node-agent-1
 
 ## Step-by-Step Guide
 
-### Step 1: Create an AllowlistSynchronizer Resource
+### Step 1: Install the AllowlistSynchronizer
 
-Define an `AllowlistSynchronizer` to pull ARMO's allowlist(s) for the node-agent workload. Use the path for the image you run:
+Apply an `AllowlistSynchronizer` to pull ARMO's allowlist(s) for the node-agent workload — in a single
+command, no file to save. Use the path for the image you run:
 
 - `ARMO/armo-kubescape-node-agent/*` — the public Kubescape node-agent (`quay.io/kubescape/node-agent`).
 - `ARMO/armo-private-node-agent/*` — the ARMO private node-agent (`quay.io/armosec/node-agent`).
 
-Create a file named `kubescape-allowlist.yaml`:
-
-```yaml
+```bash
+kubectl apply -f - <<'EOF'
 apiVersion: auto.gke.io/v1
 kind: AllowlistSynchronizer
 metadata:
@@ -52,15 +52,12 @@ spec:
   allowlistPaths:
   - ARMO/armo-kubescape-node-agent/*
   - ARMO/armo-private-node-agent/*
+EOF
 ```
 
-### Step 2: Apply the Allowlist Resource
+> Keep only the path you need.
 
-```bash
-kubectl apply -f kubescape-allowlist.yaml
-```
-
-Optionally wait for the synchronizer to finish installing the allowlists:
+### Step 2: Wait for the AllowlistSynchronizer to sync (optional)
 
 ```bash
 kubectl wait --for=condition=Ready allowlistsynchronizer/kubescape-allow-list --timeout=60s
