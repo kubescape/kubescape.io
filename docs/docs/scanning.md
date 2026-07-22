@@ -223,6 +223,109 @@ The default output format for a Kubescape scan is a "pretty-printed" table view.
     kubescape scan --verbose
     ```
 
+## Protecting report metadata
+
+Kubescape reports can contain sensitive information such as Pod names, namespaces, resource names, labels, annotations, repository metadata, and source paths. In some environments, this information is classified as confidential and should only be visible to a restricted group of users.
+
+For example, a report may include a namespace named after an employee or a Pod name containing an unreleased product. While this information is valuable for security analysis, it may not be appropriate to disclose when sharing reports outside your organization.
+
+To help protect sensitive report metadata, Kubescape provides two mechanisms:
+
+* **Hide (`--hide`)** replaces sensitive report metadata with deterministic pseudonyms to reduce incidental exposure.
+* **Encrypt (`--encrypt`)** encrypts sensitive report metadata so it can later be restored using `kubescape decrypt`.
+
+### Hiding sensitive metadata
+
+Replace sensitive report metadata with deterministic pseudonyms when exporting JSON reports.
+
+This reduces incidental exposure but is not a confidentiality guarantee. Values drawn from small or predictable sets, such as common namespace names, may be recovered by comparing candidate hashes. Use `--encrypt` when sensitive metadata requires confidentiality.
+
+### Examples
+
+* Scan the current cluster and generate an anonymized report:
+
+```sh
+kubescape scan --hide --format json --output report.json
+```
+
+* Scan local manifests and save an anonymized report:
+
+```sh
+kubescape scan /path/to/manifests \
+  --hide \
+  --format json \
+  --output report.json
+```
+
+!!! note "Note"
+    `--hide` replaces sensitive values with deterministic pseudonyms derived from an unsalted hash of the original value. Values drawn from a small or guessable set, such as common namespace names, can be recovered by hashing candidate values and matching the result, and identical values produce identical pseudonyms across reports.
+
+    Use `--hide` to reduce incidental exposure, not as a confidentiality guarantee. To share a report whose metadata is genuinely protected, use `--encrypt` and withhold the master key.
+
+### Encrypting sensitive metadata
+
+Encrypt sensitive report metadata using the master key supplied through the `KUBESCAPE_MASTER_KEY` environment variable.
+
+The master key is used as raw bytes and must be exactly 32 characters long. Use `--format json` to generate a report that can later be decrypted with `kubescape decrypt`.
+
+If both `--encrypt` and `--hide` are specified, `--encrypt` takes precedence.
+
+### Examples
+
+* Generate an encrypted report:
+
+```sh
+# The key is used as raw bytes and must be exactly 32 characters long.
+# Note: `openssl rand -base64 32` (44 chars) and `openssl rand -hex 32` (64 chars)
+# are NOT valid — they exceed 32 bytes once passed through as raw text.
+export KUBESCAPE_MASTER_KEY=$(LC_ALL=C tr -dc 'A-Za-z0-9' </dev/urandom | head -c 32)
+
+kubescape scan \
+  --encrypt \
+  --format json \
+  --output encrypted-report.json
+```
+
+* Scan local manifests and generate an encrypted report:
+
+```sh
+kubescape scan /path/to/manifests \
+  --encrypt \
+  --format json \
+  --output encrypted-report.json
+```
+
+!!! note "Note"
+    `--encrypt` requires the `KUBESCAPE_MASTER_KEY` environment variable. The key must be exactly 32 characters long. Reports that you intend to decrypt later must be generated with `--format json`, and the same key must be supplied when running `kubescape decrypt`.
+
+### Decrypting encrypted reports
+
+Decrypt report metadata from a JSON report that was protected with `kubescape scan --encrypt`.
+
+Only metadata encrypted by `kubescape scan --encrypt` is restored. Metadata pseudonymized with `--hide` cannot be recovered by `kubescape decrypt`.
+
+### Examples
+
+* Decrypt an encrypted report:
+
+```sh
+# The key is used as raw bytes and must be exactly 32 characters long.
+# Note: `openssl rand -base64 32` (44 chars) and `openssl rand -hex 32` (64 chars)
+# are NOT valid — they exceed 32 bytes once passed through as raw text.
+export KUBESCAPE_MASTER_KEY=$(LC_ALL=C tr -dc 'A-Za-z0-9' </dev/urandom | head -c 32)
+
+kubescape decrypt encrypted-report.json
+```
+
+* Save the decrypted report to a file:
+
+```sh
+kubescape decrypt encrypted-report.json > decrypted-report.json
+```
+
+!!! note "Note"
+    `kubescape decrypt` restores metadata encrypted by `kubescape scan --encrypt`. It does not reverse deterministic pseudonymization produced by `--hide`.
+
 ## Scanning with the Kubescape Operator
 
 Besides the CLI, the Kubescape operator can also be installed via a Helm chart. Installing the Helm chart is an excellent way to begin using Kubescape, as it provides extensive features such as continuous scanning, image vulnerability scanning, runtime analysis, network policy generation, and more. You can find the Helm chart in the [Kubescape-operator documentation](../docs/install-operator.md).
