@@ -280,7 +280,7 @@ If both `--encrypt` and `--hide` are specified, `--encrypt` takes precedence.
     # The key is used as raw bytes and must be exactly 32 bytes (32 ASCII characters) long.
     # Note: `openssl rand -base64 32` (44 chars) and `openssl rand -hex 32` (64 chars)
     # are NOT valid — they exceed 32 bytes once passed through as raw text.
-    export KUBESCAPE_MASTER_KEY=$(LC_ALL=C tr -dc 'A-Za-z0-9' </dev/urandom | head -c 32)
+    export KUBESCAPE_MASTER_KEY="01234567890123456789012345678901"
 
     kubescape scan \
       --encrypt \
@@ -318,7 +318,7 @@ Only metadata encrypted by `kubescape scan --encrypt` is restored. Metadata pseu
     ```sh
     # Use the exact 32-byte key that was used with `kubescape scan --encrypt`,
     # retrieved from wherever you stored it.
-    export KUBESCAPE_MASTER_KEY="<your-stored-master-key>"
+    export KUBESCAPE_MASTER_KEY="01234567890123456789012345678901"
 
     kubescape decrypt encrypted-report.json
     ```
