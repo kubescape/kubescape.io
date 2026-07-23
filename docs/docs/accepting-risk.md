@@ -69,10 +69,7 @@ Under `spec`:
 
 At least one of `posture` or `vulnerabilities` must be set.
 
-`action` can be:
-
-- `ignore` — suppress the finding; the resource is reported as passed with exceptions and no longer counts against the score.
-- `alert_only` — keep the finding in the results, but mark it as an accepted exception rather than removing it.
+`action` can be `ignore` or `alert_only`. In a CLI posture scan, a matched resource is reported as passed with exceptions for either value, and it is excluded from the control's failed-resource count and compliance score. The value you choose is preserved in the scan results, which is where the two currently differ.
 
 ### Matching resources
 
