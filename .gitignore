@@ -2,3 +2,6 @@
 site/
 devenv
 tmp/*
+
+# Avoid vscode crashing horror by git tracking 10k files
+.venv
