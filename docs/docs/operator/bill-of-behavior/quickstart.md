@@ -23,7 +23,7 @@ Our chain continues to connect to postgres via `psql` and to exfiltrate the `bas
 You need the `Kubescape Node-Agent` and `Kubescape Storage` component
 
 ```bash
-CHART=https://github.com/k8sstormcenter/helm-charts/releases/download/kubescape-operator-1.40.3-sbob-rc3.1/kubescape-operator-1.40.3-sbob-rc3.1.tgz
+CHART=https://github.com/k8sstormcenter/helm-charts/releases/download/kubescape-operator-1.40.3-sbob-rc4.1/kubescape-operator-1.40.3-sbob-rc4.1.tgz
 helm install kubescape "$CHART" \
   -n kubescape --create-namespace \
   --set capabilities.runtimeObservability=enable \
@@ -37,71 +37,64 @@ So **R0005** (DNS exfil) and **R0011** (Unexpected egress) need an external conn
 on a public location and read/adapt the CEL rules to understand which rules fire exactly when.
 
 
-The general pattern is to ensure that sbobs of `your-sbob-name` exist and to bind
-them via labels on each pod[^migration]
+The general pattern is to ensure that a sbob of `your-sbob-name` exists and to bind
+it via a label on each pod
 
 
-[^migration]: The first implementation currently relies on the CRDs `ApplicationProfile`
-    and `NetworkNeighborhood`, but we will migrate them to `ContainerProfile` asap.
-    The functionality itself will not be affected.
 
-    Currently, you need to apply the CRD to the cluster **before** the workload and ensure
-    the labels are correct.
 
 ```yaml
 spec:
   template:
     metadata:
       labels:
-        kubescape.io/user-defined-profile: your-sbob-name    
-        kubescape.io/user-defined-network: your-sbob-name    
+        kubescape.io/user-defined-profile: your-sbob-name
 ```
 
 !!! info "Which build is this"
-    `sbob-rc3` is the release candidate that ships the Bill of Behavior features (wildcards, signing,
-    tamper detection), watch for announcements when it becomes GA.
+    `sbob-rc4` is the release candidate that ships the Bill of Behavior features
+    (wildcards, signing, tamper detection) on the unified `ContainerProfile`.
+    Watch for announcements when it becomes GA.
 
 ## 2. Apply the Bill of Behavior — *before* the app
 
 The profiles are **user-defined**, so detection is instantly live with no learning period. 
 
-First, deploy the `user-defined-profile` and `user-defined-network` for the log4j-demo:
+First, deploy one `ContainerProfile` per workload for the log4j-demo:
 
 ```bash
 kubectl create namespace log4j-poc
 BASE=https://raw.githubusercontent.com/k8sstormcenter/bob/main/_artifacts/log4j-sbobs
 for w in backend frontend observer postgres; do
-  kubectl apply -f "$BASE/ap-chain-$w.yaml" -f "$BASE/nn-chain-$w.yaml"
+  kubectl apply -f "$BASE/cp-chain-$w.yaml"
 done
 ```
 
-Two sections of the java-backend's SBOB are worth highlighting:
+Two sections of the java-backend's SBOB are 
+worth highlighting:
 
 ```yaml
-# ap-chain-backend.yaml 
-execs:
-- { path: /opt/java/openjdk/bin/java, args: ["java", "-jar", "/app/app.jar"] }
-- { path: /usr/bin/curl }
-- { path: /usr/bin/psql,                   
-          args: ["/usr/bin/psql"] }  # symlink
-#  New: node-agent sees the *resolved* path from a symlink
-- { path: /usr/lib/postgresql/18/bin/psql, 
-          args: ["/usr/lib/postgresql/18/bin/psql", "⋯⋯"] }
-#  New: wildcard ⋯⋯ allows any psql arguments.
+# cp-chain-backend.yaml 
+kind: ContainerProfile
+spec:
+  matchLabels: { app: chain-backend }   
+  execs:
+  - { path: /opt/java/openjdk/bin/java, args:
+     ["/opt/java/openjdk/bin/java", "-jar", "/app/app.jar"] }
+  - { path: /usr/bin/curl }
+  - { path: /usr/bin/psql,              args: 
+     ["/usr/bin/psql"] }  # symlink
+  #  New: node-agent sees the *resolved* path from a symlink
+  - { path: /usr/lib/postgresql/18/bin/psql, 
+     args: ["/usr/lib/postgresql/18/bin/psql", "⋯⋯"] }
+  #  New: wildcard ⋯⋯ allows any psql arguments.
+  ingress:
+  - from: { app: chain-frontend }   ports: [ TCP/8080 ]   # incoming from nginx
+  egress:
+  - to: kube-dns                    ports: [ UDP/53, TCP/53 ]
+  - to: { app: chain-postgres }     ports: [ TCP/5432 ]   # java-app intended to connect to DB
 ```
 To showcase the symlink resolution, we make java use `psql` for its connection to the DB.
-
-
-
-```yaml
-# nn-chain-backend.yaml — allowed network for java
-ingress:
-- from: { app: chain-frontend }   ports: [ TCP/8080 ]   #incoming from nginx
-egress:
-- to: kube-dns                    ports: [ UDP/53, TCP/53 ]
-- to: { app: chain-postgres }     ports: [ TCP/5432 ]   # java-app intended to connect to DB
-```
-
 Egress to postgres is *allowed* — this java really does query a database. This means, the connection via network from java-backend to postgres
 will not be detected as anomaly. 
 
@@ -129,7 +122,7 @@ kubectl -n kube-system rollout restart deploy/coredns
 
 ## 4. Deploy the vulnerable app + the attacker
 
-Bring up the whole `log4j-poc`[^scenarios], all pods labelled `user-defined-profile/network` to bind the profiles from Step 2.  
+Bring up the whole `log4j-poc`[^scenarios], all pods carry the single `kubescape.io/user-defined-profile: chain-<workload>` label to bind the ContainerProfile from Step 2.  
 The manifest also includes the attacker: a marshalsec LDAP server and a class-file HTTP server.
 
 [^scenarios]: 
