@@ -60,16 +60,18 @@ spec:
 
 The profiles are **user-defined**, so detection is instantly live with no learning period. 
 
-!!! "Wait for storage before applying profiles"
+!!! warning "Wait for storage before applying profiles"
     as the `ContainerProfile` is served by the Kubescape **storage** aggregated API-server
 
-    ```bash
-    kubectl -n kubescape rollout status deploy/storage --timeout=180s
-    kubectl wait --for=condition=Available --timeout=180s \
-      apiservices/v1beta1.spdx.softwarecomposition.kubescape.io
-    ```
+Gate on storage being ready first:
 
-First, deploy one `ContainerProfile` per workload for the log4j-demo:
+```bash
+kubectl -n kubescape rollout status deploy/storage --timeout=180s
+kubectl wait --for=condition=Available --timeout=180s \
+  apiservices/v1beta1.spdx.softwarecomposition.kubescape.io
+```
+
+Then deploy one `ContainerProfile` per workload for the log4j-demo:
 
 ```bash
 kubectl create namespace log4j-poc
@@ -111,7 +113,7 @@ will not be detected as anomaly.
 
  
 !!! tip "Allowlisting obvious parts of attack for demo"
-    For showcasing various features, we pretend the attacker uses binaries that the app was intended to use. A real java implementation 
+    For showcasing various features, we pretend the attacker uses binaries that are marked as `intended for the application`. A real java implementation 
     would not use `psql`. 
 
 !!! tip "NEW: Symlinks resolve and list the real binary"
