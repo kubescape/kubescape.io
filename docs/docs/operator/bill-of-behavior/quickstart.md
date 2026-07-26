@@ -23,7 +23,7 @@ Our chain continues to connect to postgres via `psql` and to exfiltrate the `bas
 You need the `Kubescape Node-Agent` and `Kubescape Storage` component
 
 ```bash
-CHART=https://github.com/k8sstormcenter/helm-charts/releases/download/kubescape-operator-1.40.3-sbob-rc4.1/kubescape-operator-1.40.3-sbob-rc4.1.tgz
+CHART=https://github.com/k8sstormcenter/helm-charts/releases/download/kubescape-operator-1.40.3-sbob-rc4.2/kubescape-operator-1.40.3-sbob-rc4.2.tgz
 helm install kubescape "$CHART" \
   -n kubescape --create-namespace \
   --set capabilities.runtimeObservability=enable \
@@ -60,6 +60,15 @@ spec:
 
 The profiles are **user-defined**, so detection is instantly live with no learning period. 
 
+!!! "Wait for storage before applying profiles"
+    as the `ContainerProfile` is served by the Kubescape **storage** aggregated API-server
+
+    ```bash
+    kubectl -n kubescape rollout status deploy/storage --timeout=180s
+    kubectl wait --for=condition=Available --timeout=180s \
+      apiservices/v1beta1.spdx.softwarecomposition.kubescape.io
+    ```
+
 First, deploy one `ContainerProfile` per workload for the log4j-demo:
 
 ```bash
@@ -68,6 +77,8 @@ BASE=https://raw.githubusercontent.com/k8sstormcenter/bob/main/_artifacts/log4j-
 for w in backend frontend observer postgres; do
   kubectl apply -f "$BASE/cp-chain-$w.yaml"
 done
+# verify they actually landed (4 profiles):
+kubectl get containerprofiles -n log4j-poc
 ```
 
 Two sections of the java-backend's SBOB are 
@@ -226,16 +237,7 @@ kubectl delete ns log4j-poc attacker-ns      # clean up
 The JNDI string needs to resolve an outbound LDAP + HTTP to fetch the exploit class for
 Log4j 
 
-**1. R0011 ships disabled.** Enable it in the installed rules:
-
-```bash
-kubectl -n kubescape patch rules.kubescape.io default-rules --type=json \
-  -p "$(kubectl -n kubescape get rules.kubescape.io default-rules -o json \
-        | jq -c '[.spec.rules | to_entries[] | select(.value.id=="R0011")
-                 | {op:"replace", path:"/spec/rules/\(.key)/enabled", value:true}]')"
-```
-
-**2. R0011 skips private targets.** The in-cluster attacker is a ClusterIP (RFC-1918), so put the attacker on an **external/public** host
+**R0011 skips private targets.** The in-cluster attacker is a ClusterIP (RFC-1918), so put the attacker on an **external/public** host
  and point the JNDI there — the demo
 attacker image has an ENV var `CODEBASE_HOST`, so it runs anywhere:
 
