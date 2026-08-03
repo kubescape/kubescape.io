@@ -4,6 +4,7 @@ repo_url: https://github.com/kubescape/kubescape
 theme:
   name: material
   logo: assets/kubescape-lockup.svg
+  favicon: assets/favicon.svg
   font:
     text: Fira Sans
     code: Fira Mono
