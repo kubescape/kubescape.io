@@ -26,6 +26,6 @@ kubescapeScheduler:
               - nsa
 ```
 
-Use `targetType: Framework` (capital **F**) so the operator can also append the `security` framework when `kubescape.triggerSecurityFramework` is enabled (the chart default).
+Use `targetType: Framework` (capital **F**) so the operator can also append the `security` framework when `operator.triggerSecurityFramework` is enabled (the chart default).
 
 Leave `scanV1` empty (`{}`) to use the install-time `defaultFrameworks` list (or the `"all"` legacy fallback when that list is empty).

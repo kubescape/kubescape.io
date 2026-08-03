@@ -175,7 +175,7 @@ You can configure these by using `--set` when installing the chart, or by specif
 !!! note
     Requires a kubescape-operator chart release that includes `defaultFrameworks` (and an operator image that reads it). On older charts the Helm `--set` is accepted but ignored.
 
-Choose which security frameworks the operator uses when a scan request has **no** `targetNames` (empty scheduled `scanV1`, API scans without targets, startup scan, and exception-triggered rescans).
+Choose which security frameworks the operator uses when a scan request has **no** `targetNames` (empty scheduled `scanV1`, API scans without targets, continuous scanning, startup scan, and exception-triggered rescans).
 
 By default the value is empty (`[]`): the chart does not write the field, and the operator keeps its legacy fallbacks (see [Scheduled scans](operator/scheduled-scans.md)). Set a list to opt in:
 
@@ -190,7 +190,7 @@ Examples:
 
 ```shell
 # AKS CIS benchmark (also scans the "security" framework unless
-# kubescape.triggerSecurityFramework=false)
+# operator.triggerSecurityFramework=false)
 helm upgrade --install kubescape kubescape/kubescape-operator -n kubescape --create-namespace \
   --set clusterName=`kubectl config current-context` \
   --set 'defaultFrameworks={cis-aks-t1.2.0}'
