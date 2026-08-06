@@ -55,16 +55,15 @@ flowchart LR
    Add (or update) your `.cursor/mcp.json` configuration:
    ```json
    {
-     "servers": [
-       {
-         "name": "kubescape",
+     "mcpServers": {
+       "kubescape": {
          "command": "/absolute/path/to/kubescape",
          "args": ["mcpserver"]
        }
-     ]
+     }
    }
    ```
-   Restart Cursor  or Claude Desktop to pick up the new MCP integration.
+   Restart Cursor or Claude Desktop to pick up the new MCP integration.
 
 <!-- Screenshot placeholder: Cursor MCP configuration -->
 
