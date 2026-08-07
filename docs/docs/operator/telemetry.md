@@ -3,7 +3,7 @@
 Several of Kubescape's in-cluster components implement telemetry data using [OpenTelemetry](https://opentelemetry.io/) (otel).\
 You can optionally install an Otel [collector](https://opentelemetry.io/docs/collector/) to your cluster to aggregate all metrics and send them to your own tracing tool.
 
-You simply have to fill in this information before [installing kubescape operator](/../install-operator.md):\
+You simply have to fill in this information before [installing kubescape operator](../install-operator.md):\
 you need to edit the property below at [values.yaml](https://github.com/kubescape/helm-charts/blob/main/charts/kubescape-operator/values.yaml) OR using --set while installing the helm chart\
 
 ```
