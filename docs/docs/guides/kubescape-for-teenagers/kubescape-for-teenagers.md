@@ -6,6 +6,6 @@ To get an idea of the basics of Kubescape, feel free to download the guide below
 
 Please note that Kubescape is changing quickly and adding functionality all the time. For more details, visit our [documentation](https://kubescape.io/docs/) and our [Repo on Github](https://github.com/kubescape).
 
-You can download the English version [here](Kubescape%20for%20teenagers%20EN.pdf).
+You can download the [English version](Kubescape%20for%20teenagers%20EN.pdf).
 
-Vous pouvez télécharger la version française [ici](Kubescape%20fro%20teenagers%20FR.pdf).
+Vous pouvez télécharger la [version française](Kubescape%20fro%20teenagers%20FR.pdf).
