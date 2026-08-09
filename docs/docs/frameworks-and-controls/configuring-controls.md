@@ -196,6 +196,12 @@ Default values:
 * `bearer'`
 * `credential'`
 
+### sensitiveKeyNamesAllowed
+
+Allowed key names, which will override `sensitiveKeyNames` and reduce false positives for known keys.
+
+* Default values: none
+
 ### sensitiveValues
 
 Certain strings identify a value that should be stored in a `Secret`, and not in a `ConfigMap` or an environment variable.
