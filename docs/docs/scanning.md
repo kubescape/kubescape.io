@@ -46,13 +46,20 @@ Namespace: kube-system
 
 Controls: 1 (Failed: 1, action required: 0)
 
-┌──────────┬────────────────────────────────┬────────────────────────────────┬────────────────────────────────────┐
-│ SEVERITY │          CONTROL NAME          │              DOCS              │        ASSISTED REMEDIATION        │
-├──────────┼────────────────────────────────┼────────────────────────────────┼────────────────────────────────────┤
-│ Medium   │ Automatic mapping of service   │ https://ks.dev/controls/c-0034 │ automountServiceAccountToken=false │
-│          │ account                        │                                │                                    │
-└──────────┴────────────────────────────────┴────────────────────────────────┴────────────────────────────────────┘
+╭──────────┬──────────────────────────────────┬────────────────────────────────────┬────────────────────────────────────╮
+│ Severity │ Control name                     │ Docs                               │ Assisted remediation               │
+├──────────┼──────────────────────────────────┼────────────────────────────────────┼────────────────────────────────────┤
+│ Medium   │ Automatic mapping of service     │ https://hub.armosec.io/docs/c-0034 │ automountServiceAccountToken=false │
+│          │ account                          │                                    │                                    │
+╰──────────┴──────────────────────────────────┴────────────────────────────────────┴────────────────────────────────────╯
 ```
+
+When scanning files rather than a cluster, each block is preceded by a `Source:` line naming
+the file the resource came from.
+
+Assisted remediation identifies *where* to look: the JSON path of the field that triggered
+the control, with a suggested value appended for the paths Kubescape can fix (`path=value`).
+It does not show the value the field currently holds.
 
 ### Scanning files
 
