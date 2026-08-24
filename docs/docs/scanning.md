@@ -217,6 +217,41 @@ The default output format for a Kubescape scan is a "pretty-printed" table view.
     ```sh
     kubescape scan --format html --output results.html
     ```
+- SARIF:
+
+    ```sh
+    kubescape scan --format sarif --output results.sarif
+    ```
+
+- GitLab SAST:
+
+    ```sh
+    kubescape scan --format gitlab-sast --output gl-sast-report.json
+    ```
+
+- YAML:
+
+    ```sh
+    kubescape scan --format yaml --output results.yaml
+    ```
+
+- CSV:
+
+    ```sh
+    kubescape scan --format csv --output results.csv
+    ```
+
+- Markdown:
+
+    ```sh
+    kubescape scan --format markdown --output results.md
+    ```
+
+- PolicyReport:
+
+    ```sh
+    kubescape scan --format policyreport --output policyreport.yaml
+    ```
 
 * Multiple output formats in a single scan:
 
