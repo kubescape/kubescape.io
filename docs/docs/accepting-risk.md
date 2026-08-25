@@ -65,7 +65,7 @@ Under `spec`:
 - `expiresAt` — optional RFC 3339 timestamp. It is checked at scan time: once it has passed, the exception is ignored and the finding is reported again. It is not enforced by the resource itself, only during a scan.
 - `match` — which resources the exception applies to (see [Matching resources](#matching-resources)).
 - `posture` — a list of `{ controlID, action, frameworkName }` entries. `controlID` and `action` are required; `frameworkName` optionally limits the exception to a single framework.
-- `vulnerabilities` — vulnerability exceptions, handled by the in-cluster vulnerability scanner (kubevuln). They do not affect posture scans.
+- `vulnerabilities` — vulnerability exceptions, handled by the in-cluster vulnerability scanner (kubevuln). They do not affect posture scans. See [Vulnerability exceptions](operator/vulnerability-exceptions.md).
 
 At least one of `posture` or `vulnerabilities` must be set.
 
