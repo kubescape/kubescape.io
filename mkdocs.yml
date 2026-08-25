@@ -62,6 +62,7 @@ nav:
             - 'Overview': 'docs/operator/index.md'
             - 'Vulnerability scanning': 'docs/operator/vulnerabilities.md'
             - 'Relevancy': 'docs/operator/relevancy.md'
+            - 'Vulnerability exceptions': 'docs/operator/vulnerability-exceptions.md'
             - 'Runtime Threat Detection': 'docs/operator/runtime-threat-detection.md'
             - 'Node Agent Rule Library': 'docs/operator/node-agent-rule-library.md'
             - 'Bill of Behavior':
