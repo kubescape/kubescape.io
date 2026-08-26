@@ -91,6 +91,7 @@ nav:
             - 'Control library': 'docs/controls/index.md'
             - 'Configuring controls': 'docs/frameworks-and-controls/configuring-controls.md'
         - Guides:
+            - 'Monitoring vulnerabilities across your cluster': 'docs/guides/vulnerability-monitoring.md'
             - 'Configure checks on a GitHub repository': 'docs/guides/kubescape-gha/index.md'
             - 'Harden a cluster': 'docs/guides/kubescape-cli/index.md'
             - 'Deploying on OpenShift': 'docs/guides/deploying-on-openshift.md'
