@@ -170,9 +170,44 @@ serviceScanConfig:
 
 You can configure these by using `--set` when installing the chart, or by specifying your own values file with the `-f` flag. [Read the Helm documentation to learn more](https://helm.sh/docs/chart_template_guide/values_files/).
 
+### Default posture frameworks
+
+!!! note
+    Requires a kubescape-operator chart release that includes `defaultFrameworks` (and an operator image that reads it). On older charts the Helm `--set` is accepted but ignored.
+
+Choose which security frameworks the operator uses when a scan request has **no** `targetNames` (empty scheduled `scanV1`, API scans without targets, continuous scanning, startup scan, and exception-triggered rescans).
+
+By default the value is empty (`[]`): the chart does not write the field, and the operator keeps its legacy fallbacks (see [Scheduled scans](operator/scheduled-scans.md)). Set a list to opt in:
+
+```yaml
+defaultFrameworks:
+  - allcontrols
+  - nsa
+  - mitre
+```
+
+Examples:
+
+```shell
+# AKS CIS benchmark (also scans the "security" framework unless
+# operator.triggerSecurityFramework=false)
+helm upgrade --install kubescape kubescape/kubescape-operator -n kubescape --create-namespace \
+  --set clusterName=`kubectl config current-context` \
+  --set 'defaultFrameworks={cis-aks-t1.2.0}'
+
+# All controls plus the current CIS Kubernetes benchmark
+helm upgrade --install kubescape kubescape/kubescape-operator -n kubescape --create-namespace \
+  --set clusterName=`kubectl config current-context` \
+  --set 'defaultFrameworks={allcontrols,cis-v1.10.0}'
+```
+
+Clear an existing list with `--set defaultFrameworks=null` (or an empty list in a values file).
+
+Any scan that explicitly sets `targetNames` — including API-triggered scans — uses those targets instead of this list. To override frameworks for the scheduled CronJob only, see [Scheduled scans](operator/scheduled-scans.md).
+
 ### Configuring parameters
 
-See [the GitHub repository for the Kubescape operator](https://github.com/kubescape/helm-charts/blob/main/charts/kubescape-operator/README.md#chart-support) to learn the full set of configuration parameters.
+See [the GitHub repository for the Kubescape operator](https://github.com/kubescape/helm-charts/blob/main/charts/kubescape-operator/README.md#chart-support) to learn the full set of configuration parameters (including `defaultFrameworks` once that chart release is published).
 
 ### Sizing resources
 
