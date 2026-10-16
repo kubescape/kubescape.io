@@ -86,15 +86,15 @@ The server exposes 31 tools. What each one needs:
 - `run_framework_security_scan` — Scans the cluster against a framework (for example `nsa`, `mitre`) and returns the failed resources and the compliance score.
 - `run_rbac_security_scan` / `run_network_security_scan` — Scan only over-permissive RBAC bindings, or only ingress/egress policies.
 - `scan_controls` — Scans the cluster for specific control IDs (for example `C-0012`).
-- `scan_workload` — Scans one named workload, such as a single Deployment.
-- `scan_resource_slice` — Scans a page of resources of one kind, to keep responses small on large clusters.
+- `scan_workload` — Scans one named workload, such as a single Deployment. With `path` it scans the workload from local manifests instead, without a cluster.
+- `scan_resource_slice` — Fetches a page of resource manifests of one kind for subsequent analysis. It does not evaluate controls.
 - `predict_pss_compliance` — Predicts which workloads in a namespace would fail a Pod Security Standards level.
 - `analyze_rbac_escalation_paths` — Finds the privilege-escalation paths reachable from a ServiceAccount, User or Group.
 - `analyze_network_reachability` — Checks whether one pod can reach another, taking every NetworkPolicy into account.
 - `analyze_service_exposure` — Reports whether a Service is reachable from outside the cluster, and how.
 - `detect_secret_exposure` (alias `analyze_secret_exposure`) — Looks for plain-text credentials in workload environment variables and ConfigMaps.
 - `analyze_mutating_admission_policy_impact` — Shows which MutatingAdmissionPolicies would change a given resource.
-- `dry_run_remediation` — Proposes a patch for a cluster resource and dry-runs it against the API server.
+- `dry_run_remediation` — Validates a patch you supply (`patch_json`) for a cluster resource and dry-runs it against the API server.
 
 **Local files and the policy library (no cluster needed)**
 
