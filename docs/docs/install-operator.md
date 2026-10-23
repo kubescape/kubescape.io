@@ -10,7 +10,7 @@ First, [configure kubectl to refer to the Kubernetes cluster you wish to install
 
 If you have not already, you should [install Helm](https://helm.sh/docs/intro/install/).
 
-The storage component keeps its data on a 5Gi PersistentVolumeClaim, so the cluster needs a default [StorageClass](https://kubernetes.io/docs/concepts/storage/storage-classes/). If it has none (EKS Auto Mode, for example, [does not create one](https://docs.aws.amazon.com/eks/latest/userguide/create-storage-class.html)), the claim stays `Pending` and the storage pod does not start. Either name a StorageClass with `--set persistence.storageClass=<name>`, or add `--set configurations.persistence=disable` to keep the data in an `emptyDir` volume, which is lost when the storage pod restarts.
+The storage component keeps its data on a 5Gi PersistentVolumeClaim, so the cluster needs a default [StorageClass](https://kubernetes.io/docs/concepts/storage/storage-classes/) to create the volume, or a PersistentVolume of at least 5Gi with no StorageClass, created in advance. If it has neither (EKS Auto Mode, for example, [does not create one](https://docs.aws.amazon.com/eks/latest/userguide/create-storage-class.html)), the claim stays `Pending` and the storage pod does not start. Either name a StorageClass with `--set persistence.storageClass=<name>`, or add `--set configurations.persistence=disable` to keep the data in an `emptyDir` volume, which is lost when the storage pod is deleted or replaced, for example on an upgrade.
 
 ## Install
 
