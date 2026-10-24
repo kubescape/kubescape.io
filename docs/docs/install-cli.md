@@ -82,42 +82,13 @@ scoop install kubescape
 
 ### Homebrew
 
-Kubescape is available in the [official Homebrew repository](https://formulae.brew.sh/formula/kubescape#default) or through a [Kubescape tap](https://github.com/kubescape/homebrew-tap). The version from the official repository does not include support for scanning Git repositories, due to [an upstream packaging issue](https://github.com/kubescape/kubescape/issues/1014).
-
-To install Kubescape from the official repository:
+Kubescape is available in the [official Homebrew repository](https://formulae.brew.sh/formula/kubescape#default) or through a [Kubescape tap](https://github.com/kubescape/homebrew-tap). The version from the official repository does not include support for scanning Git repositories, due to [an upstream packaging issue](https://github.com/kubescape/kubescape/issues/1014). For full functionality, use the [install script](#quick-install) or a [GitHub release](#manual-installation).
 
 ```bash
 brew install kubescape
 ```
 
-To get Git support, install the Kubescape tap and the `kubescape-cli` package:
-
-```bash
-brew tap kubescape/tap
-brew install kubescape-cli
-```
-
 ## Linux
-
-### Ubuntu
-
-The Kubescape maintainers build each release and upload the packages to a [personal package archive (PPA)](https://help.launchpad.net/Packaging/PPA).
-
-To install Kubescape with `apt`:
-
-```bash
-sudo add-apt-repository ppa:kubescape/kubescape
-sudo apt update
-sudo apt install kubescape
-```
-
-Kubescape can also be installed from [the Snap Store](https://snapcraft.io/kubescape).
-
-### Red Hat, CentOS, Fedora and other RPM-based distributions, and Debian
-
-The Kubescape maintainers build each release and upload the packages to the openSUSE Build Service (OBS), which builds packages in `RPM` and `deb` format for many different distributions and platforms.
-
-[Installation instructions for each distribution are available on the OBS page](https://software.opensuse.org/download.html?project=home%3Akubescape&package=kubescape).
 
 ### openSUSE
 
@@ -227,4 +198,3 @@ You can also download a single artifact, and scan with the `--use-from` flag:
 ## Next steps
 
 * [Learn how to install the Kubescape Operator in your Kubernetes cluster](install-operator.md)
-* [Check out the GitHub repository for Kubescape packaging](https://github.com/kubescape/packaging)
