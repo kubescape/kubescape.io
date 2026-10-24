@@ -17,15 +17,9 @@ We are working on providing `validation tests` for common CNCF projects to make 
 
 ## How Kubescape is a reference implementation
 
-Kubescape implements the SBOB end to end, using eBPF to observe workloads at the Linux ABI and Kubernetes custom resources to store the declaration, it allows signing the YAMLs and it detects tampering.[^migration]
+Kubescape implements the SBOB end to end, using eBPF to observe workloads at the Linux ABI and Kubernetes custom resources to store the declaration, it allows signing the YAMLs and it detects tampering.
 
 
-[^migration]: The first implementation currently relies on the CRDs `ApplicationProfile`
-    and `NetworkNeighborhood`, but we will migrate them to `ContainerProfile` asap.
-    The functionality itself will not be affected.
-
-    Currently, you need to apply the CRD to the cluster before the workload and ensure
-    the labels are correct.
 
 ## Beyond learned profiles, a note on Usability
 

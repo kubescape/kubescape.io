@@ -28,11 +28,11 @@ The signature travels **with** the object, as an annotation.
 
 ## Try it yourself
 
-Prerequisites: a cluster with Kubescape **sbob-rc3** installed (see the
+Prerequisites: a cluster with Kubescape **sbob-rc4** installed (see the
 [quickstart install](quickstart.md)), plus `kubectl`, `docker`, `jq`, and `yq`. 
 
 ```bash
-export SIGN_OBJECT="ghcr.io/k8sstormcenter/sign-object:v0.0.3@sha256:f3d4e321fa62e0a4ca421ba59a3fce3f2ff88714aaf87a7d160322cb8ec2f92b"
+export SIGN_OBJECT="ghcr.io/k8sstormcenter/sign-object:sbob-rc4@sha256:baa78f7c9e2692146d9148760557839a60da4a4bffd224ff000a8d70b1dc00a8"
 sign_object() { docker run --rm -v "$PWD:/work" "$SIGN_OBJECT" "$@"; }
 mkdir -p sbob-signing && cd sbob-signing
 ```
@@ -48,16 +48,15 @@ sign_object generate-keypair --output cosign.key
 ```bash
 cat > my-profile.yaml <<'EOF'
 apiVersion: spdx.softwarecomposition.kubescape.io/v1beta1
-kind: ApplicationProfile
+kind: ContainerProfile
 metadata:
   name: signed-demo
   namespace: sig-demo
 spec:
   architectures: ["amd64"]
-  containers:
-  - name: app
-    execs:
-    - { path: /bin/sleep, args: ["/bin/sleep", "infinity"] }
+  matchLabels: { app: signed-demo }
+  execs:
+  - { path: /bin/sleep, args: ["/bin/sleep", "infinity"] }
 EOF
 ```
 
@@ -65,7 +64,7 @@ EOF
 
 ```bash
 sign_object sign --file my-profile.yaml --output my-profile.signed.yaml \
-  --key cosign.key --type applicationprofile
+  --key cosign.key --type containerprofile
 ```
 
 **4. Apply the signed profile first, then a workload that references it** by label.
@@ -86,7 +85,6 @@ spec:
       labels:
         app: signed-demo
         kubescape.io/user-defined-profile: signed-demo
-        kubescape.io/user-defined-network: signed-demo
     spec:
       containers:
       - { name: app, image: busybox:1.36, command: ["/bin/sleep", "infinity"] }
@@ -103,8 +101,8 @@ kubectl -n kubescape logs -l app=node-agent --tail=-1 | grep -c '"RuleID":"R1016
 **5. Tamper.** Add `/bin/sh` to the signed profile, keeping the old signature. Any in-place edit works — `kubectl patch`, `edit`, `apply`, `replace`, or delete + re-apply. The signature no longer matches the spec:
 
 ```bash
-kubectl -n sig-demo patch applicationprofile signed-demo --type=json \
-  -p '[{"op":"add","path":"/spec/containers/0/execs/-","value":{"path":"/bin/sh","args":["/bin/sh"]}}]'
+kubectl -n sig-demo patch containerprofile signed-demo --type=json \
+  -p '[{"op":"add","path":"/spec/execs/-","value":{"path":"/bin/sh","args":["/bin/sh"]}}]'
 ```
 
 
