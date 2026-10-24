@@ -1,0 +1,227 @@
+{
+  "examples": [
+    {
+      "source": "docs/blog/posts/kubescape-cicd-integrations/kubescape-cicd-integrations.md",
+      "url": "https://raw.githubusercontent.com/kubescape/kubescape/master/install.sh",
+      "reason": "Static URL used in a documentation example."
+    },
+    {
+      "source": "docs/docs/getting-started.md",
+      "url": "https://raw.githubusercontent.com/kubescape/kubescape/master/install.sh",
+      "reason": "Static URL used in a documentation example."
+    },
+    {
+      "source": "docs/docs/guides/kubescape-cli/index.md",
+      "url": "https://raw.githubusercontent.com/kubescape/kubescape/master/install.sh",
+      "reason": "Static URL used in a documentation example."
+    },
+    {
+      "source": "docs/docs/install-cli.md",
+      "url": "https://raw.githubusercontent.com/kubescape/kubescape/master/install.sh",
+      "reason": "Static URL used in a documentation example."
+    },
+    {
+      "source": "docs/docs/integrations/gitlab.md",
+      "url": "https://raw.githubusercontent.com/kubescape/kubescape/master/install.sh",
+      "reason": "Static URL used in a documentation example."
+    },
+    {
+      "source": "docs/docs/mcp-server.md",
+      "url": "https://raw.githubusercontent.com/kubescape/kubescape/master/install.sh",
+      "reason": "Static URL used in a documentation example."
+    },
+    {
+      "source": "docs/index.md",
+      "url": "https://raw.githubusercontent.com/kubescape/kubescape/master/install.sh",
+      "reason": "Static URL used in a documentation example."
+    },
+    {
+      "source": "docs/blog/posts/Kubescape-support-for-VEX-generation/kubescape-support-for-vex-generation.md",
+      "url": "https://k8s.io/examples/application/deployment.yaml",
+      "reason": "Static URL used in a documentation example."
+    },
+    {
+      "source": "docs/docs/operator/generating-vex.md",
+      "url": "https://k8s.io/examples/application/deployment.yaml",
+      "reason": "Static URL used in a documentation example."
+    },
+    {
+      "source": "docs/docs/operator/runtime-threat-detection.md",
+      "url": "https://k8s.io/examples/application/deployment.yaml",
+      "reason": "Static URL used in a documentation example."
+    },
+    {
+      "source": "docs/blog/posts/cel-and-kubescape/cel-and-kubescape.md",
+      "url": "https://github.com/kubescape/cel-admission-library/releases/latest/download/policy-configuration-definition.yaml",
+      "reason": "Static URL used in a documentation example."
+    },
+    {
+      "source": "docs/blog/posts/cel-and-kubescape/cel-and-kubescape.md",
+      "url": "https://github.com/kubescape/cel-admission-library/releases/latest/download/basic-control-configuration.yaml",
+      "reason": "Static URL used in a documentation example."
+    },
+    {
+      "source": "docs/blog/posts/cel-and-kubescape/cel-and-kubescape.md",
+      "url": "https://github.com/kubescape/cel-admission-library/releases/latest/download/kubescape-validating-admission-policies.yaml",
+      "reason": "Static URL used in a documentation example."
+    },
+    {
+      "source": "docs/docs/install-cli.md",
+      "url": "https://raw.githubusercontent.com/kubescape/kubescape/master/install.ps1",
+      "reason": "Static URL used in a documentation example."
+    },
+    {
+      "source": "docs/docs/scanning.md",
+      "url": "https://hub.armosec.io/docs/c-0034",
+      "reason": "Static URL used in a documentation example."
+    },
+    {
+      "source": "docs/docs/guides/deploying-on-openshift.md",
+      "url": "https://kubescape.github.io/helm-charts/",
+      "reason": "Static URL used in a documentation example."
+    },
+    {
+      "source": "docs/docs/install-operator.md",
+      "url": "https://kubescape.github.io/helm-charts/",
+      "reason": "Static URL used in a documentation example."
+    },
+    {
+      "source": "docs/docs/integrations/kubescape-integration-with-cloud-providers/azure-aks.md",
+      "url": "https://kubescape.github.io/helm-charts/",
+      "reason": "Static URL used in a documentation example."
+    },
+    {
+      "source": "docs/docs/operator/continuous-scanning.md",
+      "url": "https://kubescape.github.io/helm-charts/",
+      "reason": "Static URL used in a documentation example."
+    },
+    {
+      "source": "docs/docs/operator/generating-vex.md",
+      "url": "https://kubescape.github.io/helm-charts/",
+      "reason": "Static URL used in a documentation example."
+    },
+    {
+      "source": "docs/docs/operator/prometheus-integration.md",
+      "url": "https://kubescape.github.io/helm-charts/",
+      "reason": "Static URL used in a documentation example."
+    },
+    {
+      "source": "docs/docs/operator/runtime-threat-detection.md",
+      "url": "https://kubescape.github.io/helm-charts/",
+      "reason": "Static URL used in a documentation example."
+    },
+    {
+      "source": "docs/docs/guides/kubescape-cli/index.md",
+      "url": "https://get.k3s.io",
+      "reason": "Static URL used in a documentation example."
+    },
+    {
+      "source": "docs/docs/operator/prometheus-integration.md",
+      "url": "https://prometheus-community.github.io/helm-charts",
+      "reason": "Static URL used in a documentation example."
+    },
+    {
+      "source": "docs/docs/operator/telemetry.md",
+      "url": "https://github.com/uptrace/uptrace.git",
+      "reason": "Static URL used in a documentation example."
+    },
+    {
+      "source": "docs/docs/operator/bill-of-behavior/quickstart.md",
+      "url": "https://github.com/k8sstormcenter/helm-charts/releases/download/kubescape-operator-1.40.3-sbob-rc3.1/kubescape-operator-1.40.3-sbob-rc3.1.tgz",
+      "reason": "Static URL used in a documentation example."
+    },
+    {
+      "source": "docs/docs/operator/bill-of-behavior/quickstart.md",
+      "url": "https://raw.githubusercontent.com/k8sstormcenter/bob/e247f527b830849b3f3a33282479b47b905f7615/example/log4j-chain/exfil-dns.yaml",
+      "reason": "Pinned historical walkthrough input; includes explicit expansion of the BASE variable."
+    },
+    {
+      "source": "docs/docs/operator/bill-of-behavior/quickstart.md",
+      "url": "https://raw.githubusercontent.com/k8sstormcenter/bob/e247f527b830849b3f3a33282479b47b905f7615/example/log4j-chain/log4j-chain.yaml",
+      "reason": "Pinned historical walkthrough input; includes explicit expansion of the BASE variable."
+    },
+    {
+      "source": "docs/docs/operator/bill-of-behavior/quickstart.md",
+      "url": "https://raw.githubusercontent.com/k8sstormcenter/bob/e247f527b830849b3f3a33282479b47b905f7615/example/log4j-chain/attack-pod.yaml",
+      "reason": "Pinned historical walkthrough input; includes explicit expansion of the BASE variable."
+    },
+    {
+      "source": "docs/docs/operator/bill-of-behavior/quickstart.md",
+      "url": "https://raw.githubusercontent.com/k8sstormcenter/bob/e247f527b830849b3f3a33282479b47b905f7615/_artifacts/log4j-sbobs/ap-chain-backend.yaml",
+      "reason": "Pinned historical walkthrough input; includes explicit expansion of the BASE variable."
+    },
+    {
+      "source": "docs/docs/operator/bill-of-behavior/quickstart.md",
+      "url": "https://raw.githubusercontent.com/k8sstormcenter/bob/e247f527b830849b3f3a33282479b47b905f7615/_artifacts/log4j-sbobs/ap-chain-frontend.yaml",
+      "reason": "Pinned historical walkthrough input; includes explicit expansion of the BASE variable."
+    },
+    {
+      "source": "docs/docs/operator/bill-of-behavior/quickstart.md",
+      "url": "https://raw.githubusercontent.com/k8sstormcenter/bob/e247f527b830849b3f3a33282479b47b905f7615/_artifacts/log4j-sbobs/ap-chain-observer.yaml",
+      "reason": "Pinned historical walkthrough input; includes explicit expansion of the BASE variable."
+    },
+    {
+      "source": "docs/docs/operator/bill-of-behavior/quickstart.md",
+      "url": "https://raw.githubusercontent.com/k8sstormcenter/bob/e247f527b830849b3f3a33282479b47b905f7615/_artifacts/log4j-sbobs/ap-chain-postgres.yaml",
+      "reason": "Pinned historical walkthrough input; includes explicit expansion of the BASE variable."
+    },
+    {
+      "source": "docs/docs/operator/bill-of-behavior/quickstart.md",
+      "url": "https://raw.githubusercontent.com/k8sstormcenter/bob/e247f527b830849b3f3a33282479b47b905f7615/_artifacts/log4j-sbobs/nn-chain-backend.yaml",
+      "reason": "Pinned historical walkthrough input; includes explicit expansion of the BASE variable."
+    },
+    {
+      "source": "docs/docs/operator/bill-of-behavior/quickstart.md",
+      "url": "https://raw.githubusercontent.com/k8sstormcenter/bob/e247f527b830849b3f3a33282479b47b905f7615/_artifacts/log4j-sbobs/nn-chain-frontend.yaml",
+      "reason": "Pinned historical walkthrough input; includes explicit expansion of the BASE variable."
+    },
+    {
+      "source": "docs/docs/operator/bill-of-behavior/quickstart.md",
+      "url": "https://raw.githubusercontent.com/k8sstormcenter/bob/e247f527b830849b3f3a33282479b47b905f7615/_artifacts/log4j-sbobs/nn-chain-observer.yaml",
+      "reason": "Pinned historical walkthrough input; includes explicit expansion of the BASE variable."
+    },
+    {
+      "source": "docs/docs/operator/bill-of-behavior/quickstart.md",
+      "url": "https://raw.githubusercontent.com/k8sstormcenter/bob/e247f527b830849b3f3a33282479b47b905f7615/_artifacts/log4j-sbobs/nn-chain-postgres.yaml",
+      "reason": "Pinned historical walkthrough input; includes explicit expansion of the BASE variable."
+    }
+  ],
+  "exceptions": [
+    {
+      "source": "docs/frameworks-and-controls/frameworks/index.html",
+      "url": "https://github.com/kubescape/opa-utils/blob/v0.0.315/score/score.go#L410",
+      "reason": "GitHub renders code-line selections dynamically; the framework compliance calculation was verified in this pinned source.",
+      "fragment_only": true
+    },
+    {
+      "source": "docs/controls/c-0233/index.html",
+      "url": "https://console.aws.amazon.com/eks/home#/clusters",
+      "reason": "AWS Console client-side route requiring the reader's login.",
+      "fragment_only": true
+    },
+    {
+      "source": "docs/install-cli/index.html",
+      "url": "https://scoop.sh/#/apps?q=kubescape&s=0&d=1&o=true&id=1f5ae05eaafe3e7a26505f0889101e0da91ffe91",
+      "reason": "Scoop client-side application route, not a literal HTML anchor.",
+      "fragment_only": true
+    },
+    {
+      "source": "docs/operator/runtime-threat-detection/index.html",
+      "url": "https://github.com/kubescape/storage/blob/968527e99defc5be451813e1008453869cf82c0a/pkg/apis/softwarecomposition/v1beta1/types.go#L238",
+      "reason": "GitHub renders code-line selections dynamically; this line was verified in the pinned source.",
+      "fragment_only": true
+    },
+    {
+      "source": "docs/operator/telemetry/index.html",
+      "url": "http://localhost:14318/overview/2",
+      "reason": "Local Uptrace dashboard example; requires the reader's cluster.",
+      "fragment_only": false
+    },
+    {
+      "source": "docs/operator/vulnerabilities/index.html",
+      "url": "https://github.com/anchore/syft/blob/v1.23.1/syft/pkg/cataloger/sbom/cataloger.go#L26-L36",
+      "reason": "GitHub renders code-line selections dynamically; these lines were verified in the pinned source.",
+      "fragment_only": true
+    }
+  ]
+}

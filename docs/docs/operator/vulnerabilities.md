@@ -7,7 +7,7 @@ The **Kubevuln** component scans images which are deployed to the cluster when:
 - A new Deployment, StatefulSet, DaemonSet or naked Pod is created
 - The container image tag in an existing Deployment, StatefulSet, DaemonSet or Pod is changed
 
-It uses the [Grype](https://github.com/anchore/grype) engine to evaluate against a [database of known vulnerabilities](https://github.com/anchore/grype#grypes-database) from a variety of publicly available vulnerability data sources.  The sources include the security announcement data from all major Linux distributions, the [National Vulnerability Database](https://nvd.nist.gov/vuln/data-feeds), and [GitHub security advisories](https://github.com/advisories).
+It uses the [Grype](https://github.com/anchore/grype) engine to evaluate against a [database of known vulnerabilities](https://oss.anchore.com/docs/guides/vulnerability/database/) from a variety of publicly available vulnerability data sources.  The sources include the security announcement data from all major Linux distributions, the [National Vulnerability Database](https://nvd.nist.gov/vuln/data-feeds), and [GitHub security advisories](https://github.com/advisories).
 
 The results are made available in API objects exposed by the [Kubescape storage engine](index.md#in-cluster-storage).
 

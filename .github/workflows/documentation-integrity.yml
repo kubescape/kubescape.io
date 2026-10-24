@@ -1,0 +1,85 @@
+name: Documentation integrity
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+  schedule:
+    - cron: '17 6 * * 1'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  documentation-integrity:
+    name: Documentation integrity
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+      - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
+        with:
+          python-version: '3.10'
+      - name: Install locked documentation dependencies
+        run: |
+          mkdir -p tmp/validation/ci
+          python -m venv "$RUNNER_TEMP/docs-lock-tools"
+          "$RUNNER_TEMP/docs-lock-tools/bin/python" -m pip install pipenv==2026.10.2 2>&1 | tee tmp/validation/ci/tooling-install.log
+          "$RUNNER_TEMP/docs-lock-tools/bin/pipenv" requirements --hash > tmp/validation/ci/locked-requirements.txt
+          sha256sum Pipfile.lock > tmp/validation/ci/lock.sha256
+          python -m venv "$RUNNER_TEMP/docs-venv"
+          "$RUNNER_TEMP/docs-venv/bin/python" -m pip install --require-hashes -r tmp/validation/ci/locked-requirements.txt 2>&1 | tee tmp/validation/ci/install.log
+          "$RUNNER_TEMP/docs-venv/bin/python" -m pip check | tee tmp/validation/ci/dependencies.log
+          echo "$RUNNER_TEMP/docs-venv/bin" >> "$GITHUB_PATH"
+      - name: Record and verify installed versions
+        run: |
+          python - <<'PY'
+          import json
+          import sys
+          from importlib.metadata import distributions
+          from pathlib import Path
+          from packaging.markers import Marker
+          from packaging.utils import canonicalize_name
+
+          lock = json.loads(Path("Pipfile.lock").read_text())["default"]
+          expected = {
+              canonicalize_name(name): entry["version"].removeprefix("==")
+              for name, entry in lock.items()
+              if not entry.get("markers") or Marker(entry["markers"]).evaluate()
+          }
+          installed = {canonicalize_name(d.metadata["Name"]): d.version for d in distributions()}
+          mismatches = {name: installed.get(name) for name, version in expected.items() if installed.get(name) != version}
+          tooling = {name: version for name, version in installed.items() if name not in expected}
+          report = {"python": sys.version, "expected": expected, "installed": installed, "extra_tooling": tooling, "mismatches": mismatches}
+          Path("tmp/validation/ci/environment.json").write_text(json.dumps(report, indent=2) + "\n")
+          if mismatches or set(tooling) - {"pip", "setuptools", "wheel"}:
+              raise SystemExit("Installed distributions do not match the documentation lock; see environment.json")
+          PY
+      - name: Test the link checker
+        run: python -B -m unittest discover -s tests -p 'test_*.py' -v 2>&1 | tee tmp/validation/ci/tests.log
+      - name: Build the site
+        id: build
+        run: python -m mkdocs build --strict --clean 2>&1 | tee tmp/validation/ci/build.log
+      - name: Check internal links
+        run: |
+          python scripts/check_links.py internal --site-dir site --site-url https://kubescape.io --report tmp/validation/ci/internal-links.json | tee -a "$GITHUB_STEP_SUMMARY"
+      - name: Report external links
+        if: ${{ !cancelled() && steps.build.outcome == 'success' && (github.event_name == 'schedule' || github.event_name == 'workflow_dispatch') }}
+        run: |
+          python scripts/check_links.py external --site-dir site --site-url https://kubescape.io --report tmp/validation/ci/external-links.json | tee -a "$GITHUB_STEP_SUMMARY"
+      - name: Upload diagnostics, including failed checks
+        if: ${{ always() }}
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: documentation-integrity-${{ github.run_id }}-${{ github.run_attempt }}
+          path: tmp/validation/ci/
+          if-no-files-found: warn
+          retention-days: 14

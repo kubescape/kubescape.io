@@ -222,7 +222,7 @@ More information on this use case can be found [here](./operator/multiple-node-a
 
 ## Verifying images
 
-Kubescape container images are signed with [Cosign](https://docs.sigstore.dev/signing/quickstart/).
+Kubescape container images are signed with [Cosign](https://docs.sigstore.dev/quickstart/quickstart-cosign/).
 
 ### Keyless verification
 

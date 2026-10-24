@@ -17,6 +17,8 @@ We have three mailing lists:
 
 We recommend all Kubescape users join -announce to stay up-to-date with new releases.
 
+<span id="monthly-meeting"></span>
+
 ## Community meetings
 
 We hold [community meetings](https://zoom.us/j/95174063585) on Zoom, every second Tuesday, at 15:00 CET. ([See that in your local time zone](https://time.is/compare/1500_in_CET). 

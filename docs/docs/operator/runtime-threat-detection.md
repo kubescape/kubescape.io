@@ -25,7 +25,7 @@ Kubescape node-agent leverages advanced eBPF (extended Berkeley Packet Filter) t
 The runtime threat detection feature is divided into three main detection strategies:
 
 * [Anomaly detection engine](#anomaly-detection-engine) 🔎
-* [Behavioral analysis engine](#behavior-analysis-engine) 🧠
+* [Behavioral analysis engine](#behavioral-analysis-engine) 🧠
 * [Malware scanner](#malware-scanning) 🐛
 
 
@@ -33,6 +33,8 @@ The runtime threat detection feature is divided into three main detection strate
 The anomaly detection engine is responsible for detecting any abnormal behavior in the runtime environment. It does this by recording the baseline behavior of the application and comparing it to the current state. If any deviation is detected, the engine will raise an alert.
 
 Kubescape observes containers during a customizable learning phase to understand the application's typical behavior. It then stores this information persistently in objects called `ApplicationProfiles` (see [here](https://github.com/kubescape/storage/blob/968527e99defc5be451813e1008453869cf82c0a/pkg/apis/softwarecomposition/v1beta1/types.go#L238)) , capturing details such as file access, network connections, system calls, and other relevant data. This profile, stored as a Kubernetes Custom Resource (CR), serves as a benchmark for normal behavior. Once the learning phase concludes and the profile is established, Kubescape validates application events coming from eBPF for deviations from this norm, triggering alerts upon detecting anomalies.
+
+<span id="behavior-analysis-engine"></span>
 
 ### Behavioral analysis engine
 Additionally, Kubescape is equipped with rules designed to identify well-known attack signatures. These rules are adept at uncovering various threats, such as unauthorized software executions that deviate from the original container image, detection of unpackers in memory, reverse shell activities, and more. Users have the flexibility to create 'Rule Bindings'—specific instructions that direct Kubescape on which rules should be applied to which Pods. This level of customization ensures that security measures are tailored to the unique needs of each Kubernetes deployment, enhancing the overall security posture and responsiveness of the system.
