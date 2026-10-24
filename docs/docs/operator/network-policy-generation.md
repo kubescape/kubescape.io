@@ -140,7 +140,7 @@ Since the Network Policy generation is based on the traffic that is captured, it
 We also recommend going over the generated Network Policy and making sure that it contains all the required rules. You can then apply the Network Policy to your cluster.
 
 ## How it works
-With Network Policy feature enabled, Kubescape will use the `node-agent` component to listen for the network traffic in all your Pods. This traffic will then be aggregate by workload, and saved into a CRD of Kind `NetworkNeighborhood`. This CRD represents all the incoming and outgoing communication for all Pods which belong to the same workload. When the client asks for a `GeneratedNetworkPolicy` CRD, Kubescape will use the `NetworkNeighborhood` CRD to as well as `KnownServers` CRDs (see "Advanced Usage") to generate the Network Policy, converting all traffic into Network Policy rules.  
+With Network Policy feature enabled, Kubescape will use the `node-agent` component to listen for the network traffic in all your Pods. The traffic of each container is saved in the `ingress` and `egress` fields of its `ContainerProfile`, which represents the incoming and outgoing communication of that container across all Pods of the same workload. When the client asks for a `GeneratedNetworkPolicy`, Kubescape combines the `ContainerProfile` objects of all the workload's containers with the `KnownServer` objects (see "Advanced Usage") to generate the Network Policy, converting all traffic into Network Policy rules.  
 
 ```mermaid
 sequenceDiagram
@@ -159,16 +159,16 @@ sequenceDiagram
     end
     k8a ->> u: Installation Complete
 
-    %% Initial creation of NetworkNeighborhood resource by Node-Agent
+    %% Initial creation of ContainerProfile resources by Node-Agent
     ksn ->> ksn: Listen for Initial Network Traffic
-    ksn ->> k8a: Create NetworkNeighborhood Resource
-    k8a ->> kss: Store NetworkNeighborhood Resource
+    ksn ->> k8a: Create ContainerProfile Resource (one per container)
+    k8a ->> kss: Store ContainerProfile Resource
 
-    %% Node-Agent continuously monitors network traffic and updates NetworkNeighborhood
+    %% Node-Agent continuously monitors network traffic and updates the ContainerProfiles
     loop Continuously Monitor Network Traffic
         ksn ->> ksn: Listen for Network Traffic
-        ksn ->> k8a: Update NetworkNeighborhood Resource
-        k8a ->> kss: Store Updated NetworkNeighborhood
+        ksn ->> k8a: Update ContainerProfile Resource
+        k8a ->> kss: Store Updated ContainerProfile
     end
 
     %% Optional scenario: User creates a 'KnownServer' CRD
@@ -180,7 +180,7 @@ sequenceDiagram
     %% User requests GeneratedNetworkPolicy CRD
     u ->> k8a: GET GeneratedNetworkPolicy
     k8a ->> kss: Request GeneratedNetworkPolicy
-    kss ->> kss: Generate Policy from NetworkNeighborhood and KnownServers
+    kss ->> kss: Generate Policy from the workload's ContainerProfiles and KnownServers
     kss -->> k8a: Return GeneratedNetworkPolicy
     k8a -->> u: Provide GeneratedNetworkPolicy
 
@@ -218,147 +218,84 @@ policyRef:
   originalIP: 142.250.1.104
   dns: ""
 ```
-The `dns` field will be populated depending on the data retrieved from the node-agent and stored in the `NetworkNeighborhood`.
+The `dns` field will be populated depending on the data retrieved from the node-agent and stored in the `ContainerProfile`.
   
 You can generate as many `KnownServer` CRDs as you want. Kubescape will use all of them when generating the Network Policy.
 
-### Network Neighborhood
-The captured traffic is stored by the node-agent in a CRD called `NetworkNeighborhood`. This CRD represents the ingress and egress traffic aggregated by the parent workload (for example, if we create a Deployment with 2 Pods, we will only see NetworkNeighborhood for the Deployment and not for it Pods nor for it Replicas).  
-This CRD is used by the storage to generate the NetworkPolicy on-the-fly upon a request from the user.   
+### Container Profiles
+The captured traffic is stored by the node-agent in the `ingress` and `egress` fields of a `ContainerProfile`. There is one `ContainerProfile` per container of the workload's Pod template, not one per Pod (for example, a Deployment with 3 replicas of a Pod with 2 containers has 2 container profiles). A `ContainerProfile` also holds the container's runtime behavior (executed processes, opened files, system calls), which is used for [runtime threat detection](runtime-threat-detection.md).  
+The storage combines the profiles of all containers of a workload to generate its Network Policy on-the-fly upon a request from the user, so a Deployment `web` with an `nginx` and a `log-shipper` container gets one policy, `deployment-web`, with the traffic of both.
 
-Example of a `NetworkNeighborhood` CRD:
+The network part of a `ContainerProfile` (other fields left out):
 ```yaml
 apiVersion: spdx.softwarecomposition.kubescape.io/v1beta1
-kind: NetworkNeighborhood
+kind: ContainerProfile
 metadata:
   annotations:
     kubescape.io/completion: complete
-    kubescape.io/status: complete
-  creationTimestamp: "2023-12-11T17:16:58Z"
+    kubescape.io/status: completed
   labels:
+    kubescape.io/instance-template-hash: 5d8f7c9b4
     kubescape.io/workload-api-group: apps
     kubescape.io/workload-api-version: v1
-    kubescape.io/workload-kind: deployment
-    kubescape.io/workload-name: operator
-    kubescape.io/workload-namespace: kubescape
-    kubescape.io/workload-resource-version: "76459062"
-  name: deployment-operator
-  namespace: kubescape
-  resourceVersion: "1"
-  uid: e8fb66d7-aad6-40f7-ab14-6267d3c1636d
+    kubescape.io/workload-container-name: nginx
+    kubescape.io/workload-kind: Deployment
+    kubescape.io/workload-name: web
+    kubescape.io/workload-namespace: default
+  name: replicaset-web-5d8f7c9b4-nginx-1f16-ff4e
+  namespace: default
 spec:
-  containers:
-  - name: "operator"
-    ingress: []
-    egress:
-    - dns: ""
-      identifier: ad98a9e00a1e4a5efbbd827f432595a31085d0e8dcec365dbdfd8141bf3cbe3e
-      ipAddress: ""
-      namespaceSelector: null
-      podSelector:
-        matchLabels:
-          app: otel-collector
-      ports:
-      - name: TCP-4317
-        port: 4317
-        protocol: TCP
-      type: internal
-    - dns: ""
-      identifier: e6d07dcea08c02c35494f7aed68e7cff6d51843c5fbb36032a905f11ba833c13
-      ipAddress: ""
-      namespaceSelector: null
-      podSelector:
-        matchLabels:
-          app: gateway
-      ports:
-      - name: TCP-8001
-        port: 8001
-        protocol: TCP
-      type: internal
-    - dns: ""
-      identifier: ed8a3fa8750dd7045e9abb755f5dbd1a2025f5ed49c1ed67b7d8e1c534899bbb
-      ipAddress: ""
-      namespaceSelector: null
-      podSelector:
-        matchLabels:
-          app: kubescape
-      ports:
-      - name: TCP-8080
-        port: 8080
-        protocol: TCP
-      type: internal
-    - dns: report.armo.cloud.
-      identifier: 83260a3ba8236e69f12ebb706196a2d9541b6c2771cb481dde4f3f5816a1cd94
-      ipAddress: 16.171.184.118
-      namespaceSelector: null
-      podSelector: null
-      ports:
-      - name: TCP-443
-        port: 443
-        protocol: TCP
-      type: external
-    - dns: ""
-      identifier: e5e8ca3d76f701a19b7478fdc1c8c24ccc6cef9902b52c8c7e015439e2a1ddf3
-      ipAddress: ""
-      namespaceSelector:
-        matchLabels:
-          kubernetes.io/metadata.name: kube-system
-      podSelector:
-        matchLabels:
-          k8s-app: kube-dns
-      ports:
-      - name: UDP-53
-        port: 53
-        protocol: UDP
-      type: internal
-    - dns: ""
-      identifier: ba56b560f0008cb2227752015bf87c5fc365fb8dfd5599162cbe71f105dfce00
-      ipAddress: ""
-      namespaceSelector: null
-      podSelector:
-        matchLabels:
-          app: kubevuln
-      ports:
-      - name: TCP-8080
-        port: 8080
-        protocol: TCP
-      type: internal
-    - dns: ""
-      identifier: d3e4abc95832bb489fadd3cf2448ad9954e09ef1c6e4aaaf8790097369a873e5
-      ipAddress: 10.128.0.90
-      namespaceSelector: null
-      podSelector: null
-      ports:
-      - name: TCP-443
-        port: 443
-        protocol: TCP
-      type: internal
-  ephemeralContainers: null
-  initContainers: null
   matchLabels:
-    app.kubernetes.io/instance: kubescape
-    app.kubernetes.io/name: operator
-    tier: ks-control-plane
-```  
-`spec.containers` - contains the ingress and egress traffic for each container of the workload.
-`spec.ephemeralContainers` - contains the ingress and egress traffic for each ephemeral container of the workload.
-`spec.initContainers` - contains the ingress and egress traffic for each init container of the workload.
+    app: web
+  ingress:
+  - dns: ""
+    identifier: 3f1c
+    ipAddress: ""
+    namespaceSelector:
+      matchLabels:
+        kubernetes.io/metadata.name: shop
+    podSelector:
+      matchLabels:
+        app: frontend
+    ports:
+    - name: TCP-80
+      port: 80
+      protocol: TCP
+    type: internal
+  egress:
+  - dns: ""
+    identifier: 9a2e
+    ipAddress: ""
+    namespaceSelector:
+      matchLabels:
+        kubernetes.io/metadata.name: kube-system
+    podSelector:
+      matchLabels:
+        k8s-app: kube-dns
+    ports:
+    - name: UDP-53
+      port: 53
+      protocol: UDP
+    type: internal
+```
+`spec.matchLabels` - the labels that select the workload's Pods; they become the `podSelector` of the generated Network Policy.  
 `egress.identifier` - a unique identifier for an egress traffic entry.  
 `egress.ipAddress` - the IP address of the entry's traffic.  
 `egress.dns` - the DNS resolution of the entry's traffic, in case its IP address was resolved to a DNS name.  
 `egress.namespaceSelector` - the namespace selector for the entry's traffic, in case the traffic is going to a Pod in a different namespace.  
-`egress.podSelector` - the pod selector for the entry's traffic, in case the traffic is going to a Pod in the same namespace.  
+`egress.podSelector` - the pod selector for the entry's traffic, in case the traffic is going to a Pod in the cluster.  
 `egress.ports` - the ports for the entry's traffic.  
 `egress.ports.port` - the port number for the entry's traffic.  
 `egress.ports.protocol` - the protocol for the entry's traffic.
 `egress.ports.name` - the identifier for the port entry.  
 `egress.type` - the type of the entry's traffic. Can be `internal` or `external`, where internal means that the traffic is going to a Pod in the cluster, and external means that the traffic is going outside the cluster.  
 `ingress` - same as `egress`, but for ingress traffic.
-To retrieve the `NetworkNeighborhood` CRD for a workload, you can run the following command:
+
+To list the container profiles of a workload, you can run the following command:
 ```bash
-kubectl -n <namespace> get networkneighborhoods <workload-kind>-<workload-name> -o yaml
+kubectl -n <namespace> get containerprofiles -l kubescape.io/workload-name=<workload-name>
 ```
 
-!!! info "Deprecated NetworkNeighbors CRD"
+!!! info "Removed NetworkNeighborhood and NetworkNeighbors CRDs"
 
-    The `NetworkNeighbors` CRD has been deprecated<sup>[1](https://github.com/kubescape/storage/pull/107)</sup> and replaced by the `NetworkNeighborhood` CRD.
+    The `NetworkNeighborhood` CRD was removed in storage v0.0.303<sup>[1](https://github.com/kubescape/storage/pull/351)</sup>; its traffic data is now part of the `ContainerProfile`. The older `NetworkNeighbors` CRD had been replaced by `NetworkNeighborhood` before that<sup>[2](https://github.com/kubescape/storage/pull/107)</sup>.

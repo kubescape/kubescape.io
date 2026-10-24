@@ -270,11 +270,8 @@ oc get vulnerabilitymanifests -A
 View runtime security alerts (if any have been triggered):
 
 ```bash
-# Check for application activities
-oc get applicationactivities -A
-
-# Check for network neighborhoods
-oc get networkneighborhoods -A
+# Check the container profiles (learned behavior and network traffic)
+oc get containerprofiles -A
 
 # View generated network policies
 oc get generatednetworkpolicies -A
@@ -536,11 +533,8 @@ This should trigger a runtime alert for accessing sensitive files.
 Check if alerts were generated:
 
 ```bash
-# Check application activities
-oc get applicationactivities -n default
-
-# Check network neighborhoods
-oc get networkneighborhoods -n default
+# Check container profiles
+oc get containerprofiles -n default
 
 # View node-agent logs for alert events
 oc logs -n kubescape -l app=node-agent --tail=100 | grep -i alert
@@ -556,20 +550,17 @@ helm uninstall kubescape -n kubescape
 
 ### Remove CRDs (Optional)
 
-Helm does not automatically remove CRDs. If you want to completely remove Kubescape:
+Helm does not remove the CRDs in the chart's `crds/` folder. If you want to completely remove Kubescape:
 
 ```bash
-oc delete crd workloadconfigurationscans.spdx.softwarecomposition.kubescape.io
-oc delete crd workloadconfigurationscansummaries.spdx.softwarecomposition.kubescape.io
-oc delete crd vulnerabilitymanifests.spdx.softwarecomposition.kubescape.io
-oc delete crd vulnerabilitymanifestsummaries.spdx.softwarecomposition.kubescape.io
-oc delete crd vulnerabilitysummaries.spdx.softwarecomposition.kubescape.io
-oc delete crd generatednetworkpolicies.spdx.softwarecomposition.kubescape.io
-oc delete crd applicationactivities.spdx.softwarecomposition.kubescape.io
-oc delete crd applicationprofiles.spdx.softwarecomposition.kubescape.io
-oc delete crd networkneighborhoods.spdx.softwarecomposition.kubescape.io
-oc delete crd seccompprofiles.kubescape.io
+oc delete crd clustersecurityexceptions.kubescape.io
+oc delete crd operatorcommands.kubescape.io
+oc delete crd rules.kubescape.io
+oc delete crd securityexceptions.kubescape.io
+oc delete crd servicesscanresults.kubescape.io
 ```
+
+The `*.spdx.softwarecomposition.kubescape.io` resources (vulnerability manifests, container profiles, scan results) are not CRDs: they are served by the Kubescape storage component and go away with it.
 
 ### Delete Namespace
 
