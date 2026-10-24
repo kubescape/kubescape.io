@@ -166,7 +166,7 @@ Create an exceptions.json file and add the following content:
         "name": "exclude-linux-hardening-policy-control",
         "policyType": "postureExceptionPolicy",
         "actions": [
-            "alertOnly"
+            "disable"
         ],
         "resources": [
             {
@@ -186,7 +186,7 @@ Create an exceptions.json file and add the following content:
         "name": "exclude-egress-and-ingress-blocked-policy-control",
         "policyType": "postureExceptionPolicy",
         "actions": [
-            "alertOnly"
+            "disable"
         ],
         "resources": [
             {

@@ -69,7 +69,10 @@ Under `spec`:
 
 At least one of `posture` or `vulnerabilities` must be set.
 
-`action` can be `ignore` or `alert_only`. In a CLI posture scan, a matched resource is reported as passed with exceptions for either value, and it is excluded from the control's failed-resource count and compliance score. The value you choose is preserved in the scan results, which is where the two currently differ.
+`action` can be `ignore` or `alert_only`:
+
+- `ignore`: the matched resource is reported as passed with exceptions, and it is excluded from the control's failed-resource count and compliance score.
+- `alert_only`: the resource still fails, marked as failed with exceptions. It still counts in the failed-resource count and the compliance score, and still fails `--severity-threshold` and `--compliance-threshold`. Use it to record that a failure was reviewed without hiding it.
 
 ### Matching resources
 
@@ -103,7 +106,9 @@ kubescape scan --exceptions /path/to/exceptions.json
 
 - `name`- Exception name - a unique name representing the exception
 - `policyType`- Do not change
-- `actions`- List of available actions. Currently, alertOnly is supported
+- `actions`- What the exception does with a matched failure:
+    - `disable`: the resource is reported as passed with exceptions, and is excluded from the control's failed-resource count and compliance score.
+    - `alertOnly`: the resource still fails, marked as failed with exceptions, and still counts in the score and thresholds. Before Kubescape v4.0.13, `alertOnly` also excluded the resource.
 - `resources`- List of resources to apply this exception on
     - `designatorType: Attributes`- An attribute-based declaration {key: value}  
     Supported keys:
@@ -198,7 +203,7 @@ The resources
         "name": "exclude-allowed-hostPath-control",
         "policyType": "postureExceptionPolicy",
         "actions": [
-            "alertOnly"
+            "disable"
         ],
         "resources": [
             {
@@ -225,7 +230,7 @@ The resources
         "name": "exclude-deployments-in-ns-default",
         "policyType": "postureExceptionPolicy",
         "actions": [
-            "alertOnly"
+            "disable"
         ],
         "resources": [
             {
@@ -253,7 +258,7 @@ The resources
         "name": "exclude-nginx-minikube",
         "policyType": "postureExceptionPolicy",
         "actions": [
-            "alertOnly"
+            "disable"
         ],
         "resources": [
             {
