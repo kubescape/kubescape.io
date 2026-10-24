@@ -1,10 +1,166 @@
-:root {
-    --md-primary-fg-color:        #122a83;
-  }
+:root > * {
+  --md-primary-fg-color: #122a83;
+  --kubescape-heading-color: #484848;
+}
+
+[data-md-color-scheme="default"] {
+  color-scheme: light;
+}
+
+[data-md-color-scheme="slate"] {
+  --md-default-bg-color: #181a1b;
+  --md-default-bg-color--light: #181a1b8a;
+  --md-default-bg-color--lighter: #181a1b42;
+  --md-default-bg-color--lightest: #181a1b12;
+  --md-default-fg-color: #d5d5d2;
+  --md-default-fg-color--light: #b9bcbf;
+  --md-default-fg-color--lighter: #91979c;
+  --md-default-fg-color--lightest: #ffffff1f;
+  --md-code-bg-color: #202324;
+  --md-code-fg-color: #dededb;
+  --md-typeset-a-color: #91bdf1;
+  --md-accent-fg-color: #b8d6ff;
+  --md-accent-fg-color--transparent: #b8d6ff1a;
+  --md-footer-bg-color: #111314;
+  --md-footer-bg-color--dark: #0d0f10;
+  --kubescape-heading-color: #dededb;
+}
 
 h1, h2, h3 {
-	color: #484848 !important;
+	color: var(--kubescape-heading-color) !important;
 	font-weight: 600 !important;
+}
+
+/* Keep the native palette engine, but expose one keyboard-accessible button. */
+.theme-switch [data-md-component="palette"],
+.no-js .theme-switch {
+  display: none;
+}
+
+.theme-switch {
+  flex-shrink: 0;
+}
+
+.theme-toggle.md-header__button {
+  width: 44px;
+  height: 44px;
+  padding: 10px;
+  margin: 0 2px;
+  color: #d5d7df;
+  background: transparent;
+  border: 0;
+  border-radius: 4px;
+  vertical-align: middle;
+}
+
+.theme-toggle.md-header__button:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: -2px;
+}
+
+.theme-toggle svg {
+  display: block;
+  width: 24px;
+  height: 24px;
+  fill: none;
+}
+
+.theme-toggle__sun,
+[data-md-color-scheme="slate"] .theme-toggle__moon {
+  display: none;
+}
+
+[data-md-color-scheme="slate"] .theme-toggle__sun {
+  display: block;
+}
+
+/* Match the left header inset without reserving an empty repository column. */
+@media screen and (min-width: 60em) {
+  .md-header__inner .md-search {
+    margin-inline-end: 8px;
+  }
+
+  .md-header__inner .md-header__source {
+    flex-shrink: 0;
+    width: max-content;
+    max-width: none;
+    margin-inline: 8px 12px;
+  }
+
+  .md-header__source .md-source {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    min-height: 44px;
+  }
+
+  .md-header__source .md-source__icon {
+    display: flex;
+    align-items: center;
+    width: auto;
+    height: auto;
+  }
+
+  .md-header__source .md-source__icon svg {
+    margin: 0;
+  }
+
+  .md-header__source .md-source__icon + .md-source__repository {
+    max-width: none;
+    margin: 0;
+    padding: 0;
+  }
+}
+
+/* These diagrams contain authored light fills and text colors. */
+[data-md-color-scheme="slate"] .md-typeset .mermaid {
+  /* Material renders SVGs in a shadow root; their colors inherit these tokens. */
+  --md-default-fg-color--lightest: #00000012;
+  --md-default-fg-color--lighter: #00000052;
+  --md-mermaid-label-fg-color: #333;
+  --md-mermaid-label-bg-color: #fff;
+  --md-mermaid-edge-color: #666;
+  --md-mermaid-node-bg-color: #f1f3f5;
+  --md-mermaid-node-fg-color: #737980;
+  --md-mermaid-sequence-actor-bg-color: var(--md-mermaid-label-bg-color);
+  --md-mermaid-sequence-actor-fg-color: var(--md-mermaid-label-fg-color);
+  --md-mermaid-sequence-actor-border-color: var(--md-mermaid-node-fg-color);
+  --md-mermaid-sequence-actor-line-color: var(--md-mermaid-edge-color);
+  --md-mermaid-sequence-actorman-bg-color: var(--md-mermaid-label-bg-color);
+  --md-mermaid-sequence-actorman-line-color: var(--md-mermaid-node-fg-color);
+  --md-mermaid-sequence-box-bg-color: var(--md-mermaid-node-bg-color);
+  --md-mermaid-sequence-box-fg-color: var(--md-mermaid-edge-color);
+  --md-mermaid-sequence-label-bg-color: var(--md-mermaid-node-bg-color);
+  --md-mermaid-sequence-label-fg-color: var(--md-mermaid-label-fg-color);
+  --md-mermaid-sequence-loop-bg-color: var(--md-mermaid-node-bg-color);
+  --md-mermaid-sequence-loop-fg-color: var(--md-mermaid-edge-color);
+  --md-mermaid-sequence-loop-border-color: var(--md-mermaid-node-fg-color);
+  --md-mermaid-sequence-message-fg-color: var(--md-mermaid-edge-color);
+  --md-mermaid-sequence-message-line-color: var(--md-mermaid-edge-color);
+  --md-mermaid-sequence-note-bg-color: var(--md-mermaid-label-bg-color);
+  --md-mermaid-sequence-note-fg-color: var(--md-mermaid-edge-color);
+  --md-mermaid-sequence-note-border-color: var(--md-mermaid-label-fg-color);
+  --md-mermaid-sequence-number-bg-color: var(--md-mermaid-node-fg-color);
+  --md-mermaid-sequence-number-fg-color: #fff;
+  padding: 0.75rem;
+  color: #333;
+  background: #fff;
+  border-radius: 4px;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  body.theme-transition,
+  .theme-transition :is(.md-header, .md-tabs, .md-nav, .md-sidebar, .md-search__form,
+    .md-search__output, .md-search__scrollwrap, .md-footer, .md-footer-meta,
+    .md-typeset, h1, h2, h3, a, code, pre, table, th, td, .admonition, details) {
+    transition: color 180ms ease, background-color 180ms ease, border-color 180ms ease;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .theme-toggle.md-header__button {
+    transition: none;
+  }
 }
 
 .md-header__button.md-logo img, .md-header__button.md-logo svg {
