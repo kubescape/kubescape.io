@@ -41,7 +41,7 @@ To invoke Kubescape when installed with krew, use `kubectl kubescape` instead of
 
 ### PowerShell 
 
-Similar to the [bash installation script](#manual-install), you can install Kubescape using PowerShell on Windows: 
+Similar to the [bash installation script](#script-install), you can install Kubescape using PowerShell on Windows:
 
 ```powershell
 iwr -useb https://raw.githubusercontent.com/kubescape/kubescape/master/install.ps1 | iex
@@ -165,7 +165,7 @@ To install Kubescape on NixOS, add the following configuration to your [`/etc/ni
   ];
 ```
 
-Alternatively, if using [Home Manager](https://nixos.wiki/wiki/Home_Manager):
+Alternatively, if using [Home Manager](https://wiki.nixos.org/wiki/Home_Manager):
 
 ```
   # your other config ...
@@ -182,7 +182,7 @@ nix-env --install -A nixpkgs.kubescape
 ```
 
 !!! note "Note"
-    Packaging for Nix is [community supported](https://github.com/NixOS/nixpkgs/blob/master/pkgs/tools/security/kubescape/default.nix) and may not always be up-to-date with the [latest Kubescape release](https://github.com/kubescape/kubescape/tags). If you are having trouble, please reach out to [NixOS support](https://nixos.wiki/wiki/Support).
+    Packaging for Nix is [community supported](https://github.com/NixOS/nixpkgs/blob/master/pkgs/by-name/ku/kubescape/package.nix) and may not always be up-to-date with the [latest Kubescape release](https://github.com/kubescape/kubescape/tags). If you are having trouble, please reach out to [NixOS support](https://wiki.nixos.org/wiki/Support).
 
 ## Offline/air-gapped environment support
 

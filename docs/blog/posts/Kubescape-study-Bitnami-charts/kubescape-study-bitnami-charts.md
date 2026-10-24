@@ -27,7 +27,7 @@ When we ran Kubescape against Bitnami and Tanzu Application Catalog Helm charts,
 We now use Kubescape in several ways to improve our overall security posture and deliver a great user experience for our community users and Tanzu Application Catalog customers.
 
 * We continuously implement security improvements based on Kubescape's risk analysis and security compliance scanning.
-* We created an [Open Source Health Assessment](https://tanzu.vmware.com/oss-health-assessment) service where users can upload their Kubescape scanning reports and receive actionable insights.
+* We created an Open Source Health Assessment service where users can upload their Kubescape scanning reports and receive actionable insights.
 * We integrated Kubescape into the Bitnami catalog through a Kubescape CLI image, enabling users to initiate OSS health assessments locally using a simple Docker run command.
 
 ## Bitnami Helm chart security improvements
@@ -40,9 +40,9 @@ So what were those meaningful improvements we could make to our catalogs, thanks
 * **Improved compliance with security frameworks**: Kubescape's ability to detect compliance with multiple frameworks (including NSA-CISA, MITRE ATT&CK®, and the CIS Benchmark) helped ensure that Bitnami Helm charts align better with industry-standard security practices.
 * **Enhanced OpenShift compatibility**: When implemented, the configuration changes suggested by Kubescape enabled Bitnami Helm charts to function within OpenShift's restricted-v2 Security Context Constraints (SCC), which was not possible before.
 
-These enhancements further aligned Bitnami and [Tanzu Application Catalog Helm charts](https://tanzu.vmware.com/application-catalog) with industry standards and provide users with greater confidence in their deployments.
+These enhancements further aligned Bitnami and Tanzu Application Catalog Helm charts with industry standards and provide users with greater confidence in their deployments.
 
-For organizations looking to assess their own Kubernetes environments, the [VMware Tanzu OSS Health Assessment tool](https://tanzu.vmware.com/oss-health-assessment), which integrates Kubescape, offers comprehensive reports on misconfigurations and security vulnerabilities within OSS dependencies. It also provides insights using your own data about how upgrading from the community Bitnami Application Catalog to the enterprise [Tanzu Application Catalog](https://tanzu.vmware.com/application-catalog) can save you time and effort in improving your security posture.
+For organizations looking to assess their own Kubernetes environments, the VMware Tanzu OSS Health Assessment tool, which integrates Kubescape, offers comprehensive reports on misconfigurations and security vulnerabilities within OSS dependencies. It also provides insights using your own data about how upgrading from the community Bitnami Application Catalog to the enterprise Tanzu Application Catalog can save you time and effort in improving your security posture.
 
 <figure markdown>
   ![Tanzu OSS Assessment](oss.png){ width="600" }

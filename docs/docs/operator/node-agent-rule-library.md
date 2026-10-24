@@ -73,7 +73,7 @@ For the full rule definitions, including severities, MITRE mappings, tags, and t
 
 ## CEL helpers and built-in functions
 
-Kubescape rule expressions use standard CEL syntax plus several helper namespaces that the node-agent registers at runtime. For the base CEL operators, macros, and standard definitions, see the [CEL language definition](https://github.com/google/cel-spec/blob/master/doc/langdef.md#list-of-standard-definitions).
+Kubescape rule expressions use standard CEL syntax plus several helper namespaces that the node-agent registers at runtime. For the base CEL operators, macros, and standard definitions, see the [CEL language definition](https://github.com/cel-expr/cel-spec/blob/master/doc/langdef.md#standard-definitions).
 
 Kubescape also injects:
 
