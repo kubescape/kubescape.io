@@ -66,7 +66,7 @@ docker-compose up -d
 docker-compose logs uptrace
 ```
 
-4. Follow the [instructions above](#installing-kubescape-operator-in-a-kubernetes-cluster-using-helm), add the OTEL collector configuration and install the operator as follows:
+4. Follow the [operator installation instructions](../install-operator.md#install), add the OTEL collector configuration and install the operator as follows:
   
   ```
   --set configurations.otelUrl=<collector host>:14317 --set otelCollector.endpoint.insecure=false

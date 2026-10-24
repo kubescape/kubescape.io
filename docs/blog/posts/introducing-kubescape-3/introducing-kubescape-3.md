@@ -148,7 +148,7 @@ This scan will become the default behavior of `kubescape scan` in the coming wee
 
 ### Enhancements to monitoring and alerting
 
-Now we have data in the cluster regarding the configuration and vulnerability status of your environment, we can make this available through Prometheus.  Our wonderful LFX mentorship students [Tejas Jamdade](https://github.com/0xt3j4s) and [Yash Raj Singh](https://github.com/yrs147) have been building a Prometheus exporter and dashboards. These will allow you to look at control failures and vulnerabilities at a workload, namespace or cluster level, as well as setting up [Alertmanager](https://prometheus.io/docs/alerting/latest/alertmanager/) to inform you when security problems exceed a configurable threshold.
+Now we have data in the cluster regarding the configuration and vulnerability status of your environment, we can make this available through Prometheus.  Our wonderful LFX mentorship students [Tejas Jamdade](https://github.com/0xt3j4s) and [Yash Raj Singh](https://github.com/whyrass) have been building a Prometheus exporter and dashboards. These will allow you to look at control failures and vulnerabilities at a workload, namespace or cluster level, as well as setting up [Alertmanager](https://prometheus.io/docs/alerting/latest/alertmanager/) to inform you when security problems exceed a configurable threshold.
 
 ### Third-party cluster data services
 
@@ -188,7 +188,7 @@ We’re certainly not done here! For the rest of the year we will be finishing o
 
 ## Join the Kubescape community
 
-We welcome your feedback and ideas for improvement. We hold [community meetings](https://kubescape.io/project/community/#monthly-meeting) on Zoom, on the first Tuesday of every month, at 14:00 GMT.
+We welcome your feedback and ideas for improvement. We hold [community meetings](https://kubescape.io/project/community/#community-meetings) on Zoom, on the first Tuesday of every month, at 14:00 GMT.
 
 Thanks to all our contributors! Check out our [CONTRIBUTING](https://github.com/kubescape/kubescape/blob/master/CONTRIBUTING.md) file to learn how to join them.
 

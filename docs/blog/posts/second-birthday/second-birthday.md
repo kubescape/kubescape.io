@@ -28,7 +28,7 @@ We also added support for vulnerability scanning, allowing you to check for CVEs
 
 [Kubescape joined the Cloud Native Computing Foundation (CNCF)](https://www.armosec.io/blog/cncf-accepts-kubescape-security-and-compliance-scanner/) in December 2021, becoming the first and only open source, CNCF-hosted tool for [Kubernetes security posture management](https://www.armosec.io/glossary/kubernetes-security-posture-management/). With almost 9,000 stars in GitHub, and users doing almost a million scans per month, it has become one of the most popular tools in this space.
 
-ARMO has bet its business on open source, offering a [comprehensive Kubernetes security platform](https://cloud.armosec.io/) powered by Kubescape. However, this same engine is available to anyone, and we’re delighted to see [companies like Jit building their Kubernetes support on top of Kubescape.](https://www.jit.io/blog/kubescape-jit)
+ARMO has bet its business on open source, offering a [comprehensive Kubernetes security platform](https://cloud.armosec.io/) powered by Kubescape. However, this same engine is available to anyone, and we’re delighted to see [companies like Jit building their Kubernetes support on top of Kubescape.](https://www.jit.io/resources/cloud-sec-tools/kubescape-jit)
 
 Oh, and did we mention cake?  The ARMO team celebrated Kubescape's second birthday by decorating some cakes.  Congratulations to [Amir](https://github.com/amirmalka), [Yiscah](https://github.com/YiscahLevySilas1) and [Rina](https://github.com/RinaO1234), our winning team.
 

@@ -2,7 +2,7 @@
 
 ## Intro
 
-Using tools such as Kubescape to help remediate security issues in your cluster is crucial to any security plan. With Kubescape, you can scan your manifests, Helm charts, or active clusters for compliance with [security frameworks](../frameworks-and-controls/) such as NSA, MITRE, SOC 2, and more. 
+Using tools such as Kubescape to help remediate security issues in your cluster is crucial to any security plan. With Kubescape, you can scan your manifests, Helm charts, or active clusters for compliance with [security frameworks](../../frameworks-and-controls/index.md) such as NSA, MITRE, SOC 2, and more.
 There are several ways to run Kubescape, including a command-line tool, an in-cluster Operator, a Visual Studio Code integration, and a GitHub action. In this guide, you will use the Kubescape command-line tool (CLI) to illustrate hardening a running Kubernetes cluster with a simple deployment. Since the Kubescape CLI is agentless, it doesn't have as much insight into the cluster as the operator does. However, it’s still a potent tool.
 
 ## Deploy a Cluster
@@ -101,7 +101,7 @@ Run `kubescape scan control C-0260 -v` as indicated by the error, and you’ll s
 
 ![image](06-netpol-remediation-help.png)
 
-As you can see, if your terminal allows, there is a clickable link to the documentation that provides more information. In this case, it’s located at [https://kubescape.io/docs/controls/c-0260/](https://kubescape.io/docs/controls/c-0260/). Based on the information found in the ARMO documentation and the [K3s Hardening Guide](https://ranchermanager.docs.rancher.com/reference-guides/rancher-security/hardening-guides/k3s-hardening-guide#network-policies), create this network policy which will isolate network traffic within the cluster to its respective namespace:
+As you can see, if your terminal allows, there is a clickable link to the documentation that provides more information. In this case, it’s located at [https://kubescape.io/docs/controls/c-0260/](https://kubescape.io/docs/controls/c-0260/). Based on the information found in the ARMO documentation and the [K3s Hardening Guide](https://docs.k3s.io/security/hardening-guide#networkpolicies), create this network policy which will isolate network traffic within the cluster to its respective namespace:
 
 #### netpol.yml
 
