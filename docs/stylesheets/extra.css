@@ -148,13 +148,20 @@ h1, h2, h3 {
   border-radius: 4px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  body.theme-transition,
-  .theme-transition :is(.md-header, .md-tabs, .md-nav, .md-sidebar, .md-search__form,
-    .md-search__output, .md-search__scrollwrap, .md-footer, .md-footer-meta,
-    .md-typeset, h1, h2, h3, a, code, pre, table, th, td, .admonition, details) {
-    transition: color 180ms ease, background-color 180ms ease, border-color 180ms ease;
-  }
+/* Reveal the new palette above a stationary snapshot of the previous one. */
+.theme-reveal::view-transition-group(root),
+.theme-reveal::view-transition-old(root),
+.theme-reveal::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+
+.theme-reveal::view-transition-old(root) {
+  z-index: 1;
+}
+
+.theme-reveal::view-transition-new(root) {
+  z-index: 2;
 }
 
 @media (prefers-reduced-motion: reduce) {
