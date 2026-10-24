@@ -5,6 +5,17 @@ theme:
   name: material
   logo: assets/kubescape-lockup.svg
   favicon: assets/favicon.svg
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      toggle:
+        icon: theme/moon
+        name: Switch to dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      toggle:
+        icon: theme/sun
+        name: Switch to light mode
   font:
     text: Fira Sans
     code: Fira Mono
@@ -45,6 +56,8 @@ extra:
       link: https://github.com/kubescape/kubescape
 extra_css:
   - stylesheets/extra.css
+extra_javascript:
+  - javascripts/theme.js
 copyright:
   Copyright &amp;copy; 2021 - 2026 <a href="https://kubescape.devstats.cncf.io/d/66/developer-activity-counts-by-companies?orgId=1">The Kubescape Authors</a>
 nav:
