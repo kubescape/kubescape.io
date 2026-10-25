@@ -59,7 +59,7 @@ workloadconfigurationscansummaries                             spdx.softwarecomp
 
 Several of our in-cluster components implement telemetry data using OpenTelemetry (OTel). You can optionally install an OTel collector in your cluster to aggregate these metrics and send them to your own tracing tool.
 
-* [Learn about setting up telemetry](https://github.com/kubescape/helm-charts/blob/main/charts/kubescape-operator/README.md#setting-up-telemetry)
+* [Learn about setting up telemetry](telemetry.md)
 
 ## Automation and control
 

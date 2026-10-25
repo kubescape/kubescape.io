@@ -1,12 +1,15 @@
 # Quickstart Software Bill of Behavior (SBOB)
 
+!!! note "Historical sbob-rc3 walkthrough"
+    This walkthrough records the `sbob-rc3` demonstration using `ApplicationProfile` and `NetworkNeighborhood` resources. Its manifests and profiles are pinned to the matching example revision. Use the chart and image versions shown here together; newer ContainerProfile-based examples use a different setup.
+
 Here, Kubescape uses an SBOB to catch a live Log4Shell RCE — a shell spawned by a JVM worker thread, its pivot and
 exfiltration children, every one of them outside the workload's declared Software Bill of Behavior:
 
 ![Kubescape detecting a Log4Shell RCE against a Bill of Behavior](l4j-detection.gif)
 
 We published a *"harmless"* demo of
-[`log4shell`](https://github.com/k8sstormcenter/bob/tree/main/example/log4j-chain) — a
+[`log4shell`](https://github.com/k8sstormcenter/bob/tree/e247f527b830849b3f3a33282479b47b905f7615/example/log4j-chain) — a
 `frontend → java-backend → postgres` deployment, while mocking the `external payload` and the `exfiltration domain`.
 
 The attack-chain injects a `JNDI` via http-header, that gets resolved via an `ldap` server, to download a `jar` file into the running jvm to spawn a shell. 
@@ -41,11 +44,10 @@ The general pattern is to ensure that sbobs of `your-sbob-name` exist and to bin
 them via labels on each pod[^migration]
 
 
-[^migration]: The first implementation currently relies on the CRDs `ApplicationProfile`
-    and `NetworkNeighborhood`, but we will migrate them to `ContainerProfile` asap.
-    The functionality itself will not be affected.
+[^migration]: This historical implementation relies on the CRDs `ApplicationProfile`
+    and `NetworkNeighborhood`. Later implementations use `ContainerProfile`.
 
-    Currently, you need to apply the CRD to the cluster **before** the workload and ensure
+    For this version, apply the CRD to the cluster **before** the workload and ensure
     the labels are correct.
 
 ```yaml
@@ -58,8 +60,8 @@ spec:
 ```
 
 !!! info "Which build is this"
-    `sbob-rc3` is the release candidate that ships the Bill of Behavior features (wildcards, signing,
-    tamper detection), watch for announcements when it becomes GA.
+    This walkthrough uses the `sbob-rc3` release candidate of the Bill of Behavior features
+    (wildcards, signing and tamper detection). It does not describe the latest release.
 
 ## 2. Apply the Bill of Behavior — *before* the app
 
@@ -69,7 +71,7 @@ First, deploy the `user-defined-profile` and `user-defined-network` for the log4
 
 ```bash
 kubectl create namespace log4j-poc
-BASE=https://raw.githubusercontent.com/k8sstormcenter/bob/main/_artifacts/log4j-sbobs
+BASE=https://raw.githubusercontent.com/k8sstormcenter/bob/e247f527b830849b3f3a33282479b47b905f7615/_artifacts/log4j-sbobs
 for w in backend frontend observer postgres; do
   kubectl apply -f "$BASE/ap-chain-$w.yaml" -f "$BASE/nn-chain-$w.yaml"
 done
@@ -121,7 +123,7 @@ domain a real attacker would own. Simulate that in-cluster with a CoreDNS overri
 CoreDNS so it takes effect:
 
 ```bash
-kubectl apply -f https://raw.githubusercontent.com/k8sstormcenter/bob/main/example/log4j-chain/exfil-dns.yaml
+kubectl apply -f https://raw.githubusercontent.com/k8sstormcenter/bob/e247f527b830849b3f3a33282479b47b905f7615/example/log4j-chain/exfil-dns.yaml
 kubectl -n kube-system rollout restart deploy/coredns
 ```
 !!! note " SKIP this in any non-throwaway cluster- this kaputts dns"  
@@ -137,7 +139,7 @@ The manifest also includes the attacker: a marshalsec LDAP server and a class-fi
 **C** `patched` — `ghcr.io/k8sstormcenter/log4j-chain-backend-patched@sha256:cf34e119b720b0a31b5e5d2a7ede0e61eea0c14105c88558d80e7fa2a062290a`
 
 ```bash
-kubectl apply -f https://raw.githubusercontent.com/k8sstormcenter/bob/main/example/log4j-chain/log4j-chain.yaml
+kubectl apply -f https://raw.githubusercontent.com/k8sstormcenter/bob/e247f527b830849b3f3a33282479b47b905f7615/example/log4j-chain/log4j-chain.yaml
 kubectl -n log4j-poc rollout status deploy/chain-backend --timeout=120s
 kubectl -n attacker-ns rollout status deploy/attacker --timeout=60s
 ```
@@ -151,10 +153,12 @@ image: ghcr.io/k8sstormcenter/log4j-chain-backend-vulnerable@sha256:8f3cb3f9… 
 
 ## 5. Fire the exploit
 
-The attack pod sends the classic JNDI payload in a `User-Agent` header. It lands in `log4j-poc`:
+The attack pod sends the classic JNDI payload in a `User-Agent` header. Replace the
+template's Pod-name placeholder with `attack-demo` before applying it in `log4j-poc`:
 
 ```bash
-curl -sL https://raw.githubusercontent.com/k8sstormcenter/bob/main/example/log4j-chain/attack-pod.yaml \
+curl -sL https://raw.githubusercontent.com/k8sstormcenter/bob/e247f527b830849b3f3a33282479b47b905f7615/example/log4j-chain/attack-pod.yaml \
+  | sed 's/attack-PLACEHOLDER/attack-demo/' \
   | kubectl -n log4j-poc apply -f -
 ```
 

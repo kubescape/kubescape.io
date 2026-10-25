@@ -27,7 +27,7 @@ Kubescape was created by [ARMO](https://www.armosec.io/?utm_source=github&utm_me
 ## Demo
 <img src="https://github.com/kubescape/kubescape/raw/master/docs/img/demo.gif" alt="demo">
 
-_Please [star ⭐](https://github.com/kubescape/kubescape/stargazers) the repo if you want us to continue developing and improving Kubescape! 😀_
+_Please [star ⭐](https://github.com/kubescape/kubescape) the repo if you want us to continue developing and improving Kubescape! 😀_
 
 ## Getting started
 
@@ -43,7 +43,7 @@ Learn more about:
 * [Running your first scan](https://github.com/kubescape/kubescape/blob/master/docs/getting-started.md#run-your-first-scan)
 * [Usage](https://github.com/kubescape/kubescape/blob/master/docs/getting-started.md#examples)
 * [Architecture](https://github.com/kubescape/kubescape/blob/master/docs/architecture.md)
-* [Building Kubescape from source](https://github.com/kubescape/kubescape/blob/master/docs/building.md)
+* [Building Kubescape from source](https://github.com/kubescape/kubescape/wiki/Building)
 
 _Did you know you can use Kubescape in all these places?_
 

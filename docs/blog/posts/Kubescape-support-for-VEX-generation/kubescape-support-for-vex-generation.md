@@ -192,7 +192,7 @@ To follow additional developments in open source Kubernetes security, check out 
 
 ## Join the Kubescape community
 
-We welcome your feedback and ideas for improvement. We hold [community meetings](https://kubescape.io/project/community/#monthly-meeting) on Zoom, on the first Tuesday of every month, at 14:00 GMT.
+We welcome your feedback and ideas for improvement. We hold [community meetings](https://kubescape.io/project/community/#community-meetings) on Zoom, on the first Tuesday of every month, at 14:00 GMT.
 
 Thanks to all our contributors! Check out our [CONTRIBUTING](https://github.com/kubescape/kubescape/blob/master/CONTRIBUTING.md) file to learn how to join them.
 
