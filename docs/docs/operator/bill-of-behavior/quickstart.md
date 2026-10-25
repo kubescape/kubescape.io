@@ -153,10 +153,12 @@ image: ghcr.io/k8sstormcenter/log4j-chain-backend-vulnerable@sha256:8f3cb3f9… 
 
 ## 5. Fire the exploit
 
-The attack pod sends the classic JNDI payload in a `User-Agent` header. It lands in `log4j-poc`:
+The attack pod sends the classic JNDI payload in a `User-Agent` header. Replace the
+template's Pod-name placeholder with `attack-demo` before applying it in `log4j-poc`:
 
 ```bash
 curl -sL https://raw.githubusercontent.com/k8sstormcenter/bob/e247f527b830849b3f3a33282479b47b905f7615/example/log4j-chain/attack-pod.yaml \
+  | sed 's/attack-PLACEHOLDER/attack-demo/' \
   | kubectl -n log4j-poc apply -f -
 ```
 
