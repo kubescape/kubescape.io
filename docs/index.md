@@ -4,11 +4,8 @@ hide:
   - toc
 ---
 
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/cncf/artwork/master/projects/kubescape/stacked/white/kubescape-stacked-white.svg" width="300">
-  <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/cncf/artwork/master/projects/kubescape/stacked/color/kubescape-stacked-color.svg" width="300">
-  <img alt="Kubescape logo" src="https://raw.githubusercontent.com/cncf/artwork/master/projects/kubescape/stacked/color/kubescape-stacked-color.svg" width="300">
-</picture>
+<!-- Preserve the official brand colors in both themes: https://github.com/cncf/artwork/tree/main/projects/kubescape/stacked -->
+<img alt="Kubescape logo" src="assets/kubescape-stacked-color.svg" width="300">
 
 _Open-source Kubernetes Security: Practical, End-to-End Coverage_
 
@@ -102,5 +99,7 @@ Kubescape is a [Cloud Native Computing Foundation (CNCF) incubating project](htt
 Kubescape is a [trademark](https://www.linuxfoundation.org/legal/trademark-usage) owned by the [Linux Foundation](https://www.linuxfoundation.org/)
 
 <div>
-    <img src="https://raw.githubusercontent.com/cncf/artwork/refs/heads/main/other/cncf-member/incubating/color/cncf-incubating-color.svg" width="300" alt="CNCF Incubating Project">
+    <!-- Official logo variants: https://github.com/cncf/artwork/tree/main/other/cncf-member/incubating -->
+    <img src="assets/cncf-incubating-color.svg#only-light" width="300" alt="CNCF Incubating Project">
+    <img src="assets/cncf-incubating-white.svg#only-dark" width="300" alt="CNCF Incubating Project">
 </div>

@@ -1,0 +1,23 @@
+{# Material 9.2.7 persists automatic selections too. Only an explicit choice
+   should override the system on the next visit. Run before the page is painted. #}
+<script>
+  (() => {
+    const options = {{ config.theme.palette | tojson }};
+    const saved = __md_get("__palette");
+    const manual = __md_get("__palette_manual") === true;
+    const savedScheme = saved && saved.color && saved.color.scheme;
+    const scheme = manual && options.some(option => option.scheme === savedScheme)
+      ? savedScheme
+      : matchMedia("(prefers-color-scheme: dark)").matches ? "slate" : "default";
+    const index = options.findIndex(option => option.scheme === scheme);
+    const color = {
+      scheme,
+      primary: options[index].primary || "indigo",
+      accent: options[index].accent || "indigo"
+    };
+    __md_set("__palette", { index, color });
+    for (const [key, value] of Object.entries(color)) {
+      document.body.setAttribute("data-md-color-" + key, value);
+    }
+  })();
+</script>
