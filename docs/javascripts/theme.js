@@ -6,7 +6,6 @@ document.addEventListener("DOMContentLoaded", () => {
   if (!button || !palette) return;
 
   const system = matchMedia("(prefers-color-scheme: dark)");
-  let manual = __md_get("__palette_manual") === true;
   let revealing = false;
 
   function updateLabel() {
@@ -25,7 +24,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   button.addEventListener("click", async () => {
     if (revealing) return;
-    manual = true;
     __md_set("__palette_manual", true);
     const scheme = document.body.dataset.mdColorScheme === "slate" ? "default" : "slate";
     if (!document.startViewTransition || matchMedia("(prefers-reduced-motion: reduce)").matches) {
@@ -63,11 +61,11 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   system.addEventListener("change", () => {
-    if (!manual) select(system.matches ? "slate" : "default");
+    if (__md_get("__palette_manual") !== true) select(system.matches ? "slate" : "default");
   });
 
   // Reconcile changes that happened while scripts were loading.
-  if (!manual) select(system.matches ? "slate" : "default");
+  if (__md_get("__palette_manual") !== true) select(system.matches ? "slate" : "default");
   updateLabel();
   button.hidden = false;
 });
