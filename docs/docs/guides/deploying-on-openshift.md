@@ -550,12 +550,13 @@ helm uninstall kubescape -n kubescape
 
 ### Remove CRDs (Optional)
 
-Helm does not remove the CRDs in the chart's `crds/` folder. If you want to completely remove Kubescape:
+Helm does not remove the CRDs in the `crds/` folders of the chart and of its `kubescape-alert-crd` dependency. If you want to completely remove Kubescape:
 
 ```bash
 oc delete crd clustersecurityexceptions.kubescape.io
 oc delete crd operatorcommands.kubescape.io
 oc delete crd rules.kubescape.io
+oc delete crd runtimerulealertbindings.kubescape.io
 oc delete crd securityexceptions.kubescape.io
 oc delete crd servicesscanresults.kubescape.io
 ```
