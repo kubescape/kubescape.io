@@ -31,6 +31,8 @@ _Please [star ⭐](https://github.com/kubescape/kubescape) the repo if you want 
 
 ## Getting started
 
+Not sure whether to scan files or a running cluster? [Compare the two scan methods](docs/index.md#choose-a-scan-manifests-or-live-cluster).
+
 Experimenting with Kubescape is as easy as:
 
 ``` sh
