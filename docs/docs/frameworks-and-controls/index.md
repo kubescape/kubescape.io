@@ -27,5 +27,6 @@ Kubescape controls have been converted to [CEL expressions](https://github.com/k
 
 * [Read about the supported frameworks](frameworks.md)
 * [Create your own framework](frameworks.md#custom-frameworks)
+* [Choose default frameworks when installing the operator](../install-operator.md#default-posture-frameworks)
 * [Learn about downloading artifacts for offline usage](../install-cli.md#offlineair-gapped-environment-support)
 * [Use Kubescape to configure a validating admission policy](validating-admission-policy.md)
