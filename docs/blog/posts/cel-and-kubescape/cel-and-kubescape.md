@@ -14,6 +14,8 @@ Kubernetes 1.30 has brought a significant development to the table with the intr
 The introduction of CEL for admission control enables administrators to define complex and tailored policies, improving the overall security of Kubernetes clusters. This is significant for organizations with complex security requirements, as it allows them to create finely tuned policies that precisely match the security needs of different applications and environments.
 In this blog post, we'll explore the benefits of Validating Admission Policies, its goals, and how Kubescape maintainers have leveraged it to create a robust and precise cel-admission-library.
 
+<!-- more -->
+
 ## Validating Admission Policies Short Primer
 The first part of this blog post explains what ValidatingAdmissionPolicies are and explain why they were added and their benefits. If you have been following the development of KEP-3488, through alpha in Kubernetes 1.26, beta in Kubernetes 1.28 and GA in the aforementioned Kubernetes 1.30 and you just want to get started with them, feel free to skip to [Using the Kubescape CEL library in your cluster](#using-the-kubescape-cel-library-in-your-cluster).
 If you are reading this and thinking: “I already have OPA Gatekeeper or Kyverno up and running to solve this”.

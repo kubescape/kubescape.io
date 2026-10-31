@@ -21,7 +21,12 @@
 -->
 
 {# Based on Material for MkDocs 9.2.7. Keep upstream header behavior; place
-   the theme switch between search and the repository link. #}
+   the theme switch between search and the repository link. The agent
+   directive comes first so it appears near the top of every page's HTML. #}
+<p class="agent-directive" aria-hidden="true">
+  For AI agents: an index of this documentation is available at
+  <a href="/llms.txt" tabindex="-1">llms.txt</a>.
+</p>
 {% set class = "md-header" %}
 {% if "navigation.tabs.sticky" in features %}
   {% set class = class ~ " md-header--shadow md-header--lifted" %}

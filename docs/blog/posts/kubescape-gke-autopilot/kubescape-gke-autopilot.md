@@ -14,6 +14,8 @@ The Kubescape community is excited to share that **Kubescape’s node agent now 
 
 This is a significant milestone that opens the door for **full runtime observability and Kubernetes-native security** on fully-managed GKE environments.
 
+<!-- more -->
+
 ---
 
 ## A Quick Background: Why It Wasn’t Possible Before

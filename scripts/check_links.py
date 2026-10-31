@@ -16,6 +16,8 @@ from urllib.request import HTTPRedirectHandler, Request, build_opener
 
 DEFAULT_INVENTORY = Path(__file__).with_name('linkcheck-inventory.json')
 CSS_URL = re.compile(r'''url\(\s*(?:"([^"]*)"|'([^']*)'|([^\s)]*))\s*\)|@import\s+(?:"([^"]*)"|'([^']*)')''', re.IGNORECASE)
+MARKDOWN_FENCE = re.compile(r'^[ \t]*(`{3,}|~{3,}).*?^[ \t]*\1[ \t]*$', re.MULTILINE | re.DOTALL)
+MARKDOWN_LINK = re.compile(r'\]\(\s*<?([^)\s>]+)')
 
 
 def css_urls(text):
@@ -25,6 +27,12 @@ def css_urls(text):
         if '\\' in url:
             raise ValueError('Escaped CSS URLs are unsupported; coverage would be incomplete')
         yield url
+
+
+def markdown_urls(text):
+    """Extract inline link targets from generated Markdown (llms.txt and page copies), outside fenced code."""
+    for match in MARKDOWN_LINK.finditer(MARKDOWN_FENCE.sub('', text)):
+        yield match.group(1)
 
 
 def srcset_urls(value):
@@ -143,6 +151,11 @@ def collect(site, site_url, inventory, report):
         source = path.relative_to(site).as_posix()
         for url in css_urls(path.read_text(encoding='utf-8')):
             references.append({'source': source, 'attribute': 'css', 'url': url,
+                               'resolved_url': urljoin(urljoin(site_url, source), url)})
+    for path in sorted([*site.glob('llms.txt'), *site.rglob('*.md')]):
+        source = path.relative_to(site).as_posix()
+        for url in markdown_urls(path.read_text(encoding='utf-8')):
+            references.append({'source': source, 'attribute': 'markdown', 'url': url,
                                'resolved_url': urljoin(urljoin(site_url, source), url)})
     for item in inventory['examples']:
         references.append({'source': item['source'], 'attribute': 'example', 'url': item['url'],
