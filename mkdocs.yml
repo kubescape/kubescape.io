@@ -1,4 +1,5 @@
 site_name: Kubescape
+site_description: Kubescape is an open-source Kubernetes security platform designed to provide practical, end-to-end security for Kubernetes environments.
 site_url: https://kubescape.io/
 repo_url: https://github.com/kubescape/kubescape
 theme:
@@ -48,6 +49,16 @@ plugins:
   - search
   - glightbox
   - mermaid2
+  - llmstxt:
+      preprocess: scripts/llmstxt_preprocess.py
+      sections:
+        Documentation:
+          - index.md
+          - docs/*.md
+        Project:
+          - project/*.md
+        Blog:
+          - blog/posts/*.md
 extra:
   social:
     - icon: fontawesome/brands/twitter

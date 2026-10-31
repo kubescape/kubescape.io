@@ -24,6 +24,7 @@ Please refer to [this](https://github.com/kubebeam/kubescape-headlamp-plugin/blo
 ## Functionality
 
 The plugin gives you access to
+
 * Configuration/compliance scan results
 * Vulnerability information on workloads (multiple views)
 * Network policy proposals and relational graph

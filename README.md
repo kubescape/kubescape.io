@@ -50,6 +50,7 @@ JavaScript, documentation commands, or third-party applications. Computed resour
 and application fragments require separate review. Static example URLs, including
 the historical BoB manifests, are declared in `scripts/linkcheck-inventory.json`;
 exceptions must match a specific referring page and URL and explain why they exist.
+Links in `llms.txt` and the generated Markdown copies are checked the same way.
 
 External availability can be checked separately:
 
@@ -75,6 +76,28 @@ fail. A maintainer must make the **Documentation integrity** status required in 
 applicable branch rule and verify it runs for documentation-bot PRs without a bypass;
 adding the workflow alone does not block merges. Netlify preview validation remains
 separate because hosted build settings are not fully defined in this repository.
+
+## Access for AI agents
+
+The [`mkdocs-llmstxt`](https://github.com/pawamoy/mkdocs-llmstxt) plugin publishes
+`/llms.txt` and a Markdown copy beside each page's HTML (for example
+`/docs/getting-started/index.md`). New pages under `docs/docs/`, `docs/project/`
+and `docs/blog/posts/` are included automatically through the `sections` patterns
+in `mkdocs.yml`. `scripts/llmstxt_preprocess.py` adds a pointer to `/llms.txt` to
+each copy and labels Mermaid source. The plugin is pinned to 0.5.0, the last
+release supporting Python 3.10, and is in maintenance mode upstream.
+
+Each HTML page points to `/llms.txt` in a visually hidden element at the top
+(`overrides/partials/header.html`). The edge function in
+`netlify/edge-functions/markdown.js` returns the Markdown copy to requests that
+send `Accept: text/markdown`; it does not run for other requests. Its tests run
+with `node --test tests/markdown-negotiation.test.cjs`.
+
+To check agent access with [AFDocs](https://afdocs.dev) against a deploy:
+
+```bash
+npx -y afdocs@0.20.0 check <site URL> --format scorecard --max-links 1000 --max-concurrency 3 --request-delay 200
+```
 
 ## Production
 

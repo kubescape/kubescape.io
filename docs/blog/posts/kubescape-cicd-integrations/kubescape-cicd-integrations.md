@@ -11,6 +11,8 @@ slug: 'kubescape-cicd-integrations'
 
 Kubernetes security should not be an afterthought. By integrating Kubescape into your CI/CD pipeline, you can catch misconfigurations and compliance violations before they reach production. This post walks through how to add Kubescape to the three most common CI/CD platforms: GitHub Actions, GitLab CI/CD, and Jenkins.
 
+<!-- more -->
+
 ## Why Shift Security Left?
 
 Every misconfiguration that reaches a production cluster costs more to fix than one caught during a pull request. Kubescape scans your Kubernetes manifests, Helm charts, and Kustomize configurations against security frameworks including NSA-CISA, MITRE ATT&CK, and CIS Benchmarks — and it runs in seconds. Adding it to your pipeline means every commit is checked automatically.
