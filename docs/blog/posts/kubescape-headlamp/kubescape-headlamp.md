@@ -15,6 +15,8 @@ Managing security in Kubernetes can feel like navigating a maze. With countless 
 
 That’s where Headlamp comes in. Headlamp is an open-source Kubernetes UI that provides an intuitive, visual way to explore and manage your clusters. It helps users of all experience levels understand what’s happening in their environments, surfacing insights that would otherwise require deep command-line expertise.
 
+<!-- more -->
+
 ## Announcing the Kubescape Plugin for Headlamp
 
 We’re excited to share the new Kubescape plugin for Headlamp, a game-changer for anyone looking to simplify Kubernetes security management! As Viktor Farcic noted at KubeCon NA 2024, “What Kubescape needs is a GUI.”

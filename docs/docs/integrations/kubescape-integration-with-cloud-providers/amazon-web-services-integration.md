@@ -12,13 +12,13 @@ If you use an Amazon Elastic Compute Cloud (EC2) instance, you can authenticate 
 From the AWS Command Line Interface (AWS CLI), run the following commands:
 
 1. Configure AWS keys.
-   ```Text Configure AWS keys
+   ```text title="Configure AWS keys"
    config AWS Access Key ID [****************XXXX]:
    config AWS Secret Access Key [****************XXXX]:
    ```
 2. Press **Enter** for approval.
 3. Ensure that the `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY` are configured properly.
-   ```AWS Verify credentials
+   ```text title="Verify credentials"
    cat ~/.aws/credentials
    ```
 
@@ -31,25 +31,25 @@ The `KS_CLOUD_REGION` environment variable is required to get your cluster regio
 We recommend setting the `KS_CLOUD_PROVIDER` environment variable to `eks`.
 
 1. Configure the region name.
-   ```Text Configure region
-   config Default region name \[]: (cluster default region)
+   ```text title="Configure region"
+   config Default region name []: (cluster default region)
    ```
 2. Ensure that the region is configured.
-   ```Text Verify region
-   \`cat ~/.aws/config
+   ```text title="Verify region"
+   cat ~/.aws/config
    ```
 
 ## Verify your connection and IAM roles
 
 Run the following to ensure that you have cluster access:
 
-```Text Verify access
+```text title="Verify access"
 kubectl get nodes
 ```
 
 Run the following command in the AWS CLI to verify your IAM permissions to your AWS cluster:
 
-```Text Verify IAM
+```text title="Verify IAM"
 aws eks describe-cluster --name <cluster-name> --region <cluster region>
 ```
 

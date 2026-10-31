@@ -12,6 +12,8 @@ slug: "kubescape-cis-10"
 
 We're happy to announce that Kubescape has upgraded it's securiy controls to align with the latest CIS Kubernetes Benchmark v1.10. Thus, helping you strengthen your cluster security posture with industry-recognized standards.
 
+<!-- more -->
+
 ## What's New in CIS Kubernetes Benchmark v1.10? 
 
 The CIS Kubernetes Benchmark v1.10.0 delivers significant enhancements to address the evolving security landscape:

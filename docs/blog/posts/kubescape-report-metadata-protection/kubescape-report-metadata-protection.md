@@ -19,6 +19,8 @@ This feature introduces two new mechanisms:
 
 Whether you're sharing reports across teams, collaborating with customers, or publishing security findings, Kubescape now makes it easier to protect sensitive metadata while preserving the value of the security analysis.
 
+<!-- more -->
+
 ---
 
 ## A Quick Background: Why It Was Needed
