@@ -41,10 +41,10 @@ curl -s https://raw.githubusercontent.com/kubescape/kubescape/master/install.sh 
 
 Learn more about:
 
-* [Installing Kubescape](https://github.com/kubescape/kubescape/blob/master/docs/getting-started.md#install-kubescape)
-* [Running your first scan](https://github.com/kubescape/kubescape/blob/master/docs/getting-started.md#run-your-first-scan)
-* [Usage](https://github.com/kubescape/kubescape/blob/master/docs/getting-started.md#examples)
-* [Architecture](https://github.com/kubescape/kubescape/blob/master/docs/architecture.md)
+* [Installing Kubescape](docs/getting-started.md#install-kubescape)
+* [Running your first scan](docs/getting-started.md#run-your-first-scan)
+* [Usage](docs/scanning.md)
+* [Architecture](docs/architecture.md)
 * [Building Kubescape from source](https://github.com/kubescape/kubescape/wiki/Building)
 
 _Did you know you can use Kubescape in all these places?_
@@ -64,7 +64,7 @@ By default, the results are printed in a console-friendly manner, but they can b
 
 * exported to JSON or junit XML
 * rendered to HTML or PDF
-* submitted to a [cloud service](https://github.com/kubescape/kubescape/blob/master/docs/providers.md)
+* submitted to a [cloud service](docs/providers.md)
 
 It retrieves Kubernetes objects from the API server and runs a set of [Rego snippets](https://www.openpolicyagent.org/docs/latest/policy-language/) developed by [ARMO](https://www.armosec.io/?utm_source=kubescape.io&utm_medium=website).
 

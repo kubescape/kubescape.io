@@ -198,3 +198,14 @@ h1, h2, h3 {
   height: 100%;
   border: 0;
 }
+
+/* Light / Dark mode image switching for both raw img and glightbox anchor wrappers */
+[data-md-color-scheme="default"] img[src*="#only-dark"],
+[data-md-color-scheme="default"] a[href*="#only-dark"] {
+  display: none !important;
+}
+
+[data-md-color-scheme="slate"] img[src*="#only-light"],
+[data-md-color-scheme="slate"] a[href*="#only-light"] {
+  display: none !important;
+}

@@ -65,6 +65,7 @@ nav:
     - Docs:
         - 'Documentation overview': 'docs/index.md'
         - 'Getting Started': 'docs/getting-started.md'
+        - 'Architecture': 'docs/architecture.md'
         - 'Installing the client': 'docs/install-cli.md'
         - 'Installing in your cluster': 'docs/install-operator.md'
         - 'Scanning your environment': 'docs/scanning.md'
