@@ -1,0 +1,303 @@
+# Glossary
+
+A quick-reference guide to essential Kubescape, Kubernetes, and cloud-native security concepts.
+
+Jump to: 
+[A](#a) • [B](#b) • [C](#c) • [D](#d) • [E](#e) • [F](#f) • [G](#g) • [H](#h) • [I](#i) • [K](#k) • [M](#m) • [N](#n) • [O](#o) • [P](#p) • [R](#r) • [S](#s) • [V](#v) • [W](#w)
+
+---
+
+## A
+
+### [Admission Controller](install-operator.md#the-kubescape-operator)
+A Kubernetes security mechanism that intercepts requests to the Kubernetes API server before a resource is created or changed, allowing Kubescape to block insecure configurations before they reach your cluster.
+
+**Analogy:** Like a security guard at a building's entrance checking visitor IDs and badges before allowing anyone through the front door.
+
+### [Anomaly Detection Engine](operator/runtime-threat-detection.md#anomaly-detection-engine)
+A runtime component within the Kubescape [Node Agent](#node-agent) that learns what normal container behavior looks like and sounds an alarm if sudden, unexpected actions occur.
+
+**Analogy:** Like a smart home security system that learns your daily routine and sounds an alarm if a door opens at 3 AM.
+
+### [ApplicationProfile](operator/bill-of-behavior/index.md#bill-of-behavior)
+A Kubernetes [Custom Resource (CRD)](#custom-resource-definition-crd) created by Kubescape that stores the recorded baseline behavior of a container—such as files read, system calls made, and network connections opened.
+
+**Analogy:** Like a patient's medical baseline chart recording their normal resting heart rate and blood pressure for comparison.
+
+### [Assisted Remediation](scanning.md#verbose-mode)
+A Kubescape CLI feature that points out the exact configuration field and value you need to update in your Kubernetes manifest to fix a failed security check.
+
+**Analogy:** Like a word processor's spell-checker that not only highlights a typo, but suggests the exact replacement word with one click.
+
+---
+
+## B
+
+### [Behavioral Analysis Engine](operator/runtime-threat-detection.md#behavioral-analysis-engine)
+A threat detection engine inside the [Node Agent](#node-agent) that matches live container events against known attack patterns, such as reverse shells or memory unpackers.
+
+**Analogy:** Like an airport baggage scanner trained to immediately recognize the distinct silhouette of prohibited weapons or tools.
+
+### [Bill of Behavior (BoB / SBOB)](operator/bill-of-behavior/index.md#bill-of-behavior)
+A declarative specification describing what an application is intended and allowed to do at runtime. Any action outside this specification is treated as a software bug or an active attack.
+
+**Analogy:** Like a strict employee job description—if an accountant suddenly starts trying to rewire the building's electrical breakers, it triggers an immediate investigation.
+
+---
+
+## C
+
+### [CEL (Common Expression Language)](operator/node-agent-rule-library.md#node-agent-rule-library) {: #cel-common-expression-language }
+A fast, lightweight expression language built into Kubernetes and used by Kubescape to evaluate admission policies and runtime rules without overhead.
+
+**Analogy:** Like writing a formula in a spreadsheet (e.g., `=IF(A1 > 10, ...)`): simple, safe, and evaluated almost instantaneously.
+
+### [CIS Benchmarks](frameworks-and-controls/frameworks.md#published-frameworks)
+A globally recognized catalog of vendor-neutral security guidelines and best practices published by the Center for Internet Security to harden Kubernetes clusters.
+
+**Analogy:** Like an official municipal building code checklist that construction workers must satisfy before an occupancy permit is issued.
+
+### [Control](controls/index.md#control-library)
+A single, self-contained security check (such as `C-0034: Automatic mapping of service account`) that tests your cluster or configuration files against a specific security requirement.
+
+**Analogy:** A single item on a vehicle safety inspection checklist (e.g., "Are the brake lights functioning properly?").
+
+### [Copacetic (Copa)](guides/vulnerability-monitoring.md#monitoring-vulnerabilities-across-your-cluster)
+An open-source container patching tool used by Kubescape to fix vulnerabilities in container images directly, without rebuilding the image from scratch.
+
+**Analogy:** Like patching a small puncture on a bicycle tire with a patch kit instead of manufacturing a brand-new wheel.
+
+### [Custom Resource Definition (CRD)](install-operator.md#view-results) {: #custom-resource-definition-crd }
+A Kubernetes extension mechanism that lets applications like Kubescape create their own custom object types directly inside the cluster's database.
+
+**Analogy:** Like adding a customized folder template and tab system into an existing office filing cabinet.
+
+### [CVE (Common Vulnerabilities and Exposures)](operator/vulnerabilities.md#vulnerability-scanning)
+A standardized, publicly tracked identification number (such as `CVE-2023-1234`) assigned to known software security vulnerabilities.
+
+**Analogy:** Like an official vehicle recall identifier issued by a highway safety administration.
+
+---
+
+## D
+
+### [DaemonSet](operator/index.md#node-agent)
+A Kubernetes workload controller that ensures an identical copy of a specific Pod runs on every single worker node across your cluster.
+
+**Analogy:** Like placing one dedicated security officer on every floor of a multi-story building.
+
+---
+
+## E
+
+### [eBPF (Extended Berkeley Packet Filter)](operator/relevancy.md#vulnerability-relevancy) {: #ebpf }
+A Linux kernel technology that allows Kubescape to safely and efficiently observe system calls, file access, and network events without modifying kernel code.
+
+**Analogy:** Like high-definition security cameras quietly installed along hallways that let security teams monitor all activity without getting in anyone's way.
+
+### [EPSS (Exploit Prediction Scoring System)](operator/vulnerabilities.md#vulnerability-scanning)
+A daily updated scoring system (from 0% to 100%) estimating the probability that a software vulnerability will be actively exploited in the wild over the next 30 days.
+
+**Analogy:** Like a daily weather forecast predicting an 80% chance of rain, helping you decide whether carrying an umbrella today is truly necessary.
+
+### [Exceptions (Risk Acceptance)](accepting-risk.md#accepting-risk)
+Configurable rules that instruct Kubescape to ignore or accept specific security findings that you have reviewed and decided are safe, planned, or unavoidable.
+
+**Analogy:** Like an authorized hall pass that excuses a student from class because they have a scheduled appointment.
+
+---
+
+## F
+
+### [Framework](frameworks-and-controls/index.md#frameworks-and-controls)
+A curated collection of related security [Controls](#control) grouped together to satisfy an established compliance or security standard (such as NSA-CISA, MITRE ATT&CK, or CIS).
+
+**Analogy:** Like a complete driver's license exam composed of dozens of individual road tests and written questions.
+
+---
+
+## G
+
+### [Grype](operator/vulnerabilities.md#vulnerability-scanning)
+The open-source vulnerability scanner integrated into Kubescape that inspects container packages and matches them against public vulnerability databases.
+
+**Analogy:** Like a barcode scanner at a store that instantly checks an inventory database to see if a product has an active safety warning.
+
+---
+
+## H
+
+### [Headlamp](operator/ui-with-headlamp.md#setting-up-a-ui-with-headlamp)
+An extensible open-source Kubernetes web dashboard that displays visual Kubescape compliance scores, scan results, and vulnerability summaries.
+
+**Analogy:** Like a car's digital instrument panel displaying speed, fuel efficiency, and tire pressure in a clear visual layout.
+
+### [Host Scanner](scanning.md#the-host-scanner)
+A Kubescape component that inspects the configuration and security state of the underlying node operating system (including kernel parameters, file permissions, and Kubelet settings).
+
+**Analogy:** Like inspecting the foundation and load-bearing walls of an apartment building rather than just the interior furniture.
+
+---
+
+## I
+
+### [Image Patching](guides/vulnerability-monitoring.md#monitoring-vulnerabilities-across-your-cluster)
+The process of updating vulnerable packages directly within an existing container image to eliminate security flaws without having to rebuild the application.
+
+**Analogy:** Like swapping out a faulty bolt on an appliance rather than having to take the entire machine back to the factory.
+
+### [Inspektor Gadget](operator/runtime-threat-detection.md#architecture)
+An [eBPF](#ebpf)-based framework of tools used by the Kubescape [Node Agent](#node-agent) to extract kernel-level events and monitor container activity.
+
+**Analogy:** Like a mechanic's electronic diagnostic scanner plugged into a car's computer port to read engine telemetry.
+
+---
+
+## K
+
+### [Kubelet](scanning.md#the-host-scanner)
+The primary node agent running on every Kubernetes worker node responsible for registering nodes and ensuring that requested containers are running.
+
+**Analogy:** Like the on-site superintendent of an apartment complex who ensures all apartments are occupied as instructed and maintenance is up to date.
+
+### [Kubescape CLI](install-cli.md#installing-kubescape)
+The standalone command-line executable (`kubescape`) used by developers to scan Kubernetes YAML manifests, Helm charts, container images, and clusters on-demand.
+
+**Analogy:** Like a handheld security scanner carried around by an inspector to perform immediate, on-the-spot safety checks.
+
+### [Kubescape Operator](operator/index.md#the-kubescape-operator)
+The in-cluster controller installed via Helm that continuously monitors Kubernetes clusters, runs automated scans on a schedule, and manages runtime security.
+
+**Analogy:** Like a 24/7 automated security operations center permanently stationed inside a facility.
+
+### [Kubevuln](operator/vulnerabilities.md#vulnerability-scanning)
+The in-cluster microservice that runs container vulnerability scans, generates [SBOMs](#sbom-software-bill-of-materials), and stores vulnerability manifests.
+
+**Analogy:** Like an in-house quality assurance laboratory testing incoming shipments for manufacturing defects.
+
+---
+
+## M
+
+### [Malware Scanner](operator/runtime-threat-detection.md#malware-scanning)
+A security capability inside the [Node Agent](#node-agent) that scans nodes, directories, and container volumes for viruses and malicious files using an optimized ClamAV engine.
+
+**Analogy:** Like an antivirus program scanning a hard drive to catch trojans, worms, or infected files.
+
+### [MCP Server (Model Context Protocol)](mcp-server.md#kubescape-cli-as-an-mcp-server-in-cursor)
+A feature in the Kubescape CLI that allows AI developer assistants (such as Cursor or Claude Desktop) to query cluster security reports and help you fix issues.
+
+**Analogy:** Like a direct radio link connecting an on-site technician to an AI advisor who can review findings and suggest immediate fixes.
+
+### [MITRE ATT&CK](frameworks-and-controls/frameworks.md#published-frameworks)
+A globally accessible knowledge base documenting real-world cyber adversary tactics and techniques, used by Kubescape to map threat-detection rules.
+
+**Analogy:** Like a criminal investigation playbook detailing all the common tactics and entry methods used during burglaries.
+
+---
+
+## N
+
+### [Network Neighborhood](operator/network-policy-generation.md#network-policy-generation)
+A Kubernetes [Custom Resource](#custom-resource-definition-crd) generated by Kubescape that logs all verified inbound and outbound network connections made by a workload.
+
+**Analogy:** Like an itemized phone bill listing every single incoming and outgoing phone number dialed by a household.
+
+### [Network Policy Generation](operator/network-policy-generation.md#network-policy-generation)
+A Kubescape feature that uses observed container network traffic to automatically generate minimal, secure Kubernetes `NetworkPolicy` rules that restrict unauthorized network paths.
+
+**Analogy:** Like creating an approved contact list on a child's phone that automatically blocks calls to and from unknown strangers.
+
+### [Node Agent](operator/runtime-threat-detection.md#architecture)
+A lightweight [DaemonSet](#daemonset) running on every node that uses [eBPF](#ebpf) to monitor runtime events, detect security anomalies, and track package usage.
+
+**Analogy:** Like posting a dedicated security guard on every street corner of a neighborhood.
+
+### [NSA-CISA Guidance](frameworks-and-controls/frameworks.md#published-frameworks)
+A comprehensive Kubernetes security hardening guide jointly authored by the US National Security Agency (NSA) and Cybersecurity and Infrastructure Security Agency (CISA).
+
+**Analogy:** Like government safety standards and building regulations for operating high-security facilities.
+
+---
+
+## O
+
+### [OPA (Open Policy Agent) & Rego](frameworks-and-controls/configuring-controls.md#control-configuration-parameters)
+The open-source policy engine (OPA) and query language (Rego) used by Kubescape to write and execute configuration checks against Kubernetes resources.
+
+**Analogy:** Rego is the rulebook, and OPA is the referee blowing the whistle whenever a player breaks a rule.
+
+---
+
+## P
+
+### [Pod](getting-started.md#getting-started-with-kubescape)
+The smallest deployable computing unit in Kubernetes, containing one or more containers that share network and storage resources.
+
+**Analogy:** Like a single shipping container holding one or more tightly packed boxes that travel together.
+
+---
+
+## R
+
+### [RBAC (Role-Based Access Control)](scanning.md#the-overview-scan)
+A Kubernetes authorization mechanism that regulates which users and service accounts are allowed to view, modify, or delete specific cluster resources.
+
+**Analogy:** Like electronic keycards in an office—everyone can open the front door, but only system engineers can open the server room door.
+
+### [Relevancy](operator/relevancy.md#vulnerability-relevancy)
+A Kubescape runtime filtering capability that uses [eBPF](#ebpf) to determine which packages and libraries are actively loaded into memory, allowing you to deprioritize vulnerabilities in unused code.
+
+**Analogy:** Like ignoring a warning about a broken seatbelt in a spare car parked in a garage that nobody ever drives.
+
+### [Rule](operator/node-agent-rule-library.md#node-agent-rule-library)
+The foundational check (written in Rego or [CEL](#cel-common-expression-language)) that tests for a specific security risk or runtime threat. Multiple rules combine to form a [Control](#control).
+
+**Analogy:** Like an individual clause in a lease agreement (e.g., "Tenants may not sub-lease without written consent").
+
+### [Runtime Threat Detection](operator/runtime-threat-detection.md#runtime-threat-detection)
+Continuous, real-time monitoring of live containers and the API server to catch and alert on active security attacks—such as privilege escalation or reverse shells—as they happen.
+
+**Analogy:** Like security officers watching live monitors ready to respond the second someone tries to pick a lock.
+
+---
+
+## S
+
+### [SBOM (Software Bill of Materials)](operator/relevancy.md#vulnerability-relevancy) {: #sbom-software-bill-of-materials }
+A formal, machine-readable inventory listing every software package, dependency, and library bundled inside a container image.
+
+**Analogy:** Like the nutrition and ingredient list printed on the side of a food box.
+
+### [Storage (kubescape/storage)](operator/index.md#in-cluster-storage)
+A lightweight in-cluster API server and storage engine where Kubescape persists scan results, [SBOMs](#sbom-software-bill-of-materials), and [ApplicationProfiles](#applicationprofile).
+
+**Analogy:** Like a dedicated filing room inside an office where all completed safety audits and incident reports are archived.
+
+---
+
+## V
+
+### [Validating Admission Policy (VAP)](install-operator.md#the-kubescape-operator)
+A native Kubernetes mechanism that checks incoming resource requests against security rules using [CEL](#cel-common-expression-language) directly within the API server, without needing an external webhook.
+
+**Analogy:** Like an automated electronic passport scanner at airport customs that validates your ticket before opening the gate.
+
+### [VEX (Vulnerability Exploitability eXchange)](operator/generating-vex.md#what-is-vex)
+A standardized, machine-readable statement from software publishers or security tools declaring whether a detected vulnerability is actually exploitable in a specific environment.
+
+**Analogy:** Like a product advisory notice from a car manufacturer stating: "Part #123 has a known defect, but this specific model does not use that part, so no recall is required."
+
+### [Vulnerability Manifest (`VulnerabilityManifest`)](operator/vulnerabilities.md#vulnerabilty-manifests)
+A Kubernetes [Custom Resource](#custom-resource-definition-crd) created by Kubescape that records the complete list of detected container vulnerabilities and flags which ones are active at runtime via [Relevancy](#relevancy).
+
+**Analogy:** Like an official vehicle safety inspection certificate that lists every defect found and marks which ones are critical versus harmless.
+
+---
+
+## W
+
+### [WorkloadConfigurationScan](operator/index.md#in-cluster-storage)
+A Kubernetes [Custom Resource](#custom-resource-definition-crd) that stores the results of configuration and compliance scans for a specific workload or deployment.
+
+**Analogy:** Like an inspection report detailing every hazard found inside a specific office suite.
