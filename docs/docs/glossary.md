@@ -9,7 +9,7 @@ Jump to:
 
 ## A
 
-### [Admission Controller](install-operator.md#the-kubescape-operator)
+### [Admission Controller](install-operator.md#kubescape-operator)
 A Kubernetes security mechanism that intercepts requests to the Kubernetes API server before a resource is created or changed, allowing Kubescape to block insecure configurations before they reach your cluster.
 
 **Analogy:** Like a security guard at a building's entrance checking visitor IDs and badges before allowing anyone through the front door.
@@ -72,7 +72,7 @@ A Kubernetes extension mechanism that lets applications like Kubescape create th
 
 **Analogy:** Like adding a customized folder template and tab system into an existing office filing cabinet.
 
-### [CVE (Common Vulnerabilities and Exposures)](operator/vulnerabilities.md#vulnerability-scanning)
+### [CVE (Common Vulnerabilities and Exposures)](operator/vulnerabilities.md#vulnerability-scanning-with-the-kubescape-operator)
 A standardized, publicly tracked identification number (such as `CVE-2023-1234`) assigned to known software security vulnerabilities.
 
 **Analogy:** Like an official vehicle recall identifier issued by a highway safety administration.
@@ -95,12 +95,12 @@ A Linux kernel technology that allows Kubescape to safely and efficiently observ
 
 **Analogy:** Like high-definition security cameras quietly installed along hallways that let security teams monitor all activity without getting in anyone's way.
 
-### [EPSS (Exploit Prediction Scoring System)](operator/vulnerabilities.md#vulnerability-scanning)
+### [EPSS (Exploit Prediction Scoring System)](operator/vulnerabilities.md#vulnerability-scanning-with-the-kubescape-operator)
 A daily updated scoring system (from 0% to 100%) estimating the probability that a software vulnerability will be actively exploited in the wild over the next 30 days.
 
 **Analogy:** Like a daily weather forecast predicting an 80% chance of rain, helping you decide whether carrying an umbrella today is truly necessary.
 
-### [Exceptions (Risk Acceptance)](accepting-risk.md#accepting-risk)
+### [Exceptions (Risk Acceptance)](accepting-risk.md#accepting-risk-with-exceptions)
 Configurable rules that instruct Kubescape to ignore or accept specific security findings that you have reviewed and decided are safe, planned, or unavoidable.
 
 **Analogy:** Like an authorized hall pass that excuses a student from class because they have a scheduled appointment.
@@ -118,7 +118,7 @@ A curated collection of related security [Controls](#control) grouped together t
 
 ## G
 
-### [Grype](operator/vulnerabilities.md#vulnerability-scanning)
+### [Grype](operator/vulnerabilities.md#vulnerability-scanning-with-the-kubescape-operator)
 The open-source vulnerability scanner integrated into Kubescape that inspects container packages and matches them against public vulnerability databases.
 
 **Analogy:** Like a barcode scanner at a store that instantly checks an inventory database to see if a product has an active safety warning.
@@ -170,7 +170,7 @@ The in-cluster controller installed via Helm that continuously monitors Kubernet
 
 **Analogy:** Like a 24/7 automated security operations center permanently stationed inside a facility.
 
-### [Kubevuln](operator/vulnerabilities.md#vulnerability-scanning)
+### [Kubevuln](operator/vulnerabilities.md#vulnerability-scanning-with-the-kubescape-operator)
 The in-cluster microservice that runs container vulnerability scans, generates [SBOMs](#sbom-software-bill-of-materials), and stores vulnerability manifests.
 
 **Analogy:** Like an in-house quality assurance laboratory testing incoming shipments for manufacturing defects.
@@ -278,7 +278,7 @@ A lightweight in-cluster API server and storage engine where Kubescape persists 
 
 ## V
 
-### [Validating Admission Policy (VAP)](install-operator.md#the-kubescape-operator)
+### [Validating Admission Policy (VAP)](install-operator.md#kubescape-operator)
 A native Kubernetes mechanism that checks incoming resource requests against security rules using [CEL](#cel-common-expression-language) directly within the API server, without needing an external webhook.
 
 **Analogy:** Like an automated electronic passport scanner at airport customs that validates your ticket before opening the gate.
