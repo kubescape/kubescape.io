@@ -27,7 +27,7 @@ The `kubevuln` microservice scans container images for vulnerabilities.
 
 ## In-cluster storage
 
-The `storage` microservice provides an [aggregated API server](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/apiserver-aggregation/) to expose Kubescape scan data inside the cluster.
+The `storage` microservice provides an [aggregated API server](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/apiserver-aggregation/) to expose Kubescape scan data inside the cluster. Scan results and SBOMs[^2] can be several megabytes each, so serving them through an aggregated API server avoids storing large volumes of data in `etcd`, unlike standard CRDs[^1].
 
 In-cluster scan results are considered ephemeral, as they are regularly updated and can be fully regenerated. If you want a history we recommend you use Kubescape's [provider interface](../providers.md) to send the data out of the cluster when scans are complete.
 
@@ -67,8 +67,8 @@ workloadconfigurationscans                         spdx.softwarecomposition.kube
 workloadconfigurationscansummaries                 spdx.softwarecomposition.kubescape.io/v1beta1   true         WorkloadConfigurationScanSummary
 ```
 
-1. [Custom Resource Definitions](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/#customresourcedefinitions), a common approach for adding new types to the Kubernetes API.
-2. Software Bill of Materials    
+[^1]: [Custom Resource Definitions](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/#customresourcedefinitions), a common approach for adding new types to the Kubernetes API.
+[^2]: Software Bill of Materials (SBOM).
     
 ## Telemetry
 
