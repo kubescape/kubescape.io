@@ -1,4 +1,4 @@
-# Kubescape Operator
+# Installing the Kubescape Operator {: #kubescape-operator }
 
 Kubescape can run as a set of microservices inside a Kubernetes cluster. This allows you to continually monitor the status of a cluster, including for compliance and vulnerability management, and to export this data to [an external provider](providers.md).
 
@@ -212,7 +212,7 @@ For the CPU, the more you allocate, the faster your clusters are scanned. This i
 
 However, we recommend that you give Kubescape no less than 500m CPU no matter the size of your cluster so it can scan a relatively large amount of resources fast.
 
-#### Multiple Node-Agent DaemonSets per Node Pool DaemonSets
+#### Multiple Node-Agent DaemonSets per Node Pool
 
 In Kubernetes clusters with heterogeneous node pools (different CPU/memory sizes), it is often necessary to run the `node-agent` with different resource requests/limits and scheduling constraints per node pool. This ensures optimal resource usage and stability, as each node pool can have a `node-agent` DaemonSet tailored to its hardware profile.
 
