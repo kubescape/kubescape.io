@@ -175,7 +175,7 @@ You can configure these by using `--set` when installing the chart, or by specif
 ### Default posture frameworks
 
 !!! note
-    Requires a kubescape-operator chart release that includes `defaultFrameworks` (and an operator image that reads it). On older charts the Helm `--set` is accepted but ignored.
+    Requires kubescape-operator chart v1.40.4 or later (which pins operator v0.2.161 or newer). On older charts the Helm `--set` is accepted but ignored.
 
 Choose which security frameworks the operator uses when a scan request has **no** `targetNames` (empty scheduled `scanV1`, API scans without targets, continuous scanning, startup scan, and exception-triggered rescans).
 
@@ -209,7 +209,7 @@ Any scan that explicitly sets `targetNames` â€” including API-triggered scans â€
 
 ### Configuring parameters
 
-See [the GitHub repository for the Kubescape operator](https://github.com/kubescape/helm-charts/blob/main/charts/kubescape-operator/README.md#chart-support) to learn the full set of configuration parameters (including `defaultFrameworks` once that chart release is published).
+See [the GitHub repository for the Kubescape operator](https://github.com/kubescape/helm-charts/blob/main/charts/kubescape-operator/README.md#chart-support) to learn the full set of configuration parameters, including `defaultFrameworks`.
 
 ### Sizing resources
 
