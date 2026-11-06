@@ -64,7 +64,7 @@ In the current Helm chart template, the default rule library contains 28 rules: 
 | `R1012` | On | `hardlink` | Hard link created over sensitive file | Detects hardlink creation over sensitive files. |
 | `R1015` | On | `ptrace` | Malicious Ptrace Usage | Detects potentially malicious `ptrace` usage. |
 | `R1030` | On | `iouring` | Unexpected io_uring Operation Detected | Detects `io_uring` activity that was not observed during the learning period. |
-| `R1016` | On | `—` (metadata) | Signed profile tampered | Detects tampering with a cosign-signed user profile (`ContainerProfile`): the signature annotation is present but no longer verifies. Metadata-only — emitted on profile cache-load re-verification, not a live eBPF event. See [Signing &amp; tamper detection](bill-of-behavior/signing-and-tamper.md). |
+| `R1016` | Experimental (RC) | `—` (metadata) | Signed profile tampered | Detects tampering with a cosign-signed user profile (`ContainerProfile` in release-candidate builds): the signature annotation is present but no longer verifies. Metadata-only — emitted on profile cache-load re-verification, not a live eBPF event. See [Signing &amp; tamper detection](bill-of-behavior/signing-and-tamper.md). |
 
 For the full rule definitions, including severities, MITRE mappings, tags, and trigger settings, see:
 

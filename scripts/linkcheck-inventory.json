@@ -137,7 +137,7 @@
     },
     {
       "source": "docs/docs/operator/bill-of-behavior/quickstart.md",
-      "url": "https://raw.githubusercontent.com/k8sstormcenter/bob/b0a0e7265222eba8646f4900dff59675c6462a30/example/log4j-chain/log4j-chain.yaml",
+      "url": "https://raw.githubusercontent.com/k8sstormcenter/bob/e247f527b830849b3f3a33282479b47b905f7615/example/log4j-chain/log4j-chain.yaml",
       "reason": "Pinned walkthrough input; includes explicit expansion of the BASE variable."
     },
     {

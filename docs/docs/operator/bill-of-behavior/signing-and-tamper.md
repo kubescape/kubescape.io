@@ -67,6 +67,9 @@ sign_object sign --file my-profile.yaml --output my-profile.signed.yaml \
   --key cosign.key --type containerprofile
 ```
 
+!!! note "Signer identity and authorization"
+    Signature verification guarantees integrity (that the profile was not altered since it was signed), but does not restrict *which* key was used to sign it. In this release candidate, node-agent accepts any valid signature. Ensure Kubernetes RBAC restricts write access to `ContainerProfile` resources so unauthorized keys cannot be applied.
+
 **4. Apply the signed profile first, then a workload that references it** by label.
 
 ```bash

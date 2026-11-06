@@ -14,7 +14,7 @@ Our chain continues to connect to postgres via `psql` and to exfiltrate the `bas
 
 
 !!! note "What you need"
-    - A throwaway Kubernetes cluster (do NOT use in a real environment). 
+    - An `amd64` throwaway Kubernetes cluster (do NOT use in a real environment). The release-candidate node-agent image is currently amd64-only.
     - `helm` and `kubectl`
     - the dns-mock will configure your core-dns, this is an exfiltration showcase that may leave your cluster misconfigured.
 
@@ -101,10 +101,23 @@ spec:
      args: ["/usr/lib/postgresql/18/bin/psql", "⋯⋯"] }
   #  New: wildcard ⋯⋯ allows any psql arguments.
   ingress:
-  - from: { app: chain-frontend }   ports: [ TCP/8080 ]   # incoming from nginx
+  - identifier: ingress-from-frontend
+    podSelector:
+      matchLabels: { app: chain-frontend }
+    ports:
+    - { name: TCP-8080, port: 8080, protocol: TCP }
   egress:
-  - to: kube-dns                    ports: [ UDP/53, TCP/53 ]
-  - to: { app: chain-postgres }     ports: [ TCP/5432 ]   # java-app intended to connect to DB
+  - identifier: egress-kube-dns
+    podSelector:
+      matchLabels: { k8s-app: kube-dns }
+    ports:
+    - { name: UDP-53, port: 53, protocol: UDP }
+    - { name: TCP-53, port: 53, protocol: TCP }
+  - identifier: egress-chain-postgres
+    podSelector:
+      matchLabels: { app: chain-postgres }
+    ports:
+    - { name: TCP-5432, port: 5432, protocol: TCP }
 ```
 To showcase the symlink resolution, we make java use `psql` for its connection to the DB.
 Egress to postgres is *allowed* — this java really does query a database. This means, the connection via network from java-backend to postgres
@@ -142,7 +155,7 @@ The manifest also includes the attacker: a marshalsec LDAP server and a class-fi
 **C** `patched` — `ghcr.io/k8sstormcenter/log4j-chain-backend-patched@sha256:cf34e119b720b0a31b5e5d2a7ede0e61eea0c14105c88558d80e7fa2a062290a`
 
 ```bash
-kubectl apply -f https://raw.githubusercontent.com/k8sstormcenter/bob/b0a0e7265222eba8646f4900dff59675c6462a30/example/log4j-chain/log4j-chain.yaml
+kubectl apply -f https://raw.githubusercontent.com/k8sstormcenter/bob/e247f527b830849b3f3a33282479b47b905f7615/example/log4j-chain/log4j-chain.yaml
 kubectl -n log4j-poc rollout status deploy/chain-backend --timeout=120s
 kubectl -n attacker-ns rollout status deploy/attacker --timeout=60s
 ```
