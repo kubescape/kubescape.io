@@ -127,63 +127,43 @@
     },
     {
       "source": "docs/docs/operator/bill-of-behavior/quickstart.md",
-      "url": "https://github.com/k8sstormcenter/helm-charts/releases/download/kubescape-operator-1.40.3-sbob-rc3.1/kubescape-operator-1.40.3-sbob-rc3.1.tgz",
+      "url": "https://github.com/k8sstormcenter/helm-charts/releases/download/kubescape-operator-1.40.3-sbob-rc4.2/kubescape-operator-1.40.3-sbob-rc4.2.tgz",
       "reason": "Static URL used in a documentation example."
     },
     {
       "source": "docs/docs/operator/bill-of-behavior/quickstart.md",
-      "url": "https://raw.githubusercontent.com/k8sstormcenter/bob/e247f527b830849b3f3a33282479b47b905f7615/example/log4j-chain/exfil-dns.yaml",
-      "reason": "Pinned historical walkthrough input; includes explicit expansion of the BASE variable."
+      "url": "https://raw.githubusercontent.com/k8sstormcenter/bob/b0a0e7265222eba8646f4900dff59675c6462a30/example/log4j-chain/exfil-dns.yaml",
+      "reason": "Pinned walkthrough input; includes explicit expansion of the BASE variable."
     },
     {
       "source": "docs/docs/operator/bill-of-behavior/quickstart.md",
       "url": "https://raw.githubusercontent.com/k8sstormcenter/bob/e247f527b830849b3f3a33282479b47b905f7615/example/log4j-chain/log4j-chain.yaml",
-      "reason": "Pinned historical walkthrough input; includes explicit expansion of the BASE variable."
+      "reason": "Pinned walkthrough input; includes explicit expansion of the BASE variable."
     },
     {
       "source": "docs/docs/operator/bill-of-behavior/quickstart.md",
-      "url": "https://raw.githubusercontent.com/k8sstormcenter/bob/e247f527b830849b3f3a33282479b47b905f7615/example/log4j-chain/attack-pod.yaml",
-      "reason": "Pinned historical walkthrough input; includes explicit expansion of the BASE variable."
+      "url": "https://raw.githubusercontent.com/k8sstormcenter/bob/b0a0e7265222eba8646f4900dff59675c6462a30/example/log4j-chain/attack-pod.yaml",
+      "reason": "Pinned walkthrough input; includes explicit expansion of the BASE variable."
     },
     {
       "source": "docs/docs/operator/bill-of-behavior/quickstart.md",
-      "url": "https://raw.githubusercontent.com/k8sstormcenter/bob/e247f527b830849b3f3a33282479b47b905f7615/_artifacts/log4j-sbobs/ap-chain-backend.yaml",
-      "reason": "Pinned historical walkthrough input; includes explicit expansion of the BASE variable."
+      "url": "https://raw.githubusercontent.com/k8sstormcenter/bob/b0a0e7265222eba8646f4900dff59675c6462a30/_artifacts/log4j-sbobs/cp-chain-backend.yaml",
+      "reason": "Pinned walkthrough input; includes explicit expansion of the BASE variable."
     },
     {
       "source": "docs/docs/operator/bill-of-behavior/quickstart.md",
-      "url": "https://raw.githubusercontent.com/k8sstormcenter/bob/e247f527b830849b3f3a33282479b47b905f7615/_artifacts/log4j-sbobs/ap-chain-frontend.yaml",
-      "reason": "Pinned historical walkthrough input; includes explicit expansion of the BASE variable."
+      "url": "https://raw.githubusercontent.com/k8sstormcenter/bob/b0a0e7265222eba8646f4900dff59675c6462a30/_artifacts/log4j-sbobs/cp-chain-frontend.yaml",
+      "reason": "Pinned walkthrough input; includes explicit expansion of the BASE variable."
     },
     {
       "source": "docs/docs/operator/bill-of-behavior/quickstart.md",
-      "url": "https://raw.githubusercontent.com/k8sstormcenter/bob/e247f527b830849b3f3a33282479b47b905f7615/_artifacts/log4j-sbobs/ap-chain-observer.yaml",
-      "reason": "Pinned historical walkthrough input; includes explicit expansion of the BASE variable."
+      "url": "https://raw.githubusercontent.com/k8sstormcenter/bob/b0a0e7265222eba8646f4900dff59675c6462a30/_artifacts/log4j-sbobs/cp-chain-observer.yaml",
+      "reason": "Pinned walkthrough input; includes explicit expansion of the BASE variable."
     },
     {
       "source": "docs/docs/operator/bill-of-behavior/quickstart.md",
-      "url": "https://raw.githubusercontent.com/k8sstormcenter/bob/e247f527b830849b3f3a33282479b47b905f7615/_artifacts/log4j-sbobs/ap-chain-postgres.yaml",
-      "reason": "Pinned historical walkthrough input; includes explicit expansion of the BASE variable."
-    },
-    {
-      "source": "docs/docs/operator/bill-of-behavior/quickstart.md",
-      "url": "https://raw.githubusercontent.com/k8sstormcenter/bob/e247f527b830849b3f3a33282479b47b905f7615/_artifacts/log4j-sbobs/nn-chain-backend.yaml",
-      "reason": "Pinned historical walkthrough input; includes explicit expansion of the BASE variable."
-    },
-    {
-      "source": "docs/docs/operator/bill-of-behavior/quickstart.md",
-      "url": "https://raw.githubusercontent.com/k8sstormcenter/bob/e247f527b830849b3f3a33282479b47b905f7615/_artifacts/log4j-sbobs/nn-chain-frontend.yaml",
-      "reason": "Pinned historical walkthrough input; includes explicit expansion of the BASE variable."
-    },
-    {
-      "source": "docs/docs/operator/bill-of-behavior/quickstart.md",
-      "url": "https://raw.githubusercontent.com/k8sstormcenter/bob/e247f527b830849b3f3a33282479b47b905f7615/_artifacts/log4j-sbobs/nn-chain-observer.yaml",
-      "reason": "Pinned historical walkthrough input; includes explicit expansion of the BASE variable."
-    },
-    {
-      "source": "docs/docs/operator/bill-of-behavior/quickstart.md",
-      "url": "https://raw.githubusercontent.com/k8sstormcenter/bob/e247f527b830849b3f3a33282479b47b905f7615/_artifacts/log4j-sbobs/nn-chain-postgres.yaml",
-      "reason": "Pinned historical walkthrough input; includes explicit expansion of the BASE variable."
+      "url": "https://raw.githubusercontent.com/k8sstormcenter/bob/b0a0e7265222eba8646f4900dff59675c6462a30/_artifacts/log4j-sbobs/cp-chain-postgres.yaml",
+      "reason": "Pinned walkthrough input; includes explicit expansion of the BASE variable."
     }
   ],
   "exceptions": [
