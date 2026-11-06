@@ -2,6 +2,8 @@
 site/
 devenv
 tmp/*
+__pycache__/
+*.py[cod]
 
 # Avoid vscode crashing horror by git tracking 10k files
 .venv
