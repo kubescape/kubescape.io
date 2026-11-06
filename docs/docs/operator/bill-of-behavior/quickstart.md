@@ -1,15 +1,12 @@
 # Quickstart Software Bill of Behavior (SBOB)
 
-!!! note "Historical sbob-rc3 walkthrough"
-    This walkthrough records the `sbob-rc3` demonstration using `ApplicationProfile` and `NetworkNeighborhood` resources. Its manifests and profiles are pinned to the matching example revision. Use the chart and image versions shown here together; newer ContainerProfile-based examples use a different setup.
-
 Here, Kubescape uses an SBOB to catch a live Log4Shell RCE — a shell spawned by a JVM worker thread, its pivot and
 exfiltration children, every one of them outside the workload's declared Software Bill of Behavior:
 
 ![Kubescape detecting a Log4Shell RCE against a Bill of Behavior](l4j-detection.gif)
 
 We published a *"harmless"* demo of
-[`log4shell`](https://github.com/k8sstormcenter/bob/tree/e247f527b830849b3f3a33282479b47b905f7615/example/log4j-chain) — a
+[`log4shell`](https://github.com/k8sstormcenter/bob/tree/b0a0e7265222eba8646f4900dff59675c6462a30/example/log4j-chain) — a
 `frontend → java-backend → postgres` deployment, while mocking the `external payload` and the `exfiltration domain`.
 
 The attack-chain injects a `JNDI` via http-header, that gets resolved via an `ldap` server, to download a `jar` file into the running jvm to spawn a shell. 
@@ -26,7 +23,7 @@ Our chain continues to connect to postgres via `psql` and to exfiltrate the `bas
 You need the `Kubescape Node-Agent` and `Kubescape Storage` component
 
 ```bash
-CHART=https://github.com/k8sstormcenter/helm-charts/releases/download/kubescape-operator-1.40.3-sbob-rc3.1/kubescape-operator-1.40.3-sbob-rc3.1.tgz
+CHART=https://github.com/k8sstormcenter/helm-charts/releases/download/kubescape-operator-1.40.3-sbob-rc4.2/kubescape-operator-1.40.3-sbob-rc4.2.tgz
 helm install kubescape "$CHART" \
   -n kubescape --create-namespace \
   --set capabilities.runtimeObservability=enable \
@@ -40,76 +37,82 @@ So **R0005** (DNS exfil) and **R0011** (Unexpected egress) need an external conn
 on a public location and read/adapt the CEL rules to understand which rules fire exactly when.
 
 
-The general pattern is to ensure that sbobs of `your-sbob-name` exist and to bind
-them via labels on each pod[^migration]
+The general pattern is to ensure that a sbob of `your-sbob-name` exists and to bind
+it via a label on each pod
 
 
-[^migration]: This historical implementation relies on the CRDs `ApplicationProfile`
-    and `NetworkNeighborhood`. Later implementations use `ContainerProfile`.
-
-    For this version, apply the CRD to the cluster **before** the workload and ensure
-    the labels are correct.
 
 ```yaml
 spec:
   template:
     metadata:
       labels:
-        kubescape.io/user-defined-profile: your-sbob-name    
-        kubescape.io/user-defined-network: your-sbob-name    
+        kubescape.io/user-defined-profile: your-sbob-name
 ```
 
 !!! info "Which build is this"
-    This walkthrough uses the `sbob-rc3` release candidate of the Bill of Behavior features
-    (wildcards, signing and tamper detection). It does not describe the latest release.
+    `sbob-rc4` is the release candidate that ships the Bill of Behavior features
+    (wildcards, signing, tamper detection) on the unified `ContainerProfile`.
+    Watch for announcements when it becomes GA.
 
 ## 2. Apply the Bill of Behavior — *before* the app
 
 The profiles are **user-defined**, so detection is instantly live with no learning period. 
 
-First, deploy the `user-defined-profile` and `user-defined-network` for the log4j-demo:
+!!! warning "Wait for storage before applying profiles"
+    as the `ContainerProfile` is served by the Kubescape **storage** aggregated API-server
+
+Gate on storage being ready first:
+
+```bash
+kubectl -n kubescape rollout status deploy/storage --timeout=180s
+kubectl wait --for=condition=Available --timeout=180s \
+  apiservices/v1beta1.spdx.softwarecomposition.kubescape.io
+```
+
+Then deploy one `ContainerProfile` per workload for the log4j-demo:
 
 ```bash
 kubectl create namespace log4j-poc
-BASE=https://raw.githubusercontent.com/k8sstormcenter/bob/e247f527b830849b3f3a33282479b47b905f7615/_artifacts/log4j-sbobs
+BASE=https://raw.githubusercontent.com/k8sstormcenter/bob/b0a0e7265222eba8646f4900dff59675c6462a30/_artifacts/log4j-sbobs
 for w in backend frontend observer postgres; do
-  kubectl apply -f "$BASE/ap-chain-$w.yaml" -f "$BASE/nn-chain-$w.yaml"
+  kubectl apply -f "$BASE/cp-chain-$w.yaml"
 done
+# verify they actually landed (4 profiles):
+kubectl get containerprofiles -n log4j-poc
 ```
 
-Two sections of the java-backend's SBOB are worth highlighting:
+Two sections of the java-backend's SBOB are 
+worth highlighting:
 
 ```yaml
-# ap-chain-backend.yaml 
-execs:
-- { path: /opt/java/openjdk/bin/java, args: ["java", "-jar", "/app/app.jar"] }
-- { path: /usr/bin/curl }
-- { path: /usr/bin/psql,                   
-          args: ["/usr/bin/psql"] }  # symlink
-#  New: node-agent sees the *resolved* path from a symlink
-- { path: /usr/lib/postgresql/18/bin/psql, 
-          args: ["/usr/lib/postgresql/18/bin/psql", "⋯⋯"] }
-#  New: wildcard ⋯⋯ allows any psql arguments.
+# cp-chain-backend.yaml 
+kind: ContainerProfile
+spec:
+  matchLabels: { app: chain-backend }   
+  execs:
+  - { path: /opt/java/openjdk/bin/java, args:
+     ["/opt/java/openjdk/bin/java", "-jar", "/app/app.jar"] }
+  - { path: /usr/bin/curl }
+  - { path: /usr/bin/psql,              args: 
+     ["/usr/bin/psql"] }  # symlink
+  #  New: node-agent sees the *resolved* path from a symlink
+  - { path: /usr/lib/postgresql/18/bin/psql, 
+     args: ["/usr/lib/postgresql/18/bin/psql", "⋯⋯"] }
+  #  New: wildcard ⋯⋯ allows any psql arguments.
+  ingress:
+  - from: { app: chain-frontend }   ports: [ TCP/8080 ]   # incoming from nginx
+  egress:
+  - to: kube-dns                    ports: [ UDP/53, TCP/53 ]
+  - to: { app: chain-postgres }     ports: [ TCP/5432 ]   # java-app intended to connect to DB
 ```
 To showcase the symlink resolution, we make java use `psql` for its connection to the DB.
-
-
-
-```yaml
-# nn-chain-backend.yaml — allowed network for java
-ingress:
-- from: { app: chain-frontend }   ports: [ TCP/8080 ]   #incoming from nginx
-egress:
-- to: kube-dns                    ports: [ UDP/53, TCP/53 ]
-- to: { app: chain-postgres }     ports: [ TCP/5432 ]   # java-app intended to connect to DB
-```
-
 Egress to postgres is *allowed* — this java really does query a database. This means, the connection via network from java-backend to postgres
 will not be detected as anomaly. 
 
  
 !!! tip "Allowlisting obvious parts of attack for demo"
-    For showcasing various features, we pretend the attacker uses binaries that the app was intended to use. A real java implementation 
+    For showcasing various features, we pretend the attacker uses binaries that are marked as `intended for the application`. A real java implementation 
     would not use `psql`. 
 
 !!! tip "NEW: Symlinks resolve and list the real binary"
@@ -123,7 +126,7 @@ domain a real attacker would own. Simulate that in-cluster with a CoreDNS overri
 CoreDNS so it takes effect:
 
 ```bash
-kubectl apply -f https://raw.githubusercontent.com/k8sstormcenter/bob/e247f527b830849b3f3a33282479b47b905f7615/example/log4j-chain/exfil-dns.yaml
+kubectl apply -f https://raw.githubusercontent.com/k8sstormcenter/bob/b0a0e7265222eba8646f4900dff59675c6462a30/example/log4j-chain/exfil-dns.yaml
 kubectl -n kube-system rollout restart deploy/coredns
 ```
 !!! note " SKIP this in any non-throwaway cluster- this kaputts dns"  
@@ -131,7 +134,7 @@ kubectl -n kube-system rollout restart deploy/coredns
 
 ## 4. Deploy the vulnerable app + the attacker
 
-Bring up the whole `log4j-poc`[^scenarios], all pods labelled `user-defined-profile/network` to bind the profiles from Step 2.  
+Bring up the whole `log4j-poc`[^scenarios], all pods carry the single `kubescape.io/user-defined-profile: chain-<workload>` label to bind the ContainerProfile from Step 2.  
 The manifest also includes the attacker: a marshalsec LDAP server and a class-file HTTP server.
 
 [^scenarios]: 
@@ -139,7 +142,7 @@ The manifest also includes the attacker: a marshalsec LDAP server and a class-fi
 **C** `patched` — `ghcr.io/k8sstormcenter/log4j-chain-backend-patched@sha256:cf34e119b720b0a31b5e5d2a7ede0e61eea0c14105c88558d80e7fa2a062290a`
 
 ```bash
-kubectl apply -f https://raw.githubusercontent.com/k8sstormcenter/bob/e247f527b830849b3f3a33282479b47b905f7615/example/log4j-chain/log4j-chain.yaml
+kubectl apply -f https://raw.githubusercontent.com/k8sstormcenter/bob/b0a0e7265222eba8646f4900dff59675c6462a30/example/log4j-chain/log4j-chain.yaml
 kubectl -n log4j-poc rollout status deploy/chain-backend --timeout=120s
 kubectl -n attacker-ns rollout status deploy/attacker --timeout=60s
 ```
@@ -153,12 +156,10 @@ image: ghcr.io/k8sstormcenter/log4j-chain-backend-vulnerable@sha256:8f3cb3f9… 
 
 ## 5. Fire the exploit
 
-The attack pod sends the classic JNDI payload in a `User-Agent` header. Replace the
-template's Pod-name placeholder with `attack-demo` before applying it in `log4j-poc`:
+The attack pod sends the classic JNDI payload in a `User-Agent` header. It lands in `log4j-poc`:
 
 ```bash
-curl -sL https://raw.githubusercontent.com/k8sstormcenter/bob/e247f527b830849b3f3a33282479b47b905f7615/example/log4j-chain/attack-pod.yaml \
-  | sed 's/attack-PLACEHOLDER/attack-demo/' \
+curl -sL https://raw.githubusercontent.com/k8sstormcenter/bob/b0a0e7265222eba8646f4900dff59675c6462a30/example/log4j-chain/attack-pod.yaml \
   | kubectl -n log4j-poc apply -f -
 ```
 
@@ -237,16 +238,7 @@ kubectl delete ns log4j-poc attacker-ns      # clean up
 The JNDI string needs to resolve an outbound LDAP + HTTP to fetch the exploit class for
 Log4j 
 
-**1. R0011 ships disabled.** Enable it in the installed rules:
-
-```bash
-kubectl -n kubescape patch rules.kubescape.io default-rules --type=json \
-  -p "$(kubectl -n kubescape get rules.kubescape.io default-rules -o json \
-        | jq -c '[.spec.rules | to_entries[] | select(.value.id=="R0011")
-                 | {op:"replace", path:"/spec/rules/\(.key)/enabled", value:true}]')"
-```
-
-**2. R0011 skips private targets.** The in-cluster attacker is a ClusterIP (RFC-1918), so put the attacker on an **external/public** host
+**R0011 skips private targets.** The in-cluster attacker is a ClusterIP (RFC-1918), so put the attacker on an **external/public** host
  and point the JNDI there — the demo
 attacker image has an ENV var `CODEBASE_HOST`, so it runs anywhere:
 
