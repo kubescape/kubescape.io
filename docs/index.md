@@ -1,4 +1,5 @@
 ---
+title: Kubescape - Open-source Kubernetes Security Platform
 hide:
   - navigation
   - toc
@@ -7,7 +8,7 @@ hide:
 <!-- Preserve the official brand colors in both themes: https://github.com/cncf/artwork/tree/main/projects/kubescape/stacked -->
 <img alt="Kubescape logo" src="assets/kubescape-stacked-color.svg" width="300">
 
-_Open-source Kubernetes Security: Practical, End-to-End Coverage_
+# Open-source Kubernetes Security: Practical, End-to-End Coverage
 
 Kubescape is an open-source Kubernetes security platform designed to provide practical, end-to-end security for Kubernetes environments. It supports engineers and operators throughout the development and deployment lifecycle, offering tools for configuration scanning, vulnerability assessment, policy enforcement, network policy and seccomp validation, and runtime threat detection.
 
