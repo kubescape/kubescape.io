@@ -24,6 +24,18 @@ Kubescape's `scan` command supports a `--controls-config` flag, which allows you
 
 ## Configuration parameter reference
 
+### cosignRekorURL
+
+URL of the [Rekor](https://github.com/sigstore/rekor) transparency log used to look up signatures that have no Rekor bundle, like `cosign verify --rekor-url`. Ignored when `cosignRequireTransparencyLog` is `false`. Requires Kubescape v4.0.17 or later.
+
+* Default values: none
+
+### cosignRequireTransparencyLog
+
+Whether a valid cosign signature must also have a transparency log (Rekor) entry. Set it to `false` to accept images signed with `--tlog-upload=false`, as in private registries and air-gapped clusters; this works like `cosign verify --insecure-ignore-tlog`, and the key and signed image digest are still verified. Any other value keeps the entry required. Requires Kubescape v4.0.15 or later.
+
+* Default values: `true`
+
 ### cpu_limit_max
 
 Used for controls that test that [CPU resource `limit` values](https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/#requests-and-limits) are set and under a defined maximum value.
@@ -237,6 +249,18 @@ Default values:
 * `workflow-controller-metrics`
 * `weave-scope-app`
 * `kubernetes-dashboard`
+
+### trustedCosignIdentities
+
+Keyless ([Fulcio](https://github.com/sigstore/fulcio)) signers that are trusted for validating container image signatures. Each entry is an OIDC issuer regular expression, whitespace, then a certificate identity regular expression, like `cosign verify --certificate-oidc-issuer-regexp ... --certificate-identity-regexp ...`. The expressions are not anchored, so add `^` and `$` yourself. An image passes if either a trusted public key or a trusted identity verifies it. Requires Kubescape v4.0.18 or later.
+
+```json
+"trustedCosignIdentities": [
+  "^https://token\\.actions\\.githubusercontent\\.com$ ^https://github\\.com/my-org/"
+]
+```
+
+* Default values: none
 
 ### trustedCosignPublicKeys
 
