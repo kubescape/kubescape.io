@@ -32,7 +32,7 @@ URL of the [Rekor](https://github.com/sigstore/rekor) transparency log used to l
 
 ### cosignRequireTransparencyLog
 
-Whether a valid cosign signature must also have a transparency log (Rekor) entry. Set it to `false` to accept images signed with `--tlog-upload=false`, as in private registries and air-gapped clusters; this works like `cosign verify --insecure-ignore-tlog`, and the key and signed image digest are still verified. Any other value keeps the entry required. Requires Kubescape v4.0.15 or later.
+Whether a valid cosign signature must also have a transparency log (Rekor) entry. Set it to `false` to accept images signed with `--tlog-upload=false`, as in private registries and air-gapped clusters; this works like `cosign verify --insecure-ignore-tlog`, and the key and signed image digest are still verified. Any other value keeps the entry required. Keyless signatures still need the log: without an entry, verification fails once the short-lived Fulcio certificate expires, so sign with a key when you skip the log. Requires Kubescape v4.0.15 or later.
 
 * Default values: `true`
 
@@ -255,9 +255,11 @@ Default values:
 Keyless ([Fulcio](https://github.com/sigstore/fulcio)) signers that are trusted for validating container image signatures. Each entry is an OIDC issuer regular expression, whitespace, then a certificate identity regular expression, like `cosign verify --certificate-oidc-issuer-regexp ... --certificate-identity-regexp ...`. The expressions are not anchored, so add `^` and `$` yourself. An image passes if either a trusted public key or a trusted identity verifies it. Requires Kubescape v4.0.18 or later.
 
 ```json
-"trustedCosignIdentities": [
-  "^https://token\\.actions\\.githubusercontent\\.com$ ^https://github\\.com/my-org/"
-]
+{
+  "trustedCosignIdentities": [
+    "^https://token\\.actions\\.githubusercontent\\.com$ ^https://github\\.com/my-org/"
+  ]
+}
 ```
 
 * Default values: none
