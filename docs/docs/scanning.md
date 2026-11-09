@@ -23,7 +23,7 @@ For example, malware in a cluster will often attempt to create a cluster admin r
 
 !!! info "Key Results from this Overview Scan"
     * **Target Context:** Scans the active Kubernetes cluster context automatically (e.g., `docker-desktop`).
-    * **Multi-Domain Baseline:** Evaluates 48 baseline controls categorized by:
+    * **Multi-Domain Baseline:** Evaluates baseline security controls across key categories:
         * **Control Plane & Networking:** Validates Kubelet authentication, insecure ports, and network policies.
         * **Workload Security:** Checks for non-root containers, privileged flags, and known CVEs.
         * **Resource & Storage:** Identifies missing CPU/memory limits and writable `hostPath` mounts.
@@ -57,11 +57,11 @@ kubescape scan framework nsa
 </div>
 
 !!! info "Key Results from this Framework Scan"
-    * **Framework Compliance:** Evaluates all 26 controls defined by the NSA-CISA Kubernetes Hardening Guidance.
+    * **Framework Compliance:** Evaluates controls defined by the NSA-CISA Kubernetes Hardening Guidance.
     * **Control Breakdown:** Displays the number of passed, failed, and action-required controls with their individual compliance scores.
     * **Severity Distribution:** Highlights failed resources categorized by risk level (Critical, High, Medium, Low).
-    * **Resource Summary:** Provides the aggregate compliance score (e.g., 67.13%) calculated across all evaluated resources.
-    * **Scan Coverage:** Confirms the percentage of controls evaluated (91% in this demo) and notes any cloud-specific checks skipped on local clusters.
+    * **Resource Summary:** Calculates an aggregate compliance score across all evaluated resources to reflect overall cluster posture.
+    * **Scan Coverage:** Confirms the percentage of framework controls evaluated and notes any environment-specific checks skipped.
 
 !!! note "Note"
     Before Kubescape 3.0, the default behaviour of `kubescape scan` was to scan the NSA and MITRE frameworks.
@@ -122,25 +122,26 @@ It does not show the value the field currently holds.
 Kubescape can be used to scan local YAML/JSON files before they are deployed to Kubernetes. This is a common use case for integrations into CI/CD systems; see [Integrations](integrations/index.md) for how this can be used.
 
 * Scan local YAML/JSON files before deploying:
+
     ```sh
     kubescape scan *.yaml
     ```
 
-<div style="width: 100%; margin: 1.5em 0;">
-  <video controls autoplay muted loop playsinline width="100%" poster="../../assets/scanning/scan-manifest-poster.png" style="width: 100%; aspect-ratio: 1464 / 704; display: block; border-radius: 8px; border: 1px solid rgba(128, 128, 128, 0.2); box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);">
-    <source src="../../assets/scanning/scan-manifest.mp4" type="video/mp4">
-    <source src="/assets/scanning/scan-manifest.mp4" type="video/mp4">
-    Your browser does not support the video tag.
-  </video>
-  <p style="text-align: center; font-size: 0.85em; color: var(--md-default-fg-color--light); margin-top: 0.5em;"><em>Creating a local Kubernetes manifest and scanning it before deployment</em></p>
-</div>
+    <div style="width: 100%; margin: 1.5em 0;">
+      <video controls autoplay muted loop playsinline width="100%" poster="../../assets/scanning/scan-manifest-poster.png" style="width: 100%; aspect-ratio: 1464 / 704; display: block; border-radius: 8px; border: 1px solid rgba(128, 128, 128, 0.2); box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);">
+        <source src="../../assets/scanning/scan-manifest.mp4" type="video/mp4">
+        <source src="/assets/scanning/scan-manifest.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+      <p style="text-align: center; font-size: 0.85em; color: var(--md-default-fg-color--light); margin-top: 0.5em;"><em>Creating a local Kubernetes manifest and scanning it before deployment</em></p>
+    </div>
 
-!!! info "Key Results from this Manifest Scan"
-    * **No Cluster Required:** Runs entirely on local YAML/JSON files without needing an active Kubernetes cluster or network connection.
-    * **Pre-Deployment Shift-Left Security:** Catches misconfigurations during development or in CI before manifests are deployed.
-    * **Node Escape Detection:** Instantly flags dangerous container configurations such as `privileged: true`, non-root container violations, and privilege escalation.
-    * **Resource & Hygiene Checks:** Identifies missing CPU/memory limits, naked pods, and missing liveness/readiness probes.
-    * **Direct Remediation Command:** Suggests the exact CLI command to inspect any failed control (e.g., `kubescape scan control C-0057 pod.yaml -v`).
+    !!! info "Key Results from this Manifest Scan"
+        * **No Cluster Required:** Runs entirely on local YAML/JSON files without needing an active Kubernetes cluster or network connection.
+        * **Pre-Deployment Shift-Left Security:** Catches misconfigurations during development or in CI before manifests are deployed.
+        * **Node Escape Detection:** Instantly flags dangerous container configurations such as `privileged: true`, non-root container violations, and privilege escalation.
+        * **Resource & Hygiene Checks:** Identifies missing CPU/memory limits, naked pods, and missing liveness/readiness probes.
+        * **Direct Remediation Command:** Suggests the exact CLI command to inspect any failed control (e.g., `kubescape scan control C-0057 pod.yaml -v`).
 
 * Scan Kubernetes manifest files from a Git repository:
 
@@ -154,24 +155,24 @@ Kubescape can be used to scan local YAML/JSON files before they are deployed to 
     kubescape scan </path/to/directory>
     ```
 
-<div style="width: 100%; margin: 1.5em 0;">
-  <video controls autoplay muted loop playsinline width="100%" poster="../../assets/scanning/scan-helm-poster.png" style="width: 100%; aspect-ratio: 1474 / 706; display: block; border-radius: 8px; border: 1px solid rgba(128, 128, 128, 0.2); box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);">
-    <source src="../../assets/scanning/scan-helm.mp4" type="video/mp4">
-    <source src="/assets/scanning/scan-helm.mp4" type="video/mp4">
-    Your browser does not support the video tag.
-  </video>
-  <p style="text-align: center; font-size: 0.85em; color: var(--md-default-fg-color--light); margin-top: 0.5em;"><em>Creating and scanning a Helm chart directory with Kubescape</em></p>
-</div>
-
-!!! info "Key Results from this Helm Chart Scan"
-    * **Automatic Template Rendering:** Kubescape automatically renders your chart templates against default `values.yaml` without needing manual template generation or a running cluster.
-    * **Multi-Workload Posture:** Scans all rendered resources (Deployments, Pods, Services) in a single pass.
-    * **Highest-Stake Workloads Ranked:** Identifies high-impact rendered resources (like `deployment.yaml` and test pods).
-    * **Pre-Deployment Helm Validation:** Validates security controls before publishing charts or running `helm install`.
-
     !!! note "Note"
         Kubescape will load the default VALUES file and will use it to render the chart.
         Charts that require custom values will not be processed by Kubescape.
+
+    <div style="width: 100%; margin: 1.5em 0;">
+      <video controls autoplay muted loop playsinline width="100%" poster="../../assets/scanning/scan-helm-poster.png" style="width: 100%; aspect-ratio: 1474 / 706; display: block; border-radius: 8px; border: 1px solid rgba(128, 128, 128, 0.2); box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);">
+        <source src="../../assets/scanning/scan-helm.mp4" type="video/mp4">
+        <source src="/assets/scanning/scan-helm.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+      <p style="text-align: center; font-size: 0.85em; color: var(--md-default-fg-color--light); margin-top: 0.5em;"><em>Creating and scanning a Helm chart directory with Kubescape</em></p>
+    </div>
+
+    !!! info "Key Results from this Helm Chart Scan"
+        * **Automatic Template Rendering:** Kubescape automatically renders your chart templates against default `values.yaml` without needing manual template generation or a running cluster.
+        * **Multi-Workload Posture:** Scans all rendered resources (Deployments, Pods, Services) in a single pass.
+        * **Highest-Stake Workloads Ranked:** Identifies high-impact rendered resources (like `deployment.yaml` and test pods).
+        * **Pre-Deployment Helm Validation:** Validates security controls before publishing charts or running `helm install`.
 
 * Scan a Kustomize directory:
 
@@ -187,24 +188,25 @@ Kubescape can be used to scan local YAML/JSON files before they are deployed to 
 Kubescape can scan container images for known vulnerabilities before deployment. You can scan images from public registries, private registries, or use an offline vulnerability database.
 
 * Scan a public image:
+
     ```sh
     kubescape scan image <image:tag>
     ```
 
-<div style="width: 100%; margin: 1.5em 0;">
-  <video controls autoplay muted loop playsinline width="100%" poster="../../assets/scanning/scan-image-poster.png" style="width: 100%; aspect-ratio: 1452 / 698; display: block; border-radius: 8px; border: 1px solid rgba(128, 128, 128, 0.2); box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);">
-    <source src="../../assets/scanning/scan-image.mp4" type="video/mp4">
-    <source src="/assets/scanning/scan-image.mp4" type="video/mp4">
-    Your browser does not support the video tag.
-  </video>
-  <p style="text-align: center; font-size: 0.85em; color: var(--md-default-fg-color--light); margin-top: 0.5em;"><em>Scanning a container image for vulnerabilities with Kubescape</em></p>
-</div>
+    <div style="width: 100%; margin: 1.5em 0;">
+      <video controls autoplay muted loop playsinline width="100%" poster="../../assets/scanning/scan-image-poster.png" style="width: 100%; aspect-ratio: 1452 / 698; display: block; border-radius: 8px; border: 1px solid rgba(128, 128, 128, 0.2); box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);">
+        <source src="../../assets/scanning/scan-image.mp4" type="video/mp4">
+        <source src="/assets/scanning/scan-image.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+      <p style="text-align: center; font-size: 0.85em; color: var(--md-default-fg-color--light); margin-top: 0.5em;"><em>Scanning a container image for vulnerabilities with Kubescape</em></p>
+    </div>
 
-!!! info "Key Results from Container Image Vulnerability Scanning"
-    * **CVE Identification & Severity Triage:** Scans container layers and packages, categorizing CVEs by severity (Critical, High, Medium, Low).
-    * **Exploitability Intelligence (KEV & EPSS):** Flags actively exploited vulnerabilities (**KEV: yes**) and displays **EPSS** probability scores (e.g., 100% / 99th percentile) to prioritize real-world threats.
-    * **Clear Remediation Targets:** Identifies vulnerable software components, currently installed versions, and the exact patched version available in `Fixed in`.
-    * **Shift-Left Registry & Local Scanning:** Can scan public container registries (`nginx:1.20`), private registries with credentials, or local images prior to cluster deployment.
+    !!! info "Key Results from Container Image Vulnerability Scanning"
+        * **CVE Identification & Severity Triage:** Scans container layers and packages, categorizing CVEs by severity (Critical, High, Medium, Low).
+        * **Exploitability Intelligence (KEV & EPSS):** Flags actively exploited vulnerabilities (**KEV: yes**) and displays **EPSS** probability scores and percentiles to prioritize real-world threats.
+        * **Clear Remediation Targets:** Identifies vulnerable software components, currently installed versions, and the exact patched version available in `Fixed in`.
+        * **Shift-Left Registry & Local Scanning:** Can scan public container registries (`nginx:1.20`), private registries with credentials, or local images prior to cluster deployment.
 
 * Scan with verbose output:
     ```sh
