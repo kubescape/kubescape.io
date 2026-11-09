@@ -16,7 +16,6 @@ For example, malware in a cluster will often attempt to create a cluster admin r
   <video controls autoplay muted loop playsinline width="100%" poster="../../assets/scanning/scan-overview-poster.png" style="width: 100%; aspect-ratio: 1916 / 970; display: block; border-radius: 8px; border: 1px solid rgba(128, 128, 128, 0.2); box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);">
     <source src="../../assets/scanning/scan-overview.mp4" type="video/mp4">
     <source src="/assets/scanning/scan-overview.mp4" type="video/mp4">
-    <source src="../assets/scanning/scan-overview.mp4" type="video/mp4">
     Your browser does not support the video tag.
   </video>
   <p style="text-align: center; font-size: 0.85em; color: var(--md-default-fg-color--light); margin-top: 0.5em;"><em>Running a baseline cluster overview scan with Kubescape</em></p>
@@ -52,7 +51,6 @@ kubescape scan framework nsa
   <video controls autoplay muted loop playsinline width="100%" poster="../../assets/scanning/scan-framework-nsa-poster.png" style="width: 100%; aspect-ratio: 1468 / 706; display: block; border-radius: 8px; border: 1px solid rgba(128, 128, 128, 0.2); box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);">
     <source src="../../assets/scanning/scan-framework-nsa.mp4" type="video/mp4">
     <source src="/assets/scanning/scan-framework-nsa.mp4" type="video/mp4">
-    <source src="../assets/scanning/scan-framework-nsa.mp4" type="video/mp4">
     Your browser does not support the video tag.
   </video>
   <p style="text-align: center; font-size: 0.85em; color: var(--md-default-fg-color--light); margin-top: 0.5em;"><em>Scanning an active cluster against the NSA-CISA security framework</em></p>
@@ -108,7 +106,6 @@ It does not show the value the field currently holds.
   <video controls autoplay muted loop playsinline width="100%" poster="../../assets/scanning/scan-verbose-poster.png" style="width: 100%; aspect-ratio: 1462 / 698; display: block; border-radius: 8px; border: 1px solid rgba(128, 128, 128, 0.2); box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);">
     <source src="../../assets/scanning/scan-verbose.mp4" type="video/mp4">
     <source src="/assets/scanning/scan-verbose.mp4" type="video/mp4">
-    <source src="../assets/scanning/scan-verbose.mp4" type="video/mp4">
     Your browser does not support the video tag.
   </video>
   <p style="text-align: center; font-size: 0.85em; color: var(--md-default-fg-color--light); margin-top: 0.5em;"><em>Scanning local resources with verbose mode enabled (<code>--verbose</code>)</em></p>
@@ -133,7 +130,6 @@ Kubescape can be used to scan local YAML/JSON files before they are deployed to 
   <video controls autoplay muted loop playsinline width="100%" poster="../../assets/scanning/scan-manifest-poster.png" style="width: 100%; aspect-ratio: 1464 / 704; display: block; border-radius: 8px; border: 1px solid rgba(128, 128, 128, 0.2); box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);">
     <source src="../../assets/scanning/scan-manifest.mp4" type="video/mp4">
     <source src="/assets/scanning/scan-manifest.mp4" type="video/mp4">
-    <source src="../assets/scanning/scan-manifest.mp4" type="video/mp4">
     Your browser does not support the video tag.
   </video>
   <p style="text-align: center; font-size: 0.85em; color: var(--md-default-fg-color--light); margin-top: 0.5em;"><em>Creating a local Kubernetes manifest and scanning it before deployment</em></p>
@@ -162,7 +158,6 @@ Kubescape can be used to scan local YAML/JSON files before they are deployed to 
   <video controls autoplay muted loop playsinline width="100%" poster="../../assets/scanning/scan-helm-poster.png" style="width: 100%; aspect-ratio: 1474 / 706; display: block; border-radius: 8px; border: 1px solid rgba(128, 128, 128, 0.2); box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);">
     <source src="../../assets/scanning/scan-helm.mp4" type="video/mp4">
     <source src="/assets/scanning/scan-helm.mp4" type="video/mp4">
-    <source src="../assets/scanning/scan-helm.mp4" type="video/mp4">
     Your browser does not support the video tag.
   </video>
   <p style="text-align: center; font-size: 0.85em; color: var(--md-default-fg-color--light); margin-top: 0.5em;"><em>Creating and scanning a Helm chart directory with Kubescape</em></p>
@@ -200,7 +195,6 @@ Kubescape can scan container images for known vulnerabilities before deployment.
   <video controls autoplay muted loop playsinline width="100%" poster="../../assets/scanning/scan-image-poster.png" style="width: 100%; aspect-ratio: 1452 / 698; display: block; border-radius: 8px; border: 1px solid rgba(128, 128, 128, 0.2); box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);">
     <source src="../../assets/scanning/scan-image.mp4" type="video/mp4">
     <source src="/assets/scanning/scan-image.mp4" type="video/mp4">
-    <source src="../assets/scanning/scan-image.mp4" type="video/mp4">
     Your browser does not support the video tag.
   </video>
   <p style="text-align: center; font-size: 0.85em; color: var(--md-default-fg-color--light); margin-top: 0.5em;"><em>Scanning a container image for vulnerabilities with Kubescape</em></p>
