@@ -70,6 +70,7 @@ nav:
         - 'Installing the client': 'docs/install-cli.md'
         - 'Installing in your cluster': 'docs/install-operator.md'
         - 'Scanning your environment': 'docs/scanning.md'
+        - 'Scanning a fleet of clusters': 'docs/fleet-scanning.md'
         - 'Accepting risk': 'docs/accepting-risk.md'
         - 'Connecting to providers': 'docs/providers.md'
         - 'MCP Server': 'docs/mcp-server.md'
