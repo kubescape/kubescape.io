@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block extrahead %}
+  {% set page_title = page.meta.title if (page.meta and page.meta.title) else page.title %}
+  {% if page_title and not page.is_homepage and not page_title.endswith(config.site_name) %}
+    {% set social_title = page_title ~ " - " ~ config.site_name %}
+  {% else %}
+    {% set social_title = page_title or config.site_name %}
+  {% endif %}
+  {% set social_desc = page.meta.description if (page.meta and page.meta.description) else (config.site_description or "Open-source Kubernetes security platform for posture management, vulnerability scanning, and runtime threat detection.") %}
+  {% set social_url = page.canonical_url or config.site_url %}
+  {% set social_image = (config.site_url ~ page.meta.image) if (page.meta and page.meta.image) else (config.site_url ~ "assets/kubescape-preview.png") %}
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="{% if page.meta and page.meta.type %}{{ page.meta.type }}{% else %}website{% endif %}">
+  <meta property="og:url" content="{{ social_url }}">
+  <meta property="og:title" content="{{ social_title }}">
+  <meta property="og:description" content="{{ social_desc }}">
+  <meta property="og:image" content="{{ social_image }}">
+  <meta property="og:site_name" content="{{ config.site_name }}">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@kubescape">
+  <meta name="twitter:creator" content="@kubescape">
+  <meta name="twitter:title" content="{{ social_title }}">
+  <meta name="twitter:description" content="{{ social_desc }}">
+  <meta name="twitter:image" content="{{ social_image }}">
+  {{ super() }}
+{% endblock %}
