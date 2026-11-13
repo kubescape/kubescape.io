@@ -9,7 +9,7 @@
   {% endif %}
   {% set social_desc = page.meta.description if (page.meta and page.meta.description) else (config.site_description or "Open-source Kubernetes security platform for posture management, vulnerability scanning, and runtime threat detection.") %}
   {% set social_url = page.canonical_url or config.site_url %}
-  {% set social_image = (config.site_url ~ page.meta.image) if (page.meta and page.meta.image) else (config.site_url ~ "assets/kubescape-lockup.svg") %}
+  {% set social_image = (config.site_url ~ page.meta.image) if (page.meta and page.meta.image) else (config.site_url ~ "assets/kubescape-preview.png") %}
 
   <!-- Open Graph / Facebook -->
   <meta property="og:type" content="{% if page.meta and page.meta.type %}{{ page.meta.type }}{% else %}website{% endif %}">
@@ -20,7 +20,7 @@
   <meta property="og:site_name" content="{{ config.site_name }}">
 
   <!-- Twitter Card -->
-  <meta name="twitter:card" content="summary">
+  <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:site" content="@kubescape">
   <meta name="twitter:creator" content="@kubescape">
   <meta name="twitter:title" content="{{ social_title }}">
