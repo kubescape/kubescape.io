@@ -82,6 +82,21 @@ class InternalLinksTest(unittest.TestCase):
         self.assertEqual(code, 1)
         self.assertIn('assets/more.css', [f['target'] for f in report['failures']])
 
+    def test_llms_txt_and_markdown_copies(self):
+        self.write('index.html', '<h1>Home</h1>')
+        self.write('guide/index.html', '<h1 id="install">Install</h1>')
+        self.write('llms.txt', '# Kubescape\n\n> Summary\n\n## Docs\n\n- [Guide](https://kubescape.io/guide/index.md)\n')
+        self.write('guide/index.md', 'Index at [llms.txt](/llms.txt). See [install](https://kubescape.io/guide/#install).\n\n'
+                                     '```markdown\n[example](missing/)\n```\n')
+        code, report = self.check()
+        self.assertEqual(code, 0)
+        self.assertEqual(report['counts']['internal_references'], 3)
+        (self.site / 'guide/index.md').write_text('[Missing](https://kubescape.io/gone/index.md) [Anchor](../#absent)')
+        code, report = self.check()
+        self.assertEqual(code, 1)
+        self.assertCountEqual([(f['source'], f['kind']) for f in report['failures']],
+                              [('guide/index.md', 'missing_file'), ('guide/index.md', 'missing_anchor')])
+
     def test_exception_matches_both_source_and_exact_url(self):
         self.write('index.html', '<a href="missing/">Intentional example</a>')
         self.write('other/index.html', '<a href="../missing/">Unintentional</a>')

@@ -23,7 +23,7 @@ Set one of the following:
 
 If you're missing the `application_default_credentials.json` file, but you do have GCP access from the shell, run the following command to create it:
 
-```Text Create login
+```text title="Create login"
 gcloud auth application-default login
 ```
 
@@ -31,7 +31,7 @@ gcloud auth application-default login
 
 Run the following to ensure you can access your cluster:
 
-```Text Verify connection
+```text title="Verify connection"
 gcloud container clusters describe <cluster name> --zone <cluster zone> --project <GCP project>
 ```
 
@@ -45,7 +45,7 @@ The workload identity is not enabled by default in GKE. Ensure you aren't interf
 
 Ensure that your cluster has workload identity enabled by running this command:
 
-```Text Verify workload identity
+```text title="Verify workload identity"
 gcloud container clusters describe <CLUSTER_NAME> | grep workloadPool
 ```
 
@@ -53,6 +53,6 @@ Use [this recipe](https://kubescape.io/docs/integrations/kubescape-integration-w
 
 After you’ve installed Kubescape and successfully authorized the components, you can use Kubescape CLI commands to scan clusters hosted in GCP and send the scan results to ARMO Platform to visualize your data.
 
-```Text Scan
+```text title="Scan"
 kubescape scan . --submit --account=<accountID>
 ```

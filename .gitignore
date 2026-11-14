@@ -7,3 +7,9 @@ __pycache__/
 
 # Avoid vscode crashing horror by git tracking 10k files
 .venv
+
+# Written when MkDocs loads scripts/llmstxt_preprocess.py
+__pycache__/
+
+# Local Netlify folder
+.netlify

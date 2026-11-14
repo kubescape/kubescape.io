@@ -75,8 +75,8 @@ It depends on how you manage your identities:
 
 In the Azure CLI, run the following command:
 
-```Text Assign Reader
-az role assignment create --assignee "\<principal_id>" --role "Reader" --scope "\<cluster_id>"
+```text title="Assign Reader"
+az role assignment create --assignee "<principal_id>" --role "Reader" --scope "<cluster_id>"
 ```
 
 >  You must have the ability to assign a role, if you get an authorization error while creating the role, please get in touch with your AZURE administrator.
@@ -99,7 +99,7 @@ helm repo add kubescape https://kubescape.github.io/helm-charts/ ; helm repo upd
 
 In the Azure CLI, run the following command:
 
-```Text Assign Reader
+```text title="Assign Reader"
 az role assignment create --assignee $(az aks show --resource-group $(az resource list --name $(kubectl config current-context) --query "[].resourceGroup" --output tsv) --name $(kubectl config current-context) --query "identityProfile.kubeletidentity.clientId" --output tsv) --role "Reader" --scope /subscriptions/$(az account show --query id --output tsv)/resourceGroups/$(az resource list --name $(kubectl config current-context) --query "[].resourceGroup" --output tsv)
 ```
 

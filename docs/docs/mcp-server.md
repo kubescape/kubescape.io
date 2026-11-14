@@ -40,7 +40,7 @@ flowchart LR
 
 
 ## Prerequisites
-- `kubescape` CLI (a release that includes the `mcpserver` command, `beyond `v3.0.44`).
+- `kubescape` CLI (a release that includes the `mcpserver` command, beyond `v3.0.44`).
 - Cursor version or Claude Desktop with MCP support enabled
 - For the tools that read stored scan results: a reachable cluster with the Kubescape operator deployed and writing `VulnerabilityManifest`, `WorkloadConfigurationScan` and `ContainerProfile` resources. The live scan tools only need cluster access, and the local tools need no cluster (see [Available MCP Tools](#available-mcp-tools)).
 - Local credentials for the cluster (`KUBECONFIG` or in-cluster context) allowing read access to Kubescape CRDs.

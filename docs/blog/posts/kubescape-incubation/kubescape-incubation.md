@@ -12,6 +12,8 @@ slug: "kubescape-incubation"
 
 We are thrilled to share that Kubescape has officially been accepted as a CNCF Incubating project. This milestone is a significant achievement for the project. Kubescape began in 2021 as a fun project to scan for compliance with NSA-CISA Kubernetes hardening guidelines. What started as a security scanner, helping Devlopers and DevOps teams implement better Kubernetes security practices, evolved into a full security platform. Still helping security Kubernetes environments 😉
 
+<!-- more -->
+
 From the very beginning, Kubescape was built with the cloud-native community in mind. It started as a simple CLI tool designed to check cluster configurations against NSA-CISA Kubernetes Hardening Guidance. Over time, with the support of a rapidly growing community, Kubescape has evolved into one of the most complete open-source solutions for Kubernetes security. We are proud to have contributed to its development alongside contributors in the Kubescape community, and to see so many adopters leveraging Kubescape in their day-to-day workflows.
 
 The Kubescape community has been a driving force behind this success. It’s not just the maintainers and contributors that we celebrate but the many users who have adopted and integrated Kubescape into their environments. Companies like Intel, AWS, Bitnami, ARMO, and Energi Danmark are just a few of the organizations using Kubescape. Some use Kubescape to secure their Kubernetes clusters. Others leverage it for educational purposes. Other use cases that go beyond what we imagined when we made our first commit. We are grateful for the trust that these adopters, along with hundreds of others, have shown in Kubescape.
