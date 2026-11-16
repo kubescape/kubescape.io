@@ -15,7 +15,7 @@ kubescape scan framework nsa \
   --fleet-report fleet.json
 ```
 
-Kubescape scans the contexts one after another. One cluster failing does not stop the others. When it is done, it:
+By default Kubescape scans the contexts one after another. One cluster failing does not stop the others. When it is done, it:
 
 * writes one report per cluster, named after `--output`: `report.prod.json`, `report.staging.json` and `report.dr.json`
 * writes `fleet.json`, the combined report for the whole fleet
@@ -31,6 +31,25 @@ Every cluster you ask for appears in the fleet report, with one of these statuse
 | `unreachable` | The cluster's API server never answered. These clusters are retried, twice by default. Use `--retries 0` to fail fast. |
 | `error` | Something answered but the scan failed, for example a request was forbidden. |
 | `cancelled` | The run was stopped, by Ctrl-C or `--scan-timeout`, before the cluster finished. |
+
+## Scanning several clusters at once
+
+Add `--parallel` to scan up to that many clusters at the same time:
+
+```sh
+kubescape scan framework nsa \
+  --kube-contexts prod,staging,dr \
+  --output report.json --format json \
+  --fleet-report fleet.json \
+  --parallel 3
+```
+
+!!! note "Note"
+    `--parallel` is not in a release yet. It will be available from the first release after v4.0.21.
+
+Each cluster is scanned by its own Kubescape process, and the reports, the summary and the exit code are the same as without `--parallel`. It helps most when the clusters are slow to answer, for example across a network.
+
+Each process uses about as much memory as scanning that cluster on its own, so `--parallel 3` needs room for about three of those at once, plus the main process. Each process's log is deleted when the run ends, but a failed cluster's error is still shown at the end. The [full reference](https://github.com/kubescape/kubescape/blob/master/docs/fleet-scanning.md#scanning-in-parallel) has the measurements.
 
 ## Exit codes
 
