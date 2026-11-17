@@ -26,5 +26,12 @@
   <meta name="twitter:title" content="{{ social_title }}">
   <meta name="twitter:description" content="{{ social_desc }}">
   <meta name="twitter:image" content="{{ social_image }}">
+
+  <!-- Documentation Repository & Source Metadata -->
+  {% if page and page.file %}
+  <meta name="doc-repo-path" content="docs/{{ page.file.src_uri }}">
+  <meta name="doc-github-url" content="https://github.com/kubescape/kubescape.io/blob/main/docs/{{ page.file.src_uri }}">
+  {% endif %}
+
   {{ super() }}
 {% endblock %}

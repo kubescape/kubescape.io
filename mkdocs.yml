@@ -69,6 +69,7 @@ extra_css:
   - stylesheets/extra.css
 extra_javascript:
   - javascripts/theme.js
+  - javascripts/docs-repo-modal.js
 copyright:
   Copyright &amp;copy; 2021 - 2026 <a href="https://kubescape.devstats.cncf.io/d/66/developer-activity-counts-by-companies?orgId=1">The Kubescape Authors</a>
 nav:
