@@ -1,10 +1,20 @@
 /**
  * Kubescape Documentation Repository & Page Source Modal
- * Provides a professional, interactive modal connecting contributors directly
- * to the kubescape.io repository and the source file of the current page.
+ * Provides a professional, accessible, and interactive modal connecting contributors
+ * directly to the kubescape.io repository and the source file of the current page.
+ *
+ * Implements W3C WAI-ARIA Dialog (Modal) pattern:
+ * - aria-labelledby pointing to dialog title
+ * - Focus trap (Tab / Shift+Tab cycling)
+ * - Initial focus on dialog open
+ * - Focus restoration to trigger element on close
+ * - Escape key dismissal
  */
 
 (function () {
+  const FOCUSABLE_SELECTOR = 'a[href], button:not([disabled]), textarea:not([disabled]), input:not([disabled]), select:not([disabled]), [tabindex]:not([tabindex="-1"])';
+  let previousActiveElement = null;
+
   function getPageSourceInfo() {
     const metaPath = document.querySelector('meta[name="doc-repo-path"]');
     const metaUrl = document.querySelector('meta[name="doc-github-url"]');
@@ -35,6 +45,7 @@
     modalRoot.setAttribute("role", "dialog");
     modalRoot.setAttribute("aria-modal", "true");
     modalRoot.setAttribute("aria-hidden", "true");
+    modalRoot.setAttribute("aria-labelledby", "ks-repo-modal-title");
 
     modalRoot.innerHTML = `
       <div class="ks-repo-modal__backdrop" data-ks-modal-close></div>
@@ -42,13 +53,13 @@
         <!-- Header -->
         <div class="ks-repo-modal__header">
           <div class="ks-repo-modal__title-group">
-            <div class="ks-repo-modal__icon">
+            <div class="ks-repo-modal__icon" aria-hidden="true">
               <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor">
                 <path d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.1-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2Z"/>
               </svg>
             </div>
             <div>
-              <h3 class="ks-repo-modal__title">Documentation Repository</h3>
+              <h3 class="ks-repo-modal__title" id="ks-repo-modal-title">Documentation Repository</h3>
               <span class="ks-repo-modal__subtitle">github.com/kubescape/kubescape.io</span>
             </div>
           </div>
@@ -71,7 +82,7 @@
                 <path d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.1-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2Z"/>
               </svg>
               <span>Open kubescape.io on GitHub</span>
-              <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" class="ks-repo-modal__ext-icon">
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" class="ks-repo-modal__ext-icon" aria-hidden="true">
                 <path d="M14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3m-2 16H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7z"/>
               </svg>
             </a>
@@ -94,7 +105,7 @@
                 <path d="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M18,20H6V4H13V9H18V20Z"/>
               </svg>
               <span>View this file on GitHub</span>
-              <svg viewBox="0 0 24 24" width="13" height="13" fill="currentColor" class="ks-repo-modal__ext-icon">
+              <svg viewBox="0 0 24 24" width="13" height="13" fill="currentColor" class="ks-repo-modal__ext-icon" aria-hidden="true">
                 <path d="M14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3m-2 16H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7z"/>
               </svg>
             </a>
@@ -113,14 +124,23 @@
 
     document.body.appendChild(modalRoot);
 
-    // Event listeners for close
+    // Event listeners for backdrop and close button
     modalRoot.querySelectorAll("[data-ks-modal-close]").forEach(el => {
       el.addEventListener("click", closeModal);
     });
 
+    // Keyboard navigation: Escape to close and Tab focus trap
     document.addEventListener("keydown", (e) => {
-      if (e.key === "Escape" && modalRoot.classList.contains("is-open")) {
+      if (!modalRoot.classList.contains("is-open")) return;
+
+      if (e.key === "Escape") {
+        e.preventDefault();
         closeModal();
+        return;
+      }
+
+      if (e.key === "Tab") {
+        handleFocusTrap(e, modalRoot);
       }
     });
 
@@ -146,7 +166,34 @@
     }
   }
 
+  function handleFocusTrap(e, modalRoot) {
+    const focusable = Array.from(modalRoot.querySelectorAll(FOCUSABLE_SELECTOR))
+      .filter(el => el.offsetParent !== null && !el.hasAttribute("disabled"));
+
+    if (focusable.length === 0) return;
+
+    const firstElement = focusable[0];
+    const lastElement = focusable[focusable.length - 1];
+
+    if (e.shiftKey) {
+      // Shift + Tab: reverse cycle
+      if (document.activeElement === firstElement || !modalRoot.contains(document.activeElement)) {
+        e.preventDefault();
+        lastElement.focus();
+      }
+    } else {
+      // Tab: forward cycle
+      if (document.activeElement === lastElement || !modalRoot.contains(document.activeElement)) {
+        e.preventDefault();
+        firstElement.focus();
+      }
+    }
+  }
+
   function openModal() {
+    // Record triggering element to restore focus on close
+    previousActiveElement = document.activeElement;
+
     createModal();
     const modalRoot = document.getElementById("ks-repo-modal-root");
     if (!modalRoot) return;
@@ -162,6 +209,14 @@
     modalRoot.classList.add("is-open");
     modalRoot.setAttribute("aria-hidden", "false");
     document.body.style.overflow = "hidden";
+
+    // Set initial focus to the close button inside modal
+    const closeBtn = modalRoot.querySelector(".ks-repo-modal__close-btn");
+    if (closeBtn) {
+      requestAnimationFrame(() => {
+        closeBtn.focus();
+      });
+    }
   }
 
   function closeModal() {
@@ -171,6 +226,12 @@
     modalRoot.classList.remove("is-open");
     modalRoot.setAttribute("aria-hidden", "true");
     document.body.style.overflow = "";
+
+    // Restore focus to the element that originally triggered the modal
+    if (previousActiveElement && typeof previousActiveElement.focus === "function") {
+      previousActiveElement.focus();
+      previousActiveElement = null;
+    }
   }
 
   function bindHeaderButton() {
@@ -190,4 +251,3 @@
     document$.subscribe(init);
   }
 })();
-

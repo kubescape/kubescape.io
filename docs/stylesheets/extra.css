@@ -392,6 +392,14 @@ h1, h2, h3 {
   color: var(--md-default-fg-color);
 }
 
+.ks-repo-modal__close-btn:focus-visible,
+.ks-repo-modal__primary-btn:focus-visible,
+.ks-repo-modal__copy-btn:focus-visible,
+.ks-repo-modal__secondary-link:focus-visible {
+  outline: 2px solid var(--md-typeset-a-color, #122a83);
+  outline-offset: 2px;
+}
+
 /* Modal Body */
 .ks-repo-modal__body {
   padding: 1.25rem;
