@@ -1,6 +1,6 @@
-﻿# Control library
+# Control library
 
-Explore and filter all Kubescape controls by identifier, keyword, category, or severity.
+Explore and filter all Kubescape controls by identifier, title, category, or severity.
 
 <div class="ks-control-explorer" id="ks-control-explorer">
   <div class="ks-explorer-search-bar">
@@ -10,7 +10,7 @@ Explore and filter all Kubescape controls by identifier, keyword, category, or s
         <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
       </svg>
     </span>
-    <input type="text" id="ks-control-search" placeholder="Search controls (e.g. root, RBAC, C-0013, secret, memory)..." autocomplete="off" spellcheck="false" aria-label="Search controls">
+    <input type="text" id="ks-control-search" placeholder="Search controls (e.g. root, RBAC, C-0013, secret, memory, ingress)..." autocomplete="off" spellcheck="false" aria-label="Search controls">
     <button type="button" id="ks-search-clear" class="ks-search-clear" aria-label="Clear search" style="display:none;">✕</button>
     <kbd class="ks-search-kbd">/</kbd>
   </div>
@@ -61,7 +61,7 @@ Explore and filter all Kubescape controls by identifier, keyword, category, or s
       <button type="button" class="ks-copy-cmd-btn" data-cmd="kubescape scan control C-0002" title="Copy scan command">📋 Copy scan command</button>
     </div>
   </div>
-  <div class="ks-control-card" data-id="C-0004" data-sev="high" data-cat="cluster">
+  <div class="ks-control-card" data-id="C-0004" data-sev="high" data-cat="container">
     <div class="ks-card-header">
       <a class="ks-card-id" href="c-0004/">C-0004</a>
       <span class="ks-badge ks-badge-high">High</span>
@@ -91,12 +91,12 @@ Explore and filter all Kubescape controls by identifier, keyword, category, or s
       <button type="button" class="ks-copy-cmd-btn" data-cmd="kubescape scan control C-0007" title="Copy scan command">📋 Copy scan command</button>
     </div>
   </div>
-  <div class="ks-control-card" data-id="C-0009" data-sev="high" data-cat="cluster">
+  <div class="ks-control-card" data-id="C-0009" data-sev="high" data-cat="container">
     <div class="ks-card-header">
       <a class="ks-card-id" href="c-0009/">C-0009</a>
       <span class="ks-badge ks-badge-high">High</span>
     </div>
-    <a class="ks-card-title" href="c-0009/">C-0009</a>
+    <a class="ks-card-title" href="c-0009/">Resource limits</a>
     <div class="ks-card-footer">
       <button type="button" class="ks-copy-cmd-btn" data-cmd="kubescape scan control C-0009" title="Copy scan command">📋 Copy scan command</button>
     </div>
@@ -111,57 +111,57 @@ Explore and filter all Kubescape controls by identifier, keyword, category, or s
       <button type="button" class="ks-copy-cmd-btn" data-cmd="kubescape scan control C-0012" title="Copy scan command">📋 Copy scan command</button>
     </div>
   </div>
-  <div class="ks-control-card" data-id="C-0013" data-sev="medium" data-cat="cluster">
+  <div class="ks-control-card" data-id="C-0013" data-sev="medium" data-cat="container">
     <div class="ks-card-header">
       <a class="ks-card-id" href="c-0013/">C-0013</a>
       <span class="ks-badge ks-badge-medium">Medium</span>
     </div>
-    <a class="ks-card-title" href="c-0013/">C-0013</a>
+    <a class="ks-card-title" href="c-0013/">Non-root containers</a>
     <div class="ks-card-footer">
       <button type="button" class="ks-copy-cmd-btn" data-cmd="kubescape scan control C-0013" title="Copy scan command">📋 Copy scan command</button>
     </div>
   </div>
-  <div class="ks-control-card" data-id="C-0014" data-sev="low" data-cat="cluster">
+  <div class="ks-control-card" data-id="C-0014" data-sev="low" data-cat="rbac">
     <div class="ks-card-header">
       <a class="ks-card-id" href="c-0014/">C-0014</a>
       <span class="ks-badge ks-badge-low">Low</span>
     </div>
-    <a class="ks-card-title" href="c-0014/">C-0014</a>
+    <a class="ks-card-title" href="c-0014/">Access Kubernetes dashboard</a>
     <div class="ks-card-footer">
       <button type="button" class="ks-copy-cmd-btn" data-cmd="kubescape scan control C-0014" title="Copy scan command">📋 Copy scan command</button>
     </div>
   </div>
-  <div class="ks-control-card" data-id="C-0015" data-sev="high" data-cat="cluster">
+  <div class="ks-control-card" data-id="C-0015" data-sev="high" data-cat="rbac">
     <div class="ks-card-header">
       <a class="ks-card-id" href="c-0015/">C-0015</a>
       <span class="ks-badge ks-badge-high">High</span>
     </div>
-    <a class="ks-card-title" href="c-0015/">C-0015</a>
+    <a class="ks-card-title" href="c-0015/">List Kubernetes secrets</a>
     <div class="ks-card-footer">
       <button type="button" class="ks-copy-cmd-btn" data-cmd="kubescape scan control C-0015" title="Copy scan command">📋 Copy scan command</button>
     </div>
   </div>
-  <div class="ks-control-card" data-id="C-0016" data-sev="medium" data-cat="cluster">
+  <div class="ks-control-card" data-id="C-0016" data-sev="medium" data-cat="rbac">
     <div class="ks-card-header">
       <a class="ks-card-id" href="c-0016/">C-0016</a>
       <span class="ks-badge ks-badge-medium">Medium</span>
     </div>
-    <a class="ks-card-title" href="c-0016/">C-0016</a>
+    <a class="ks-card-title" href="c-0016/">Allow privilege escalation</a>
     <div class="ks-card-footer">
       <button type="button" class="ks-copy-cmd-btn" data-cmd="kubescape scan control C-0016" title="Copy scan command">📋 Copy scan command</button>
     </div>
   </div>
-  <div class="ks-control-card" data-id="C-0017" data-sev="low" data-cat="cluster">
+  <div class="ks-control-card" data-id="C-0017" data-sev="low" data-cat="container">
     <div class="ks-card-header">
       <a class="ks-card-id" href="c-0017/">C-0017</a>
       <span class="ks-badge ks-badge-low">Low</span>
     </div>
-    <a class="ks-card-title" href="c-0017/">C-0017</a>
+    <a class="ks-card-title" href="c-0017/">Immutable container filesystem</a>
     <div class="ks-card-footer">
       <button type="button" class="ks-copy-cmd-btn" data-cmd="kubescape scan control C-0017" title="Copy scan command">📋 Copy scan command</button>
     </div>
   </div>
-  <div class="ks-control-card" data-id="C-0018" data-sev="low" data-cat="cluster">
+  <div class="ks-control-card" data-id="C-0018" data-sev="low" data-cat="container">
     <div class="ks-card-header">
       <a class="ks-card-id" href="c-0018/">C-0018</a>
       <span class="ks-badge ks-badge-low">Low</span>
@@ -186,27 +186,27 @@ Explore and filter all Kubescape controls by identifier, keyword, category, or s
       <a class="ks-card-id" href="c-0021/">C-0021</a>
       <span class="ks-badge ks-badge-medium">Medium</span>
     </div>
-    <a class="ks-card-title" href="c-0021/">C-0021</a>
+    <a class="ks-card-title" href="c-0021/">Exposed sensitive interfaces</a>
     <div class="ks-card-footer">
       <button type="button" class="ks-copy-cmd-btn" data-cmd="kubescape scan control C-0021" title="Copy scan command">📋 Copy scan command</button>
     </div>
   </div>
-  <div class="ks-control-card" data-id="C-0026" data-sev="low" data-cat="cluster">
+  <div class="ks-control-card" data-id="C-0026" data-sev="low" data-cat="container">
     <div class="ks-card-header">
       <a class="ks-card-id" href="c-0026/">C-0026</a>
       <span class="ks-badge ks-badge-low">Low</span>
     </div>
-    <a class="ks-card-title" href="c-0026/">C-0026</a>
+    <a class="ks-card-title" href="c-0026/">Kubernetes CronJob</a>
     <div class="ks-card-footer">
       <button type="button" class="ks-copy-cmd-btn" data-cmd="kubescape scan control C-0026" title="Copy scan command">📋 Copy scan command</button>
     </div>
   </div>
-  <div class="ks-control-card" data-id="C-0030" data-sev="medium" data-cat="cluster">
+  <div class="ks-control-card" data-id="C-0030" data-sev="medium" data-cat="network">
     <div class="ks-card-header">
       <a class="ks-card-id" href="c-0030/">C-0030</a>
       <span class="ks-badge ks-badge-medium">Medium</span>
     </div>
-    <a class="ks-card-title" href="c-0030/">C-0030</a>
+    <a class="ks-card-title" href="c-0030/">Ingress and Egress blocked</a>
     <div class="ks-card-footer">
       <button type="button" class="ks-copy-cmd-btn" data-cmd="kubescape scan control C-0030" title="Copy scan command">📋 Copy scan command</button>
     </div>
@@ -221,12 +221,12 @@ Explore and filter all Kubescape controls by identifier, keyword, category, or s
       <button type="button" class="ks-copy-cmd-btn" data-cmd="kubescape scan control C-0031" title="Copy scan command">📋 Copy scan command</button>
     </div>
   </div>
-  <div class="ks-control-card" data-id="C-0034" data-sev="medium" data-cat="cluster">
+  <div class="ks-control-card" data-id="C-0034" data-sev="medium" data-cat="rbac">
     <div class="ks-card-header">
       <a class="ks-card-id" href="c-0034/">C-0034</a>
       <span class="ks-badge ks-badge-medium">Medium</span>
     </div>
-    <a class="ks-card-title" href="c-0034/">C-0034</a>
+    <a class="ks-card-title" href="c-0034/">Automatic mapping of service account</a>
     <div class="ks-card-footer">
       <button type="button" class="ks-copy-cmd-btn" data-cmd="kubescape scan control C-0034" title="Copy scan command">📋 Copy scan command</button>
     </div>
@@ -246,27 +246,27 @@ Explore and filter all Kubescape controls by identifier, keyword, category, or s
       <a class="ks-card-id" href="c-0036/">C-0036</a>
       <span class="ks-badge ks-badge-low">Low</span>
     </div>
-    <a class="ks-card-title" href="c-0036/">C-0036</a>
+    <a class="ks-card-title" href="c-0036/">Validate admission controller (validating)</a>
     <div class="ks-card-footer">
       <button type="button" class="ks-copy-cmd-btn" data-cmd="kubescape scan control C-0036" title="Copy scan command">📋 Copy scan command</button>
     </div>
   </div>
-  <div class="ks-control-card" data-id="C-0037" data-sev="medium" data-cat="cluster">
+  <div class="ks-control-card" data-id="C-0037" data-sev="medium" data-cat="network">
     <div class="ks-card-header">
       <a class="ks-card-id" href="c-0037/">C-0037</a>
       <span class="ks-badge ks-badge-medium">Medium</span>
     </div>
-    <a class="ks-card-title" href="c-0037/">C-0037</a>
+    <a class="ks-card-title" href="c-0037/">CoreDNS poisoning</a>
     <div class="ks-card-footer">
       <button type="button" class="ks-copy-cmd-btn" data-cmd="kubescape scan control C-0037" title="Copy scan command">📋 Copy scan command</button>
     </div>
   </div>
-  <div class="ks-control-card" data-id="C-0038" data-sev="high" data-cat="cluster">
+  <div class="ks-control-card" data-id="C-0038" data-sev="high" data-cat="rbac">
     <div class="ks-card-header">
       <a class="ks-card-id" href="c-0038/">C-0038</a>
       <span class="ks-badge ks-badge-high">High</span>
     </div>
-    <a class="ks-card-title" href="c-0038/">C-0038</a>
+    <a class="ks-card-title" href="c-0038/">Host PID/IPC privileges</a>
     <div class="ks-card-footer">
       <button type="button" class="ks-copy-cmd-btn" data-cmd="kubescape scan control C-0038" title="Copy scan command">📋 Copy scan command</button>
     </div>
@@ -276,47 +276,47 @@ Explore and filter all Kubescape controls by identifier, keyword, category, or s
       <a class="ks-card-id" href="c-0039/">C-0039</a>
       <span class="ks-badge ks-badge-medium">Medium</span>
     </div>
-    <a class="ks-card-title" href="c-0039/">C-0039</a>
+    <a class="ks-card-title" href="c-0039/">Validate admission controller (mutating)</a>
     <div class="ks-card-footer">
       <button type="button" class="ks-copy-cmd-btn" data-cmd="kubescape scan control C-0039" title="Copy scan command">📋 Copy scan command</button>
     </div>
   </div>
-  <div class="ks-control-card" data-id="C-0041" data-sev="high" data-cat="cluster">
+  <div class="ks-control-card" data-id="C-0041" data-sev="high" data-cat="rbac">
     <div class="ks-card-header">
       <a class="ks-card-id" href="c-0041/">C-0041</a>
       <span class="ks-badge ks-badge-high">High</span>
     </div>
-    <a class="ks-card-title" href="c-0041/">C-0041</a>
+    <a class="ks-card-title" href="c-0041/">HostNetwork access</a>
     <div class="ks-card-footer">
       <button type="button" class="ks-copy-cmd-btn" data-cmd="kubescape scan control C-0041" title="Copy scan command">📋 Copy scan command</button>
     </div>
   </div>
-  <div class="ks-control-card" data-id="C-0042" data-sev="low" data-cat="cluster">
+  <div class="ks-control-card" data-id="C-0042" data-sev="low" data-cat="network">
     <div class="ks-card-header">
       <a class="ks-card-id" href="c-0042/">C-0042</a>
       <span class="ks-badge ks-badge-low">Low</span>
     </div>
-    <a class="ks-card-title" href="c-0042/">C-0042</a>
+    <a class="ks-card-title" href="c-0042/">SSH server running inside container</a>
     <div class="ks-card-footer">
       <button type="button" class="ks-copy-cmd-btn" data-cmd="kubescape scan control C-0042" title="Copy scan command">📋 Copy scan command</button>
     </div>
   </div>
-  <div class="ks-control-card" data-id="C-0044" data-sev="medium" data-cat="cluster">
+  <div class="ks-control-card" data-id="C-0044" data-sev="medium" data-cat="network">
     <div class="ks-card-header">
       <a class="ks-card-id" href="c-0044/">C-0044</a>
       <span class="ks-badge ks-badge-medium">Medium</span>
     </div>
-    <a class="ks-card-title" href="c-0044/">C-0044</a>
+    <a class="ks-card-title" href="c-0044/">Container hostPort</a>
     <div class="ks-card-footer">
       <button type="button" class="ks-copy-cmd-btn" data-cmd="kubescape scan control C-0044" title="Copy scan command">📋 Copy scan command</button>
     </div>
   </div>
-  <div class="ks-control-card" data-id="C-0045" data-sev="high" data-cat="cluster">
+  <div class="ks-control-card" data-id="C-0045" data-sev="high" data-cat="container">
     <div class="ks-card-header">
       <a class="ks-card-id" href="c-0045/">C-0045</a>
       <span class="ks-badge ks-badge-high">High</span>
     </div>
-    <a class="ks-card-title" href="c-0045/">C-0045</a>
+    <a class="ks-card-title" href="c-0045/">Writable hostPath mount</a>
     <div class="ks-card-footer">
       <button type="button" class="ks-copy-cmd-btn" data-cmd="kubescape scan control C-0045" title="Copy scan command">📋 Copy scan command</button>
     </div>
@@ -326,32 +326,32 @@ Explore and filter all Kubescape controls by identifier, keyword, category, or s
       <a class="ks-card-id" href="c-0046/">C-0046</a>
       <span class="ks-badge ks-badge-high">High</span>
     </div>
-    <a class="ks-card-title" href="c-0046/">C-0046</a>
+    <a class="ks-card-title" href="c-0046/">Insecure capabilities</a>
     <div class="ks-card-footer">
       <button type="button" class="ks-copy-cmd-btn" data-cmd="kubescape scan control C-0046" title="Copy scan command">📋 Copy scan command</button>
     </div>
   </div>
-  <div class="ks-control-card" data-id="C-0048" data-sev="high" data-cat="cluster">
+  <div class="ks-control-card" data-id="C-0048" data-sev="high" data-cat="container">
     <div class="ks-card-header">
       <a class="ks-card-id" href="c-0048/">C-0048</a>
       <span class="ks-badge ks-badge-high">High</span>
     </div>
-    <a class="ks-card-title" href="c-0048/">C-0048</a>
+    <a class="ks-card-title" href="c-0048/">HostPath mount</a>
     <div class="ks-card-footer">
       <button type="button" class="ks-copy-cmd-btn" data-cmd="kubescape scan control C-0048" title="Copy scan command">📋 Copy scan command</button>
     </div>
   </div>
-  <div class="ks-control-card" data-id="C-0049" data-sev="low" data-cat="cluster">
+  <div class="ks-control-card" data-id="C-0049" data-sev="low" data-cat="network">
     <div class="ks-card-header">
       <a class="ks-card-id" href="c-0049/">C-0049</a>
       <span class="ks-badge ks-badge-low">Low</span>
     </div>
-    <a class="ks-card-title" href="c-0049/">C-0049</a>
+    <a class="ks-card-title" href="c-0049/">Network mapping</a>
     <div class="ks-card-footer">
       <button type="button" class="ks-copy-cmd-btn" data-cmd="kubescape scan control C-0049" title="Copy scan command">📋 Copy scan command</button>
     </div>
   </div>
-  <div class="ks-control-card" data-id="C-0050" data-sev="high" data-cat="cluster">
+  <div class="ks-control-card" data-id="C-0050" data-sev="high" data-cat="container">
     <div class="ks-card-header">
       <a class="ks-card-id" href="c-0050/">C-0050</a>
       <span class="ks-badge ks-badge-high">High</span>
@@ -361,7 +361,7 @@ Explore and filter all Kubescape controls by identifier, keyword, category, or s
       <button type="button" class="ks-copy-cmd-btn" data-cmd="kubescape scan control C-0050" title="Copy scan command">📋 Copy scan command</button>
     </div>
   </div>
-  <div class="ks-control-card" data-id="C-0052" data-sev="high" data-cat="cluster">
+  <div class="ks-control-card" data-id="C-0052" data-sev="high" data-cat="network">
     <div class="ks-card-header">
       <a class="ks-card-id" href="c-0052/">C-0052</a>
       <span class="ks-badge ks-badge-high">High</span>
@@ -371,22 +371,22 @@ Explore and filter all Kubescape controls by identifier, keyword, category, or s
       <button type="button" class="ks-copy-cmd-btn" data-cmd="kubescape scan control C-0052" title="Copy scan command">📋 Copy scan command</button>
     </div>
   </div>
-  <div class="ks-control-card" data-id="C-0053" data-sev="medium" data-cat="cluster">
+  <div class="ks-control-card" data-id="C-0053" data-sev="medium" data-cat="rbac">
     <div class="ks-card-header">
       <a class="ks-card-id" href="c-0053/">C-0053</a>
       <span class="ks-badge ks-badge-medium">Medium</span>
     </div>
-    <a class="ks-card-title" href="c-0053/">C-0053</a>
+    <a class="ks-card-title" href="c-0053/">Access container service account</a>
     <div class="ks-card-footer">
       <button type="button" class="ks-copy-cmd-btn" data-cmd="kubescape scan control C-0053" title="Copy scan command">📋 Copy scan command</button>
     </div>
   </div>
-  <div class="ks-control-card" data-id="C-0054" data-sev="medium" data-cat="cluster">
+  <div class="ks-control-card" data-id="C-0054" data-sev="medium" data-cat="network">
     <div class="ks-card-header">
       <a class="ks-card-id" href="c-0054/">C-0054</a>
       <span class="ks-badge ks-badge-medium">Medium</span>
     </div>
-    <a class="ks-card-title" href="c-0054/">C-0054</a>
+    <a class="ks-card-title" href="c-0054/">Cluster internal networking</a>
     <div class="ks-card-footer">
       <button type="button" class="ks-copy-cmd-btn" data-cmd="kubescape scan control C-0054" title="Copy scan command">📋 Copy scan command</button>
     </div>
@@ -396,47 +396,47 @@ Explore and filter all Kubescape controls by identifier, keyword, category, or s
       <a class="ks-card-id" href="c-0055/">C-0055</a>
       <span class="ks-badge ks-badge-medium">Medium</span>
     </div>
-    <a class="ks-card-title" href="c-0055/">C-0055</a>
+    <a class="ks-card-title" href="c-0055/">Linux hardening</a>
     <div class="ks-card-footer">
       <button type="button" class="ks-copy-cmd-btn" data-cmd="kubescape scan control C-0055" title="Copy scan command">📋 Copy scan command</button>
     </div>
   </div>
-  <div class="ks-control-card" data-id="C-0056" data-sev="medium" data-cat="cluster">
+  <div class="ks-control-card" data-id="C-0056" data-sev="medium" data-cat="container">
     <div class="ks-card-header">
       <a class="ks-card-id" href="c-0056/">C-0056</a>
       <span class="ks-badge ks-badge-medium">Medium</span>
     </div>
-    <a class="ks-card-title" href="c-0056/">C-0056</a>
+    <a class="ks-card-title" href="c-0056/">Configured liveness probe</a>
     <div class="ks-card-footer">
       <button type="button" class="ks-copy-cmd-btn" data-cmd="kubescape scan control C-0056" title="Copy scan command">📋 Copy scan command</button>
     </div>
   </div>
-  <div class="ks-control-card" data-id="C-0057" data-sev="high" data-cat="cluster">
+  <div class="ks-control-card" data-id="C-0057" data-sev="high" data-cat="rbac">
     <div class="ks-card-header">
       <a class="ks-card-id" href="c-0057/">C-0057</a>
       <span class="ks-badge ks-badge-high">High</span>
     </div>
-    <a class="ks-card-title" href="c-0057/">C-0057</a>
+    <a class="ks-card-title" href="c-0057/">Privileged container</a>
     <div class="ks-card-footer">
       <button type="button" class="ks-copy-cmd-btn" data-cmd="kubescape scan control C-0057" title="Copy scan command">📋 Copy scan command</button>
     </div>
   </div>
-  <div class="ks-control-card" data-id="C-0058" data-sev="medium" data-cat="cluster">
+  <div class="ks-control-card" data-id="C-0058" data-sev="medium" data-cat="rbac">
     <div class="ks-card-header">
       <a class="ks-card-id" href="c-0058/">C-0058</a>
       <span class="ks-badge ks-badge-medium">Medium</span>
     </div>
-    <a class="ks-card-title" href="c-0058/">C-0058</a>
+    <a class="ks-card-title" href="c-0058/">CVE-2021-25741 - Using symlink for arbitrary host file system access.</a>
     <div class="ks-card-footer">
       <button type="button" class="ks-copy-cmd-btn" data-cmd="kubescape scan control C-0058" title="Copy scan command">📋 Copy scan command</button>
     </div>
   </div>
-  <div class="ks-control-card" data-id="C-0059" data-sev="high" data-cat="cluster">
+  <div class="ks-control-card" data-id="C-0059" data-sev="high" data-cat="network">
     <div class="ks-card-header">
       <a class="ks-card-id" href="c-0059/">C-0059</a>
       <span class="ks-badge ks-badge-high">High</span>
     </div>
-    <a class="ks-card-title" href="c-0059/">C-0059</a>
+    <a class="ks-card-title" href="c-0059/">CVE-2021-25742-nginx-ingress-snippet-annotation-vulnerability</a>
     <div class="ks-card-footer">
       <button type="button" class="ks-copy-cmd-btn" data-cmd="kubescape scan control C-0059" title="Copy scan command">📋 Copy scan command</button>
     </div>
@@ -451,17 +451,17 @@ Explore and filter all Kubescape controls by identifier, keyword, category, or s
       <button type="button" class="ks-copy-cmd-btn" data-cmd="kubescape scan control C-0061" title="Copy scan command">📋 Copy scan command</button>
     </div>
   </div>
-  <div class="ks-control-card" data-id="C-0062" data-sev="medium" data-cat="cluster">
+  <div class="ks-control-card" data-id="C-0062" data-sev="medium" data-cat="container">
     <div class="ks-card-header">
       <a class="ks-card-id" href="c-0062/">C-0062</a>
       <span class="ks-badge ks-badge-medium">Medium</span>
     </div>
-    <a class="ks-card-title" href="c-0062/">C-0062</a>
+    <a class="ks-card-title" href="c-0062/">Sudo in container entrypoint</a>
     <div class="ks-card-footer">
       <button type="button" class="ks-copy-cmd-btn" data-cmd="kubescape scan control C-0062" title="Copy scan command">📋 Copy scan command</button>
     </div>
   </div>
-  <div class="ks-control-card" data-id="C-0063" data-sev="medium" data-cat="container">
+  <div class="ks-control-card" data-id="C-0063" data-sev="medium" data-cat="rbac">
     <div class="ks-card-header">
       <a class="ks-card-id" href="c-0063/">C-0063</a>
       <span class="ks-badge ks-badge-medium">Medium</span>
@@ -471,12 +471,12 @@ Explore and filter all Kubescape controls by identifier, keyword, category, or s
       <button type="button" class="ks-copy-cmd-btn" data-cmd="kubescape scan control C-0063" title="Copy scan command">📋 Copy scan command</button>
     </div>
   </div>
-  <div class="ks-control-card" data-id="C-0065" data-sev="medium" data-cat="cluster">
+  <div class="ks-control-card" data-id="C-0065" data-sev="medium" data-cat="rbac">
     <div class="ks-card-header">
       <a class="ks-card-id" href="c-0065/">C-0065</a>
       <span class="ks-badge ks-badge-medium">Medium</span>
     </div>
-    <a class="ks-card-title" href="c-0065/">C-0065</a>
+    <a class="ks-card-title" href="c-0065/">No impersonation</a>
     <div class="ks-card-footer">
       <button type="button" class="ks-copy-cmd-btn" data-cmd="kubescape scan control C-0065" title="Copy scan command">📋 Copy scan command</button>
     </div>
@@ -511,17 +511,17 @@ Explore and filter all Kubescape controls by identifier, keyword, category, or s
       <button type="button" class="ks-copy-cmd-btn" data-cmd="kubescape scan control C-0068" title="Copy scan command">📋 Copy scan command</button>
     </div>
   </div>
-  <div class="ks-control-card" data-id="C-0069" data-sev="critical" data-cat="cluster">
+  <div class="ks-control-card" data-id="C-0069" data-sev="critical" data-cat="rbac">
     <div class="ks-card-header">
       <a class="ks-card-id" href="c-0069/">C-0069</a>
       <span class="ks-badge ks-badge-critical">Critical</span>
     </div>
-    <a class="ks-card-title" href="c-0069/">C-0069</a>
+    <a class="ks-card-title" href="c-0069/">Disable anonymous access to Kubelet service</a>
     <div class="ks-card-footer">
       <button type="button" class="ks-copy-cmd-btn" data-cmd="kubescape scan control C-0069" title="Copy scan command">📋 Copy scan command</button>
     </div>
   </div>
-  <div class="ks-control-card" data-id="C-0070" data-sev="critical" data-cat="cluster">
+  <div class="ks-control-card" data-id="C-0070" data-sev="critical" data-cat="rbac">
     <div class="ks-card-header">
       <a class="ks-card-id" href="c-0070/">C-0070</a>
       <span class="ks-badge ks-badge-critical">Critical</span>
@@ -531,22 +531,22 @@ Explore and filter all Kubescape controls by identifier, keyword, category, or s
       <button type="button" class="ks-copy-cmd-btn" data-cmd="kubescape scan control C-0070" title="Copy scan command">📋 Copy scan command</button>
     </div>
   </div>
-  <div class="ks-control-card" data-id="C-0073" data-sev="low" data-cat="cluster">
+  <div class="ks-control-card" data-id="C-0073" data-sev="low" data-cat="container">
     <div class="ks-card-header">
       <a class="ks-card-id" href="c-0073/">C-0073</a>
       <span class="ks-badge ks-badge-low">Low</span>
     </div>
-    <a class="ks-card-title" href="c-0073/">C-0073</a>
+    <a class="ks-card-title" href="c-0073/">Naked pods</a>
     <div class="ks-card-footer">
       <button type="button" class="ks-copy-cmd-btn" data-cmd="kubescape scan control C-0073" title="Copy scan command">📋 Copy scan command</button>
     </div>
   </div>
-  <div class="ks-control-card" data-id="C-0074" data-sev="medium" data-cat="cluster">
+  <div class="ks-control-card" data-id="C-0074" data-sev="medium" data-cat="container">
     <div class="ks-card-header">
       <a class="ks-card-id" href="c-0074/">C-0074</a>
       <span class="ks-badge ks-badge-medium">Medium</span>
     </div>
-    <a class="ks-card-title" href="c-0074/">C-0074</a>
+    <a class="ks-card-title" href="c-0074/">Container runtime socket mounted</a>
     <div class="ks-card-footer">
       <button type="button" class="ks-copy-cmd-btn" data-cmd="kubescape scan control C-0074" title="Copy scan command">📋 Copy scan command</button>
     </div>
@@ -566,7 +566,7 @@ Explore and filter all Kubescape controls by identifier, keyword, category, or s
       <a class="ks-card-id" href="c-0076/">C-0076</a>
       <span class="ks-badge ks-badge-low">Low</span>
     </div>
-    <a class="ks-card-title" href="c-0076/">C-0076</a>
+    <a class="ks-card-title" href="c-0076/">Label usage for resources</a>
     <div class="ks-card-footer">
       <button type="button" class="ks-copy-cmd-btn" data-cmd="kubescape scan control C-0076" title="Copy scan command">📋 Copy scan command</button>
     </div>
@@ -581,12 +581,12 @@ Explore and filter all Kubescape controls by identifier, keyword, category, or s
       <button type="button" class="ks-copy-cmd-btn" data-cmd="kubescape scan control C-0077" title="Copy scan command">📋 Copy scan command</button>
     </div>
   </div>
-  <div class="ks-control-card" data-id="C-0078" data-sev="medium" data-cat="cluster">
+  <div class="ks-control-card" data-id="C-0078" data-sev="medium" data-cat="container">
     <div class="ks-card-header">
       <a class="ks-card-id" href="c-0078/">C-0078</a>
       <span class="ks-badge ks-badge-medium">Medium</span>
     </div>
-    <a class="ks-card-title" href="c-0078/">C-0078</a>
+    <a class="ks-card-title" href="c-0078/">Images from allowed registry</a>
     <div class="ks-card-footer">
       <button type="button" class="ks-copy-cmd-btn" data-cmd="kubescape scan control C-0078" title="Copy scan command">📋 Copy scan command</button>
     </div>
@@ -606,47 +606,47 @@ Explore and filter all Kubescape controls by identifier, keyword, category, or s
       <a class="ks-card-id" href="c-0081/">C-0081</a>
       <span class="ks-badge ks-badge-medium">Medium</span>
     </div>
-    <a class="ks-card-title" href="c-0081/">C-0081</a>
+    <a class="ks-card-title" href="c-0081/">CVE-2022-24348-argocddirtraversal</a>
     <div class="ks-card-footer">
       <button type="button" class="ks-copy-cmd-btn" data-cmd="kubescape scan control C-0081" title="Copy scan command">📋 Copy scan command</button>
     </div>
   </div>
-  <div class="ks-control-card" data-id="C-0083" data-sev="high" data-cat="cluster">
+  <div class="ks-control-card" data-id="C-0083" data-sev="high" data-cat="network">
     <div class="ks-card-header">
       <a class="ks-card-id" href="c-0083/">C-0083</a>
       <span class="ks-badge ks-badge-high">High</span>
     </div>
-    <a class="ks-card-title" href="c-0083/">C-0083</a>
+    <a class="ks-card-title" href="c-0083/">Workloads with Critical vulnerabilities exposed to external traffic</a>
     <div class="ks-card-footer">
       <button type="button" class="ks-copy-cmd-btn" data-cmd="kubescape scan control C-0083" title="Copy scan command">📋 Copy scan command</button>
     </div>
   </div>
-  <div class="ks-control-card" data-id="C-0084" data-sev="high" data-cat="cluster">
+  <div class="ks-control-card" data-id="C-0084" data-sev="high" data-cat="network">
     <div class="ks-card-header">
       <a class="ks-card-id" href="c-0084/">C-0084</a>
       <span class="ks-badge ks-badge-high">High</span>
     </div>
-    <a class="ks-card-title" href="c-0084/">C-0084</a>
+    <a class="ks-card-title" href="c-0084/">Workloads with RCE vulnerabilities exposed to external traffic</a>
     <div class="ks-card-footer">
       <button type="button" class="ks-copy-cmd-btn" data-cmd="kubescape scan control C-0084" title="Copy scan command">📋 Copy scan command</button>
     </div>
   </div>
-  <div class="ks-control-card" data-id="C-0085" data-sev="medium" data-cat="cluster">
+  <div class="ks-control-card" data-id="C-0085" data-sev="medium" data-cat="container">
     <div class="ks-card-header">
       <a class="ks-card-id" href="c-0085/">C-0085</a>
       <span class="ks-badge ks-badge-medium">Medium</span>
     </div>
-    <a class="ks-card-title" href="c-0085/">C-0085</a>
+    <a class="ks-card-title" href="c-0085/">Workloads with excessive amount of vulnerabilities</a>
     <div class="ks-card-footer">
       <button type="button" class="ks-copy-cmd-btn" data-cmd="kubescape scan control C-0085" title="Copy scan command">📋 Copy scan command</button>
     </div>
   </div>
-  <div class="ks-control-card" data-id="C-0087" data-sev="high" data-cat="cluster">
+  <div class="ks-control-card" data-id="C-0087" data-sev="high" data-cat="container">
     <div class="ks-card-header">
       <a class="ks-card-id" href="c-0087/">C-0087</a>
       <span class="ks-badge ks-badge-high">High</span>
     </div>
-    <a class="ks-card-title" href="c-0087/">C-0087</a>
+    <a class="ks-card-title" href="c-0087/">CVE-2022-23648-containerd-fs-escape</a>
     <div class="ks-card-footer">
       <button type="button" class="ks-copy-cmd-btn" data-cmd="kubescape scan control C-0087" title="Copy scan command">📋 Copy scan command</button>
     </div>
@@ -666,7 +666,7 @@ Explore and filter all Kubescape controls by identifier, keyword, category, or s
       <a class="ks-card-id" href="c-0089/">C-0089</a>
       <span class="ks-badge ks-badge-low">Low</span>
     </div>
-    <a class="ks-card-title" href="c-0089/">C-0089</a>
+    <a class="ks-card-title" href="c-0089/">CVE-2022-3172-aggregated-API-server-redirect</a>
     <div class="ks-card-footer">
       <button type="button" class="ks-copy-cmd-btn" data-cmd="kubescape scan control C-0089" title="Copy scan command">📋 Copy scan command</button>
     </div>
@@ -676,7 +676,7 @@ Explore and filter all Kubescape controls by identifier, keyword, category, or s
       <a class="ks-card-id" href="c-0090/">C-0090</a>
       <span class="ks-badge ks-badge-critical">Critical</span>
     </div>
-    <a class="ks-card-title" href="c-0090/">C-0090</a>
+    <a class="ks-card-title" href="c-0090/">CVE-2022-39328-grafana-auth-bypass</a>
     <div class="ks-card-footer">
       <button type="button" class="ks-copy-cmd-btn" data-cmd="kubescape scan control C-0090" title="Copy scan command">📋 Copy scan command</button>
     </div>
@@ -686,12 +686,12 @@ Explore and filter all Kubescape controls by identifier, keyword, category, or s
       <a class="ks-card-id" href="c-0091/">C-0091</a>
       <span class="ks-badge ks-badge-high">High</span>
     </div>
-    <a class="ks-card-title" href="c-0091/">C-0091</a>
+    <a class="ks-card-title" href="c-0091/">CVE-2022-47633-kyverno-signature-bypass</a>
     <div class="ks-card-footer">
       <button type="button" class="ks-copy-cmd-btn" data-cmd="kubescape scan control C-0091" title="Copy scan command">📋 Copy scan command</button>
     </div>
   </div>
-  <div class="ks-control-card" data-id="C-0092" data-sev="medium" data-cat="container">
+  <div class="ks-control-card" data-id="C-0092" data-sev="medium" data-cat="rbac">
     <div class="ks-card-header">
       <a class="ks-card-id" href="c-0092/">C-0092</a>
       <span class="ks-badge ks-badge-medium">Medium</span>
@@ -701,37 +701,37 @@ Explore and filter all Kubescape controls by identifier, keyword, category, or s
       <button type="button" class="ks-copy-cmd-btn" data-cmd="kubescape scan control C-0092" title="Copy scan command">📋 Copy scan command</button>
     </div>
   </div>
-  <div class="ks-control-card" data-id="C-0093" data-sev="medium" data-cat="cluster">
+  <div class="ks-control-card" data-id="C-0093" data-sev="medium" data-cat="container">
     <div class="ks-card-header">
       <a class="ks-card-id" href="c-0093/">C-0093</a>
       <span class="ks-badge ks-badge-medium">Medium</span>
     </div>
-    <a class="ks-card-title" href="c-0093/">C-0093</a>
+    <a class="ks-card-title" href="c-0093/">Ensure that the API server pod specification file ownership is set to root:root</a>
     <div class="ks-card-footer">
       <button type="button" class="ks-copy-cmd-btn" data-cmd="kubescape scan control C-0093" title="Copy scan command">📋 Copy scan command</button>
     </div>
   </div>
-  <div class="ks-control-card" data-id="C-0094" data-sev="medium" data-cat="cluster">
+  <div class="ks-control-card" data-id="C-0094" data-sev="medium" data-cat="rbac">
     <div class="ks-card-header">
       <a class="ks-card-id" href="c-0094/">C-0094</a>
       <span class="ks-badge ks-badge-medium">Medium</span>
     </div>
-    <a class="ks-card-title" href="c-0094/">C-0094</a>
+    <a class="ks-card-title" href="c-0094/">Ensure that the controller manager pod specification file permissions are set to 600 or more restrictive</a>
     <div class="ks-card-footer">
       <button type="button" class="ks-copy-cmd-btn" data-cmd="kubescape scan control C-0094" title="Copy scan command">📋 Copy scan command</button>
     </div>
   </div>
-  <div class="ks-control-card" data-id="C-0095" data-sev="medium" data-cat="cluster">
+  <div class="ks-control-card" data-id="C-0095" data-sev="medium" data-cat="container">
     <div class="ks-card-header">
       <a class="ks-card-id" href="c-0095/">C-0095</a>
       <span class="ks-badge ks-badge-medium">Medium</span>
     </div>
-    <a class="ks-card-title" href="c-0095/">C-0095</a>
+    <a class="ks-card-title" href="c-0095/">Ensure that the controller manager pod specification file ownership is set to root:root</a>
     <div class="ks-card-footer">
       <button type="button" class="ks-copy-cmd-btn" data-cmd="kubescape scan control C-0095" title="Copy scan command">📋 Copy scan command</button>
     </div>
   </div>
-  <div class="ks-control-card" data-id="C-0096" data-sev="medium" data-cat="container">
+  <div class="ks-control-card" data-id="C-0096" data-sev="medium" data-cat="rbac">
     <div class="ks-card-header">
       <a class="ks-card-id" href="c-0096/">C-0096</a>
       <span class="ks-badge ks-badge-medium">Medium</span>
@@ -741,52 +741,52 @@ Explore and filter all Kubescape controls by identifier, keyword, category, or s
       <button type="button" class="ks-copy-cmd-btn" data-cmd="kubescape scan control C-0096" title="Copy scan command">📋 Copy scan command</button>
     </div>
   </div>
-  <div class="ks-control-card" data-id="C-0097" data-sev="medium" data-cat="cluster">
+  <div class="ks-control-card" data-id="C-0097" data-sev="medium" data-cat="container">
     <div class="ks-card-header">
       <a class="ks-card-id" href="c-0097/">C-0097</a>
       <span class="ks-badge ks-badge-medium">Medium</span>
     </div>
-    <a class="ks-card-title" href="c-0097/">C-0097</a>
+    <a class="ks-card-title" href="c-0097/">Ensure that the scheduler pod specification file ownership is set to root:root</a>
     <div class="ks-card-footer">
       <button type="button" class="ks-copy-cmd-btn" data-cmd="kubescape scan control C-0097" title="Copy scan command">📋 Copy scan command</button>
     </div>
   </div>
-  <div class="ks-control-card" data-id="C-0098" data-sev="medium" data-cat="cluster">
+  <div class="ks-control-card" data-id="C-0098" data-sev="medium" data-cat="rbac">
     <div class="ks-card-header">
       <a class="ks-card-id" href="c-0098/">C-0098</a>
       <span class="ks-badge ks-badge-medium">Medium</span>
     </div>
-    <a class="ks-card-title" href="c-0098/">C-0098</a>
+    <a class="ks-card-title" href="c-0098/">Ensure that the etcd pod specification file permissions are set to 600 or more restrictive</a>
     <div class="ks-card-footer">
       <button type="button" class="ks-copy-cmd-btn" data-cmd="kubescape scan control C-0098" title="Copy scan command">📋 Copy scan command</button>
     </div>
   </div>
-  <div class="ks-control-card" data-id="C-0099" data-sev="medium" data-cat="cluster">
+  <div class="ks-control-card" data-id="C-0099" data-sev="medium" data-cat="container">
     <div class="ks-card-header">
       <a class="ks-card-id" href="c-0099/">C-0099</a>
       <span class="ks-badge ks-badge-medium">Medium</span>
     </div>
-    <a class="ks-card-title" href="c-0099/">C-0099</a>
+    <a class="ks-card-title" href="c-0099/">Ensure that the etcd pod specification file ownership is set to root:root</a>
     <div class="ks-card-footer">
       <button type="button" class="ks-copy-cmd-btn" data-cmd="kubescape scan control C-0099" title="Copy scan command">📋 Copy scan command</button>
     </div>
   </div>
-  <div class="ks-control-card" data-id="C-0100" data-sev="medium" data-cat="cluster">
+  <div class="ks-control-card" data-id="C-0100" data-sev="medium" data-cat="rbac">
     <div class="ks-card-header">
       <a class="ks-card-id" href="c-0100/">C-0100</a>
       <span class="ks-badge ks-badge-medium">Medium</span>
     </div>
-    <a class="ks-card-title" href="c-0100/">C-0100</a>
+    <a class="ks-card-title" href="c-0100/">Ensure that the Container Network Interface file permissions are set to 600 or more restrictive</a>
     <div class="ks-card-footer">
       <button type="button" class="ks-copy-cmd-btn" data-cmd="kubescape scan control C-0100" title="Copy scan command">📋 Copy scan command</button>
     </div>
   </div>
-  <div class="ks-control-card" data-id="C-0101" data-sev="medium" data-cat="cluster">
+  <div class="ks-control-card" data-id="C-0101" data-sev="medium" data-cat="network">
     <div class="ks-card-header">
       <a class="ks-card-id" href="c-0101/">C-0101</a>
       <span class="ks-badge ks-badge-medium">Medium</span>
     </div>
-    <a class="ks-card-title" href="c-0101/">C-0101</a>
+    <a class="ks-card-title" href="c-0101/">Ensure that the Container Network Interface file ownership is set to root:root</a>
     <div class="ks-card-footer">
       <button type="button" class="ks-copy-cmd-btn" data-cmd="kubescape scan control C-0101" title="Copy scan command">📋 Copy scan command</button>
     </div>
@@ -806,47 +806,47 @@ Explore and filter all Kubescape controls by identifier, keyword, category, or s
       <a class="ks-card-id" href="c-0103/">C-0103</a>
       <span class="ks-badge ks-badge-high">High</span>
     </div>
-    <a class="ks-card-title" href="c-0103/">C-0103</a>
+    <a class="ks-card-title" href="c-0103/">Ensure that the etcd data directory ownership is set to etcd:etcd</a>
     <div class="ks-card-footer">
       <button type="button" class="ks-copy-cmd-btn" data-cmd="kubescape scan control C-0103" title="Copy scan command">📋 Copy scan command</button>
     </div>
   </div>
-  <div class="ks-control-card" data-id="C-0104" data-sev="high" data-cat="cluster">
+  <div class="ks-control-card" data-id="C-0104" data-sev="high" data-cat="rbac">
     <div class="ks-card-header">
       <a class="ks-card-id" href="c-0104/">C-0104</a>
       <span class="ks-badge ks-badge-high">High</span>
     </div>
-    <a class="ks-card-title" href="c-0104/">C-0104</a>
+    <a class="ks-card-title" href="c-0104/">Ensure that the admin.conf file permissions are set to 600</a>
     <div class="ks-card-footer">
       <button type="button" class="ks-copy-cmd-btn" data-cmd="kubescape scan control C-0104" title="Copy scan command">📋 Copy scan command</button>
     </div>
   </div>
-  <div class="ks-control-card" data-id="C-0105" data-sev="high" data-cat="cluster">
+  <div class="ks-control-card" data-id="C-0105" data-sev="high" data-cat="rbac">
     <div class="ks-card-header">
       <a class="ks-card-id" href="c-0105/">C-0105</a>
       <span class="ks-badge ks-badge-high">High</span>
     </div>
-    <a class="ks-card-title" href="c-0105/">C-0105</a>
+    <a class="ks-card-title" href="c-0105/">Ensure that the admin.conf file ownership is set to root:root</a>
     <div class="ks-card-footer">
       <button type="button" class="ks-copy-cmd-btn" data-cmd="kubescape scan control C-0105" title="Copy scan command">📋 Copy scan command</button>
     </div>
   </div>
-  <div class="ks-control-card" data-id="C-0106" data-sev="medium" data-cat="cluster">
+  <div class="ks-control-card" data-id="C-0106" data-sev="medium" data-cat="rbac">
     <div class="ks-card-header">
       <a class="ks-card-id" href="c-0106/">C-0106</a>
       <span class="ks-badge ks-badge-medium">Medium</span>
     </div>
-    <a class="ks-card-title" href="c-0106/">C-0106</a>
+    <a class="ks-card-title" href="c-0106/">Ensure that the scheduler.conf file permissions are set to 600 or more restrictive</a>
     <div class="ks-card-footer">
       <button type="button" class="ks-copy-cmd-btn" data-cmd="kubescape scan control C-0106" title="Copy scan command">📋 Copy scan command</button>
     </div>
   </div>
-  <div class="ks-control-card" data-id="C-0107" data-sev="medium" data-cat="cluster">
+  <div class="ks-control-card" data-id="C-0107" data-sev="medium" data-cat="container">
     <div class="ks-card-header">
       <a class="ks-card-id" href="c-0107/">C-0107</a>
       <span class="ks-badge ks-badge-medium">Medium</span>
     </div>
-    <a class="ks-card-title" href="c-0107/">C-0107</a>
+    <a class="ks-card-title" href="c-0107/">Ensure that the scheduler.conf file ownership is set to root:root</a>
     <div class="ks-card-footer">
       <button type="button" class="ks-copy-cmd-btn" data-cmd="kubescape scan control C-0107" title="Copy scan command">📋 Copy scan command</button>
     </div>
@@ -861,12 +861,12 @@ Explore and filter all Kubescape controls by identifier, keyword, category, or s
       <button type="button" class="ks-copy-cmd-btn" data-cmd="kubescape scan control C-0108" title="Copy scan command">📋 Copy scan command</button>
     </div>
   </div>
-  <div class="ks-control-card" data-id="C-0109" data-sev="medium" data-cat="cluster">
+  <div class="ks-control-card" data-id="C-0109" data-sev="medium" data-cat="container">
     <div class="ks-card-header">
       <a class="ks-card-id" href="c-0109/">C-0109</a>
       <span class="ks-badge ks-badge-medium">Medium</span>
     </div>
-    <a class="ks-card-title" href="c-0109/">C-0109</a>
+    <a class="ks-card-title" href="c-0109/">Ensure that the controller-manager.conf file ownership is set to root:root</a>
     <div class="ks-card-footer">
       <button type="button" class="ks-copy-cmd-btn" data-cmd="kubescape scan control C-0109" title="Copy scan command">📋 Copy scan command</button>
     </div>
@@ -881,22 +881,22 @@ Explore and filter all Kubescape controls by identifier, keyword, category, or s
       <button type="button" class="ks-copy-cmd-btn" data-cmd="kubescape scan control C-0110" title="Copy scan command">📋 Copy scan command</button>
     </div>
   </div>
-  <div class="ks-control-card" data-id="C-0111" data-sev="high" data-cat="cluster">
+  <div class="ks-control-card" data-id="C-0111" data-sev="high" data-cat="rbac">
     <div class="ks-card-header">
       <a class="ks-card-id" href="c-0111/">C-0111</a>
       <span class="ks-badge ks-badge-high">High</span>
     </div>
-    <a class="ks-card-title" href="c-0111/">C-0111</a>
+    <a class="ks-card-title" href="c-0111/">Ensure that the Kubernetes PKI certificate file permissions are set to 600 or more restrictive</a>
     <div class="ks-card-footer">
       <button type="button" class="ks-copy-cmd-btn" data-cmd="kubescape scan control C-0111" title="Copy scan command">📋 Copy scan command</button>
     </div>
   </div>
-  <div class="ks-control-card" data-id="C-0112" data-sev="high" data-cat="cluster">
+  <div class="ks-control-card" data-id="C-0112" data-sev="high" data-cat="rbac">
     <div class="ks-card-header">
       <a class="ks-card-id" href="c-0112/">C-0112</a>
       <span class="ks-badge ks-badge-high">High</span>
     </div>
-    <a class="ks-card-title" href="c-0112/">C-0112</a>
+    <a class="ks-card-title" href="c-0112/">Ensure that the Kubernetes PKI key file permissions are set to 600</a>
     <div class="ks-card-footer">
       <button type="button" class="ks-copy-cmd-btn" data-cmd="kubescape scan control C-0112" title="Copy scan command">📋 Copy scan command</button>
     </div>
@@ -906,17 +906,17 @@ Explore and filter all Kubescape controls by identifier, keyword, category, or s
       <a class="ks-card-id" href="c-0113/">C-0113</a>
       <span class="ks-badge ks-badge-high">High</span>
     </div>
-    <a class="ks-card-title" href="c-0113/">C-0113</a>
+    <a class="ks-card-title" href="c-0113/">Ensure that the API Server --anonymous-auth argument is set to false</a>
     <div class="ks-card-footer">
       <button type="button" class="ks-copy-cmd-btn" data-cmd="kubescape scan control C-0113" title="Copy scan command">📋 Copy scan command</button>
     </div>
   </div>
-  <div class="ks-control-card" data-id="C-0114" data-sev="high" data-cat="cluster">
+  <div class="ks-control-card" data-id="C-0114" data-sev="high" data-cat="rbac">
     <div class="ks-card-header">
       <a class="ks-card-id" href="c-0114/">C-0114</a>
       <span class="ks-badge ks-badge-high">High</span>
     </div>
-    <a class="ks-card-title" href="c-0114/">C-0114</a>
+    <a class="ks-card-title" href="c-0114/">Ensure that the API Server --token-auth-file parameter is not set</a>
     <div class="ks-card-footer">
       <button type="button" class="ks-copy-cmd-btn" data-cmd="kubescape scan control C-0114" title="Copy scan command">📋 Copy scan command</button>
     </div>
@@ -926,7 +926,7 @@ Explore and filter all Kubescape controls by identifier, keyword, category, or s
       <a class="ks-card-id" href="c-0115/">C-0115</a>
       <span class="ks-badge ks-badge-medium">Medium</span>
     </div>
-    <a class="ks-card-title" href="c-0115/">C-0115</a>
+    <a class="ks-card-title" href="c-0115/">Ensure that the API Server --DenyServiceExternalIPs is not set</a>
     <div class="ks-card-footer">
       <button type="button" class="ks-copy-cmd-btn" data-cmd="kubescape scan control C-0115" title="Copy scan command">📋 Copy scan command</button>
     </div>
@@ -936,7 +936,7 @@ Explore and filter all Kubescape controls by identifier, keyword, category, or s
       <a class="ks-card-id" href="c-0116/">C-0116</a>
       <span class="ks-badge ks-badge-high">High</span>
     </div>
-    <a class="ks-card-title" href="c-0116/">C-0116</a>
+    <a class="ks-card-title" href="c-0116/">Ensure that the API Server --kubelet-client-certificate and --kubelet-client-key arguments are set as appropriate</a>
     <div class="ks-card-footer">
       <button type="button" class="ks-copy-cmd-btn" data-cmd="kubescape scan control C-0116" title="Copy scan command">📋 Copy scan command</button>
     </div>
@@ -946,47 +946,47 @@ Explore and filter all Kubescape controls by identifier, keyword, category, or s
       <a class="ks-card-id" href="c-0117/">C-0117</a>
       <span class="ks-badge ks-badge-high">High</span>
     </div>
-    <a class="ks-card-title" href="c-0117/">C-0117</a>
+    <a class="ks-card-title" href="c-0117/">Ensure that the API Server --kubelet-certificate-authority argument is set as appropriate</a>
     <div class="ks-card-footer">
       <button type="button" class="ks-copy-cmd-btn" data-cmd="kubescape scan control C-0117" title="Copy scan command">📋 Copy scan command</button>
     </div>
   </div>
-  <div class="ks-control-card" data-id="C-0118" data-sev="high" data-cat="cluster">
+  <div class="ks-control-card" data-id="C-0118" data-sev="high" data-cat="rbac">
     <div class="ks-card-header">
       <a class="ks-card-id" href="c-0118/">C-0118</a>
       <span class="ks-badge ks-badge-high">High</span>
     </div>
-    <a class="ks-card-title" href="c-0118/">C-0118</a>
+    <a class="ks-card-title" href="c-0118/">Ensure that the API Server --authorization-mode argument is not set to AlwaysAllow</a>
     <div class="ks-card-footer">
       <button type="button" class="ks-copy-cmd-btn" data-cmd="kubescape scan control C-0118" title="Copy scan command">📋 Copy scan command</button>
     </div>
   </div>
-  <div class="ks-control-card" data-id="C-0119" data-sev="medium" data-cat="cluster">
+  <div class="ks-control-card" data-id="C-0119" data-sev="medium" data-cat="rbac">
     <div class="ks-card-header">
       <a class="ks-card-id" href="c-0119/">C-0119</a>
       <span class="ks-badge ks-badge-medium">Medium</span>
     </div>
-    <a class="ks-card-title" href="c-0119/">C-0119</a>
+    <a class="ks-card-title" href="c-0119/">Ensure that the API Server --authorization-mode argument includes Node</a>
     <div class="ks-card-footer">
       <button type="button" class="ks-copy-cmd-btn" data-cmd="kubescape scan control C-0119" title="Copy scan command">📋 Copy scan command</button>
     </div>
   </div>
-  <div class="ks-control-card" data-id="C-0120" data-sev="high" data-cat="cluster">
+  <div class="ks-control-card" data-id="C-0120" data-sev="high" data-cat="rbac">
     <div class="ks-card-header">
       <a class="ks-card-id" href="c-0120/">C-0120</a>
       <span class="ks-badge ks-badge-high">High</span>
     </div>
-    <a class="ks-card-title" href="c-0120/">C-0120</a>
+    <a class="ks-card-title" href="c-0120/">Ensure that the API Server --authorization-mode argument includes RBAC</a>
     <div class="ks-card-footer">
       <button type="button" class="ks-copy-cmd-btn" data-cmd="kubescape scan control C-0120" title="Copy scan command">📋 Copy scan command</button>
     </div>
   </div>
-  <div class="ks-control-card" data-id="C-0121" data-sev="medium" data-cat="cluster">
+  <div class="ks-control-card" data-id="C-0121" data-sev="medium" data-cat="container">
     <div class="ks-card-header">
       <a class="ks-card-id" href="c-0121/">C-0121</a>
       <span class="ks-badge ks-badge-medium">Medium</span>
     </div>
-    <a class="ks-card-title" href="c-0121/">C-0121</a>
+    <a class="ks-card-title" href="c-0121/">Ensure that the admission control plugin EventRateLimit is set</a>
     <div class="ks-card-footer">
       <button type="button" class="ks-copy-cmd-btn" data-cmd="kubescape scan control C-0121" title="Copy scan command">📋 Copy scan command</button>
     </div>
@@ -996,37 +996,37 @@ Explore and filter all Kubescape controls by identifier, keyword, category, or s
       <a class="ks-card-id" href="c-0122/">C-0122</a>
       <span class="ks-badge ks-badge-high">High</span>
     </div>
-    <a class="ks-card-title" href="c-0122/">C-0122</a>
+    <a class="ks-card-title" href="c-0122/">Ensure that the admission control plugin AlwaysAdmit is not set</a>
     <div class="ks-card-footer">
       <button type="button" class="ks-copy-cmd-btn" data-cmd="kubescape scan control C-0122" title="Copy scan command">📋 Copy scan command</button>
     </div>
   </div>
-  <div class="ks-control-card" data-id="C-0123" data-sev="medium" data-cat="cluster">
+  <div class="ks-control-card" data-id="C-0123" data-sev="medium" data-cat="container">
     <div class="ks-card-header">
       <a class="ks-card-id" href="c-0123/">C-0123</a>
       <span class="ks-badge ks-badge-medium">Medium</span>
     </div>
-    <a class="ks-card-title" href="c-0123/">C-0123</a>
+    <a class="ks-card-title" href="c-0123/">Ensure that the admission control plugin AlwaysPullImages is set</a>
     <div class="ks-card-footer">
       <button type="button" class="ks-copy-cmd-btn" data-cmd="kubescape scan control C-0123" title="Copy scan command">📋 Copy scan command</button>
     </div>
   </div>
-  <div class="ks-control-card" data-id="C-0124" data-sev="medium" data-cat="cluster">
+  <div class="ks-control-card" data-id="C-0124" data-sev="medium" data-cat="container">
     <div class="ks-card-header">
       <a class="ks-card-id" href="c-0124/">C-0124</a>
       <span class="ks-badge ks-badge-medium">Medium</span>
     </div>
-    <a class="ks-card-title" href="c-0124/">C-0124</a>
+    <a class="ks-card-title" href="c-0124/">Ensure that the admission control plugin SecurityContextDeny is set if PodSecurityPolicy is not used</a>
     <div class="ks-card-footer">
       <button type="button" class="ks-copy-cmd-btn" data-cmd="kubescape scan control C-0124" title="Copy scan command">📋 Copy scan command</button>
     </div>
   </div>
-  <div class="ks-control-card" data-id="C-0125" data-sev="low" data-cat="cluster">
+  <div class="ks-control-card" data-id="C-0125" data-sev="low" data-cat="rbac">
     <div class="ks-card-header">
       <a class="ks-card-id" href="c-0125/">C-0125</a>
       <span class="ks-badge ks-badge-low">Low</span>
     </div>
-    <a class="ks-card-title" href="c-0125/">C-0125</a>
+    <a class="ks-card-title" href="c-0125/">Ensure that the admission control plugin ServiceAccount is set</a>
     <div class="ks-card-footer">
       <button type="button" class="ks-copy-cmd-btn" data-cmd="kubescape scan control C-0125" title="Copy scan command">📋 Copy scan command</button>
     </div>
@@ -1036,7 +1036,7 @@ Explore and filter all Kubescape controls by identifier, keyword, category, or s
       <a class="ks-card-id" href="c-0126/">C-0126</a>
       <span class="ks-badge ks-badge-low">Low</span>
     </div>
-    <a class="ks-card-title" href="c-0126/">C-0126</a>
+    <a class="ks-card-title" href="c-0126/">Ensure that the admission control plugin NamespaceLifecycle is set</a>
     <div class="ks-card-footer">
       <button type="button" class="ks-copy-cmd-btn" data-cmd="kubescape scan control C-0126" title="Copy scan command">📋 Copy scan command</button>
     </div>
@@ -1046,17 +1046,17 @@ Explore and filter all Kubescape controls by identifier, keyword, category, or s
       <a class="ks-card-id" href="c-0127/">C-0127</a>
       <span class="ks-badge ks-badge-medium">Medium</span>
     </div>
-    <a class="ks-card-title" href="c-0127/">C-0127</a>
+    <a class="ks-card-title" href="c-0127/">Ensure that the admission control plugin NodeRestriction is set</a>
     <div class="ks-card-footer">
       <button type="button" class="ks-copy-cmd-btn" data-cmd="kubescape scan control C-0127" title="Copy scan command">📋 Copy scan command</button>
     </div>
   </div>
-  <div class="ks-control-card" data-id="C-0128" data-sev="high" data-cat="cluster">
+  <div class="ks-control-card" data-id="C-0128" data-sev="high" data-cat="network">
     <div class="ks-card-header">
       <a class="ks-card-id" href="c-0128/">C-0128</a>
       <span class="ks-badge ks-badge-high">High</span>
     </div>
-    <a class="ks-card-title" href="c-0128/">C-0128</a>
+    <a class="ks-card-title" href="c-0128/">Ensure that the API Server --secure-port argument is not set to 0</a>
     <div class="ks-card-footer">
       <button type="button" class="ks-copy-cmd-btn" data-cmd="kubescape scan control C-0128" title="Copy scan command">📋 Copy scan command</button>
     </div>
@@ -1066,7 +1066,7 @@ Explore and filter all Kubescape controls by identifier, keyword, category, or s
       <a class="ks-card-id" href="c-0129/">C-0129</a>
       <span class="ks-badge ks-badge-low">Low</span>
     </div>
-    <a class="ks-card-title" href="c-0129/">C-0129</a>
+    <a class="ks-card-title" href="c-0129/">Ensure that the API Server --profiling argument is set to false</a>
     <div class="ks-card-footer">
       <button type="button" class="ks-copy-cmd-btn" data-cmd="kubescape scan control C-0129" title="Copy scan command">📋 Copy scan command</button>
     </div>
@@ -1076,7 +1076,7 @@ Explore and filter all Kubescape controls by identifier, keyword, category, or s
       <a class="ks-card-id" href="c-0130/">C-0130</a>
       <span class="ks-badge ks-badge-high">High</span>
     </div>
-    <a class="ks-card-title" href="c-0130/">C-0130</a>
+    <a class="ks-card-title" href="c-0130/">Ensure that the API Server --audit-log-path argument is set</a>
     <div class="ks-card-footer">
       <button type="button" class="ks-copy-cmd-btn" data-cmd="kubescape scan control C-0130" title="Copy scan command">📋 Copy scan command</button>
     </div>
@@ -1086,7 +1086,7 @@ Explore and filter all Kubescape controls by identifier, keyword, category, or s
       <a class="ks-card-id" href="c-0131/">C-0131</a>
       <span class="ks-badge ks-badge-medium">Medium</span>
     </div>
-    <a class="ks-card-title" href="c-0131/">C-0131</a>
+    <a class="ks-card-title" href="c-0131/">Ensure that the API Server --audit-log-maxage argument is set to 30 or as appropriate</a>
     <div class="ks-card-footer">
       <button type="button" class="ks-copy-cmd-btn" data-cmd="kubescape scan control C-0131" title="Copy scan command">📋 Copy scan command</button>
     </div>
@@ -1096,7 +1096,7 @@ Explore and filter all Kubescape controls by identifier, keyword, category, or s
       <a class="ks-card-id" href="c-0132/">C-0132</a>
       <span class="ks-badge ks-badge-medium">Medium</span>
     </div>
-    <a class="ks-card-title" href="c-0132/">C-0132</a>
+    <a class="ks-card-title" href="c-0132/">Ensure that the API Server --audit-log-maxbackup argument is set to 10 or as appropriate</a>
     <div class="ks-card-footer">
       <button type="button" class="ks-copy-cmd-btn" data-cmd="kubescape scan control C-0132" title="Copy scan command">📋 Copy scan command</button>
     </div>
@@ -1116,7 +1116,7 @@ Explore and filter all Kubescape controls by identifier, keyword, category, or s
       <a class="ks-card-id" href="c-0134/">C-0134</a>
       <span class="ks-badge ks-badge-medium">Medium</span>
     </div>
-    <a class="ks-card-title" href="c-0134/">C-0134</a>
+    <a class="ks-card-title" href="c-0134/">Ensure that the API Server --request-timeout argument is set as appropriate</a>
     <div class="ks-card-footer">
       <button type="button" class="ks-copy-cmd-btn" data-cmd="kubescape scan control C-0134" title="Copy scan command">📋 Copy scan command</button>
     </div>
@@ -1126,7 +1126,7 @@ Explore and filter all Kubescape controls by identifier, keyword, category, or s
       <a class="ks-card-id" href="c-0135/">C-0135</a>
       <span class="ks-badge ks-badge-medium">Medium</span>
     </div>
-    <a class="ks-card-title" href="c-0135/">C-0135</a>
+    <a class="ks-card-title" href="c-0135/">Ensure that the API Server --service-account-lookup argument is set to true</a>
     <div class="ks-card-footer">
       <button type="button" class="ks-copy-cmd-btn" data-cmd="kubescape scan control C-0135" title="Copy scan command">📋 Copy scan command</button>
     </div>
@@ -1136,7 +1136,7 @@ Explore and filter all Kubescape controls by identifier, keyword, category, or s
       <a class="ks-card-id" href="c-0136/">C-0136</a>
       <span class="ks-badge ks-badge-medium">Medium</span>
     </div>
-    <a class="ks-card-title" href="c-0136/">C-0136</a>
+    <a class="ks-card-title" href="c-0136/">Ensure that the API Server --service-account-key-file argument is set as appropriate</a>
     <div class="ks-card-footer">
       <button type="button" class="ks-copy-cmd-btn" data-cmd="kubescape scan control C-0136" title="Copy scan command">📋 Copy scan command</button>
     </div>
@@ -1156,7 +1156,7 @@ Explore and filter all Kubescape controls by identifier, keyword, category, or s
       <a class="ks-card-id" href="c-0138/">C-0138</a>
       <span class="ks-badge ks-badge-high">High</span>
     </div>
-    <a class="ks-card-title" href="c-0138/">C-0138</a>
+    <a class="ks-card-title" href="c-0138/">Ensure that the API Server --tls-cert-file and --tls-private-key-file arguments are set as appropriate</a>
     <div class="ks-card-footer">
       <button type="button" class="ks-copy-cmd-btn" data-cmd="kubescape scan control C-0138" title="Copy scan command">📋 Copy scan command</button>
     </div>
@@ -1166,7 +1166,7 @@ Explore and filter all Kubescape controls by identifier, keyword, category, or s
       <a class="ks-card-id" href="c-0139/">C-0139</a>
       <span class="ks-badge ks-badge-high">High</span>
     </div>
-    <a class="ks-card-title" href="c-0139/">C-0139</a>
+    <a class="ks-card-title" href="c-0139/">Ensure that the API Server --client-ca-file argument is set as appropriate</a>
     <div class="ks-card-footer">
       <button type="button" class="ks-copy-cmd-btn" data-cmd="kubescape scan control C-0139" title="Copy scan command">📋 Copy scan command</button>
     </div>
@@ -1176,7 +1176,7 @@ Explore and filter all Kubescape controls by identifier, keyword, category, or s
       <a class="ks-card-id" href="c-0140/">C-0140</a>
       <span class="ks-badge ks-badge-high">High</span>
     </div>
-    <a class="ks-card-title" href="c-0140/">C-0140</a>
+    <a class="ks-card-title" href="c-0140/">Ensure that the API Server --etcd-cafile argument is set as appropriate</a>
     <div class="ks-card-footer">
       <button type="button" class="ks-copy-cmd-btn" data-cmd="kubescape scan control C-0140" title="Copy scan command">📋 Copy scan command</button>
     </div>
@@ -1196,7 +1196,7 @@ Explore and filter all Kubescape controls by identifier, keyword, category, or s
       <a class="ks-card-id" href="c-0142/">C-0142</a>
       <span class="ks-badge ks-badge-high">High</span>
     </div>
-    <a class="ks-card-title" href="c-0142/">C-0142</a>
+    <a class="ks-card-title" href="c-0142/">Ensure that encryption providers are appropriately configured</a>
     <div class="ks-card-footer">
       <button type="button" class="ks-copy-cmd-btn" data-cmd="kubescape scan control C-0142" title="Copy scan command">📋 Copy scan command</button>
     </div>
@@ -1206,17 +1206,17 @@ Explore and filter all Kubescape controls by identifier, keyword, category, or s
       <a class="ks-card-id" href="c-0143/">C-0143</a>
       <span class="ks-badge ks-badge-medium">Medium</span>
     </div>
-    <a class="ks-card-title" href="c-0143/">C-0143</a>
+    <a class="ks-card-title" href="c-0143/">Ensure that the API Server only makes use of Strong Cryptographic Ciphers</a>
     <div class="ks-card-footer">
       <button type="button" class="ks-copy-cmd-btn" data-cmd="kubescape scan control C-0143" title="Copy scan command">📋 Copy scan command</button>
     </div>
   </div>
-  <div class="ks-control-card" data-id="C-0144" data-sev="medium" data-cat="cluster">
+  <div class="ks-control-card" data-id="C-0144" data-sev="medium" data-cat="container">
     <div class="ks-card-header">
       <a class="ks-card-id" href="c-0144/">C-0144</a>
       <span class="ks-badge ks-badge-medium">Medium</span>
     </div>
-    <a class="ks-card-title" href="c-0144/">C-0144</a>
+    <a class="ks-card-title" href="c-0144/">Ensure that the Controller Manager --terminated-pod-gc-threshold argument is set as appropriate</a>
     <div class="ks-card-footer">
       <button type="button" class="ks-copy-cmd-btn" data-cmd="kubescape scan control C-0144" title="Copy scan command">📋 Copy scan command</button>
     </div>
@@ -1226,17 +1226,17 @@ Explore and filter all Kubescape controls by identifier, keyword, category, or s
       <a class="ks-card-id" href="c-0145/">C-0145</a>
       <span class="ks-badge ks-badge-low">Low</span>
     </div>
-    <a class="ks-card-title" href="c-0145/">C-0145</a>
+    <a class="ks-card-title" href="c-0145/">Ensure that the Controller Manager --profiling argument is set to false</a>
     <div class="ks-card-footer">
       <button type="button" class="ks-copy-cmd-btn" data-cmd="kubescape scan control C-0145" title="Copy scan command">📋 Copy scan command</button>
     </div>
   </div>
-  <div class="ks-control-card" data-id="C-0146" data-sev="medium" data-cat="cluster">
+  <div class="ks-control-card" data-id="C-0146" data-sev="medium" data-cat="rbac">
     <div class="ks-card-header">
       <a class="ks-card-id" href="c-0146/">C-0146</a>
       <span class="ks-badge ks-badge-medium">Medium</span>
     </div>
-    <a class="ks-card-title" href="c-0146/">C-0146</a>
+    <a class="ks-card-title" href="c-0146/">Ensure that the Controller Manager --use-service-account-credentials argument is set to true</a>
     <div class="ks-card-footer">
       <button type="button" class="ks-copy-cmd-btn" data-cmd="kubescape scan control C-0146" title="Copy scan command">📋 Copy scan command</button>
     </div>
@@ -1246,17 +1246,17 @@ Explore and filter all Kubescape controls by identifier, keyword, category, or s
       <a class="ks-card-id" href="c-0147/">C-0147</a>
       <span class="ks-badge ks-badge-medium">Medium</span>
     </div>
-    <a class="ks-card-title" href="c-0147/">C-0147</a>
+    <a class="ks-card-title" href="c-0147/">Ensure that the Controller Manager --service-account-private-key-file argument is set as appropriate</a>
     <div class="ks-card-footer">
       <button type="button" class="ks-copy-cmd-btn" data-cmd="kubescape scan control C-0147" title="Copy scan command">📋 Copy scan command</button>
     </div>
   </div>
-  <div class="ks-control-card" data-id="C-0148" data-sev="high" data-cat="cluster">
+  <div class="ks-control-card" data-id="C-0148" data-sev="high" data-cat="container">
     <div class="ks-card-header">
       <a class="ks-card-id" href="c-0148/">C-0148</a>
       <span class="ks-badge ks-badge-high">High</span>
     </div>
-    <a class="ks-card-title" href="c-0148/">C-0148</a>
+    <a class="ks-card-title" href="c-0148/">Ensure that the Controller Manager --root-ca-file argument is set as appropriate</a>
     <div class="ks-card-footer">
       <button type="button" class="ks-copy-cmd-btn" data-cmd="kubescape scan control C-0148" title="Copy scan command">📋 Copy scan command</button>
     </div>
@@ -1266,7 +1266,7 @@ Explore and filter all Kubescape controls by identifier, keyword, category, or s
       <a class="ks-card-id" href="c-0149/">C-0149</a>
       <span class="ks-badge ks-badge-medium">Medium</span>
     </div>
-    <a class="ks-card-title" href="c-0149/">C-0149</a>
+    <a class="ks-card-title" href="c-0149/">Ensure that the Controller Manager RotateKubeletServerCertificate argument is set to true</a>
     <div class="ks-card-footer">
       <button type="button" class="ks-copy-cmd-btn" data-cmd="kubescape scan control C-0149" title="Copy scan command">📋 Copy scan command</button>
     </div>
@@ -1276,7 +1276,7 @@ Explore and filter all Kubescape controls by identifier, keyword, category, or s
       <a class="ks-card-id" href="c-0150/">C-0150</a>
       <span class="ks-badge ks-badge-medium">Medium</span>
     </div>
-    <a class="ks-card-title" href="c-0150/">C-0150</a>
+    <a class="ks-card-title" href="c-0150/">Ensure that the Controller Manager --bind-address argument is set to 127.0.0.1</a>
     <div class="ks-card-footer">
       <button type="button" class="ks-copy-cmd-btn" data-cmd="kubescape scan control C-0150" title="Copy scan command">📋 Copy scan command</button>
     </div>
@@ -1286,7 +1286,7 @@ Explore and filter all Kubescape controls by identifier, keyword, category, or s
       <a class="ks-card-id" href="c-0151/">C-0151</a>
       <span class="ks-badge ks-badge-low">Low</span>
     </div>
-    <a class="ks-card-title" href="c-0151/">C-0151</a>
+    <a class="ks-card-title" href="c-0151/">Ensure that the Scheduler --profiling argument is set to false</a>
     <div class="ks-card-footer">
       <button type="button" class="ks-copy-cmd-btn" data-cmd="kubescape scan control C-0151" title="Copy scan command">📋 Copy scan command</button>
     </div>
@@ -1296,7 +1296,7 @@ Explore and filter all Kubescape controls by identifier, keyword, category, or s
       <a class="ks-card-id" href="c-0152/">C-0152</a>
       <span class="ks-badge ks-badge-medium">Medium</span>
     </div>
-    <a class="ks-card-title" href="c-0152/">C-0152</a>
+    <a class="ks-card-title" href="c-0152/">Ensure that the Scheduler --bind-address argument is set to 127.0.0.1</a>
     <div class="ks-card-footer">
       <button type="button" class="ks-copy-cmd-btn" data-cmd="kubescape scan control C-0152" title="Copy scan command">📋 Copy scan command</button>
     </div>
@@ -1306,7 +1306,7 @@ Explore and filter all Kubescape controls by identifier, keyword, category, or s
       <a class="ks-card-id" href="c-0153/">C-0153</a>
       <span class="ks-badge ks-badge-high">High</span>
     </div>
-    <a class="ks-card-title" href="c-0153/">C-0153</a>
+    <a class="ks-card-title" href="c-0153/">Ensure that the --cert-file and --key-file arguments are set as appropriate</a>
     <div class="ks-card-footer">
       <button type="button" class="ks-copy-cmd-btn" data-cmd="kubescape scan control C-0153" title="Copy scan command">📋 Copy scan command</button>
     </div>
@@ -1316,7 +1316,7 @@ Explore and filter all Kubescape controls by identifier, keyword, category, or s
       <a class="ks-card-id" href="c-0154/">C-0154</a>
       <span class="ks-badge ks-badge-high">High</span>
     </div>
-    <a class="ks-card-title" href="c-0154/">C-0154</a>
+    <a class="ks-card-title" href="c-0154/">Ensure that the --client-cert-auth argument is set to true</a>
     <div class="ks-card-footer">
       <button type="button" class="ks-copy-cmd-btn" data-cmd="kubescape scan control C-0154" title="Copy scan command">📋 Copy scan command</button>
     </div>
@@ -1326,7 +1326,7 @@ Explore and filter all Kubescape controls by identifier, keyword, category, or s
       <a class="ks-card-id" href="c-0155/">C-0155</a>
       <span class="ks-badge ks-badge-medium">Medium</span>
     </div>
-    <a class="ks-card-title" href="c-0155/">C-0155</a>
+    <a class="ks-card-title" href="c-0155/">Ensure that the --auto-tls argument is not set to true</a>
     <div class="ks-card-footer">
       <button type="button" class="ks-copy-cmd-btn" data-cmd="kubescape scan control C-0155" title="Copy scan command">📋 Copy scan command</button>
     </div>
@@ -1336,7 +1336,7 @@ Explore and filter all Kubescape controls by identifier, keyword, category, or s
       <a class="ks-card-id" href="c-0156/">C-0156</a>
       <span class="ks-badge ks-badge-high">High</span>
     </div>
-    <a class="ks-card-title" href="c-0156/">C-0156</a>
+    <a class="ks-card-title" href="c-0156/">Ensure that the --peer-cert-file and --peer-key-file arguments are set as appropriate</a>
     <div class="ks-card-footer">
       <button type="button" class="ks-copy-cmd-btn" data-cmd="kubescape scan control C-0156" title="Copy scan command">📋 Copy scan command</button>
     </div>
@@ -1346,7 +1346,7 @@ Explore and filter all Kubescape controls by identifier, keyword, category, or s
       <a class="ks-card-id" href="c-0157/">C-0157</a>
       <span class="ks-badge ks-badge-high">High</span>
     </div>
-    <a class="ks-card-title" href="c-0157/">C-0157</a>
+    <a class="ks-card-title" href="c-0157/">Ensure that the --peer-client-cert-auth argument is set to true</a>
     <div class="ks-card-footer">
       <button type="button" class="ks-copy-cmd-btn" data-cmd="kubescape scan control C-0157" title="Copy scan command">📋 Copy scan command</button>
     </div>
@@ -1356,7 +1356,7 @@ Explore and filter all Kubescape controls by identifier, keyword, category, or s
       <a class="ks-card-id" href="c-0158/">C-0158</a>
       <span class="ks-badge ks-badge-medium">Medium</span>
     </div>
-    <a class="ks-card-title" href="c-0158/">C-0158</a>
+    <a class="ks-card-title" href="c-0158/">Ensure that the --peer-auto-tls argument is not set to true</a>
     <div class="ks-card-footer">
       <button type="button" class="ks-copy-cmd-btn" data-cmd="kubescape scan control C-0158" title="Copy scan command">📋 Copy scan command</button>
     </div>
@@ -1366,7 +1366,7 @@ Explore and filter all Kubescape controls by identifier, keyword, category, or s
       <a class="ks-card-id" href="c-0159/">C-0159</a>
       <span class="ks-badge ks-badge-high">High</span>
     </div>
-    <a class="ks-card-title" href="c-0159/">C-0159</a>
+    <a class="ks-card-title" href="c-0159/">Ensure that a unique Certificate Authority is used for etcd</a>
     <div class="ks-card-footer">
       <button type="button" class="ks-copy-cmd-btn" data-cmd="kubescape scan control C-0159" title="Copy scan command">📋 Copy scan command</button>
     </div>
@@ -1376,7 +1376,7 @@ Explore and filter all Kubescape controls by identifier, keyword, category, or s
       <a class="ks-card-id" href="c-0160/">C-0160</a>
       <span class="ks-badge ks-badge-medium">Medium</span>
     </div>
-    <a class="ks-card-title" href="c-0160/">C-0160</a>
+    <a class="ks-card-title" href="c-0160/">Ensure that a minimal audit policy is created</a>
     <div class="ks-card-footer">
       <button type="button" class="ks-copy-cmd-btn" data-cmd="kubescape scan control C-0160" title="Copy scan command">📋 Copy scan command</button>
     </div>
@@ -1386,7 +1386,7 @@ Explore and filter all Kubescape controls by identifier, keyword, category, or s
       <a class="ks-card-id" href="c-0161/">C-0161</a>
       <span class="ks-badge ks-badge-medium">Medium</span>
     </div>
-    <a class="ks-card-title" href="c-0161/">C-0161</a>
+    <a class="ks-card-title" href="c-0161/">Ensure that the audit policy covers key security concerns</a>
     <div class="ks-card-footer">
       <button type="button" class="ks-copy-cmd-btn" data-cmd="kubescape scan control C-0161" title="Copy scan command">📋 Copy scan command</button>
     </div>
@@ -1401,27 +1401,27 @@ Explore and filter all Kubescape controls by identifier, keyword, category, or s
       <button type="button" class="ks-copy-cmd-btn" data-cmd="kubescape scan control C-0162" title="Copy scan command">📋 Copy scan command</button>
     </div>
   </div>
-  <div class="ks-control-card" data-id="C-0163" data-sev="medium" data-cat="cluster">
+  <div class="ks-control-card" data-id="C-0163" data-sev="medium" data-cat="container">
     <div class="ks-card-header">
       <a class="ks-card-id" href="c-0163/">C-0163</a>
       <span class="ks-badge ks-badge-medium">Medium</span>
     </div>
-    <a class="ks-card-title" href="c-0163/">C-0163</a>
+    <a class="ks-card-title" href="c-0163/">Ensure that the kubelet service file ownership is set to root:root</a>
     <div class="ks-card-footer">
       <button type="button" class="ks-copy-cmd-btn" data-cmd="kubescape scan control C-0163" title="Copy scan command">📋 Copy scan command</button>
     </div>
   </div>
-  <div class="ks-control-card" data-id="C-0164" data-sev="medium" data-cat="cluster">
+  <div class="ks-control-card" data-id="C-0164" data-sev="medium" data-cat="rbac">
     <div class="ks-card-header">
       <a class="ks-card-id" href="c-0164/">C-0164</a>
       <span class="ks-badge ks-badge-medium">Medium</span>
     </div>
-    <a class="ks-card-title" href="c-0164/">C-0164</a>
+    <a class="ks-card-title" href="c-0164/">If proxy kubeconfig file exists ensure permissions are set to 600 or more restrictive</a>
     <div class="ks-card-footer">
       <button type="button" class="ks-copy-cmd-btn" data-cmd="kubescape scan control C-0164" title="Copy scan command">📋 Copy scan command</button>
     </div>
   </div>
-  <div class="ks-control-card" data-id="C-0165" data-sev="medium" data-cat="container">
+  <div class="ks-control-card" data-id="C-0165" data-sev="medium" data-cat="network">
     <div class="ks-card-header">
       <a class="ks-card-id" href="c-0165/">C-0165</a>
       <span class="ks-badge ks-badge-medium">Medium</span>
@@ -1431,12 +1431,12 @@ Explore and filter all Kubescape controls by identifier, keyword, category, or s
       <button type="button" class="ks-copy-cmd-btn" data-cmd="kubescape scan control C-0165" title="Copy scan command">📋 Copy scan command</button>
     </div>
   </div>
-  <div class="ks-control-card" data-id="C-0166" data-sev="medium" data-cat="cluster">
+  <div class="ks-control-card" data-id="C-0166" data-sev="medium" data-cat="rbac">
     <div class="ks-card-header">
       <a class="ks-card-id" href="c-0166/">C-0166</a>
       <span class="ks-badge ks-badge-medium">Medium</span>
     </div>
-    <a class="ks-card-title" href="c-0166/">C-0166</a>
+    <a class="ks-card-title" href="c-0166/">Ensure that the --kubeconfig kubelet.conf file permissions are set to 600 or more restrictive</a>
     <div class="ks-card-footer">
       <button type="button" class="ks-copy-cmd-btn" data-cmd="kubescape scan control C-0166" title="Copy scan command">📋 Copy scan command</button>
     </div>
@@ -1471,22 +1471,22 @@ Explore and filter all Kubescape controls by identifier, keyword, category, or s
       <button type="button" class="ks-copy-cmd-btn" data-cmd="kubescape scan control C-0169" title="Copy scan command">📋 Copy scan command</button>
     </div>
   </div>
-  <div class="ks-control-card" data-id="C-0170" data-sev="high" data-cat="cluster">
+  <div class="ks-control-card" data-id="C-0170" data-sev="high" data-cat="rbac">
     <div class="ks-card-header">
       <a class="ks-card-id" href="c-0170/">C-0170</a>
       <span class="ks-badge ks-badge-high">High</span>
     </div>
-    <a class="ks-card-title" href="c-0170/">C-0170</a>
+    <a class="ks-card-title" href="c-0170/">If the kubelet config.yaml configuration file is being used validate permissions set to 600 or more restrictive</a>
     <div class="ks-card-footer">
       <button type="button" class="ks-copy-cmd-btn" data-cmd="kubescape scan control C-0170" title="Copy scan command">📋 Copy scan command</button>
     </div>
   </div>
-  <div class="ks-control-card" data-id="C-0171" data-sev="high" data-cat="cluster">
+  <div class="ks-control-card" data-id="C-0171" data-sev="high" data-cat="container">
     <div class="ks-card-header">
       <a class="ks-card-id" href="c-0171/">C-0171</a>
       <span class="ks-badge ks-badge-high">High</span>
     </div>
-    <a class="ks-card-title" href="c-0171/">C-0171</a>
+    <a class="ks-card-title" href="c-0171/">If the kubelet config.yaml configuration file is being used validate file ownership is set to root:root</a>
     <div class="ks-card-footer">
       <button type="button" class="ks-copy-cmd-btn" data-cmd="kubescape scan control C-0171" title="Copy scan command">📋 Copy scan command</button>
     </div>
@@ -1501,7 +1501,7 @@ Explore and filter all Kubescape controls by identifier, keyword, category, or s
       <button type="button" class="ks-copy-cmd-btn" data-cmd="kubescape scan control C-0172" title="Copy scan command">📋 Copy scan command</button>
     </div>
   </div>
-  <div class="ks-control-card" data-id="C-0173" data-sev="medium" data-cat="cluster">
+  <div class="ks-control-card" data-id="C-0173" data-sev="medium" data-cat="rbac">
     <div class="ks-card-header">
       <a class="ks-card-id" href="c-0173/">C-0173</a>
       <span class="ks-badge ks-badge-medium">Medium</span>
@@ -1521,12 +1521,12 @@ Explore and filter all Kubescape controls by identifier, keyword, category, or s
       <button type="button" class="ks-copy-cmd-btn" data-cmd="kubescape scan control C-0174" title="Copy scan command">📋 Copy scan command</button>
     </div>
   </div>
-  <div class="ks-control-card" data-id="C-0175" data-sev="medium" data-cat="cluster">
+  <div class="ks-control-card" data-id="C-0175" data-sev="medium" data-cat="network">
     <div class="ks-card-header">
       <a class="ks-card-id" href="c-0175/">C-0175</a>
       <span class="ks-badge ks-badge-medium">Medium</span>
     </div>
-    <a class="ks-card-title" href="c-0175/">C-0175</a>
+    <a class="ks-card-title" href="c-0175/">Verify that the --read-only-port argument is set to 0</a>
     <div class="ks-card-footer">
       <button type="button" class="ks-copy-cmd-btn" data-cmd="kubescape scan control C-0175" title="Copy scan command">📋 Copy scan command</button>
     </div>
@@ -1536,7 +1536,7 @@ Explore and filter all Kubescape controls by identifier, keyword, category, or s
       <a class="ks-card-id" href="c-0176/">C-0176</a>
       <span class="ks-badge ks-badge-low">Low</span>
     </div>
-    <a class="ks-card-title" href="c-0176/">C-0176</a>
+    <a class="ks-card-title" href="c-0176/">Ensure that the --streaming-connection-idle-timeout argument is not set to 0</a>
     <div class="ks-card-footer">
       <button type="button" class="ks-copy-cmd-btn" data-cmd="kubescape scan control C-0176" title="Copy scan command">📋 Copy scan command</button>
     </div>
@@ -1546,7 +1546,7 @@ Explore and filter all Kubescape controls by identifier, keyword, category, or s
       <a class="ks-card-id" href="c-0177/">C-0177</a>
       <span class="ks-badge ks-badge-low">Low</span>
     </div>
-    <a class="ks-card-title" href="c-0177/">C-0177</a>
+    <a class="ks-card-title" href="c-0177/">Ensure that the --protect-kernel-defaults argument is set to true</a>
     <div class="ks-card-footer">
       <button type="button" class="ks-copy-cmd-btn" data-cmd="kubescape scan control C-0177" title="Copy scan command">📋 Copy scan command</button>
     </div>
@@ -1556,7 +1556,7 @@ Explore and filter all Kubescape controls by identifier, keyword, category, or s
       <a class="ks-card-id" href="c-0178/">C-0178</a>
       <span class="ks-badge ks-badge-low">Low</span>
     </div>
-    <a class="ks-card-title" href="c-0178/">C-0178</a>
+    <a class="ks-card-title" href="c-0178/">Ensure that the --make-iptables-util-chains argument is set to true</a>
     <div class="ks-card-footer">
       <button type="button" class="ks-copy-cmd-btn" data-cmd="kubescape scan control C-0178" title="Copy scan command">📋 Copy scan command</button>
     </div>
@@ -1566,7 +1566,7 @@ Explore and filter all Kubescape controls by identifier, keyword, category, or s
       <a class="ks-card-id" href="c-0179/">C-0179</a>
       <span class="ks-badge ks-badge-low">Low</span>
     </div>
-    <a class="ks-card-title" href="c-0179/">C-0179</a>
+    <a class="ks-card-title" href="c-0179/">Ensure that the --hostname-override argument is not set</a>
     <div class="ks-card-footer">
       <button type="button" class="ks-copy-cmd-btn" data-cmd="kubescape scan control C-0179" title="Copy scan command">📋 Copy scan command</button>
     </div>
@@ -1586,7 +1586,7 @@ Explore and filter all Kubescape controls by identifier, keyword, category, or s
       <a class="ks-card-id" href="c-0181/">C-0181</a>
       <span class="ks-badge ks-badge-high">High</span>
     </div>
-    <a class="ks-card-title" href="c-0181/">C-0181</a>
+    <a class="ks-card-title" href="c-0181/">Ensure that the --tls-cert-file and --tls-private-key-file arguments are set as appropriate</a>
     <div class="ks-card-footer">
       <button type="button" class="ks-copy-cmd-btn" data-cmd="kubescape scan control C-0181" title="Copy scan command">📋 Copy scan command</button>
     </div>
@@ -1596,7 +1596,7 @@ Explore and filter all Kubescape controls by identifier, keyword, category, or s
       <a class="ks-card-id" href="c-0182/">C-0182</a>
       <span class="ks-badge ks-badge-medium">Medium</span>
     </div>
-    <a class="ks-card-title" href="c-0182/">C-0182</a>
+    <a class="ks-card-title" href="c-0182/">Ensure that the --rotate-certificates argument is not set to false</a>
     <div class="ks-card-footer">
       <button type="button" class="ks-copy-cmd-btn" data-cmd="kubescape scan control C-0182" title="Copy scan command">📋 Copy scan command</button>
     </div>
@@ -1606,7 +1606,7 @@ Explore and filter all Kubescape controls by identifier, keyword, category, or s
       <a class="ks-card-id" href="c-0183/">C-0183</a>
       <span class="ks-badge ks-badge-medium">Medium</span>
     </div>
-    <a class="ks-card-title" href="c-0183/">C-0183</a>
+    <a class="ks-card-title" href="c-0183/">Verify that the RotateKubeletServerCertificate argument is set to true</a>
     <div class="ks-card-footer">
       <button type="button" class="ks-copy-cmd-btn" data-cmd="kubescape scan control C-0183" title="Copy scan command">📋 Copy scan command</button>
     </div>
@@ -1616,77 +1616,77 @@ Explore and filter all Kubescape controls by identifier, keyword, category, or s
       <a class="ks-card-id" href="c-0184/">C-0184</a>
       <span class="ks-badge ks-badge-medium">Medium</span>
     </div>
-    <a class="ks-card-title" href="c-0184/">C-0184</a>
+    <a class="ks-card-title" href="c-0184/">Ensure that the Kubelet only makes use of Strong Cryptographic Ciphers</a>
     <div class="ks-card-footer">
       <button type="button" class="ks-copy-cmd-btn" data-cmd="kubescape scan control C-0184" title="Copy scan command">📋 Copy scan command</button>
     </div>
   </div>
-  <div class="ks-control-card" data-id="C-0185" data-sev="high" data-cat="cluster">
+  <div class="ks-control-card" data-id="C-0185" data-sev="high" data-cat="rbac">
     <div class="ks-card-header">
       <a class="ks-card-id" href="c-0185/">C-0185</a>
       <span class="ks-badge ks-badge-high">High</span>
     </div>
-    <a class="ks-card-title" href="c-0185/">C-0185</a>
+    <a class="ks-card-title" href="c-0185/">Ensure that the cluster-admin role is only used where required</a>
     <div class="ks-card-footer">
       <button type="button" class="ks-copy-cmd-btn" data-cmd="kubescape scan control C-0185" title="Copy scan command">📋 Copy scan command</button>
     </div>
   </div>
-  <div class="ks-control-card" data-id="C-0186" data-sev="medium" data-cat="cluster">
+  <div class="ks-control-card" data-id="C-0186" data-sev="medium" data-cat="rbac">
     <div class="ks-card-header">
       <a class="ks-card-id" href="c-0186/">C-0186</a>
       <span class="ks-badge ks-badge-medium">Medium</span>
     </div>
-    <a class="ks-card-title" href="c-0186/">C-0186</a>
+    <a class="ks-card-title" href="c-0186/">Minimize access to secrets</a>
     <div class="ks-card-footer">
       <button type="button" class="ks-copy-cmd-btn" data-cmd="kubescape scan control C-0186" title="Copy scan command">📋 Copy scan command</button>
     </div>
   </div>
-  <div class="ks-control-card" data-id="C-0187" data-sev="high" data-cat="cluster">
+  <div class="ks-control-card" data-id="C-0187" data-sev="high" data-cat="rbac">
     <div class="ks-card-header">
       <a class="ks-card-id" href="c-0187/">C-0187</a>
       <span class="ks-badge ks-badge-high">High</span>
     </div>
-    <a class="ks-card-title" href="c-0187/">C-0187</a>
+    <a class="ks-card-title" href="c-0187/">Minimize wildcard use in Roles and ClusterRoles</a>
     <div class="ks-card-footer">
       <button type="button" class="ks-copy-cmd-btn" data-cmd="kubescape scan control C-0187" title="Copy scan command">📋 Copy scan command</button>
     </div>
   </div>
-  <div class="ks-control-card" data-id="C-0188" data-sev="medium" data-cat="cluster">
+  <div class="ks-control-card" data-id="C-0188" data-sev="medium" data-cat="rbac">
     <div class="ks-card-header">
       <a class="ks-card-id" href="c-0188/">C-0188</a>
       <span class="ks-badge ks-badge-medium">Medium</span>
     </div>
-    <a class="ks-card-title" href="c-0188/">C-0188</a>
+    <a class="ks-card-title" href="c-0188/">Minimize access to create pods</a>
     <div class="ks-card-footer">
       <button type="button" class="ks-copy-cmd-btn" data-cmd="kubescape scan control C-0188" title="Copy scan command">📋 Copy scan command</button>
     </div>
   </div>
-  <div class="ks-control-card" data-id="C-0189" data-sev="medium" data-cat="cluster">
+  <div class="ks-control-card" data-id="C-0189" data-sev="medium" data-cat="rbac">
     <div class="ks-card-header">
       <a class="ks-card-id" href="c-0189/">C-0189</a>
       <span class="ks-badge ks-badge-medium">Medium</span>
     </div>
-    <a class="ks-card-title" href="c-0189/">C-0189</a>
+    <a class="ks-card-title" href="c-0189/">Ensure that default service accounts are not actively used</a>
     <div class="ks-card-footer">
       <button type="button" class="ks-copy-cmd-btn" data-cmd="kubescape scan control C-0189" title="Copy scan command">📋 Copy scan command</button>
     </div>
   </div>
-  <div class="ks-control-card" data-id="C-0190" data-sev="medium" data-cat="cluster">
+  <div class="ks-control-card" data-id="C-0190" data-sev="medium" data-cat="rbac">
     <div class="ks-card-header">
       <a class="ks-card-id" href="c-0190/">C-0190</a>
       <span class="ks-badge ks-badge-medium">Medium</span>
     </div>
-    <a class="ks-card-title" href="c-0190/">C-0190</a>
+    <a class="ks-card-title" href="c-0190/">Ensure that Service Account Tokens are only mounted where necessary</a>
     <div class="ks-card-footer">
       <button type="button" class="ks-copy-cmd-btn" data-cmd="kubescape scan control C-0190" title="Copy scan command">📋 Copy scan command</button>
     </div>
   </div>
-  <div class="ks-control-card" data-id="C-0191" data-sev="medium" data-cat="cluster">
+  <div class="ks-control-card" data-id="C-0191" data-sev="medium" data-cat="rbac">
     <div class="ks-card-header">
       <a class="ks-card-id" href="c-0191/">C-0191</a>
       <span class="ks-badge ks-badge-medium">Medium</span>
     </div>
-    <a class="ks-card-title" href="c-0191/">C-0191</a>
+    <a class="ks-card-title" href="c-0191/">Limit use of the Bind, Impersonate and Escalate permissions in the Kubernetes cluster</a>
     <div class="ks-card-footer">
       <button type="button" class="ks-copy-cmd-btn" data-cmd="kubescape scan control C-0191" title="Copy scan command">📋 Copy scan command</button>
     </div>
@@ -1696,127 +1696,127 @@ Explore and filter all Kubescape controls by identifier, keyword, category, or s
       <a class="ks-card-id" href="c-0192/">C-0192</a>
       <span class="ks-badge ks-badge-medium">Medium</span>
     </div>
-    <a class="ks-card-title" href="c-0192/">C-0192</a>
+    <a class="ks-card-title" href="c-0192/">Ensure that the cluster has at least one active policy control mechanism in place</a>
     <div class="ks-card-footer">
       <button type="button" class="ks-copy-cmd-btn" data-cmd="kubescape scan control C-0192" title="Copy scan command">📋 Copy scan command</button>
     </div>
   </div>
-  <div class="ks-control-card" data-id="C-0193" data-sev="high" data-cat="cluster">
+  <div class="ks-control-card" data-id="C-0193" data-sev="high" data-cat="rbac">
     <div class="ks-card-header">
       <a class="ks-card-id" href="c-0193/">C-0193</a>
       <span class="ks-badge ks-badge-high">High</span>
     </div>
-    <a class="ks-card-title" href="c-0193/">C-0193</a>
+    <a class="ks-card-title" href="c-0193/">Minimize the admission of privileged containers</a>
     <div class="ks-card-footer">
       <button type="button" class="ks-copy-cmd-btn" data-cmd="kubescape scan control C-0193" title="Copy scan command">📋 Copy scan command</button>
     </div>
   </div>
-  <div class="ks-control-card" data-id="C-0194" data-sev="medium" data-cat="cluster">
+  <div class="ks-control-card" data-id="C-0194" data-sev="medium" data-cat="container">
     <div class="ks-card-header">
       <a class="ks-card-id" href="c-0194/">C-0194</a>
       <span class="ks-badge ks-badge-medium">Medium</span>
     </div>
-    <a class="ks-card-title" href="c-0194/">C-0194</a>
+    <a class="ks-card-title" href="c-0194/">Minimize the admission of containers wishing to share the host process ID namespace</a>
     <div class="ks-card-footer">
       <button type="button" class="ks-copy-cmd-btn" data-cmd="kubescape scan control C-0194" title="Copy scan command">📋 Copy scan command</button>
     </div>
   </div>
-  <div class="ks-control-card" data-id="C-0195" data-sev="medium" data-cat="cluster">
+  <div class="ks-control-card" data-id="C-0195" data-sev="medium" data-cat="container">
     <div class="ks-card-header">
       <a class="ks-card-id" href="c-0195/">C-0195</a>
       <span class="ks-badge ks-badge-medium">Medium</span>
     </div>
-    <a class="ks-card-title" href="c-0195/">C-0195</a>
+    <a class="ks-card-title" href="c-0195/">Minimize the admission of containers wishing to share the host IPC namespace</a>
     <div class="ks-card-footer">
       <button type="button" class="ks-copy-cmd-btn" data-cmd="kubescape scan control C-0195" title="Copy scan command">📋 Copy scan command</button>
     </div>
   </div>
-  <div class="ks-control-card" data-id="C-0196" data-sev="medium" data-cat="cluster">
+  <div class="ks-control-card" data-id="C-0196" data-sev="medium" data-cat="network">
     <div class="ks-card-header">
       <a class="ks-card-id" href="c-0196/">C-0196</a>
       <span class="ks-badge ks-badge-medium">Medium</span>
     </div>
-    <a class="ks-card-title" href="c-0196/">C-0196</a>
+    <a class="ks-card-title" href="c-0196/">Minimize the admission of containers wishing to share the host network namespace</a>
     <div class="ks-card-footer">
       <button type="button" class="ks-copy-cmd-btn" data-cmd="kubescape scan control C-0196" title="Copy scan command">📋 Copy scan command</button>
     </div>
   </div>
-  <div class="ks-control-card" data-id="C-0197" data-sev="medium" data-cat="cluster">
+  <div class="ks-control-card" data-id="C-0197" data-sev="medium" data-cat="rbac">
     <div class="ks-card-header">
       <a class="ks-card-id" href="c-0197/">C-0197</a>
       <span class="ks-badge ks-badge-medium">Medium</span>
     </div>
-    <a class="ks-card-title" href="c-0197/">C-0197</a>
+    <a class="ks-card-title" href="c-0197/">Minimize the admission of containers with allowPrivilegeEscalation</a>
     <div class="ks-card-footer">
       <button type="button" class="ks-copy-cmd-btn" data-cmd="kubescape scan control C-0197" title="Copy scan command">📋 Copy scan command</button>
     </div>
   </div>
-  <div class="ks-control-card" data-id="C-0198" data-sev="medium" data-cat="cluster">
+  <div class="ks-control-card" data-id="C-0198" data-sev="medium" data-cat="container">
     <div class="ks-card-header">
       <a class="ks-card-id" href="c-0198/">C-0198</a>
       <span class="ks-badge ks-badge-medium">Medium</span>
     </div>
-    <a class="ks-card-title" href="c-0198/">C-0198</a>
+    <a class="ks-card-title" href="c-0198/">Minimize the admission of root containers</a>
     <div class="ks-card-footer">
       <button type="button" class="ks-copy-cmd-btn" data-cmd="kubescape scan control C-0198" title="Copy scan command">📋 Copy scan command</button>
     </div>
   </div>
-  <div class="ks-control-card" data-id="C-0199" data-sev="medium" data-cat="cluster">
+  <div class="ks-control-card" data-id="C-0199" data-sev="medium" data-cat="container">
     <div class="ks-card-header">
       <a class="ks-card-id" href="c-0199/">C-0199</a>
       <span class="ks-badge ks-badge-medium">Medium</span>
     </div>
-    <a class="ks-card-title" href="c-0199/">C-0199</a>
+    <a class="ks-card-title" href="c-0199/">Minimize the admission of containers with the NET_RAW capability</a>
     <div class="ks-card-footer">
       <button type="button" class="ks-copy-cmd-btn" data-cmd="kubescape scan control C-0199" title="Copy scan command">📋 Copy scan command</button>
     </div>
   </div>
-  <div class="ks-control-card" data-id="C-0200" data-sev="medium" data-cat="cluster">
+  <div class="ks-control-card" data-id="C-0200" data-sev="medium" data-cat="container">
     <div class="ks-card-header">
       <a class="ks-card-id" href="c-0200/">C-0200</a>
       <span class="ks-badge ks-badge-medium">Medium</span>
     </div>
-    <a class="ks-card-title" href="c-0200/">C-0200</a>
+    <a class="ks-card-title" href="c-0200/">Minimize the admission of containers with added capabilities</a>
     <div class="ks-card-footer">
       <button type="button" class="ks-copy-cmd-btn" data-cmd="kubescape scan control C-0200" title="Copy scan command">📋 Copy scan command</button>
     </div>
   </div>
-  <div class="ks-control-card" data-id="C-0201" data-sev="medium" data-cat="cluster">
+  <div class="ks-control-card" data-id="C-0201" data-sev="medium" data-cat="container">
     <div class="ks-card-header">
       <a class="ks-card-id" href="c-0201/">C-0201</a>
       <span class="ks-badge ks-badge-medium">Medium</span>
     </div>
-    <a class="ks-card-title" href="c-0201/">C-0201</a>
+    <a class="ks-card-title" href="c-0201/">Minimize the admission of containers with capabilities assigned</a>
     <div class="ks-card-footer">
       <button type="button" class="ks-copy-cmd-btn" data-cmd="kubescape scan control C-0201" title="Copy scan command">📋 Copy scan command</button>
     </div>
   </div>
-  <div class="ks-control-card" data-id="C-0202" data-sev="high" data-cat="cluster">
+  <div class="ks-control-card" data-id="C-0202" data-sev="high" data-cat="container">
     <div class="ks-card-header">
       <a class="ks-card-id" href="c-0202/">C-0202</a>
       <span class="ks-badge ks-badge-high">High</span>
     </div>
-    <a class="ks-card-title" href="c-0202/">C-0202</a>
+    <a class="ks-card-title" href="c-0202/">Minimize the admission of Windows HostProcess Containers</a>
     <div class="ks-card-footer">
       <button type="button" class="ks-copy-cmd-btn" data-cmd="kubescape scan control C-0202" title="Copy scan command">📋 Copy scan command</button>
     </div>
   </div>
-  <div class="ks-control-card" data-id="C-0203" data-sev="medium" data-cat="cluster">
+  <div class="ks-control-card" data-id="C-0203" data-sev="medium" data-cat="container">
     <div class="ks-card-header">
       <a class="ks-card-id" href="c-0203/">C-0203</a>
       <span class="ks-badge ks-badge-medium">Medium</span>
     </div>
-    <a class="ks-card-title" href="c-0203/">C-0203</a>
+    <a class="ks-card-title" href="c-0203/">Minimize the admission of HostPath volumes</a>
     <div class="ks-card-footer">
       <button type="button" class="ks-copy-cmd-btn" data-cmd="kubescape scan control C-0203" title="Copy scan command">📋 Copy scan command</button>
     </div>
   </div>
-  <div class="ks-control-card" data-id="C-0204" data-sev="medium" data-cat="cluster">
+  <div class="ks-control-card" data-id="C-0204" data-sev="medium" data-cat="network">
     <div class="ks-card-header">
       <a class="ks-card-id" href="c-0204/">C-0204</a>
       <span class="ks-badge ks-badge-medium">Medium</span>
     </div>
-    <a class="ks-card-title" href="c-0204/">C-0204</a>
+    <a class="ks-card-title" href="c-0204/">Minimize the admission of containers which use HostPorts</a>
     <div class="ks-card-footer">
       <button type="button" class="ks-copy-cmd-btn" data-cmd="kubescape scan control C-0204" title="Copy scan command">📋 Copy scan command</button>
     </div>
@@ -1831,22 +1831,22 @@ Explore and filter all Kubescape controls by identifier, keyword, category, or s
       <button type="button" class="ks-copy-cmd-btn" data-cmd="kubescape scan control C-0205" title="Copy scan command">📋 Copy scan command</button>
     </div>
   </div>
-  <div class="ks-control-card" data-id="C-0206" data-sev="medium" data-cat="cluster">
+  <div class="ks-control-card" data-id="C-0206" data-sev="medium" data-cat="network">
     <div class="ks-card-header">
       <a class="ks-card-id" href="c-0206/">C-0206</a>
       <span class="ks-badge ks-badge-medium">Medium</span>
     </div>
-    <a class="ks-card-title" href="c-0206/">C-0206</a>
+    <a class="ks-card-title" href="c-0206/">Ensure that all Namespaces have Network Policies defined</a>
     <div class="ks-card-footer">
       <button type="button" class="ks-copy-cmd-btn" data-cmd="kubescape scan control C-0206" title="Copy scan command">📋 Copy scan command</button>
     </div>
   </div>
-  <div class="ks-control-card" data-id="C-0207" data-sev="medium" data-cat="cluster">
+  <div class="ks-control-card" data-id="C-0207" data-sev="medium" data-cat="rbac">
     <div class="ks-card-header">
       <a class="ks-card-id" href="c-0207/">C-0207</a>
       <span class="ks-badge ks-badge-medium">Medium</span>
     </div>
-    <a class="ks-card-title" href="c-0207/">C-0207</a>
+    <a class="ks-card-title" href="c-0207/">Prefer using secrets as files over secrets as environment variables</a>
     <div class="ks-card-footer">
       <button type="button" class="ks-copy-cmd-btn" data-cmd="kubescape scan control C-0207" title="Copy scan command">📋 Copy scan command</button>
     </div>
@@ -1861,32 +1861,32 @@ Explore and filter all Kubescape controls by identifier, keyword, category, or s
       <button type="button" class="ks-copy-cmd-btn" data-cmd="kubescape scan control C-0208" title="Copy scan command">📋 Copy scan command</button>
     </div>
   </div>
-  <div class="ks-control-card" data-id="C-0209" data-sev="medium" data-cat="cluster">
+  <div class="ks-control-card" data-id="C-0209" data-sev="medium" data-cat="rbac">
     <div class="ks-card-header">
       <a class="ks-card-id" href="c-0209/">C-0209</a>
       <span class="ks-badge ks-badge-medium">Medium</span>
     </div>
-    <a class="ks-card-title" href="c-0209/">C-0209</a>
+    <a class="ks-card-title" href="c-0209/">Create administrative boundaries between resources using namespaces</a>
     <div class="ks-card-footer">
       <button type="button" class="ks-copy-cmd-btn" data-cmd="kubescape scan control C-0209" title="Copy scan command">📋 Copy scan command</button>
     </div>
   </div>
-  <div class="ks-control-card" data-id="C-0210" data-sev="medium" data-cat="cluster">
+  <div class="ks-control-card" data-id="C-0210" data-sev="medium" data-cat="container">
     <div class="ks-card-header">
       <a class="ks-card-id" href="c-0210/">C-0210</a>
       <span class="ks-badge ks-badge-medium">Medium</span>
     </div>
-    <a class="ks-card-title" href="c-0210/">C-0210</a>
+    <a class="ks-card-title" href="c-0210/">Ensure that the seccomp profile is set to docker/default in your pod definitions</a>
     <div class="ks-card-footer">
       <button type="button" class="ks-copy-cmd-btn" data-cmd="kubescape scan control C-0210" title="Copy scan command">📋 Copy scan command</button>
     </div>
   </div>
-  <div class="ks-control-card" data-id="C-0211" data-sev="high" data-cat="cluster">
+  <div class="ks-control-card" data-id="C-0211" data-sev="high" data-cat="container">
     <div class="ks-card-header">
       <a class="ks-card-id" href="c-0211/">C-0211</a>
       <span class="ks-badge ks-badge-high">High</span>
     </div>
-    <a class="ks-card-title" href="c-0211/">C-0211</a>
+    <a class="ks-card-title" href="c-0211/">Apply Security Context to Your Pods and Containers</a>
     <div class="ks-card-footer">
       <button type="button" class="ks-copy-cmd-btn" data-cmd="kubescape scan control C-0211" title="Copy scan command">📋 Copy scan command</button>
     </div>
@@ -1896,87 +1896,87 @@ Explore and filter all Kubescape controls by identifier, keyword, category, or s
       <a class="ks-card-id" href="c-0212/">C-0212</a>
       <span class="ks-badge ks-badge-medium">Medium</span>
     </div>
-    <a class="ks-card-title" href="c-0212/">C-0212</a>
+    <a class="ks-card-title" href="c-0212/">The default namespace should not be used</a>
     <div class="ks-card-footer">
       <button type="button" class="ks-copy-cmd-btn" data-cmd="kubescape scan control C-0212" title="Copy scan command">📋 Copy scan command</button>
     </div>
   </div>
-  <div class="ks-control-card" data-id="C-0213" data-sev="high" data-cat="cluster">
+  <div class="ks-control-card" data-id="C-0213" data-sev="high" data-cat="rbac">
     <div class="ks-card-header">
       <a class="ks-card-id" href="c-0213/">C-0213</a>
       <span class="ks-badge ks-badge-high">High</span>
     </div>
-    <a class="ks-card-title" href="c-0213/">C-0213</a>
+    <a class="ks-card-title" href="c-0213/">Minimize the admission of privileged containers</a>
     <div class="ks-card-footer">
       <button type="button" class="ks-copy-cmd-btn" data-cmd="kubescape scan control C-0213" title="Copy scan command">📋 Copy scan command</button>
     </div>
   </div>
-  <div class="ks-control-card" data-id="C-0214" data-sev="medium" data-cat="cluster">
+  <div class="ks-control-card" data-id="C-0214" data-sev="medium" data-cat="container">
     <div class="ks-card-header">
       <a class="ks-card-id" href="c-0214/">C-0214</a>
       <span class="ks-badge ks-badge-medium">Medium</span>
     </div>
-    <a class="ks-card-title" href="c-0214/">C-0214</a>
+    <a class="ks-card-title" href="c-0214/">Minimize the admission of containers wishing to share the host process ID namespace</a>
     <div class="ks-card-footer">
       <button type="button" class="ks-copy-cmd-btn" data-cmd="kubescape scan control C-0214" title="Copy scan command">📋 Copy scan command</button>
     </div>
   </div>
-  <div class="ks-control-card" data-id="C-0215" data-sev="medium" data-cat="cluster">
+  <div class="ks-control-card" data-id="C-0215" data-sev="medium" data-cat="container">
     <div class="ks-card-header">
       <a class="ks-card-id" href="c-0215/">C-0215</a>
       <span class="ks-badge ks-badge-medium">Medium</span>
     </div>
-    <a class="ks-card-title" href="c-0215/">C-0215</a>
+    <a class="ks-card-title" href="c-0215/">Minimize the admission of containers wishing to share the host IPC namespace</a>
     <div class="ks-card-footer">
       <button type="button" class="ks-copy-cmd-btn" data-cmd="kubescape scan control C-0215" title="Copy scan command">📋 Copy scan command</button>
     </div>
   </div>
-  <div class="ks-control-card" data-id="C-0216" data-sev="medium" data-cat="cluster">
+  <div class="ks-control-card" data-id="C-0216" data-sev="medium" data-cat="network">
     <div class="ks-card-header">
       <a class="ks-card-id" href="c-0216/">C-0216</a>
       <span class="ks-badge ks-badge-medium">Medium</span>
     </div>
-    <a class="ks-card-title" href="c-0216/">C-0216</a>
+    <a class="ks-card-title" href="c-0216/">Minimize the admission of containers wishing to share the host network namespace</a>
     <div class="ks-card-footer">
       <button type="button" class="ks-copy-cmd-btn" data-cmd="kubescape scan control C-0216" title="Copy scan command">📋 Copy scan command</button>
     </div>
   </div>
-  <div class="ks-control-card" data-id="C-0217" data-sev="medium" data-cat="cluster">
+  <div class="ks-control-card" data-id="C-0217" data-sev="medium" data-cat="rbac">
     <div class="ks-card-header">
       <a class="ks-card-id" href="c-0217/">C-0217</a>
       <span class="ks-badge ks-badge-medium">Medium</span>
     </div>
-    <a class="ks-card-title" href="c-0217/">C-0217</a>
+    <a class="ks-card-title" href="c-0217/">Minimize the admission of containers with allowPrivilegeEscalation</a>
     <div class="ks-card-footer">
       <button type="button" class="ks-copy-cmd-btn" data-cmd="kubescape scan control C-0217" title="Copy scan command">📋 Copy scan command</button>
     </div>
   </div>
-  <div class="ks-control-card" data-id="C-0218" data-sev="medium" data-cat="cluster">
+  <div class="ks-control-card" data-id="C-0218" data-sev="medium" data-cat="container">
     <div class="ks-card-header">
       <a class="ks-card-id" href="c-0218/">C-0218</a>
       <span class="ks-badge ks-badge-medium">Medium</span>
     </div>
-    <a class="ks-card-title" href="c-0218/">C-0218</a>
+    <a class="ks-card-title" href="c-0218/">Minimize the admission of root containers</a>
     <div class="ks-card-footer">
       <button type="button" class="ks-copy-cmd-btn" data-cmd="kubescape scan control C-0218" title="Copy scan command">📋 Copy scan command</button>
     </div>
   </div>
-  <div class="ks-control-card" data-id="C-0219" data-sev="medium" data-cat="cluster">
+  <div class="ks-control-card" data-id="C-0219" data-sev="medium" data-cat="container">
     <div class="ks-card-header">
       <a class="ks-card-id" href="c-0219/">C-0219</a>
       <span class="ks-badge ks-badge-medium">Medium</span>
     </div>
-    <a class="ks-card-title" href="c-0219/">C-0219</a>
+    <a class="ks-card-title" href="c-0219/">Minimize the admission of containers with added capabilities</a>
     <div class="ks-card-footer">
       <button type="button" class="ks-copy-cmd-btn" data-cmd="kubescape scan control C-0219" title="Copy scan command">📋 Copy scan command</button>
     </div>
   </div>
-  <div class="ks-control-card" data-id="C-0220" data-sev="medium" data-cat="cluster">
+  <div class="ks-control-card" data-id="C-0220" data-sev="medium" data-cat="container">
     <div class="ks-card-header">
       <a class="ks-card-id" href="c-0220/">C-0220</a>
       <span class="ks-badge ks-badge-medium">Medium</span>
     </div>
-    <a class="ks-card-title" href="c-0220/">C-0220</a>
+    <a class="ks-card-title" href="c-0220/">Minimize the admission of containers with capabilities assigned</a>
     <div class="ks-card-footer">
       <button type="button" class="ks-copy-cmd-btn" data-cmd="kubescape scan control C-0220" title="Copy scan command">📋 Copy scan command</button>
     </div>
@@ -1991,7 +1991,7 @@ Explore and filter all Kubescape controls by identifier, keyword, category, or s
       <button type="button" class="ks-copy-cmd-btn" data-cmd="kubescape scan control C-0221" title="Copy scan command">📋 Copy scan command</button>
     </div>
   </div>
-  <div class="ks-control-card" data-id="C-0222" data-sev="medium" data-cat="cluster">
+  <div class="ks-control-card" data-id="C-0222" data-sev="medium" data-cat="rbac">
     <div class="ks-card-header">
       <a class="ks-card-id" href="c-0222/">C-0222</a>
       <span class="ks-badge ks-badge-medium">Medium</span>
@@ -2001,7 +2001,7 @@ Explore and filter all Kubescape controls by identifier, keyword, category, or s
       <button type="button" class="ks-copy-cmd-btn" data-cmd="kubescape scan control C-0222" title="Copy scan command">📋 Copy scan command</button>
     </div>
   </div>
-  <div class="ks-control-card" data-id="C-0223" data-sev="medium" data-cat="cluster">
+  <div class="ks-control-card" data-id="C-0223" data-sev="medium" data-cat="rbac">
     <div class="ks-card-header">
       <a class="ks-card-id" href="c-0223/">C-0223</a>
       <span class="ks-badge ks-badge-medium">Medium</span>
@@ -2011,12 +2011,12 @@ Explore and filter all Kubescape controls by identifier, keyword, category, or s
       <button type="button" class="ks-copy-cmd-btn" data-cmd="kubescape scan control C-0223" title="Copy scan command">📋 Copy scan command</button>
     </div>
   </div>
-  <div class="ks-control-card" data-id="C-0225" data-sev="high" data-cat="cluster">
+  <div class="ks-control-card" data-id="C-0225" data-sev="high" data-cat="rbac">
     <div class="ks-card-header">
       <a class="ks-card-id" href="c-0225/">C-0225</a>
       <span class="ks-badge ks-badge-high">High</span>
     </div>
-    <a class="ks-card-title" href="c-0225/">C-0225</a>
+    <a class="ks-card-title" href="c-0225/">Prefer using dedicated EKS Service Accounts</a>
     <div class="ks-card-footer">
       <button type="button" class="ks-copy-cmd-btn" data-cmd="kubescape scan control C-0225" title="Copy scan command">📋 Copy scan command</button>
     </div>
@@ -2031,7 +2031,7 @@ Explore and filter all Kubescape controls by identifier, keyword, category, or s
       <button type="button" class="ks-copy-cmd-btn" data-cmd="kubescape scan control C-0226" title="Copy scan command">📋 Copy scan command</button>
     </div>
   </div>
-  <div class="ks-control-card" data-id="C-0227" data-sev="high" data-cat="network">
+  <div class="ks-control-card" data-id="C-0227" data-sev="high" data-cat="rbac">
     <div class="ks-card-header">
       <a class="ks-card-id" href="c-0227/">C-0227</a>
       <span class="ks-badge ks-badge-high">High</span>
@@ -2041,7 +2041,7 @@ Explore and filter all Kubescape controls by identifier, keyword, category, or s
       <button type="button" class="ks-copy-cmd-btn" data-cmd="kubescape scan control C-0227" title="Copy scan command">📋 Copy scan command</button>
     </div>
   </div>
-  <div class="ks-control-card" data-id="C-0228" data-sev="high" data-cat="network">
+  <div class="ks-control-card" data-id="C-0228" data-sev="high" data-cat="rbac">
     <div class="ks-card-header">
       <a class="ks-card-id" href="c-0228/">C-0228</a>
       <span class="ks-badge ks-badge-high">High</span>
@@ -2071,7 +2071,7 @@ Explore and filter all Kubescape controls by identifier, keyword, category, or s
       <button type="button" class="ks-copy-cmd-btn" data-cmd="kubescape scan control C-0230" title="Copy scan command">📋 Copy scan command</button>
     </div>
   </div>
-  <div class="ks-control-card" data-id="C-0231" data-sev="medium" data-cat="cluster">
+  <div class="ks-control-card" data-id="C-0231" data-sev="medium" data-cat="network">
     <div class="ks-card-header">
       <a class="ks-card-id" href="c-0231/">C-0231</a>
       <span class="ks-badge ks-badge-medium">Medium</span>
@@ -2091,42 +2091,42 @@ Explore and filter all Kubescape controls by identifier, keyword, category, or s
       <button type="button" class="ks-copy-cmd-btn" data-cmd="kubescape scan control C-0232" title="Copy scan command">📋 Copy scan command</button>
     </div>
   </div>
-  <div class="ks-control-card" data-id="C-0233" data-sev="low" data-cat="cluster">
+  <div class="ks-control-card" data-id="C-0233" data-sev="low" data-cat="container">
     <div class="ks-card-header">
       <a class="ks-card-id" href="c-0233/">C-0233</a>
       <span class="ks-badge ks-badge-low">Low</span>
     </div>
-    <a class="ks-card-title" href="c-0233/">C-0233</a>
+    <a class="ks-card-title" href="c-0233/">Consider Fargate for running untrusted workloads</a>
     <div class="ks-card-footer">
       <button type="button" class="ks-copy-cmd-btn" data-cmd="kubescape scan control C-0233" title="Copy scan command">📋 Copy scan command</button>
     </div>
   </div>
-  <div class="ks-control-card" data-id="C-0234" data-sev="medium" data-cat="cluster">
+  <div class="ks-control-card" data-id="C-0234" data-sev="medium" data-cat="rbac">
     <div class="ks-card-header">
       <a class="ks-card-id" href="c-0234/">C-0234</a>
       <span class="ks-badge ks-badge-medium">Medium</span>
     </div>
-    <a class="ks-card-title" href="c-0234/">C-0234</a>
+    <a class="ks-card-title" href="c-0234/">Consider external secret storage</a>
     <div class="ks-card-footer">
       <button type="button" class="ks-copy-cmd-btn" data-cmd="kubescape scan control C-0234" title="Copy scan command">📋 Copy scan command</button>
     </div>
   </div>
-  <div class="ks-control-card" data-id="C-0235" data-sev="medium" data-cat="cluster">
+  <div class="ks-control-card" data-id="C-0235" data-sev="medium" data-cat="rbac">
     <div class="ks-card-header">
       <a class="ks-card-id" href="c-0235/">C-0235</a>
       <span class="ks-badge ks-badge-medium">Medium</span>
     </div>
-    <a class="ks-card-title" href="c-0235/">C-0235</a>
+    <a class="ks-card-title" href="c-0235/">Ensure that the kubelet configuration file has permissions set to 644 or more restrictive</a>
     <div class="ks-card-footer">
       <button type="button" class="ks-copy-cmd-btn" data-cmd="kubescape scan control C-0235" title="Copy scan command">📋 Copy scan command</button>
     </div>
   </div>
-  <div class="ks-control-card" data-id="C-0236" data-sev="high" data-cat="cluster">
+  <div class="ks-control-card" data-id="C-0236" data-sev="high" data-cat="container">
     <div class="ks-card-header">
       <a class="ks-card-id" href="c-0236/">C-0236</a>
       <span class="ks-badge ks-badge-high">High</span>
     </div>
-    <a class="ks-card-title" href="c-0236/">C-0236</a>
+    <a class="ks-card-title" href="c-0236/">Verify image signature</a>
     <div class="ks-card-footer">
       <button type="button" class="ks-copy-cmd-btn" data-cmd="kubescape scan control C-0236" title="Copy scan command">📋 Copy scan command</button>
     </div>
@@ -2136,7 +2136,7 @@ Explore and filter all Kubescape controls by identifier, keyword, category, or s
       <a class="ks-card-id" href="c-0237/">C-0237</a>
       <span class="ks-badge ks-badge-high">High</span>
     </div>
-    <a class="ks-card-title" href="c-0237/">C-0237</a>
+    <a class="ks-card-title" href="c-0237/">Check if signature exists</a>
     <div class="ks-card-footer">
       <button type="button" class="ks-copy-cmd-btn" data-cmd="kubescape scan control C-0237" title="Copy scan command">📋 Copy scan command</button>
     </div>
@@ -2151,12 +2151,12 @@ Explore and filter all Kubescape controls by identifier, keyword, category, or s
       <button type="button" class="ks-copy-cmd-btn" data-cmd="kubescape scan control C-0238" title="Copy scan command">📋 Copy scan command</button>
     </div>
   </div>
-  <div class="ks-control-card" data-id="C-0239" data-sev="high" data-cat="cluster">
+  <div class="ks-control-card" data-id="C-0239" data-sev="high" data-cat="rbac">
     <div class="ks-card-header">
       <a class="ks-card-id" href="c-0239/">C-0239</a>
       <span class="ks-badge ks-badge-high">High</span>
     </div>
-    <a class="ks-card-title" href="c-0239/">C-0239</a>
+    <a class="ks-card-title" href="c-0239/">Prefer using dedicated AKS Service Accounts</a>
     <div class="ks-card-footer">
       <button type="button" class="ks-copy-cmd-btn" data-cmd="kubescape scan control C-0239" title="Copy scan command">📋 Copy scan command</button>
     </div>
@@ -2181,12 +2181,12 @@ Explore and filter all Kubescape controls by identifier, keyword, category, or s
       <button type="button" class="ks-copy-cmd-btn" data-cmd="kubescape scan control C-0241" title="Copy scan command">📋 Copy scan command</button>
     </div>
   </div>
-  <div class="ks-control-card" data-id="C-0242" data-sev="medium" data-cat="cluster">
+  <div class="ks-control-card" data-id="C-0242" data-sev="medium" data-cat="container">
     <div class="ks-card-header">
       <a class="ks-card-id" href="c-0242/">C-0242</a>
       <span class="ks-badge ks-badge-medium">Medium</span>
     </div>
-    <a class="ks-card-title" href="c-0242/">C-0242</a>
+    <a class="ks-card-title" href="c-0242/">Hostile multi-tenant workloads</a>
     <div class="ks-card-footer">
       <button type="button" class="ks-copy-cmd-btn" data-cmd="kubescape scan control C-0242" title="Copy scan command">📋 Copy scan command</button>
     </div>
@@ -2211,7 +2211,7 @@ Explore and filter all Kubescape controls by identifier, keyword, category, or s
       <button type="button" class="ks-copy-cmd-btn" data-cmd="kubescape scan control C-0244" title="Copy scan command">📋 Copy scan command</button>
     </div>
   </div>
-  <div class="ks-control-card" data-id="C-0245" data-sev="high" data-cat="cluster">
+  <div class="ks-control-card" data-id="C-0245" data-sev="high" data-cat="network">
     <div class="ks-card-header">
       <a class="ks-card-id" href="c-0245/">C-0245</a>
       <span class="ks-badge ks-badge-high">High</span>
@@ -2226,17 +2226,17 @@ Explore and filter all Kubescape controls by identifier, keyword, category, or s
       <a class="ks-card-id" href="c-0246/">C-0246</a>
       <span class="ks-badge ks-badge-high">High</span>
     </div>
-    <a class="ks-card-title" href="c-0246/">C-0246</a>
+    <a class="ks-card-title" href="c-0246/">Avoid use of system:masters group</a>
     <div class="ks-card-footer">
       <button type="button" class="ks-copy-cmd-btn" data-cmd="kubescape scan control C-0246" title="Copy scan command">📋 Copy scan command</button>
     </div>
   </div>
-  <div class="ks-control-card" data-id="C-0247" data-sev="high" data-cat="cluster">
+  <div class="ks-control-card" data-id="C-0247" data-sev="high" data-cat="rbac">
     <div class="ks-card-header">
       <a class="ks-card-id" href="c-0247/">C-0247</a>
       <span class="ks-badge ks-badge-high">High</span>
     </div>
-    <a class="ks-card-title" href="c-0247/">C-0247</a>
+    <a class="ks-card-title" href="c-0247/">Restrict Access to the Control Plane Endpoint</a>
     <div class="ks-card-footer">
       <button type="button" class="ks-copy-cmd-btn" data-cmd="kubescape scan control C-0247" title="Copy scan command">📋 Copy scan command</button>
     </div>
@@ -2251,7 +2251,7 @@ Explore and filter all Kubescape controls by identifier, keyword, category, or s
       <button type="button" class="ks-copy-cmd-btn" data-cmd="kubescape scan control C-0248" title="Copy scan command">📋 Copy scan command</button>
     </div>
   </div>
-  <div class="ks-control-card" data-id="C-0249" data-sev="medium" data-cat="cluster">
+  <div class="ks-control-card" data-id="C-0249" data-sev="medium" data-cat="container">
     <div class="ks-card-header">
       <a class="ks-card-id" href="c-0249/">C-0249</a>
       <span class="ks-badge ks-badge-medium">Medium</span>
@@ -2261,7 +2261,7 @@ Explore and filter all Kubescape controls by identifier, keyword, category, or s
       <button type="button" class="ks-copy-cmd-btn" data-cmd="kubescape scan control C-0249" title="Copy scan command">📋 Copy scan command</button>
     </div>
   </div>
-  <div class="ks-control-card" data-id="C-0250" data-sev="medium" data-cat="container">
+  <div class="ks-control-card" data-id="C-0250" data-sev="medium" data-cat="rbac">
     <div class="ks-card-header">
       <a class="ks-card-id" href="c-0250/">C-0250</a>
       <span class="ks-badge ks-badge-medium">Medium</span>
@@ -2271,7 +2271,7 @@ Explore and filter all Kubescape controls by identifier, keyword, category, or s
       <button type="button" class="ks-copy-cmd-btn" data-cmd="kubescape scan control C-0250" title="Copy scan command">📋 Copy scan command</button>
     </div>
   </div>
-  <div class="ks-control-card" data-id="C-0251" data-sev="medium" data-cat="container">
+  <div class="ks-control-card" data-id="C-0251" data-sev="medium" data-cat="rbac">
     <div class="ks-card-header">
       <a class="ks-card-id" href="c-0251/">C-0251</a>
       <span class="ks-badge ks-badge-medium">Medium</span>
@@ -2281,7 +2281,7 @@ Explore and filter all Kubescape controls by identifier, keyword, category, or s
       <button type="button" class="ks-copy-cmd-btn" data-cmd="kubescape scan control C-0251" title="Copy scan command">📋 Copy scan command</button>
     </div>
   </div>
-  <div class="ks-control-card" data-id="C-0252" data-sev="high" data-cat="network">
+  <div class="ks-control-card" data-id="C-0252" data-sev="high" data-cat="rbac">
     <div class="ks-card-header">
       <a class="ks-card-id" href="c-0252/">C-0252</a>
       <span class="ks-badge ks-badge-high">High</span>
@@ -2291,12 +2291,12 @@ Explore and filter all Kubescape controls by identifier, keyword, category, or s
       <button type="button" class="ks-copy-cmd-btn" data-cmd="kubescape scan control C-0252" title="Copy scan command">📋 Copy scan command</button>
     </div>
   </div>
-  <div class="ks-control-card" data-id="C-0253" data-sev="medium" data-cat="cluster">
+  <div class="ks-control-card" data-id="C-0253" data-sev="medium" data-cat="container">
     <div class="ks-card-header">
       <a class="ks-card-id" href="c-0253/">C-0253</a>
       <span class="ks-badge ks-badge-medium">Medium</span>
     </div>
-    <a class="ks-card-title" href="c-0253/">C-0253</a>
+    <a class="ks-card-title" href="c-0253/">Deprecated Kubernetes image registry</a>
     <div class="ks-card-footer">
       <button type="button" class="ks-copy-cmd-btn" data-cmd="kubescape scan control C-0253" title="Copy scan command">📋 Copy scan command</button>
     </div>
@@ -2311,12 +2311,12 @@ Explore and filter all Kubescape controls by identifier, keyword, category, or s
       <button type="button" class="ks-copy-cmd-btn" data-cmd="kubescape scan control C-0254" title="Copy scan command">📋 Copy scan command</button>
     </div>
   </div>
-  <div class="ks-control-card" data-id="C-0255" data-sev="high" data-cat="cluster">
+  <div class="ks-control-card" data-id="C-0255" data-sev="high" data-cat="rbac">
     <div class="ks-card-header">
       <a class="ks-card-id" href="c-0255/">C-0255</a>
       <span class="ks-badge ks-badge-high">High</span>
     </div>
-    <a class="ks-card-title" href="c-0255/">C-0255</a>
+    <a class="ks-card-title" href="c-0255/">Workload with secret access</a>
     <div class="ks-card-footer">
       <button type="button" class="ks-copy-cmd-btn" data-cmd="kubescape scan control C-0255" title="Copy scan command">📋 Copy scan command</button>
     </div>
@@ -2326,167 +2326,167 @@ Explore and filter all Kubescape controls by identifier, keyword, category, or s
       <a class="ks-card-id" href="c-0256/">C-0256</a>
       <span class="ks-badge ks-badge-high">High</span>
     </div>
-    <a class="ks-card-title" href="c-0256/">C-0256</a>
+    <a class="ks-card-title" href="c-0256/">External facing</a>
     <div class="ks-card-footer">
       <button type="button" class="ks-copy-cmd-btn" data-cmd="kubescape scan control C-0256" title="Copy scan command">📋 Copy scan command</button>
     </div>
   </div>
-  <div class="ks-control-card" data-id="C-0257" data-sev="medium" data-cat="cluster">
+  <div class="ks-control-card" data-id="C-0257" data-sev="medium" data-cat="rbac">
     <div class="ks-card-header">
       <a class="ks-card-id" href="c-0257/">C-0257</a>
       <span class="ks-badge ks-badge-medium">Medium</span>
     </div>
-    <a class="ks-card-title" href="c-0257/">C-0257</a>
+    <a class="ks-card-title" href="c-0257/">Workload with PVC access</a>
     <div class="ks-card-footer">
       <button type="button" class="ks-copy-cmd-btn" data-cmd="kubescape scan control C-0257" title="Copy scan command">📋 Copy scan command</button>
     </div>
   </div>
-  <div class="ks-control-card" data-id="C-0258" data-sev="medium" data-cat="cluster">
+  <div class="ks-control-card" data-id="C-0258" data-sev="medium" data-cat="rbac">
     <div class="ks-card-header">
       <a class="ks-card-id" href="c-0258/">C-0258</a>
       <span class="ks-badge ks-badge-medium">Medium</span>
     </div>
-    <a class="ks-card-title" href="c-0258/">C-0258</a>
+    <a class="ks-card-title" href="c-0258/">Workload with ConfigMap access</a>
     <div class="ks-card-footer">
       <button type="button" class="ks-copy-cmd-btn" data-cmd="kubescape scan control C-0258" title="Copy scan command">📋 Copy scan command</button>
     </div>
   </div>
-  <div class="ks-control-card" data-id="C-0259" data-sev="high" data-cat="cluster">
+  <div class="ks-control-card" data-id="C-0259" data-sev="high" data-cat="rbac">
     <div class="ks-card-header">
       <a class="ks-card-id" href="c-0259/">C-0259</a>
       <span class="ks-badge ks-badge-high">High</span>
     </div>
-    <a class="ks-card-title" href="c-0259/">C-0259</a>
+    <a class="ks-card-title" href="c-0259/">Workload with credential access</a>
     <div class="ks-card-footer">
       <button type="button" class="ks-copy-cmd-btn" data-cmd="kubescape scan control C-0259" title="Copy scan command">📋 Copy scan command</button>
     </div>
   </div>
-  <div class="ks-control-card" data-id="C-0260" data-sev="medium" data-cat="cluster">
+  <div class="ks-control-card" data-id="C-0260" data-sev="medium" data-cat="network">
     <div class="ks-card-header">
       <a class="ks-card-id" href="c-0260/">C-0260</a>
       <span class="ks-badge ks-badge-medium">Medium</span>
     </div>
-    <a class="ks-card-title" href="c-0260/">C-0260</a>
+    <a class="ks-card-title" href="c-0260/">Missing network policy</a>
     <div class="ks-card-footer">
       <button type="button" class="ks-copy-cmd-btn" data-cmd="kubescape scan control C-0260" title="Copy scan command">📋 Copy scan command</button>
     </div>
   </div>
-  <div class="ks-control-card" data-id="C-0261" data-sev="high" data-cat="cluster">
+  <div class="ks-control-card" data-id="C-0261" data-sev="high" data-cat="rbac">
     <div class="ks-card-header">
       <a class="ks-card-id" href="c-0261/">C-0261</a>
       <span class="ks-badge ks-badge-high">High</span>
     </div>
-    <a class="ks-card-title" href="c-0261/">C-0261</a>
+    <a class="ks-card-title" href="c-0261/">ServiceAccount token mounted</a>
     <div class="ks-card-footer">
       <button type="button" class="ks-copy-cmd-btn" data-cmd="kubescape scan control C-0261" title="Copy scan command">📋 Copy scan command</button>
     </div>
   </div>
-  <div class="ks-control-card" data-id="C-0262" data-sev="high" data-cat="cluster">
+  <div class="ks-control-card" data-id="C-0262" data-sev="high" data-cat="rbac">
     <div class="ks-card-header">
       <a class="ks-card-id" href="c-0262/">C-0262</a>
       <span class="ks-badge ks-badge-high">High</span>
     </div>
-    <a class="ks-card-title" href="c-0262/">C-0262</a>
+    <a class="ks-card-title" href="c-0262/">Anonymous user has RoleBinding</a>
     <div class="ks-card-footer">
       <button type="button" class="ks-copy-cmd-btn" data-cmd="kubescape scan control C-0262" title="Copy scan command">📋 Copy scan command</button>
     </div>
   </div>
-  <div class="ks-control-card" data-id="C-0263" data-sev="high" data-cat="cluster">
+  <div class="ks-control-card" data-id="C-0263" data-sev="high" data-cat="network">
     <div class="ks-card-header">
       <a class="ks-card-id" href="c-0263/">C-0263</a>
       <span class="ks-badge ks-badge-high">High</span>
     </div>
-    <a class="ks-card-title" href="c-0263/">C-0263</a>
+    <a class="ks-card-title" href="c-0263/">Ingress uses TLS</a>
     <div class="ks-card-footer">
       <button type="button" class="ks-copy-cmd-btn" data-cmd="kubescape scan control C-0263" title="Copy scan command">📋 Copy scan command</button>
     </div>
   </div>
-  <div class="ks-control-card" data-id="C-0264" data-sev="medium" data-cat="cluster">
+  <div class="ks-control-card" data-id="C-0264" data-sev="medium" data-cat="container">
     <div class="ks-card-header">
       <a class="ks-card-id" href="c-0264/">C-0264</a>
       <span class="ks-badge ks-badge-medium">Medium</span>
     </div>
-    <a class="ks-card-title" href="c-0264/">C-0264</a>
+    <a class="ks-card-title" href="c-0264/">PersistentVolume without encyption</a>
     <div class="ks-card-footer">
       <button type="button" class="ks-copy-cmd-btn" data-cmd="kubescape scan control C-0264" title="Copy scan command">📋 Copy scan command</button>
     </div>
   </div>
-  <div class="ks-control-card" data-id="C-0265" data-sev="high" data-cat="cluster">
+  <div class="ks-control-card" data-id="C-0265" data-sev="high" data-cat="rbac">
     <div class="ks-card-header">
       <a class="ks-card-id" href="c-0265/">C-0265</a>
       <span class="ks-badge ks-badge-high">High</span>
     </div>
-    <a class="ks-card-title" href="c-0265/">C-0265</a>
+    <a class="ks-card-title" href="c-0265/">system:authenticated user has elevated roles</a>
     <div class="ks-card-footer">
       <button type="button" class="ks-copy-cmd-btn" data-cmd="kubescape scan control C-0265" title="Copy scan command">📋 Copy scan command</button>
     </div>
   </div>
-  <div class="ks-control-card" data-id="C-0266" data-sev="high" data-cat="cluster">
+  <div class="ks-control-card" data-id="C-0266" data-sev="high" data-cat="network">
     <div class="ks-card-header">
       <a class="ks-card-id" href="c-0266/">C-0266</a>
       <span class="ks-badge ks-badge-high">High</span>
     </div>
-    <a class="ks-card-title" href="c-0266/">C-0266</a>
+    <a class="ks-card-title" href="c-0266/">Exposure to internet via Gateway API or Istio Ingress</a>
     <div class="ks-card-footer">
       <button type="button" class="ks-copy-cmd-btn" data-cmd="kubescape scan control C-0266" title="Copy scan command">📋 Copy scan command</button>
     </div>
   </div>
-  <div class="ks-control-card" data-id="C-0267" data-sev="medium" data-cat="cluster">
+  <div class="ks-control-card" data-id="C-0267" data-sev="medium" data-cat="rbac">
     <div class="ks-card-header">
       <a class="ks-card-id" href="c-0267/">C-0267</a>
       <span class="ks-badge ks-badge-medium">Medium</span>
     </div>
-    <a class="ks-card-title" href="c-0267/">C-0267</a>
+    <a class="ks-card-title" href="c-0267/">Workload with cluster takeover roles</a>
     <div class="ks-card-footer">
       <button type="button" class="ks-copy-cmd-btn" data-cmd="kubescape scan control C-0267" title="Copy scan command">📋 Copy scan command</button>
     </div>
   </div>
-  <div class="ks-control-card" data-id="C-0268" data-sev="low" data-cat="cluster">
+  <div class="ks-control-card" data-id="C-0268" data-sev="low" data-cat="container">
     <div class="ks-card-header">
       <a class="ks-card-id" href="c-0268/">C-0268</a>
       <span class="ks-badge ks-badge-low">Low</span>
     </div>
-    <a class="ks-card-title" href="c-0268/">C-0268</a>
+    <a class="ks-card-title" href="c-0268/">Ensure CPU requests are set</a>
     <div class="ks-card-footer">
       <button type="button" class="ks-copy-cmd-btn" data-cmd="kubescape scan control C-0268" title="Copy scan command">📋 Copy scan command</button>
     </div>
   </div>
-  <div class="ks-control-card" data-id="C-0269" data-sev="low" data-cat="cluster">
+  <div class="ks-control-card" data-id="C-0269" data-sev="low" data-cat="container">
     <div class="ks-card-header">
       <a class="ks-card-id" href="c-0269/">C-0269</a>
       <span class="ks-badge ks-badge-low">Low</span>
     </div>
-    <a class="ks-card-title" href="c-0269/">C-0269</a>
+    <a class="ks-card-title" href="c-0269/">Ensure memory requests are set</a>
     <div class="ks-card-footer">
       <button type="button" class="ks-copy-cmd-btn" data-cmd="kubescape scan control C-0269" title="Copy scan command">📋 Copy scan command</button>
     </div>
   </div>
-  <div class="ks-control-card" data-id="C-0270" data-sev="high" data-cat="cluster">
+  <div class="ks-control-card" data-id="C-0270" data-sev="high" data-cat="container">
     <div class="ks-card-header">
       <a class="ks-card-id" href="c-0270/">C-0270</a>
       <span class="ks-badge ks-badge-high">High</span>
     </div>
-    <a class="ks-card-title" href="c-0270/">C-0270</a>
+    <a class="ks-card-title" href="c-0270/">Ensure CPU limits are set</a>
     <div class="ks-card-footer">
       <button type="button" class="ks-copy-cmd-btn" data-cmd="kubescape scan control C-0270" title="Copy scan command">📋 Copy scan command</button>
     </div>
   </div>
-  <div class="ks-control-card" data-id="C-0271" data-sev="high" data-cat="cluster">
+  <div class="ks-control-card" data-id="C-0271" data-sev="high" data-cat="container">
     <div class="ks-card-header">
       <a class="ks-card-id" href="c-0271/">C-0271</a>
       <span class="ks-badge ks-badge-high">High</span>
     </div>
-    <a class="ks-card-title" href="c-0271/">C-0271</a>
+    <a class="ks-card-title" href="c-0271/">Ensure memory limits are set</a>
     <div class="ks-card-footer">
       <button type="button" class="ks-copy-cmd-btn" data-cmd="kubescape scan control C-0271" title="Copy scan command">📋 Copy scan command</button>
     </div>
   </div>
-  <div class="ks-control-card" data-id="C-0272" data-sev="medium" data-cat="cluster">
+  <div class="ks-control-card" data-id="C-0272" data-sev="medium" data-cat="rbac">
     <div class="ks-card-header">
       <a class="ks-card-id" href="c-0272/">C-0272</a>
       <span class="ks-badge ks-badge-medium">Medium</span>
     </div>
-    <a class="ks-card-title" href="c-0272/">C-0272</a>
+    <a class="ks-card-title" href="c-0272/">Workload with administrative roles</a>
     <div class="ks-card-footer">
       <button type="button" class="ks-copy-cmd-btn" data-cmd="kubescape scan control C-0272" title="Copy scan command">📋 Copy scan command</button>
     </div>
@@ -2496,7 +2496,7 @@ Explore and filter all Kubescape controls by identifier, keyword, category, or s
       <a class="ks-card-id" href="c-0273/">C-0273</a>
       <span class="ks-badge ks-badge-low">Low</span>
     </div>
-    <a class="ks-card-title" href="c-0273/">C-0273</a>
+    <a class="ks-card-title" href="c-0273/">Outdated Kubernetes version</a>
     <div class="ks-card-footer">
       <button type="button" class="ks-copy-cmd-btn" data-cmd="kubescape scan control C-0273" title="Copy scan command">📋 Copy scan command</button>
     </div>
@@ -2511,22 +2511,22 @@ Explore and filter all Kubescape controls by identifier, keyword, category, or s
       <button type="button" class="ks-copy-cmd-btn" data-cmd="kubescape scan control C-0274" title="Copy scan command">📋 Copy scan command</button>
     </div>
   </div>
-  <div class="ks-control-card" data-id="C-0275" data-sev="medium" data-cat="cluster">
+  <div class="ks-control-card" data-id="C-0275" data-sev="medium" data-cat="container">
     <div class="ks-card-header">
       <a class="ks-card-id" href="c-0275/">C-0275</a>
       <span class="ks-badge ks-badge-medium">Medium</span>
     </div>
-    <a class="ks-card-title" href="c-0275/">C-0275</a>
+    <a class="ks-card-title" href="c-0275/">Minimize the admission of containers wishing to share the host process ID namespace</a>
     <div class="ks-card-footer">
       <button type="button" class="ks-copy-cmd-btn" data-cmd="kubescape scan control C-0275" title="Copy scan command">📋 Copy scan command</button>
     </div>
   </div>
-  <div class="ks-control-card" data-id="C-0276" data-sev="medium" data-cat="cluster">
+  <div class="ks-control-card" data-id="C-0276" data-sev="medium" data-cat="container">
     <div class="ks-card-header">
       <a class="ks-card-id" href="c-0276/">C-0276</a>
       <span class="ks-badge ks-badge-medium">Medium</span>
     </div>
-    <a class="ks-card-title" href="c-0276/">C-0276</a>
+    <a class="ks-card-title" href="c-0276/">Minimize the admission of containers wishing to share the host IPC namespace</a>
     <div class="ks-card-footer">
       <button type="button" class="ks-copy-cmd-btn" data-cmd="kubescape scan control C-0276" title="Copy scan command">📋 Copy scan command</button>
     </div>
@@ -2536,57 +2536,57 @@ Explore and filter all Kubescape controls by identifier, keyword, category, or s
       <a class="ks-card-id" href="c-0277/">C-0277</a>
       <span class="ks-badge ks-badge-medium">Medium</span>
     </div>
-    <a class="ks-card-title" href="c-0277/">C-0277</a>
+    <a class="ks-card-title" href="c-0277/">Ensure that the API Server only makes use of Strong Cryptographic Ciphers</a>
     <div class="ks-card-footer">
       <button type="button" class="ks-copy-cmd-btn" data-cmd="kubescape scan control C-0277" title="Copy scan command">📋 Copy scan command</button>
     </div>
   </div>
-  <div class="ks-control-card" data-id="C-0278" data-sev="medium" data-cat="cluster">
+  <div class="ks-control-card" data-id="C-0278" data-sev="medium" data-cat="rbac">
     <div class="ks-card-header">
       <a class="ks-card-id" href="c-0278/">C-0278</a>
       <span class="ks-badge ks-badge-medium">Medium</span>
     </div>
-    <a class="ks-card-title" href="c-0278/">C-0278</a>
+    <a class="ks-card-title" href="c-0278/">Minimize access to create persistent volumes</a>
     <div class="ks-card-footer">
       <button type="button" class="ks-copy-cmd-btn" data-cmd="kubescape scan control C-0278" title="Copy scan command">📋 Copy scan command</button>
     </div>
   </div>
-  <div class="ks-control-card" data-id="C-0279" data-sev="medium" data-cat="cluster">
+  <div class="ks-control-card" data-id="C-0279" data-sev="medium" data-cat="rbac">
     <div class="ks-card-header">
       <a class="ks-card-id" href="c-0279/">C-0279</a>
       <span class="ks-badge ks-badge-medium">Medium</span>
     </div>
-    <a class="ks-card-title" href="c-0279/">C-0279</a>
+    <a class="ks-card-title" href="c-0279/">Minimize access to the proxy sub-resource of nodes</a>
     <div class="ks-card-footer">
       <button type="button" class="ks-copy-cmd-btn" data-cmd="kubescape scan control C-0279" title="Copy scan command">📋 Copy scan command</button>
     </div>
   </div>
-  <div class="ks-control-card" data-id="C-0280" data-sev="medium" data-cat="cluster">
+  <div class="ks-control-card" data-id="C-0280" data-sev="medium" data-cat="rbac">
     <div class="ks-card-header">
       <a class="ks-card-id" href="c-0280/">C-0280</a>
       <span class="ks-badge ks-badge-medium">Medium</span>
     </div>
-    <a class="ks-card-title" href="c-0280/">C-0280</a>
+    <a class="ks-card-title" href="c-0280/">Minimize access to the approval sub-resource of certificatesigningrequests objects</a>
     <div class="ks-card-footer">
       <button type="button" class="ks-copy-cmd-btn" data-cmd="kubescape scan control C-0280" title="Copy scan command">📋 Copy scan command</button>
     </div>
   </div>
-  <div class="ks-control-card" data-id="C-0281" data-sev="medium" data-cat="cluster">
+  <div class="ks-control-card" data-id="C-0281" data-sev="medium" data-cat="rbac">
     <div class="ks-card-header">
       <a class="ks-card-id" href="c-0281/">C-0281</a>
       <span class="ks-badge ks-badge-medium">Medium</span>
     </div>
-    <a class="ks-card-title" href="c-0281/">C-0281</a>
+    <a class="ks-card-title" href="c-0281/">Minimize access to webhook configuration objects</a>
     <div class="ks-card-footer">
       <button type="button" class="ks-copy-cmd-btn" data-cmd="kubescape scan control C-0281" title="Copy scan command">📋 Copy scan command</button>
     </div>
   </div>
-  <div class="ks-control-card" data-id="C-0282" data-sev="medium" data-cat="cluster">
+  <div class="ks-control-card" data-id="C-0282" data-sev="medium" data-cat="rbac">
     <div class="ks-card-header">
       <a class="ks-card-id" href="c-0282/">C-0282</a>
       <span class="ks-badge ks-badge-medium">Medium</span>
     </div>
-    <a class="ks-card-title" href="c-0282/">C-0282</a>
+    <a class="ks-card-title" href="c-0282/">Minimize access to the service account token creation</a>
     <div class="ks-card-footer">
       <button type="button" class="ks-copy-cmd-btn" data-cmd="kubescape scan control C-0282" title="Copy scan command">📋 Copy scan command</button>
     </div>
@@ -2596,17 +2596,17 @@ Explore and filter all Kubescape controls by identifier, keyword, category, or s
       <a class="ks-card-id" href="c-0283/">C-0283</a>
       <span class="ks-badge ks-badge-medium">Medium</span>
     </div>
-    <a class="ks-card-title" href="c-0283/">C-0283</a>
+    <a class="ks-card-title" href="c-0283/">Ensure that the API Server --DenyServiceExternalIPs is set</a>
     <div class="ks-card-footer">
       <button type="button" class="ks-copy-cmd-btn" data-cmd="kubescape scan control C-0283" title="Copy scan command">📋 Copy scan command</button>
     </div>
   </div>
-  <div class="ks-control-card" data-id="C-0284" data-sev="low" data-cat="cluster">
+  <div class="ks-control-card" data-id="C-0284" data-sev="low" data-cat="container">
     <div class="ks-card-header">
       <a class="ks-card-id" href="c-0284/">C-0284</a>
       <span class="ks-badge ks-badge-low">Low</span>
     </div>
-    <a class="ks-card-title" href="c-0284/">C-0284</a>
+    <a class="ks-card-title" href="c-0284/">Ensure that the Kubelet is configured to limit pod PIDS</a>
     <div class="ks-card-footer">
       <button type="button" class="ks-copy-cmd-btn" data-cmd="kubescape scan control C-0284" title="Copy scan command">📋 Copy scan command</button>
     </div>

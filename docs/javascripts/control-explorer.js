@@ -1,4 +1,4 @@
-// Kubescape Control Explorer: Live filter and search
+// Kubescape Control Explorer: Live filter and search across IDs and titles
 document.addEventListener("DOMContentLoaded", function () {
   const explorer = document.getElementById("ks-control-explorer");
   if (!explorer) return;
@@ -53,7 +53,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Keyboard shortcut: Press "/" to focus search
   document.addEventListener("keydown", function (e) {
-    if (e.key === "/" && document.activeElement !== searchInput && !["INPUT", "TEXTAREA"].includes(document.activeElement.tagName)) {
+    if (e.key === "/" && document.activeElement !== searchInput && !["INPUT", "TEXTAREA"].includes(document.activeElement?.tagName)) {
       e.preventDefault();
       searchInput?.focus();
       searchInput?.select();
@@ -109,6 +109,35 @@ document.addEventListener("DOMContentLoaded", function () {
     searchInput?.focus();
   });
 
+  function showCopiedFeedback(btn) {
+    const originalText = btn.innerHTML;
+    btn.innerHTML = "✓ Copied!";
+    btn.classList.add("copied");
+    setTimeout(() => {
+      btn.innerHTML = originalText;
+      btn.classList.remove("copied");
+    }, 1800);
+  }
+
+  function fallbackCopyText(text, btn) {
+    try {
+      const textarea = document.createElement("textarea");
+      textarea.value = text;
+      textarea.style.position = "fixed";
+      textarea.style.opacity = "0";
+      document.body.appendChild(textarea);
+      textarea.focus();
+      textarea.select();
+      const success = document.execCommand("copy");
+      document.body.removeChild(textarea);
+      if (success) {
+        showCopiedFeedback(btn);
+      }
+    } catch (err) {
+      console.warn("Fallback copy failed:", err);
+    }
+  }
+
   // Copy command button
   document.querySelectorAll(".ks-copy-cmd-btn").forEach((btn) => {
     btn.addEventListener("click", function (e) {
@@ -116,18 +145,22 @@ document.addEventListener("DOMContentLoaded", function () {
       e.stopPropagation();
       const cmd = btn.getAttribute("data-cmd");
       if (!cmd) return;
-      navigator.clipboard.writeText(cmd).then(() => {
-        const originalText = btn.innerHTML;
-        btn.innerHTML = "✓ Copied!";
-        btn.classList.add("copied");
-        setTimeout(() => {
-          btn.innerHTML = originalText;
-          btn.classList.remove("copied");
-        }, 1800);
-      });
+
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(cmd)
+          .then(() => {
+            showCopiedFeedback(btn);
+          })
+          .catch((err) => {
+            console.warn("navigator.clipboard.writeText failed, using fallback:", err);
+            fallbackCopyText(cmd, btn);
+          });
+      } else {
+        fallbackCopyText(cmd, btn);
+      }
     });
   });
 
-  // Initial count
+  // Initial render
   updateView();
 });
