@@ -1,0 +1,1030 @@
+{
+  "C-0001": {
+    "title": "Forbidden Container Registries",
+    "category": "container"
+  },
+  "C-0002": {
+    "title": "Prevent containers from allowing command execution",
+    "category": "container"
+  },
+  "C-0004": {
+    "title": "Resources memory limit and request",
+    "category": "container"
+  },
+  "C-0005": {
+    "title": "API server insecure port is enabled",
+    "category": "network"
+  },
+  "C-0007": {
+    "title": "Roles with delete capabilities",
+    "category": "rbac"
+  },
+  "C-0009": {
+    "title": "Resource limits",
+    "category": "container"
+  },
+  "C-0012": {
+    "title": "Applications credentials in configuration files",
+    "category": "rbac"
+  },
+  "C-0013": {
+    "title": "Non-root containers",
+    "category": "container"
+  },
+  "C-0014": {
+    "title": "Access Kubernetes dashboard",
+    "category": "rbac"
+  },
+  "C-0015": {
+    "title": "List Kubernetes secrets",
+    "category": "rbac"
+  },
+  "C-0016": {
+    "title": "Allow privilege escalation",
+    "category": "rbac"
+  },
+  "C-0017": {
+    "title": "Immutable container filesystem",
+    "category": "container"
+  },
+  "C-0018": {
+    "title": "Configured readiness probe",
+    "category": "container"
+  },
+  "C-0020": {
+    "title": "Mount service principal",
+    "category": "container"
+  },
+  "C-0021": {
+    "title": "Exposed sensitive interfaces",
+    "category": "cluster"
+  },
+  "C-0026": {
+    "title": "Kubernetes CronJob",
+    "category": "container"
+  },
+  "C-0030": {
+    "title": "Ingress and Egress blocked",
+    "category": "network"
+  },
+  "C-0031": {
+    "title": "Delete Kubernetes events",
+    "category": "cluster"
+  },
+  "C-0034": {
+    "title": "Automatic mapping of service account",
+    "category": "rbac"
+  },
+  "C-0035": {
+    "title": "Administrative Roles",
+    "category": "rbac"
+  },
+  "C-0036": {
+    "title": "Validate admission controller (validating)",
+    "category": "cluster"
+  },
+  "C-0037": {
+    "title": "CoreDNS poisoning",
+    "category": "network"
+  },
+  "C-0038": {
+    "title": "Host PID/IPC privileges",
+    "category": "rbac"
+  },
+  "C-0039": {
+    "title": "Validate admission controller (mutating)",
+    "category": "cluster"
+  },
+  "C-0041": {
+    "title": "HostNetwork access",
+    "category": "rbac"
+  },
+  "C-0042": {
+    "title": "SSH server running inside container",
+    "category": "network"
+  },
+  "C-0044": {
+    "title": "Container hostPort",
+    "category": "network"
+  },
+  "C-0045": {
+    "title": "Writable hostPath mount",
+    "category": "container"
+  },
+  "C-0046": {
+    "title": "Insecure capabilities",
+    "category": "cluster"
+  },
+  "C-0048": {
+    "title": "HostPath mount",
+    "category": "container"
+  },
+  "C-0049": {
+    "title": "Network mapping",
+    "category": "network"
+  },
+  "C-0050": {
+    "title": "Resources CPU limit and request",
+    "category": "container"
+  },
+  "C-0052": {
+    "title": "Instance Metadata API",
+    "category": "network"
+  },
+  "C-0053": {
+    "title": "Access container service account",
+    "category": "rbac"
+  },
+  "C-0054": {
+    "title": "Cluster internal networking",
+    "category": "network"
+  },
+  "C-0055": {
+    "title": "Linux hardening",
+    "category": "cluster"
+  },
+  "C-0056": {
+    "title": "Configured liveness probe",
+    "category": "container"
+  },
+  "C-0057": {
+    "title": "Privileged container",
+    "category": "rbac"
+  },
+  "C-0058": {
+    "title": "CVE-2021-25741 - Using symlink for arbitrary host file system access.",
+    "category": "rbac"
+  },
+  "C-0059": {
+    "title": "CVE-2021-25742-nginx-ingress-snippet-annotation-vulnerability",
+    "category": "network"
+  },
+  "C-0061": {
+    "title": "Pods in default namespace",
+    "category": "container"
+  },
+  "C-0062": {
+    "title": "Sudo in container entrypoint",
+    "category": "container"
+  },
+  "C-0063": {
+    "title": "Portforwarding privileges",
+    "category": "rbac"
+  },
+  "C-0065": {
+    "title": "No impersonation",
+    "category": "rbac"
+  },
+  "C-0066": {
+    "title": "Secret/etcd encryption enabled",
+    "category": "rbac"
+  },
+  "C-0067": {
+    "title": "Audit logs enabled",
+    "category": "cluster"
+  },
+  "C-0068": {
+    "title": "PSP enabled",
+    "category": "cluster"
+  },
+  "C-0069": {
+    "title": "Disable anonymous access to Kubelet service",
+    "category": "rbac"
+  },
+  "C-0070": {
+    "title": "Enforce Kubelet client TLS authentication",
+    "category": "rbac"
+  },
+  "C-0073": {
+    "title": "Naked pods",
+    "category": "container"
+  },
+  "C-0074": {
+    "title": "Container runtime socket mounted",
+    "category": "container"
+  },
+  "C-0075": {
+    "title": "Image pull policy on latest tag",
+    "category": "container"
+  },
+  "C-0076": {
+    "title": "Label usage for resources",
+    "category": "cluster"
+  },
+  "C-0077": {
+    "title": "K8s common labels usage",
+    "category": "cluster"
+  },
+  "C-0078": {
+    "title": "Images from allowed registry",
+    "category": "container"
+  },
+  "C-0079": {
+    "title": "CVE-2022-0185-linux-kernel-container-escape",
+    "category": "container"
+  },
+  "C-0081": {
+    "title": "CVE-2022-24348-argocddirtraversal",
+    "category": "cluster"
+  },
+  "C-0083": {
+    "title": "Workloads with Critical vulnerabilities exposed to external traffic",
+    "category": "network"
+  },
+  "C-0084": {
+    "title": "Workloads with RCE vulnerabilities exposed to external traffic",
+    "category": "network"
+  },
+  "C-0085": {
+    "title": "Workloads with excessive amount of vulnerabilities",
+    "category": "container"
+  },
+  "C-0087": {
+    "title": "CVE-2022-23648-containerd-fs-escape",
+    "category": "container"
+  },
+  "C-0088": {
+    "title": "RBAC enabled",
+    "category": "rbac"
+  },
+  "C-0089": {
+    "title": "CVE-2022-3172-aggregated-API-server-redirect",
+    "category": "cluster"
+  },
+  "C-0090": {
+    "title": "CVE-2022-39328-grafana-auth-bypass",
+    "category": "cluster"
+  },
+  "C-0091": {
+    "title": "CVE-2022-47633-kyverno-signature-bypass",
+    "category": "cluster"
+  },
+  "C-0092": {
+    "title": "Ensure that the API server pod specification file permissions are set to 600 or more restrictive",
+    "category": "rbac"
+  },
+  "C-0093": {
+    "title": "Ensure that the API server pod specification file ownership is set to root:root",
+    "category": "container"
+  },
+  "C-0094": {
+    "title": "Ensure that the controller manager pod specification file permissions are set to 600 or more restrictive",
+    "category": "rbac"
+  },
+  "C-0095": {
+    "title": "Ensure that the controller manager pod specification file ownership is set to root:root",
+    "category": "container"
+  },
+  "C-0096": {
+    "title": "Ensure that the scheduler pod specification file permissions are set to 600 or more restrictive",
+    "category": "rbac"
+  },
+  "C-0097": {
+    "title": "Ensure that the scheduler pod specification file ownership is set to root:root",
+    "category": "container"
+  },
+  "C-0098": {
+    "title": "Ensure that the etcd pod specification file permissions are set to 600 or more restrictive",
+    "category": "rbac"
+  },
+  "C-0099": {
+    "title": "Ensure that the etcd pod specification file ownership is set to root:root",
+    "category": "container"
+  },
+  "C-0100": {
+    "title": "Ensure that the Container Network Interface file permissions are set to 600 or more restrictive",
+    "category": "rbac"
+  },
+  "C-0101": {
+    "title": "Ensure that the Container Network Interface file ownership is set to root:root",
+    "category": "network"
+  },
+  "C-0102": {
+    "title": "Ensure that the etcd data directory permissions are set to 700 or more restrictive",
+    "category": "rbac"
+  },
+  "C-0103": {
+    "title": "Ensure that the etcd data directory ownership is set to etcd:etcd",
+    "category": "cluster"
+  },
+  "C-0104": {
+    "title": "Ensure that the admin.conf file permissions are set to 600",
+    "category": "rbac"
+  },
+  "C-0105": {
+    "title": "Ensure that the admin.conf file ownership is set to root:root",
+    "category": "rbac"
+  },
+  "C-0106": {
+    "title": "Ensure that the scheduler.conf file permissions are set to 600 or more restrictive",
+    "category": "rbac"
+  },
+  "C-0107": {
+    "title": "Ensure that the scheduler.conf file ownership is set to root:root",
+    "category": "container"
+  },
+  "C-0108": {
+    "title": "Ensure that the controller-manager.conf file permissions are set to 600 or more restrictive",
+    "category": "rbac"
+  },
+  "C-0109": {
+    "title": "Ensure that the controller-manager.conf file ownership is set to root:root",
+    "category": "container"
+  },
+  "C-0110": {
+    "title": "Ensure that the Kubernetes PKI directory and file ownership is set to root:root",
+    "category": "container"
+  },
+  "C-0111": {
+    "title": "Ensure that the Kubernetes PKI certificate file permissions are set to 600 or more restrictive",
+    "category": "rbac"
+  },
+  "C-0112": {
+    "title": "Ensure that the Kubernetes PKI key file permissions are set to 600",
+    "category": "rbac"
+  },
+  "C-0113": {
+    "title": "Ensure that the API Server --anonymous-auth argument is set to false",
+    "category": "cluster"
+  },
+  "C-0114": {
+    "title": "Ensure that the API Server --token-auth-file parameter is not set",
+    "category": "rbac"
+  },
+  "C-0115": {
+    "title": "Ensure that the API Server --DenyServiceExternalIPs is not set",
+    "category": "cluster"
+  },
+  "C-0116": {
+    "title": "Ensure that the API Server --kubelet-client-certificate and --kubelet-client-key arguments are set as appropriate",
+    "category": "cluster"
+  },
+  "C-0117": {
+    "title": "Ensure that the API Server --kubelet-certificate-authority argument is set as appropriate",
+    "category": "cluster"
+  },
+  "C-0118": {
+    "title": "Ensure that the API Server --authorization-mode argument is not set to AlwaysAllow",
+    "category": "rbac"
+  },
+  "C-0119": {
+    "title": "Ensure that the API Server --authorization-mode argument includes Node",
+    "category": "rbac"
+  },
+  "C-0120": {
+    "title": "Ensure that the API Server --authorization-mode argument includes RBAC",
+    "category": "rbac"
+  },
+  "C-0121": {
+    "title": "Ensure that the admission control plugin EventRateLimit is set",
+    "category": "container"
+  },
+  "C-0122": {
+    "title": "Ensure that the admission control plugin AlwaysAdmit is not set",
+    "category": "cluster"
+  },
+  "C-0123": {
+    "title": "Ensure that the admission control plugin AlwaysPullImages is set",
+    "category": "container"
+  },
+  "C-0124": {
+    "title": "Ensure that the admission control plugin SecurityContextDeny is set if PodSecurityPolicy is not used",
+    "category": "container"
+  },
+  "C-0125": {
+    "title": "Ensure that the admission control plugin ServiceAccount is set",
+    "category": "rbac"
+  },
+  "C-0126": {
+    "title": "Ensure that the admission control plugin NamespaceLifecycle is set",
+    "category": "cluster"
+  },
+  "C-0127": {
+    "title": "Ensure that the admission control plugin NodeRestriction is set",
+    "category": "cluster"
+  },
+  "C-0128": {
+    "title": "Ensure that the API Server --secure-port argument is not set to 0",
+    "category": "network"
+  },
+  "C-0129": {
+    "title": "Ensure that the API Server --profiling argument is set to false",
+    "category": "cluster"
+  },
+  "C-0130": {
+    "title": "Ensure that the API Server --audit-log-path argument is set",
+    "category": "cluster"
+  },
+  "C-0131": {
+    "title": "Ensure that the API Server --audit-log-maxage argument is set to 30 or as appropriate",
+    "category": "cluster"
+  },
+  "C-0132": {
+    "title": "Ensure that the API Server --audit-log-maxbackup argument is set to 10 or as appropriate",
+    "category": "cluster"
+  },
+  "C-0133": {
+    "title": "Ensure that the API Server --audit-log-maxsize argument is set to 100 or as appropriate",
+    "category": "cluster"
+  },
+  "C-0134": {
+    "title": "Ensure that the API Server --request-timeout argument is set as appropriate",
+    "category": "cluster"
+  },
+  "C-0135": {
+    "title": "Ensure that the API Server --service-account-lookup argument is set to true",
+    "category": "cluster"
+  },
+  "C-0136": {
+    "title": "Ensure that the API Server --service-account-key-file argument is set as appropriate",
+    "category": "cluster"
+  },
+  "C-0137": {
+    "title": "Ensure that the API Server --etcd-certfile and --etcd-keyfile arguments are set as appropriate",
+    "category": "cluster"
+  },
+  "C-0138": {
+    "title": "Ensure that the API Server --tls-cert-file and --tls-private-key-file arguments are set as appropriate",
+    "category": "cluster"
+  },
+  "C-0139": {
+    "title": "Ensure that the API Server --client-ca-file argument is set as appropriate",
+    "category": "cluster"
+  },
+  "C-0140": {
+    "title": "Ensure that the API Server --etcd-cafile argument is set as appropriate",
+    "category": "cluster"
+  },
+  "C-0141": {
+    "title": "Ensure that the API Server --encryption-provider-config argument is set as appropriate",
+    "category": "cluster"
+  },
+  "C-0142": {
+    "title": "Ensure that encryption providers are appropriately configured",
+    "category": "cluster"
+  },
+  "C-0143": {
+    "title": "Ensure that the API Server only makes use of Strong Cryptographic Ciphers",
+    "category": "cluster"
+  },
+  "C-0144": {
+    "title": "Ensure that the Controller Manager --terminated-pod-gc-threshold argument is set as appropriate",
+    "category": "container"
+  },
+  "C-0145": {
+    "title": "Ensure that the Controller Manager --profiling argument is set to false",
+    "category": "cluster"
+  },
+  "C-0146": {
+    "title": "Ensure that the Controller Manager --use-service-account-credentials argument is set to true",
+    "category": "rbac"
+  },
+  "C-0147": {
+    "title": "Ensure that the Controller Manager --service-account-private-key-file argument is set as appropriate",
+    "category": "cluster"
+  },
+  "C-0148": {
+    "title": "Ensure that the Controller Manager --root-ca-file argument is set as appropriate",
+    "category": "container"
+  },
+  "C-0149": {
+    "title": "Ensure that the Controller Manager RotateKubeletServerCertificate argument is set to true",
+    "category": "cluster"
+  },
+  "C-0150": {
+    "title": "Ensure that the Controller Manager --bind-address argument is set to 127.0.0.1",
+    "category": "cluster"
+  },
+  "C-0151": {
+    "title": "Ensure that the Scheduler --profiling argument is set to false",
+    "category": "cluster"
+  },
+  "C-0152": {
+    "title": "Ensure that the Scheduler --bind-address argument is set to 127.0.0.1",
+    "category": "cluster"
+  },
+  "C-0153": {
+    "title": "Ensure that the --cert-file and --key-file arguments are set as appropriate",
+    "category": "cluster"
+  },
+  "C-0154": {
+    "title": "Ensure that the --client-cert-auth argument is set to true",
+    "category": "cluster"
+  },
+  "C-0155": {
+    "title": "Ensure that the --auto-tls argument is not set to true",
+    "category": "cluster"
+  },
+  "C-0156": {
+    "title": "Ensure that the --peer-cert-file and --peer-key-file arguments are set as appropriate",
+    "category": "cluster"
+  },
+  "C-0157": {
+    "title": "Ensure that the --peer-client-cert-auth argument is set to true",
+    "category": "cluster"
+  },
+  "C-0158": {
+    "title": "Ensure that the --peer-auto-tls argument is not set to true",
+    "category": "cluster"
+  },
+  "C-0159": {
+    "title": "Ensure that a unique Certificate Authority is used for etcd",
+    "category": "cluster"
+  },
+  "C-0160": {
+    "title": "Ensure that a minimal audit policy is created",
+    "category": "cluster"
+  },
+  "C-0161": {
+    "title": "Ensure that the audit policy covers key security concerns",
+    "category": "cluster"
+  },
+  "C-0162": {
+    "title": "Ensure that the kubelet service file permissions are set to 600 or more restrictive",
+    "category": "rbac"
+  },
+  "C-0163": {
+    "title": "Ensure that the kubelet service file ownership is set to root:root",
+    "category": "container"
+  },
+  "C-0164": {
+    "title": "If proxy kubeconfig file exists ensure permissions are set to 600 or more restrictive",
+    "category": "rbac"
+  },
+  "C-0165": {
+    "title": "If proxy kubeconfig file exists ensure ownership is set to root:root",
+    "category": "network"
+  },
+  "C-0166": {
+    "title": "Ensure that the --kubeconfig kubelet.conf file permissions are set to 600 or more restrictive",
+    "category": "rbac"
+  },
+  "C-0167": {
+    "title": "Ensure that the --kubeconfig kubelet.conf file ownership is set to root:root",
+    "category": "container"
+  },
+  "C-0168": {
+    "title": "Ensure that the certificate authorities file permissions are set to 600 or more restrictive",
+    "category": "rbac"
+  },
+  "C-0169": {
+    "title": "Ensure that the client certificate authorities file ownership is set to root:root",
+    "category": "container"
+  },
+  "C-0170": {
+    "title": "If the kubelet config.yaml configuration file is being used validate permissions set to 600 or more restrictive",
+    "category": "rbac"
+  },
+  "C-0171": {
+    "title": "If the kubelet config.yaml configuration file is being used validate file ownership is set to root:root",
+    "category": "container"
+  },
+  "C-0172": {
+    "title": "Ensure that the --anonymous-auth argument is set to false",
+    "category": "cluster"
+  },
+  "C-0173": {
+    "title": "Ensure that the --authorization-mode argument is not set to AlwaysAllow",
+    "category": "rbac"
+  },
+  "C-0174": {
+    "title": "Ensure that the --client-ca-file argument is set as appropriate",
+    "category": "cluster"
+  },
+  "C-0175": {
+    "title": "Verify that the --read-only-port argument is set to 0",
+    "category": "network"
+  },
+  "C-0176": {
+    "title": "Ensure that the --streaming-connection-idle-timeout argument is not set to 0",
+    "category": "cluster"
+  },
+  "C-0177": {
+    "title": "Ensure that the --protect-kernel-defaults argument is set to true",
+    "category": "cluster"
+  },
+  "C-0178": {
+    "title": "Ensure that the --make-iptables-util-chains argument is set to true",
+    "category": "cluster"
+  },
+  "C-0179": {
+    "title": "Ensure that the --hostname-override argument is not set",
+    "category": "cluster"
+  },
+  "C-0180": {
+    "title": "Ensure that the --event-qps argument is set to 0 or a level which ensures appropriate event capture",
+    "category": "cluster"
+  },
+  "C-0181": {
+    "title": "Ensure that the --tls-cert-file and --tls-private-key-file arguments are set as appropriate",
+    "category": "cluster"
+  },
+  "C-0182": {
+    "title": "Ensure that the --rotate-certificates argument is not set to false",
+    "category": "cluster"
+  },
+  "C-0183": {
+    "title": "Verify that the RotateKubeletServerCertificate argument is set to true",
+    "category": "cluster"
+  },
+  "C-0184": {
+    "title": "Ensure that the Kubelet only makes use of Strong Cryptographic Ciphers",
+    "category": "cluster"
+  },
+  "C-0185": {
+    "title": "Ensure that the cluster-admin role is only used where required",
+    "category": "rbac"
+  },
+  "C-0186": {
+    "title": "Minimize access to secrets",
+    "category": "rbac"
+  },
+  "C-0187": {
+    "title": "Minimize wildcard use in Roles and ClusterRoles",
+    "category": "rbac"
+  },
+  "C-0188": {
+    "title": "Minimize access to create pods",
+    "category": "rbac"
+  },
+  "C-0189": {
+    "title": "Ensure that default service accounts are not actively used",
+    "category": "rbac"
+  },
+  "C-0190": {
+    "title": "Ensure that Service Account Tokens are only mounted where necessary",
+    "category": "rbac"
+  },
+  "C-0191": {
+    "title": "Limit use of the Bind, Impersonate and Escalate permissions in the Kubernetes cluster",
+    "category": "rbac"
+  },
+  "C-0192": {
+    "title": "Ensure that the cluster has at least one active policy control mechanism in place",
+    "category": "cluster"
+  },
+  "C-0193": {
+    "title": "Minimize the admission of privileged containers",
+    "category": "rbac"
+  },
+  "C-0194": {
+    "title": "Minimize the admission of containers wishing to share the host process ID namespace",
+    "category": "container"
+  },
+  "C-0195": {
+    "title": "Minimize the admission of containers wishing to share the host IPC namespace",
+    "category": "container"
+  },
+  "C-0196": {
+    "title": "Minimize the admission of containers wishing to share the host network namespace",
+    "category": "network"
+  },
+  "C-0197": {
+    "title": "Minimize the admission of containers with allowPrivilegeEscalation",
+    "category": "rbac"
+  },
+  "C-0198": {
+    "title": "Minimize the admission of root containers",
+    "category": "container"
+  },
+  "C-0199": {
+    "title": "Minimize the admission of containers with the NET_RAW capability",
+    "category": "container"
+  },
+  "C-0200": {
+    "title": "Minimize the admission of containers with added capabilities",
+    "category": "container"
+  },
+  "C-0201": {
+    "title": "Minimize the admission of containers with capabilities assigned",
+    "category": "container"
+  },
+  "C-0202": {
+    "title": "Minimize the admission of Windows HostProcess Containers",
+    "category": "container"
+  },
+  "C-0203": {
+    "title": "Minimize the admission of HostPath volumes",
+    "category": "container"
+  },
+  "C-0204": {
+    "title": "Minimize the admission of containers which use HostPorts",
+    "category": "network"
+  },
+  "C-0205": {
+    "title": "Ensure that the CNI in use supports Network Policies",
+    "category": "network"
+  },
+  "C-0206": {
+    "title": "Ensure that all Namespaces have Network Policies defined",
+    "category": "network"
+  },
+  "C-0207": {
+    "title": "Prefer using secrets as files over secrets as environment variables",
+    "category": "rbac"
+  },
+  "C-0208": {
+    "title": "Consider external secret storage",
+    "category": "rbac"
+  },
+  "C-0209": {
+    "title": "Create administrative boundaries between resources using namespaces",
+    "category": "rbac"
+  },
+  "C-0210": {
+    "title": "Ensure that the seccomp profile is set to docker/default in your pod definitions",
+    "category": "container"
+  },
+  "C-0211": {
+    "title": "Apply Security Context to Your Pods and Containers",
+    "category": "container"
+  },
+  "C-0212": {
+    "title": "The default namespace should not be used",
+    "category": "cluster"
+  },
+  "C-0213": {
+    "title": "Minimize the admission of privileged containers",
+    "category": "rbac"
+  },
+  "C-0214": {
+    "title": "Minimize the admission of containers wishing to share the host process ID namespace",
+    "category": "container"
+  },
+  "C-0215": {
+    "title": "Minimize the admission of containers wishing to share the host IPC namespace",
+    "category": "container"
+  },
+  "C-0216": {
+    "title": "Minimize the admission of containers wishing to share the host network namespace",
+    "category": "network"
+  },
+  "C-0217": {
+    "title": "Minimize the admission of containers with allowPrivilegeEscalation",
+    "category": "rbac"
+  },
+  "C-0218": {
+    "title": "Minimize the admission of root containers",
+    "category": "container"
+  },
+  "C-0219": {
+    "title": "Minimize the admission of containers with added capabilities",
+    "category": "container"
+  },
+  "C-0220": {
+    "title": "Minimize the admission of containers with capabilities assigned",
+    "category": "container"
+  },
+  "C-0221": {
+    "title": "Ensure Image Vulnerability Scanning using Amazon ECR image scanning or a third party provider",
+    "category": "container"
+  },
+  "C-0222": {
+    "title": "Minimize user access to Amazon ECR",
+    "category": "rbac"
+  },
+  "C-0223": {
+    "title": "Minimize cluster access to read-only for Amazon ECR",
+    "category": "rbac"
+  },
+  "C-0225": {
+    "title": "Prefer using dedicated EKS Service Accounts",
+    "category": "rbac"
+  },
+  "C-0226": {
+    "title": "Prefer using a container-optimized OS when possible",
+    "category": "container"
+  },
+  "C-0227": {
+    "title": "Restrict Access to the Control Plane Endpoint",
+    "category": "rbac"
+  },
+  "C-0228": {
+    "title": "Ensure clusters are created with Private Endpoint Enabled and Public Access Disabled",
+    "category": "rbac"
+  },
+  "C-0229": {
+    "title": "Ensure clusters are created with Private Nodes",
+    "category": "cluster"
+  },
+  "C-0230": {
+    "title": "Ensure Network Policy is Enabled and set as appropriate",
+    "category": "network"
+  },
+  "C-0231": {
+    "title": "Encrypt traffic to HTTPS load balancers with TLS certificates",
+    "category": "network"
+  },
+  "C-0232": {
+    "title": "Manage Kubernetes RBAC users with AWS IAM Authenticator for Kubernetes or Upgrade to AWS CLI v1.16.156",
+    "category": "rbac"
+  },
+  "C-0233": {
+    "title": "Consider Fargate for running untrusted workloads",
+    "category": "container"
+  },
+  "C-0234": {
+    "title": "Consider external secret storage",
+    "category": "rbac"
+  },
+  "C-0235": {
+    "title": "Ensure that the kubelet configuration file has permissions set to 644 or more restrictive",
+    "category": "rbac"
+  },
+  "C-0236": {
+    "title": "Verify image signature",
+    "category": "container"
+  },
+  "C-0237": {
+    "title": "Check if signature exists",
+    "category": "cluster"
+  },
+  "C-0238": {
+    "title": "Ensure that the kubeconfig file permissions are set to 644 or more restrictive",
+    "category": "rbac"
+  },
+  "C-0239": {
+    "title": "Prefer using dedicated AKS Service Accounts",
+    "category": "rbac"
+  },
+  "C-0240": {
+    "title": "Ensure Network Policy is Enabled and set as appropriate",
+    "category": "network"
+  },
+  "C-0241": {
+    "title": "Use Azure RBAC for Kubernetes Authorization.",
+    "category": "rbac"
+  },
+  "C-0242": {
+    "title": "Hostile multi-tenant workloads",
+    "category": "container"
+  },
+  "C-0243": {
+    "title": "Ensure Image Vulnerability Scanning using Azure Defender image scanning or a third party provider",
+    "category": "container"
+  },
+  "C-0244": {
+    "title": "Ensure Kubernetes Secrets are encrypted",
+    "category": "rbac"
+  },
+  "C-0245": {
+    "title": "Encrypt traffic to HTTPS load balancers with TLS certificates",
+    "category": "network"
+  },
+  "C-0246": {
+    "title": "Avoid use of system:masters group",
+    "category": "cluster"
+  },
+  "C-0247": {
+    "title": "Restrict Access to the Control Plane Endpoint",
+    "category": "rbac"
+  },
+  "C-0248": {
+    "title": "Ensure clusters are created with Private Nodes",
+    "category": "cluster"
+  },
+  "C-0249": {
+    "title": "Restrict untrusted workloads",
+    "category": "container"
+  },
+  "C-0250": {
+    "title": "Minimize cluster access to read-only for Azure Container Registry (ACR)",
+    "category": "rbac"
+  },
+  "C-0251": {
+    "title": "Minimize user access to Azure Container Registry (ACR)",
+    "category": "rbac"
+  },
+  "C-0252": {
+    "title": "Ensure clusters are created with Private Endpoint Enabled and Public Access Disabled",
+    "category": "rbac"
+  },
+  "C-0253": {
+    "title": "Deprecated Kubernetes image registry",
+    "category": "container"
+  },
+  "C-0254": {
+    "title": "Enable audit Logs",
+    "category": "cluster"
+  },
+  "C-0255": {
+    "title": "Workload with secret access",
+    "category": "rbac"
+  },
+  "C-0256": {
+    "title": "External facing",
+    "category": "cluster"
+  },
+  "C-0257": {
+    "title": "Workload with PVC access",
+    "category": "rbac"
+  },
+  "C-0258": {
+    "title": "Workload with ConfigMap access",
+    "category": "rbac"
+  },
+  "C-0259": {
+    "title": "Workload with credential access",
+    "category": "rbac"
+  },
+  "C-0260": {
+    "title": "Missing network policy",
+    "category": "network"
+  },
+  "C-0261": {
+    "title": "ServiceAccount token mounted",
+    "category": "rbac"
+  },
+  "C-0262": {
+    "title": "Anonymous user has RoleBinding",
+    "category": "rbac"
+  },
+  "C-0263": {
+    "title": "Ingress uses TLS",
+    "category": "network"
+  },
+  "C-0264": {
+    "title": "PersistentVolume without encyption",
+    "category": "container"
+  },
+  "C-0265": {
+    "title": "system:authenticated user has elevated roles",
+    "category": "rbac"
+  },
+  "C-0266": {
+    "title": "Exposure to internet via Gateway API or Istio Ingress",
+    "category": "network"
+  },
+  "C-0267": {
+    "title": "Workload with cluster takeover roles",
+    "category": "rbac"
+  },
+  "C-0268": {
+    "title": "Ensure CPU requests are set",
+    "category": "container"
+  },
+  "C-0269": {
+    "title": "Ensure memory requests are set",
+    "category": "container"
+  },
+  "C-0270": {
+    "title": "Ensure CPU limits are set",
+    "category": "container"
+  },
+  "C-0271": {
+    "title": "Ensure memory limits are set",
+    "category": "container"
+  },
+  "C-0272": {
+    "title": "Workload with administrative roles",
+    "category": "rbac"
+  },
+  "C-0273": {
+    "title": "Outdated Kubernetes version",
+    "category": "cluster"
+  },
+  "C-0274": {
+    "title": "Verify Authenticated Service",
+    "category": "cluster"
+  },
+  "C-0275": {
+    "title": "Minimize the admission of containers wishing to share the host process ID namespace",
+    "category": "container"
+  },
+  "C-0276": {
+    "title": "Minimize the admission of containers wishing to share the host IPC namespace",
+    "category": "container"
+  },
+  "C-0277": {
+    "title": "Ensure that the API Server only makes use of Strong Cryptographic Ciphers",
+    "category": "cluster"
+  },
+  "C-0278": {
+    "title": "Minimize access to create persistent volumes",
+    "category": "rbac"
+  },
+  "C-0279": {
+    "title": "Minimize access to the proxy sub-resource of nodes",
+    "category": "rbac"
+  },
+  "C-0280": {
+    "title": "Minimize access to the approval sub-resource of certificatesigningrequests objects",
+    "category": "rbac"
+  },
+  "C-0281": {
+    "title": "Minimize access to webhook configuration objects",
+    "category": "rbac"
+  },
+  "C-0282": {
+    "title": "Minimize access to the service account token creation",
+    "category": "rbac"
+  },
+  "C-0283": {
+    "title": "Ensure that the API Server --DenyServiceExternalIPs is set",
+    "category": "cluster"
+  },
+  "C-0284": {
+    "title": "Ensure that the Kubelet is configured to limit pod PIDS",
+    "category": "container"
+  }
+}
