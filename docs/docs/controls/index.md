@@ -41,6 +41,8 @@ Explore and filter all Kubescape controls by identifier, title, category, or sev
 
 <div class="ks-controls-grid" id="ks-controls-grid">
 
+<!-- ks:controls:cards:start -->
+
   <div class="ks-control-card" data-id="C-0001" data-sev="high" data-cat="container">
     <div class="ks-card-header">
       <a class="ks-card-id" href="c-0001/">C-0001</a>
@@ -2611,6 +2613,8 @@ Explore and filter all Kubescape controls by identifier, title, category, or sev
       <button type="button" class="ks-copy-cmd-btn" data-cmd="kubescape scan control C-0284" title="Copy scan command">📋 Copy scan command</button>
     </div>
   </div>
+
+<!-- ks:controls:cards:end -->
 </div>
 
 <div id="ks-no-results" class="ks-no-results" style="display:none;">
