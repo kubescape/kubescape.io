@@ -299,8 +299,11 @@ h1, h2, h3 {
 
 .ks-repo-modal__dialog {
   position: relative;
+  display: flex;
+  flex-direction: column;
   width: calc(100% - 32px);
   max-width: 520px;
+  max-height: calc(100vh - 32px);
   background: var(--md-default-bg-color, #ffffff);
   border: 1px solid var(--md-default-fg-color--lightest, rgba(0, 0, 0, 0.1));
   border-radius: 12px;
@@ -308,6 +311,12 @@ h1, h2, h3 {
   overflow: hidden;
   transform: scale(0.96);
   transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@supports (height: 100dvh) {
+  .ks-repo-modal__dialog {
+    max-height: calc(100dvh - 32px);
+  }
 }
 
 .ks-repo-modal.is-open .ks-repo-modal__dialog {
@@ -323,6 +332,7 @@ h1, h2, h3 {
 /* Modal Header */
 .ks-repo-modal__header {
   display: flex;
+  flex: 0 0 auto;
   align-items: center;
   justify-content: space-between;
   padding: 1.1rem 1.25rem;
@@ -339,6 +349,11 @@ h1, h2, h3 {
   display: flex;
   align-items: center;
   gap: 0.75rem;
+  min-width: 0;
+}
+
+.ks-repo-modal__title-group > div {
+  min-width: 0;
 }
 
 .ks-repo-modal__icon {
@@ -371,12 +386,14 @@ h1, h2, h3 {
   color: var(--md-default-fg-color--lighter, #888);
   font-family: var(--md-code-font-family, monospace);
   margin-top: 2px;
+  overflow-wrap: anywhere;
 }
 
 .ks-repo-modal__close-btn {
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-shrink: 0;
   width: 32px;
   height: 32px;
   background: transparent;
@@ -404,8 +421,11 @@ h1, h2, h3 {
 .ks-repo-modal__body {
   padding: 1.25rem;
   display: flex;
+  flex: 1 1 auto;
   flex-direction: column;
   gap: 1.25rem;
+  min-height: 0;
+  overflow-y: auto;
 }
 
 .ks-repo-modal__section {
@@ -551,6 +571,7 @@ h1, h2, h3 {
 
 /* Modal Footer Note */
 .ks-repo-modal__footer {
+  flex: 0 0 auto;
   padding: 0.8rem 1.25rem;
   background: var(--md-default-bg-color--lightest, rgba(0, 0, 0, 0.02));
   border-top: 1px solid var(--md-default-fg-color--lightest, rgba(0, 0, 0, 0.08));
