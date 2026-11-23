@@ -10,6 +10,7 @@ docs/docs/controls/index.md.
 from __future__ import annotations
 
 import argparse
+from html import escape
 import json
 from pathlib import Path
 import re
@@ -99,17 +100,11 @@ def parse_control_file(file_path: Path, metadata_lookup: dict[str, dict[str, Any
     if not category:
         category = (fallback_info.get("category") or "").lower()
 
-    if not category or category not in VALID_CATEGORIES:
-        # Fallback category heuristic from text keywords
-        lower_content = content.lower()
-        if any(k in lower_content for k in ["role", "secret", "rbac", "serviceaccount", "token", "authorization"]):
-            category = "rbac"
-        elif any(k in lower_content for k in ["ingress", "egress", "networkpolicy", "port", "dns"]):
-            category = "network"
-        elif any(k in lower_content for k in ["node", "apiserver", "kubelet", "etcd", "cluster", "control plane"]):
-            category = "cluster"
-        else:
-            category = "container"
+    if category not in VALID_CATEGORIES:
+        raise ValueError(
+            f"{control_id}: missing or invalid category {category!r}. "
+            f"Set category in frontmatter or control metadata to one of: {', '.join(sorted(VALID_CATEGORIES))}."
+        )
 
     return {
         "id": control_id,
@@ -130,7 +125,7 @@ def render_card(control: dict[str, Any]) -> str:
         f'      <a class="ks-card-id" href="{control["link"]}">{control["id"]}</a>\n'
         f'      <span class="ks-badge ks-badge-{control["severity"]}">{control["severity_display"]}</span>\n'
         f'    </div>\n'
-        f'    <a class="ks-card-title" href="{control["link"]}">{control["title"]}</a>\n'
+        f'    <a class="ks-card-title" href="{control["link"]}">{escape(control["title"])}</a>\n'
         f'    <div class="ks-card-footer">\n'
         f'      <button type="button" class="ks-copy-cmd-btn" data-cmd="{control["cmd"]}" title="Copy scan command">📋 Copy scan command</button>\n'
         f'    </div>\n'
@@ -152,7 +147,7 @@ def update_index_content(existing_text: str, new_cards_block: str) -> str:
             rf"{re.escape(START_MARKER)}.*?{re.escape(END_MARKER)}",
             re.DOTALL,
         )
-        return pattern.sub(new_cards_block, existing_text)
+        return pattern.sub(lambda _: new_cards_block, existing_text)
 
     # If markers do not exist yet, inject inside <div class="ks-controls-grid" id="ks-controls-grid">
     grid_start_tag = '<div class="ks-controls-grid" id="ks-controls-grid">'
@@ -197,7 +192,10 @@ def sync_controls(
     if not control_files:
         return False, f"No control files found in {controls_dir}"
 
-    controls = [parse_control_file(f, metadata_lookup) for f in control_files]
+    try:
+        controls = [parse_control_file(f, metadata_lookup) for f in control_files]
+    except ValueError as exc:
+        return False, str(exc)
     new_cards_block = generate_cards_html(controls)
 
     current_index_text = index_file.read_text(encoding="utf-8")
@@ -215,15 +213,6 @@ def sync_controls(
         return True, f"Successfully synchronized {len(controls)} control cards in {index_file}."
 
     return True, f"Control cards in {index_file} were already up to date ({len(controls)} controls)."
-
-
-def on_pre_build(config: Any = None, **kwargs: Any) -> None:
-    """MkDocs hook entrypoint to auto-sync controls prior to build."""
-    success, msg = sync_controls()
-    if not success:
-        sys.stderr.write(f"[generate_control_index] Warning: {msg}\n")
-    else:
-        print(f"[generate_control_index] {msg}")
 
 
 def main(argv: list[str] | None = None) -> int:
