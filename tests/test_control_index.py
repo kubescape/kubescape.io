@@ -35,13 +35,17 @@ class ControlIndexGeneratorTest(unittest.TestCase):
         )
         self.index_file.write_text(content, encoding="utf-8")
 
-    def write_control(self, filename: str, title: str = "Test Control", severity: str = "High", category: str = "container"):
+    def write_control(self, filename: str, title: str = "Test Control", severity: str = "High", category: str | None = "container"):
         content = (
             f"# {filename[:6].upper()} - {title}\n\n"
             "[← Back to all controls](index.md)\n\n"
             f"## Severity\n\n{severity}\n\n"
             "## Description of the the issue\n\nTest description.\n"
         )
+        if category is not None:
+            metadata = json.loads(self.metadata_file.read_text())
+            metadata[Path(filename).stem.upper()] = {"category": category}
+            self.metadata_file.write_text(json.dumps(metadata))
         path = self.controls_dir / filename
         path.write_text(content, encoding="utf-8")
         return path
@@ -119,6 +123,25 @@ class ControlIndexGeneratorTest(unittest.TestCase):
         code, stdout, stderr = self.run_script("--check")
         self.assertEqual(code, 1)
         self.assertIn("out of sync", stderr)
+
+    def test_title_is_rendered_as_literal_text(self):
+        self.write_index()
+        self.write_control("c-0001.md", title=r"Compare <limit> & \1")
+        self.assertEqual(self.run_script()[0], 0)
+        self.assertIn(r"Compare &lt;limit&gt; &amp; \1</a>", self.index_file.read_text())
+        self.assertEqual(self.run_script("--check")[0], 0)
+
+    def test_missing_or_invalid_category_leaves_index_intact(self):
+        self.write_index()
+        original = self.index_file.read_bytes()
+        for category in (None, "unknown"):
+            self.write_control("c-0001.md", title="Check RBAC tokens", category=category)
+            for args in ((), ("--check",)):
+                with self.subTest(category=category, args=args):
+                    code, _, stderr = self.run_script(*args)
+                    self.assertEqual(code, 1)
+                    self.assertIn("C-0001: missing or invalid category", stderr)
+                    self.assertEqual(self.index_file.read_bytes(), original)
 
     def test_missing_directory_returns_error(self):
         code, stdout, stderr = self.run_script("--controls-dir", str(self.root / "nonexistent"))
