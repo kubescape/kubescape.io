@@ -578,6 +578,241 @@ h1, h2, h3 {
   text-decoration: underline;
 }
 
+/* Responsive layout, scrolling, and accessibility for the repository modal. */
+.ks-repo-modal,
+.ks-repo-modal *,
+.ks-repo-modal *::before,
+.ks-repo-modal *::after {
+  box-sizing: border-box;
+}
+
+.ks-repo-modal {
+  --ks-repo-modal-gutter: 1rem;
+  --ks-repo-modal-safe-top: max(var(--ks-repo-modal-gutter), env(safe-area-inset-top, 0px));
+  --ks-repo-modal-safe-right: max(var(--ks-repo-modal-gutter), env(safe-area-inset-right, 0px));
+  --ks-repo-modal-safe-bottom: max(var(--ks-repo-modal-gutter), env(safe-area-inset-bottom, 0px));
+  --ks-repo-modal-safe-left: max(var(--ks-repo-modal-gutter), env(safe-area-inset-left, 0px));
+
+  padding: var(--ks-repo-modal-safe-top) var(--ks-repo-modal-safe-right)
+    var(--ks-repo-modal-safe-bottom) var(--ks-repo-modal-safe-left);
+  overflow: auto;
+  overscroll-behavior: contain;
+  visibility: hidden;
+  transition: opacity 0.2s ease, visibility 0s linear 0.2s;
+}
+
+.ks-repo-modal.is-open {
+  visibility: visible;
+  transition-delay: 0s;
+}
+
+.ks-repo-modal__dialog {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 520px;
+  min-width: 0;
+  max-height: calc(
+    100vh - var(--ks-repo-modal-safe-top) - var(--ks-repo-modal-safe-bottom)
+  );
+  overflow: hidden;
+}
+
+@supports (height: 100dvh) {
+  .ks-repo-modal__dialog {
+    max-height: calc(
+      100dvh - var(--ks-repo-modal-safe-top) - var(--ks-repo-modal-safe-bottom)
+    );
+  }
+}
+
+.ks-repo-modal__header,
+.ks-repo-modal__footer {
+  flex: 0 0 auto;
+  min-width: 0;
+}
+
+.ks-repo-modal__header {
+  gap: 0.75rem;
+}
+
+.ks-repo-modal__title-group {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.ks-repo-modal__title-group > div {
+  min-width: 0;
+}
+
+.ks-repo-modal__icon {
+  flex: 0 0 36px;
+}
+
+.ks-repo-modal__title,
+.ks-repo-modal__subtitle {
+  overflow-wrap: anywhere;
+}
+
+.ks-repo-modal__close-btn {
+  flex: 0 0 44px;
+  width: 44px;
+  height: 44px;
+  border-radius: 8px;
+}
+
+.ks-repo-modal__body {
+  flex: 1 1 auto;
+  min-width: 0;
+  min-height: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+  scroll-padding-block: 1rem;
+}
+
+.ks-repo-modal__section,
+.ks-repo-modal__desc {
+  min-width: 0;
+}
+
+.ks-repo-modal__desc,
+.ks-repo-modal__footer p {
+  overflow-wrap: anywhere;
+}
+
+.ks-repo-modal__primary-btn {
+  width: 100%;
+  min-width: 0;
+  min-height: 44px;
+  flex-wrap: wrap;
+  text-align: center;
+  overflow-wrap: anywhere;
+}
+
+.ks-repo-modal__primary-btn > svg {
+  flex: 0 0 auto;
+}
+
+.ks-repo-modal__primary-btn > span {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.ks-repo-modal__path-box {
+  width: 100%;
+  min-width: 0;
+}
+
+.ks-repo-modal__path-text {
+  flex: 1 1 auto;
+  min-width: 0;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  word-break: normal;
+}
+
+.ks-repo-modal__copy-btn {
+  min-height: 36px;
+  flex: 0 0 auto;
+  white-space: nowrap;
+}
+
+.ks-repo-modal__copy-btn svg,
+.ks-repo-modal__secondary-link svg {
+  flex: 0 0 auto;
+}
+
+.ks-repo-modal__secondary-link {
+  max-width: 100%;
+  min-width: 0;
+  flex-wrap: wrap;
+  overflow-wrap: anywhere;
+}
+
+.ks-repo-modal__ext-icon {
+  flex: 0 0 auto;
+}
+
+@media screen and (max-width: 420px) {
+  .ks-repo-modal__dialog {
+    display: block;
+    overflow-x: hidden;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .ks-repo-modal__header {
+    position: relative;
+    display: block;
+    padding: 1rem;
+  }
+
+  .ks-repo-modal__title-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+
+  .ks-repo-modal__title-group > div:not(.ks-repo-modal__icon) {
+    flex: 1 1 100%;
+  }
+
+  .ks-repo-modal__close-btn {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+  }
+
+  .ks-repo-modal__body {
+    min-height: auto;
+    overflow: visible;
+  }
+
+  .ks-repo-modal__footer {
+    padding: 0.75rem 1rem;
+  }
+}
+
+@media screen and (max-width: 360px) {
+  .ks-repo-modal {
+    --ks-repo-modal-gutter: 0.75rem;
+  }
+
+  .ks-repo-modal__body {
+    padding: 1rem;
+    gap: 1rem;
+  }
+}
+
+@media screen and (max-height: 420px) {
+  .ks-repo-modal {
+    --ks-repo-modal-gutter: 0.5rem;
+  }
+
+  .ks-repo-modal__header {
+    padding-block: 0.75rem;
+  }
+
+  .ks-repo-modal__body {
+    gap: 0.75rem;
+  }
+
+  .ks-repo-modal__footer {
+    padding-block: 0.65rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ks-repo-modal,
+  .ks-repo-modal__dialog,
+  .ks-repo-modal__primary-btn,
+  .ks-repo-modal__copy-btn {
+    transition: none;
+  }
+}
+
 /* ==========================================================================
    Kubescape Control Explorer
    ========================================================================== */
@@ -892,6 +1127,7 @@ h1, h2, h3 {
   text-decoration: none;
   display: -webkit-box;
   -webkit-line-clamp: 2;
+  line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
@@ -945,4 +1181,3 @@ h1, h2, h3 {
   border: none;
   cursor: pointer;
 }
-
