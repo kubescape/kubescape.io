@@ -80,24 +80,24 @@ First, install Kubescape. Do so by running the script below:
 ```shell
 curl -s https://raw.githubusercontent.com/kubescape/kubescape/master/install.sh | /bin/bash
 ```
-Now, run the scan and view the output:
+
+Scan the cluster against the NSA-CISA and MITRE ATT&CK frameworks.
+
 ```shell
-kubescape scan
+kubescape scan framework nsa,mitre
 ```
-![image](03-kubescape-scan-1.png)
 
-Alright, the scan is finished. There’s a lot of output to go through. Using kubescape scan without any modifiers runs a scan using the MITRE and NSA frameworks. As you scroll down, you can see several of the controls scanned and their results. At the bottom, you’ll see your overall compliance score and the highest-stakes workloads:
+Review the control results and record the compliance score for each framework. The screenshots in this guide show output from an earlier CLI version.
 
-![image](04-first-scan-summary.png)
-
-This guide will not focus on the Traefik control failures but will address the Pod/nginx-app issue soon. First, knock out one of the "Network" control failures. 
+![Example compliance scores for MITRE and NSA](04-first-scan-summary.png)
 
 ### Remediate a Network Control Failure
-The scan results are divided into sections based on their type. If you scroll through the results, you’ll see a "Network" failure indicating that there are "Missing network policies.":
 
-![image](05-net-failure.png)
+Scan for the Missing network policy control (`C-0260`). Verbose output shows which resources fail the control and how to remediate them.
 
-Run `kubescape scan control C-0260 -v` as indicated by the error, and you’ll see where the issues lie and be given more information on how to remediate them:
+```shell
+kubescape scan control C-0260 -v
+```
 
 ![image](06-netpol-remediation-help.png)
 
@@ -175,9 +175,7 @@ Perfect! You have now remediated the C-0260 control failures.
 
 ### Workload Scanning
 
-Now that you’ve knocked out a relatively simple control, look at one of the highest-stake workloads and see if fixing it can improve the score. Re-run `kubescape scan`, and you’ll notice the compliance score has increased by a small amount thanks to the C-0260 remediation. Now, see if fixing an issue with `nginx-app` can improve the score further. 
-
-Under the Highest-stake workload section, you’ll see a list of commands you can run to isolate those issues. Run the command to scan the Pod/nginx-app workload:
+Scan the `nginx-app` pod to review its control results.
 
 ```shell
 kubescape scan workload Pod/nginx-app --namespace app
@@ -224,23 +222,31 @@ kubescape scan workload Pod/nginx-app --namespace app
 
 ![image](09-privilege-remediation.png)
 
+Rerun the framework scan and compare the compliance scores with your first scan.
+
+```shell
+kubescape scan framework nsa,mitre
+```
 
 ### Image Scanning
-For the final piece of the puzzle, scan the image and see if you can improve its security posture. At the bottom of the previous output, you should see "Receive a full report for nginx by running: `$ kubescape scan image nginx:1.21`". Run that command:
+Scan the image used by the `nginx-app` pod for vulnerabilities.
+
 ```shell
 kubescape scan image nginx:1.21
 ```
 ![image](10-image-scan-1.png)
 
-There are definitely some issues here! With some research, you’ll notice that 1.21 is not the latest version of NGINX. Upgrade your manifest to use the latest version:
-```shell
-nginx:latest
-```
-After you have made the modification and saved the file, re-apply the manifest:
+Set `image: nginx:latest` in `nginx-app.yml`, then re-create the pod.
+
 ```shell
 kubectl delete -f nginx-app.yml && kubectl apply -f nginx-app.yml
 ```
-Finally, run `kubescape scan nginx:latest` to see the results. The results shown in the image are current as of the writing of this guide, so yours may differ:
+
+Scan the updated image and compare the results with the first image scan.
+
+```shell
+kubescape scan image nginx:latest
+```
 
 ![image](11-image-scan-2.png)
 
