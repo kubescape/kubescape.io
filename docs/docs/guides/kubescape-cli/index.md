@@ -81,70 +81,29 @@ First, install Kubescape. Do so by running the script below:
 curl -s https://raw.githubusercontent.com/kubescape/kubescape/master/install.sh | /bin/bash
 ```
 
-Scan the cluster against the NSA-CISA and MITRE ATT&CK frameworks.
+A plain `kubescape scan` runs the [cluster overview](../../scanning.md#the-overview-scan) with ClusterScan checks, highest-stake workloads, and preliminary NSA and MITRE compliance scores. Run an explicit framework scan for the detailed NSA-CISA and MITRE ATT&CK control results.
 
 ```shell
 kubescape scan framework nsa,mitre
 ```
 
-Review the control results and record the compliance score for each framework. The screenshots in this guide show output from an earlier CLI version.
+Record the compliance scores from the `Frameworks scanned` line and review the failed controls in the results table. The screenshot shows how scores appeared in an earlier version of the cluster overview.
 
-![Example compliance scores for MITRE and NSA](04-first-scan-summary.png)
+![Earlier Kubescape cluster overview showing MITRE and NSA compliance scores](04-first-scan-summary.png)
 
 ### Remediate a Network Control Failure
 
-Scan for the Missing network policy control (`C-0260`). Verbose output shows which resources fail the control and how to remediate them.
+Check for missing network policies in the `app` namespace. The verbose report lists affected resources and links to the [C-0260 control documentation](../../controls/c-0260.md).
 
 ```shell
-kubescape scan control C-0260 -v
+kubescape scan control C-0260 --include-namespaces app -v
 ```
 
-![image](06-netpol-remediation-help.png)
-
-As you can see, if your terminal allows, there is a clickable link to the documentation that provides more information. In this case, it’s located at [https://kubescape.io/docs/controls/c-0260/](https://kubescape.io/docs/controls/c-0260/). Based on the information found in the ARMO documentation and the [K3s Hardening Guide](https://docs.k3s.io/security/hardening-guide#networkpolicies), create this network policy which will isolate network traffic within the cluster to its respective namespace:
+The example policy selects all pods in `app` and uses the automatic `kubernetes.io/metadata.name` label to allow ingress from pods in that namespace. See the [K3s Hardening Guide](https://docs.k3s.io/security/hardening-guide#networkpolicies).
 
 #### netpol.yml
 
 ```yaml
----
-kind: NetworkPolicy
-apiVersion: networking.k8s.io/v1
-metadata:
-  name: intra-namespace
-  namespace: kube-system
-spec:
-  podSelector: {}
-  ingress:
-    - from:
-      - namespaceSelector:
-          matchLabels:
-            name: kube-system
----
-kind: NetworkPolicy
-apiVersion: networking.k8s.io/v1
-metadata:
-  name: intra-namespace
-  namespace: default
-spec:
-  podSelector: {}
-  ingress:
-    - from:
-      - namespaceSelector:
-          matchLabels:
-            name: default
----
-kind: NetworkPolicy
-apiVersion: networking.k8s.io/v1
-metadata:
-  name: intra-namespace
-  namespace: kube-public
-spec:
-  podSelector: {}
-  ingress:
-    - from:
-      - namespaceSelector:
-          matchLabels:
-            name: kube-public
 ---
 kind: NetworkPolicy
 apiVersion: networking.k8s.io/v1
@@ -157,21 +116,22 @@ spec:
     - from:
       - namespaceSelector:
           matchLabels:
-            name: app
+            kubernetes.io/metadata.name: app
 ```
-Apply that policy:
+
+Apply the network policy.
 
 ```shell
 kubectl apply -f netpol.yml
 ```
 
-And run another scan for that control:
-```shell
-kubescape scan control C-0260 -v
-```
-![image](07-netpol-remediation-success.png)
+Rerun the control scan for `app`.
 
-Perfect! You have now remediated the C-0260 control failures. 
+```shell
+kubescape scan control C-0260 --include-namespaces app -v
+```
+
+Check that **Missing network policy** reports zero failed resources. C-0260 checks for missing policy configuration. Test pod connectivity separately to verify that the ingress restrictions are enforced.
 
 ### Workload Scanning
 
@@ -208,13 +168,13 @@ spec:
     securityContext:
         privileged: false
 ```
-Since it's just a simple pod, delete and re-apply it:
+Re-create the pod in the existing namespace to preserve the network policy.
 
 ```shell
-kubectl delete -f nginx-app.yml && kubectl apply -f nginx-app.yml
+kubectl delete pod nginx-app -n app && kubectl apply -f nginx-app.yml
 ```
 
-Rerun the scan and you'll see that the `C-0057` control is remediated as indicated by the green check:
+Rerun the workload scan to check that the `C-0057` finding is cleared.
 
 ```shell
 kubescape scan workload Pod/nginx-app --namespace app
@@ -229,28 +189,29 @@ kubescape scan framework nsa,mitre
 ```
 
 ### Image Scanning
-Scan the image used by the `nginx-app` pod for vulnerabilities.
+Use the `image` subcommand with the image reference from `nginx-app.yml` to scan for vulnerabilities.
 
 ```shell
 kubescape scan image nginx:1.21
 ```
-![image](10-image-scan-1.png)
+
+![Example vulnerability report for nginx:1.21](10-image-scan-1.png)
 
 Set `image: nginx:latest` in `nginx-app.yml`, then re-create the pod.
 
 ```shell
-kubectl delete -f nginx-app.yml && kubectl apply -f nginx-app.yml
+kubectl delete pod nginx-app -n app && kubectl apply -f nginx-app.yml
 ```
 
-Scan the updated image and compare the results with the first image scan.
+Scan the updated image and compare vulnerability counts by severity with the first scan.
 
 ```shell
 kubescape scan image nginx:latest
 ```
 
-![image](11-image-scan-2.png)
+![Example vulnerability report for nginx:latest](11-image-scan-2.png)
 
-Several vulnerabilities have been remediated! Unfortunately, not all of them, but that's the nature of security, and why you need a tool such as Kubescape. Your individual results will vary due to the current version and number of open vulnerabilities in NGINX when you’re going through this guide.
+Your results depend on the image contents and the vulnerability database at the time of the scan.
 
 ### Image Patching
 To remediate the remaining vulnerabilities, you can also try to patch the image. Kubescape integrates with [Copacetic](https://github.com/project-copacetic/copacetic) to patch container images. To do so, run the following command:
