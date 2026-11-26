@@ -80,71 +80,30 @@ First, install Kubescape. Do so by running the script below:
 ```shell
 curl -s https://raw.githubusercontent.com/kubescape/kubescape/master/install.sh | /bin/bash
 ```
-Now, run the scan and view the output:
+
+A plain `kubescape scan` runs the [cluster overview](../../scanning.md#the-overview-scan) with ClusterScan checks, highest-stake workloads, and preliminary NSA and MITRE compliance scores. Run an explicit framework scan for the detailed NSA-CISA and MITRE ATT&CK control results.
+
 ```shell
-kubescape scan
+kubescape scan framework nsa,mitre
 ```
-![image](03-kubescape-scan-1.png)
 
-Alright, the scan is finished. There’s a lot of output to go through. Using kubescape scan without any modifiers runs a scan using the MITRE and NSA frameworks. As you scroll down, you can see several of the controls scanned and their results. At the bottom, you’ll see your overall compliance score and the highest-stakes workloads:
+Record the compliance scores from the `Frameworks scanned` line and review the failed controls in the results table. The screenshot shows how scores appeared in an earlier version of the cluster overview.
 
-![image](04-first-scan-summary.png)
-
-This guide will not focus on the Traefik control failures but will address the Pod/nginx-app issue soon. First, knock out one of the "Network" control failures. 
+![Earlier Kubescape cluster overview showing MITRE and NSA compliance scores](04-first-scan-summary.png)
 
 ### Remediate a Network Control Failure
-The scan results are divided into sections based on their type. If you scroll through the results, you’ll see a "Network" failure indicating that there are "Missing network policies.":
 
-![image](05-net-failure.png)
+Check for missing network policies in the `app` namespace. The verbose report lists affected resources and links to the [C-0260 control documentation](../../controls/c-0260.md).
 
-Run `kubescape scan control C-0260 -v` as indicated by the error, and you’ll see where the issues lie and be given more information on how to remediate them:
+```shell
+kubescape scan control C-0260 --include-namespaces app -v
+```
 
-![image](06-netpol-remediation-help.png)
-
-As you can see, if your terminal allows, there is a clickable link to the documentation that provides more information. In this case, it’s located at [https://kubescape.io/docs/controls/c-0260/](https://kubescape.io/docs/controls/c-0260/). Based on the information found in the ARMO documentation and the [K3s Hardening Guide](https://docs.k3s.io/security/hardening-guide#networkpolicies), create this network policy which will isolate network traffic within the cluster to its respective namespace:
+The example policy selects all pods in `app` and uses the automatic `kubernetes.io/metadata.name` label to allow ingress from pods in that namespace. See the [K3s Hardening Guide](https://docs.k3s.io/security/hardening-guide#networkpolicies).
 
 #### netpol.yml
 
 ```yaml
----
-kind: NetworkPolicy
-apiVersion: networking.k8s.io/v1
-metadata:
-  name: intra-namespace
-  namespace: kube-system
-spec:
-  podSelector: {}
-  ingress:
-    - from:
-      - namespaceSelector:
-          matchLabels:
-            name: kube-system
----
-kind: NetworkPolicy
-apiVersion: networking.k8s.io/v1
-metadata:
-  name: intra-namespace
-  namespace: default
-spec:
-  podSelector: {}
-  ingress:
-    - from:
-      - namespaceSelector:
-          matchLabels:
-            name: default
----
-kind: NetworkPolicy
-apiVersion: networking.k8s.io/v1
-metadata:
-  name: intra-namespace
-  namespace: kube-public
-spec:
-  podSelector: {}
-  ingress:
-    - from:
-      - namespaceSelector:
-          matchLabels:
-            name: kube-public
 ---
 kind: NetworkPolicy
 apiVersion: networking.k8s.io/v1
@@ -157,27 +116,26 @@ spec:
     - from:
       - namespaceSelector:
           matchLabels:
-            name: app
+            kubernetes.io/metadata.name: app
 ```
-Apply that policy:
+
+Apply the network policy.
 
 ```shell
 kubectl apply -f netpol.yml
 ```
 
-And run another scan for that control:
-```shell
-kubescape scan control C-0260 -v
-```
-![image](07-netpol-remediation-success.png)
+Rerun the control scan for `app`.
 
-Perfect! You have now remediated the C-0260 control failures. 
+```shell
+kubescape scan control C-0260 --include-namespaces app -v
+```
+
+Check that **Missing network policy** reports zero failed resources. C-0260 checks for missing policy configuration. Test pod connectivity separately to verify that the ingress restrictions are enforced.
 
 ### Workload Scanning
 
-Now that you’ve knocked out a relatively simple control, look at one of the highest-stake workloads and see if fixing it can improve the score. Re-run `kubescape scan`, and you’ll notice the compliance score has increased by a small amount thanks to the C-0260 remediation. Now, see if fixing an issue with `nginx-app` can improve the score further. 
-
-Under the Highest-stake workload section, you’ll see a list of commands you can run to isolate those issues. Run the command to scan the Pod/nginx-app workload:
+Scan the `nginx-app` pod to review its control results.
 
 ```shell
 kubescape scan workload Pod/nginx-app --namespace app
@@ -210,13 +168,13 @@ spec:
     securityContext:
         privileged: false
 ```
-Since it's just a simple pod, delete and re-apply it:
+Re-create the pod in the existing namespace to preserve the network policy.
 
 ```shell
-kubectl delete -f nginx-app.yml && kubectl apply -f nginx-app.yml
+kubectl delete pod nginx-app -n app && kubectl apply -f nginx-app.yml
 ```
 
-Rerun the scan and you'll see that the `C-0057` control is remediated as indicated by the green check:
+Rerun the workload scan to check that the `C-0057` finding is cleared.
 
 ```shell
 kubescape scan workload Pod/nginx-app --namespace app
@@ -224,27 +182,36 @@ kubescape scan workload Pod/nginx-app --namespace app
 
 ![image](09-privilege-remediation.png)
 
+Rerun the framework scan and compare the compliance scores with your first scan.
+
+```shell
+kubescape scan framework nsa,mitre
+```
 
 ### Image Scanning
-For the final piece of the puzzle, scan the image and see if you can improve its security posture. At the bottom of the previous output, you should see "Receive a full report for nginx by running: `$ kubescape scan image nginx:1.21`". Run that command:
+Use the `image` subcommand with the image reference from `nginx-app.yml` to scan for vulnerabilities.
+
 ```shell
 kubescape scan image nginx:1.21
 ```
-![image](10-image-scan-1.png)
 
-There are definitely some issues here! With some research, you’ll notice that 1.21 is not the latest version of NGINX. Upgrade your manifest to use the latest version:
+![Example vulnerability report for nginx:1.21](10-image-scan-1.png)
+
+Set `image: nginx:latest` in `nginx-app.yml`, then re-create the pod.
+
 ```shell
-nginx:latest
+kubectl delete pod nginx-app -n app && kubectl apply -f nginx-app.yml
 ```
-After you have made the modification and saved the file, re-apply the manifest:
+
+Scan the updated image and compare vulnerability counts by severity with the first scan.
+
 ```shell
-kubectl delete -f nginx-app.yml && kubectl apply -f nginx-app.yml
+kubescape scan image nginx:latest
 ```
-Finally, run `kubescape scan nginx:latest` to see the results. The results shown in the image are current as of the writing of this guide, so yours may differ:
 
-![image](11-image-scan-2.png)
+![Example vulnerability report for nginx:latest](11-image-scan-2.png)
 
-Several vulnerabilities have been remediated! Unfortunately, not all of them, but that's the nature of security, and why you need a tool such as Kubescape. Your individual results will vary due to the current version and number of open vulnerabilities in NGINX when you’re going through this guide.
+Your results depend on the image contents and the vulnerability database at the time of the scan.
 
 ### Image Patching
 To remediate the remaining vulnerabilities, you can also try to patch the image. Kubescape integrates with [Copacetic](https://github.com/project-copacetic/copacetic) to patch container images. To do so, run the following command:
