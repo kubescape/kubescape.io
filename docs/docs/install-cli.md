@@ -82,19 +82,10 @@ scoop install kubescape
 
 ### Homebrew
 
-Kubescape is available in the [official Homebrew repository](https://formulae.brew.sh/formula/kubescape#default) or through a [Kubescape tap](https://github.com/kubescape/homebrew-tap). The version from the official repository does not include support for scanning Git repositories, due to [an upstream packaging issue](https://github.com/kubescape/kubescape/issues/1014).
-
-To install Kubescape from the official repository:
+Kubescape is available in the [official Homebrew repository](https://formulae.brew.sh/formula/kubescape#default):
 
 ```bash
 brew install kubescape
-```
-
-To get Git support, install the Kubescape tap and the `kubescape-cli` package:
-
-```bash
-brew tap kubescape/tap
-brew install kubescape-cli
 ```
 
 ## Linux
